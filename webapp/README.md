@@ -7,6 +7,7 @@ Første lokale version af Christians matematikapp.
 - startside med fire emner;
 - fast venstremenu på desktop og mobilmenu på små skærme;
 - emneoversigter;
+- komplet læringsforløb om lineære ligninger med teori, gennemregnede eksempler, hints og interaktive øvelser;
 - side med formler og huskeregler;
 - matematisk notation med indbygget MathML.
 

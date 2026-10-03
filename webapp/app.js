@@ -64,6 +64,9 @@ const navigationButtons = document.querySelectorAll("[data-view]");
 const sidebar = document.querySelector("#sidebar");
 const menuButton = document.querySelector("#menuButton");
 const backdrop = document.querySelector("#backdrop");
+const equationLesson = document.querySelector("#equationLesson");
+const subjectPlaceholder = document.querySelector("#subjectPlaceholder");
+const exerciseCards = document.querySelectorAll(".exercise-card");
 
 function setActiveNavigation(view) {
   document.querySelectorAll(".nav-item").forEach((item) => {
@@ -94,6 +97,9 @@ function showView(view, shouldFocus = true) {
     document.querySelector("#subjectFormula").innerHTML = subject.formula;
   }
 
+  equationLesson.hidden = view !== "equations";
+  subjectPlaceholder.hidden = view === "equations";
+
   setActiveNavigation(view);
   window.location.hash = view === "home" ? "" : view;
   closeMenu();
@@ -106,6 +112,88 @@ function showView(view, shouldFocus = true) {
 
 navigationButtons.forEach((button) => {
   button.addEventListener("click", () => showView(button.dataset.view));
+});
+
+document.querySelectorAll("[data-scroll-to]").forEach((button) => {
+  button.addEventListener("click", () => {
+    document.querySelector(`#${button.dataset.scrollTo}`).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  });
+});
+
+document.querySelectorAll(".hint-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    const hint = button.closest(".exercise-body").querySelector(".hint");
+    const willShow = hint.hidden;
+    hint.hidden = !willShow;
+    button.setAttribute("aria-expanded", String(willShow));
+    button.textContent = willShow ? "Skjul hint" : "Vis hint";
+  });
+});
+
+function parseAnswer(value) {
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/^x\s*=\s*/, "")
+    .replace(/\s/g, "")
+    .replace(",", ".");
+
+  if (/^-?\d+(\.\d+)?\/-?\d+(\.\d+)?$/.test(normalized)) {
+    const [numerator, denominator] = normalized.split("/").map(Number);
+    return denominator === 0 ? Number.NaN : numerator / denominator;
+  }
+
+  return Number(normalized);
+}
+
+function updateExerciseProgress() {
+  const solved = document.querySelectorAll('.exercise-card[data-solved="true"]').length;
+  const score = document.querySelector("#exerciseScore");
+  const total = document.querySelector("#exerciseTotal");
+  const progressBar = document.querySelector("#exerciseProgressBar");
+
+  score.textContent = String(solved);
+  total.textContent = String(exerciseCards.length);
+  progressBar.style.width = `${(solved / exerciseCards.length) * 100}%`;
+}
+
+function checkExercise(card) {
+  const input = card.querySelector("input");
+  const feedback = card.querySelector(".answer-feedback");
+  const answer = parseAnswer(input.value);
+  const expected = Number(card.dataset.answer);
+
+  feedback.classList.remove("is-correct", "is-incorrect");
+
+  if (!Number.isFinite(answer)) {
+    feedback.textContent = "Skriv et tal, fx 3 eller −2.";
+    feedback.classList.add("is-incorrect");
+    return;
+  }
+
+  if (Math.abs(answer - expected) < 0.000001) {
+    card.dataset.solved = "true";
+    card.classList.add("is-correct");
+    feedback.textContent = "Korrekt! Sæt gerne svaret ind i ligningen som kontrol.";
+    feedback.classList.add("is-correct");
+    updateExerciseProgress();
+    return;
+  }
+
+  feedback.textContent = "Ikke helt endnu. Kontrollér dit seneste regnetrin, eller åbn hintet.";
+  feedback.classList.add("is-incorrect");
+}
+
+exerciseCards.forEach((card) => {
+  const button = card.querySelector(".check-answer");
+  const input = card.querySelector("input");
+  button.addEventListener("click", () => checkExercise(card));
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") checkExercise(card);
+  });
 });
 
 menuButton.addEventListener("click", () => {

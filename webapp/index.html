@@ -202,12 +202,279 @@
             </article>
           </div>
 
-          <div class="next-step-card">
+          <div class="next-step-card" id="subjectPlaceholder">
             <div>
               <p class="eyebrow">Næste udviklingstrin</p>
               <h2>Vi fylder emnet med teori og opgaver</h2>
               <p>Strukturen er klar. Det faglige indhold bygges ind emne for emne.</p>
             </div>
+          </div>
+
+          <div class="lesson-content" id="equationLesson" hidden>
+            <nav class="lesson-nav" aria-label="Indhold i Ligninger">
+              <button type="button" data-scroll-to="teori">Teori</button>
+              <button type="button" data-scroll-to="eksempler">Eksempler</button>
+              <button type="button" data-scroll-to="oevelser">Øvelser</button>
+              <button type="button" data-scroll-to="husk">Husk</button>
+            </nav>
+
+            <section class="lesson-section" id="teori" aria-labelledby="theoryHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">1 · Teori</p>
+                  <h2 id="theoryHeading">Lighedstegnet betyder balance</h2>
+                </div>
+                <p>
+                  De to sider har samme værdi. Derfor må du ændre en ligning, når du gør
+                  præcis det samme på begge sider.
+                </p>
+              </div>
+
+              <div class="balance-card">
+                <div class="balance-side">
+                  <span>Venstre side</span>
+                  <math display="block" aria-label="x plus tre">
+                    <mrow><mi>x</mi><mo>+</mo><mn>3</mn></mrow>
+                  </math>
+                </div>
+                <div class="balance-equals" aria-hidden="true">=</div>
+                <div class="balance-side">
+                  <span>Højre side</span>
+                  <math display="block" aria-label="otte"><mn>8</mn></math>
+                </div>
+              </div>
+
+              <div class="theory-grid">
+                <article class="theory-card">
+                  <span class="mini-index">A</span>
+                  <h3>Brug den modsatte regneart</h3>
+                  <p>Fjern et led ved at bruge den regneart, der ophæver det.</p>
+                  <dl class="operation-pairs">
+                    <div><dt><math><mrow><mo>+</mo><mn>5</mn></mrow></math></dt><dd><math><mrow><mo>−</mo><mn>5</mn></mrow></math></dd></div>
+                    <div><dt><math><mrow><mo>·</mo><mn>3</mn></mrow></math></dt><dd><math><mrow><mo>÷</mo><mn>3</mn></mrow></math></dd></div>
+                  </dl>
+                </article>
+
+                <article class="theory-card">
+                  <span class="mini-index">B</span>
+                  <h3>Regn på begge sider</h3>
+                  <div class="mini-calculation" aria-label="x plus tre er otte. Træk tre fra på begge sider. x er fem.">
+                    <math display="block">
+                      <mtable columnalign="right center left">
+                        <mtr><mtd><mi>x</mi><mo>+</mo><mn>3</mn></mtd><mtd><mo>=</mo></mtd><mtd><mn>8</mn></mtd></mtr>
+                        <mtr class="math-action"><mtd><mo>−</mo><mn>3</mn></mtd><mtd></mtd><mtd><mo>−</mo><mn>3</mn></mtd></mtr>
+                        <mtr><mtd><mi>x</mi></mtd><mtd><mo>=</mo></mtd><mtd><mn>5</mn></mtd></mtr>
+                      </mtable>
+                    </math>
+                  </div>
+                </article>
+
+                <article class="theory-card">
+                  <span class="mini-index">C</span>
+                  <h3>Kontrollér svaret</h3>
+                  <p>Sæt løsningen ind i den oprindelige ligning. Begge sider skal give det samme.</p>
+                  <div class="check-line">
+                    <math aria-label="fem plus tre er otte"><mrow><mn>5</mn><mo>+</mo><mn>3</mn><mo>=</mo><mn>8</mn></mrow></math>
+                    <span class="check-mark" aria-label="korrekt">✓</span>
+                  </div>
+                </article>
+              </div>
+
+              <aside class="rule-reminder" aria-labelledby="rulesHeading">
+                <div>
+                  <p class="eyebrow">Regneregler først</p>
+                  <h3 id="rulesHeading">Tre små regler, du får brug for</h3>
+                </div>
+                <ul>
+                  <li><strong>Saml kun ens led:</strong> <math><mrow><mn>3</mn><mi>x</mi><mo>+</mo><mn>2</mn><mi>x</mi><mo>=</mo><mn>5</mn><mi>x</mi></mrow></math></li>
+                  <li><strong>Gang ind i hele parentesen:</strong> <math><mrow><mn>2</mn><mo>(</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>6</mn><mi>x</mi><mo>−</mo><mn>4</mn></mrow></math></li>
+                  <li><strong>Hold styr på fortegnet:</strong> <math><mrow><mo>−</mo><mo>(</mo><mn>2</mn><mo>+</mo><mn>8</mn><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mn>2</mn><mo>−</mo><mn>8</mn><mi>x</mi></mrow></math></li>
+                </ul>
+              </aside>
+            </section>
+
+            <section class="lesson-section" id="eksempler" aria-labelledby="examplesHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">2 · Gennemregnede eksempler</p>
+                  <h2 id="examplesHeading">Ét nyt lag ad gangen</h2>
+                </div>
+                <p>Hver linje viser både regnetrinnet og grunden til, at vi vælger det.</p>
+              </div>
+
+              <div class="example-list">
+                <article class="example-card">
+                  <div class="example-topline">
+                    <div><span class="level-pill">Niveau 1</span><h3>Led på begge sider</h3></div>
+                    <math display="block" aria-label="tre x plus seks er lig med minus x plus atten">
+                      <mrow><mn>3</mn><mi>x</mi><mo>+</mo><mn>6</mn><mo>=</mo><mo>−</mo><mi>x</mi><mo>+</mo><mn>18</mn></mrow>
+                    </math>
+                  </div>
+                  <ol class="worked-steps">
+                    <li>
+                      <div class="worked-math"><math><mrow><mn>4</mn><mi>x</mi><mo>+</mo><mn>6</mn><mo>=</mo><mn>18</mn></mrow></math></div>
+                      <p>Læg <math><mi>x</mi></math> til på begge sider, så alle <math><mi>x</mi></math>-led står til venstre.</p>
+                    </li>
+                    <li>
+                      <div class="worked-math"><math><mrow><mn>4</mn><mi>x</mi><mo>=</mo><mn>12</mn></mrow></math></div>
+                      <p>Træk <math><mn>6</mn></math> fra på begge sider.</p>
+                    </li>
+                    <li class="worked-result">
+                      <div class="worked-math"><math><mrow><mi>x</mi><mo>=</mo><mn>3</mn></mrow></math></div>
+                      <p>Divider begge sider med <math><mn>4</mn></math>.</p>
+                    </li>
+                  </ol>
+                  <details class="example-check">
+                    <summary>Se kontrol</summary>
+                    <div>
+                      <math display="block" aria-label="tre gange tre plus seks er femten, og minus tre plus atten er femten">
+                        <mrow><mn>3</mn><mo>·</mo><mn>3</mn><mo>+</mo><mn>6</mn><mo>=</mo><mn>15</mn><mo>,</mo><mspace width="1em"/><mo>−</mo><mn>3</mn><mo>+</mo><mn>18</mn><mo>=</mo><mn>15</mn></mrow>
+                      </math>
+                      <p>Begge sider giver <math><mn>15</mn></math>, så løsningen passer.</p>
+                    </div>
+                  </details>
+                </article>
+
+                <article class="example-card">
+                  <div class="example-topline">
+                    <div><span class="level-pill">Niveau 2</span><h3>Parentes først</h3></div>
+                    <math display="block" aria-label="to gange parentes tre x minus to parentes slut er lig med x minus ni">
+                      <mrow><mn>2</mn><mo>(</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>=</mo><mi>x</mi><mo>−</mo><mn>9</mn></mrow>
+                    </math>
+                  </div>
+                  <ol class="worked-steps">
+                    <li><div class="worked-math"><math><mrow><mn>6</mn><mi>x</mi><mo>−</mo><mn>4</mn><mo>=</mo><mi>x</mi><mo>−</mo><mn>9</mn></mrow></math></div><p>Gang <math><mn>2</mn></math> ind i begge led i parentesen.</p></li>
+                    <li><div class="worked-math"><math><mrow><mn>5</mn><mi>x</mi><mo>−</mo><mn>4</mn><mo>=</mo><mo>−</mo><mn>9</mn></mrow></math></div><p>Træk <math><mi>x</mi></math> fra på begge sider.</p></li>
+                    <li><div class="worked-math"><math><mrow><mn>5</mn><mi>x</mi><mo>=</mo><mo>−</mo><mn>5</mn></mrow></math></div><p>Læg <math><mn>4</mn></math> til på begge sider.</p></li>
+                    <li class="worked-result"><div class="worked-math"><math><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mn>1</mn></mrow></math></div><p>Divider begge sider med <math><mn>5</mn></math>.</p></li>
+                  </ol>
+                </article>
+
+                <article class="example-card">
+                  <div class="example-topline">
+                    <div><span class="level-pill">Niveau 3</span><h3>Brøker</h3></div>
+                    <math display="block" aria-label="to x over tre plus tre fjerdedele er lig med x over to plus fem">
+                      <mrow><mfrac><mrow><mn>2</mn><mi>x</mi></mrow><mn>3</mn></mfrac><mo>+</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><mo>=</mo><mfrac><mi>x</mi><mn>2</mn></mfrac><mo>+</mo><mn>5</mn></mrow>
+                    </math>
+                  </div>
+                  <ol class="worked-steps">
+                    <li><div class="worked-math"><math><mrow><mn>8</mn><mi>x</mi><mo>+</mo><mn>9</mn><mo>=</mo><mn>6</mn><mi>x</mi><mo>+</mo><mn>60</mn></mrow></math></div><p>Gang hele ligningen med <math><mn>12</mn></math>, som alle nævnere går op i.</p></li>
+                    <li><div class="worked-math"><math><mrow><mn>2</mn><mi>x</mi><mo>+</mo><mn>9</mn><mo>=</mo><mn>60</mn></mrow></math></div><p>Træk <math><mrow><mn>6</mn><mi>x</mi></mrow></math> fra på begge sider.</p></li>
+                    <li><div class="worked-math"><math><mrow><mn>2</mn><mi>x</mi><mo>=</mo><mn>51</mn></mrow></math></div><p>Træk <math><mn>9</mn></math> fra på begge sider.</p></li>
+                    <li class="worked-result"><div class="worked-math"><math><mrow><mi>x</mi><mo>=</mo><mfrac><mn>51</mn><mn>2</mn></mfrac><mo>=</mo><mn>25,5</mn></mrow></math></div><p>Divider begge sider med <math><mn>2</mn></math>.</p></li>
+                  </ol>
+                </article>
+              </div>
+            </section>
+
+            <section class="lesson-section" id="oevelser" aria-labelledby="exercisesHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">3 · Øvelser</p>
+                  <h2 id="exercisesHeading">Prøv selv — med hjælp når du vil</h2>
+                </div>
+                <p>Skriv værdien af <math><mi>x</mi></math>. Du kan bruge både komma og punktum i decimaltal.</p>
+              </div>
+
+              <div class="exercise-progress" aria-live="polite">
+                <div><span id="exerciseScore">0</span> af <span id="exerciseTotal">6</span> løst</div>
+                <div class="progress-track" aria-hidden="true"><span id="exerciseProgressBar"></span></div>
+              </div>
+
+              <div class="exercise-list">
+                <article class="exercise-card" data-answer="5">
+                  <div class="exercise-number">01</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Kom i gang</span>
+                    <math display="block" aria-label="x plus syv er lig med tolv"><mrow><mi>x</mi><mo>+</mo><mn>7</mn><mo>=</mo><mn>12</mn></mrow></math>
+                    <div class="answer-row">
+                      <label><span><math><mi>x</mi></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Svar på øvelse 1" /></label>
+                      <button class="check-answer" type="button">Tjek svar</button>
+                    </div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Fjern <math><mrow><mo>+</mo><mn>7</mn></mrow></math> ved at trække <math><mn>7</mn></math> fra på begge sider.</p>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="3">
+                  <div class="exercise-number">02</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Ét ekstra trin</span>
+                    <math display="block" aria-label="tre x minus fem er lig med fire"><mrow><mn>3</mn><mi>x</mi><mo>−</mo><mn>5</mn><mo>=</mo><mn>4</mn></mrow></math>
+                    <div class="answer-row"><label><span><math><mi>x</mi></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Svar på øvelse 2" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Læg først <math><mn>5</mn></math> til på begge sider. Divider derefter med <math><mn>3</mn></math>.</p>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="3">
+                  <div class="exercise-number">03</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Fra materialet</span>
+                    <math display="block" aria-label="fem x minus to er lig med to x plus syv"><mrow><mn>5</mn><mi>x</mi><mo>−</mo><mn>2</mn><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>7</mn></mrow></math>
+                    <div class="answer-row"><label><span><math><mi>x</mi></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Svar på øvelse 3" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Saml først <math><mi>x</mi></math>-leddene: Træk <math><mrow><mn>2</mn><mi>x</mi></mrow></math> fra på begge sider.</p>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="2">
+                  <div class="exercise-number">04</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Fortegn</span>
+                    <math display="block" aria-label="minus x plus tre er lig med minus to x plus fem"><mrow><mo>−</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo>=</mo><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>5</mn></mrow></math>
+                    <div class="answer-row"><label><span><math><mi>x</mi></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Svar på øvelse 4" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Læg <math><mrow><mn>2</mn><mi>x</mi></mrow></math> til på begge sider. Så står der <math><mrow><mi>x</mi><mo>+</mo><mn>3</mn><mo>=</mo><mn>5</mn></mrow></math>.</p>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="2">
+                  <div class="exercise-number">05</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Parentes</span>
+                    <math display="block" aria-label="fire gange parentes to x minus tre parentes slut er lig med to x"><mrow><mn>4</mn><mo>(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math>
+                    <div class="answer-row"><label><span><math><mi>x</mi></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Svar på øvelse 5" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Gang først ind i parentesen: <math><mrow><mn>8</mn><mi>x</mi><mo>−</mo><mn>12</mn><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math>.</p>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="-2">
+                  <div class="exercise-number">06</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Udfordring</span>
+                    <math display="block" aria-label="tre gange parentes to minus tre x parentes slut er lig med fire gange parentes fire minus x parentes slut"><mrow><mn>3</mn><mo>(</mo><mn>2</mn><mo>−</mo><mn>3</mn><mi>x</mi><mo>)</mo><mo>=</mo><mn>4</mn><mo>(</mo><mn>4</mn><mo>−</mo><mi>x</mi><mo>)</mo></mrow></math>
+                    <div class="answer-row"><label><span><math><mi>x</mi></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Svar på øvelse 6" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Hæv begge parenteser: <math><mrow><mn>6</mn><mo>−</mo><mn>9</mn><mi>x</mi><mo>=</mo><mn>16</mn><mo>−</mo><mn>4</mn><mi>x</mi></mrow></math>.</p>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="lesson-section summary-section" id="husk" aria-labelledby="summaryHeading">
+              <div class="summary-copy">
+                <p class="eyebrow">4 · Opsummering</p>
+                <h2 id="summaryHeading">Din faste rækkefølge</h2>
+                <ol>
+                  <li>Hæv parenteser og fjern eventuelle brøker.</li>
+                  <li>Saml <math><mi>x</mi></math>-led på den ene side og tal på den anden.</li>
+                  <li>Divider, så <math><mi>x</mi></math> står alene.</li>
+                  <li>Kontrollér løsningen i den oprindelige ligning.</li>
+                </ol>
+              </div>
+              <div class="summary-note">
+                <span>Vigtigst</span>
+                <p>Du må gøre næsten hvad som helst ved en ligning — så længe du gør det samme på begge sider.</p>
+              </div>
+            </section>
           </div>
         </section>
 
