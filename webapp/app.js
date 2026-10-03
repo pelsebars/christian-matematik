@@ -13,7 +13,7 @@ const subjects = {
   },
   quadratic: {
     kicker: "02 · Algebra",
-    title: "Andengradsligninger",
+    title: "Løsning af andengradsligninger",
     description:
       "En andengradsligning indeholder et led med den ukendte i anden potens og kan have to, én eller ingen reelle løsninger.",
     understand:
@@ -65,6 +65,7 @@ const sidebar = document.querySelector("#sidebar");
 const menuButton = document.querySelector("#menuButton");
 const backdrop = document.querySelector("#backdrop");
 const equationLesson = document.querySelector("#equationLesson");
+const quadraticLesson = document.querySelector("#quadraticLesson");
 const compositeLesson = document.querySelector("#compositeLesson");
 const subjectPlaceholder = document.querySelector("#subjectPlaceholder");
 const exerciseCards = document.querySelectorAll(".exercise-card");
@@ -99,8 +100,9 @@ function showView(view, shouldFocus = true) {
   }
 
   equationLesson.hidden = view !== "equations";
+  quadraticLesson.hidden = view !== "quadratic";
   compositeLesson.hidden = view !== "composite";
-  subjectPlaceholder.hidden = view === "equations" || view === "composite";
+  subjectPlaceholder.hidden = view === "equations" || view === "quadratic" || view === "composite";
 
   setActiveNavigation(view);
   window.location.hash = view === "home" ? "" : view;
@@ -189,6 +191,7 @@ function setFeedback(card, type, fallback) {
 
 function checkExercise(card) {
   const isChoice = card.dataset.kind === "choice";
+  const isRoots = card.dataset.kind === "roots";
   let isCorrect = false;
 
   if (isChoice) {
@@ -198,6 +201,20 @@ function checkExercise(card) {
       return;
     }
     isCorrect = selected.dataset.value === card.dataset.answer;
+  } else if (isRoots) {
+    const inputs = [...card.querySelectorAll("input")];
+    const answers = inputs.map((input) => parseAnswer(input.value));
+    const expected = card.dataset.answer.split(",").map(Number).sort((a, b) => a - b);
+
+    if (answers.some((answer) => !Number.isFinite(answer))) {
+      setFeedback(card, "incorrect", "Skriv begge løsninger som tal.");
+      return;
+    }
+
+    answers.sort((a, b) => a - b);
+    isCorrect =
+      answers.length === expected.length &&
+      answers.every((answer, index) => Math.abs(answer - expected[index]) < 0.000001);
   } else {
     const input = card.querySelector("input");
     const answer = parseAnswer(input.value);
@@ -227,13 +244,13 @@ function checkExercise(card) {
 
 exerciseCards.forEach((card) => {
   const button = card.querySelector(".check-answer");
-  const input = card.querySelector("input");
+  const inputs = card.querySelectorAll("input");
   button.addEventListener("click", () => checkExercise(card));
-  if (input) {
+  inputs.forEach((input) => {
     input.addEventListener("keydown", (event) => {
       if (event.key === "Enter") checkExercise(card);
     });
-  }
+  });
 });
 
 document.querySelectorAll(".answer-choice").forEach((choice) => {

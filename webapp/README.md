@@ -7,7 +7,8 @@ Første lokale version af Christians matematikapp.
 - startside med fire emner;
 - fast venstremenu på desktop og mobilmenu på små skærme;
 - emneoversigter;
-- komplette læringsforløb om lineære ligninger og sammensatte funktioner med teori, grundtjek, gennemregnede eksempler, hints og interaktive øvelser;
+- komplette læringsforløb om lineære ligninger, løsning af andengradsligninger og sammensatte funktioner med teori, grundtjek, gennemregnede eksempler, hints og interaktive øvelser;
+- et trinvist andengradsforløb baseret på opgavearket, inklusive standardform, koefficienter, diskriminant, løsningsformel, indsættelseskontrol og blandet sluttest;
 - side med formler og huskeregler;
 - matematisk notation med indbygget MathML.
 

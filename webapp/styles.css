@@ -28,6 +28,7 @@
 
 html {
   min-width: 320px;
+  overflow-x: hidden;
   background: var(--paper);
 }
 
@@ -35,6 +36,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
   color: var(--ink);
   background:
     linear-gradient(rgba(31, 111, 235, 0.035) 1px, transparent 1px),
@@ -1146,6 +1148,294 @@ math {
   font-size: clamp(1.4rem, 3vw, 2.1rem);
 }
 
+/* Løsning af andengradsligninger */
+
+.quadratic-lesson {
+  --lesson-accent: var(--orange);
+  --lesson-soft: var(--orange-soft);
+}
+
+.quadratic-lesson .lesson-nav {
+  border-color: #efd1b9;
+}
+
+.quadratic-lesson .lesson-nav button:hover,
+.quadratic-lesson .lesson-nav button:focus-visible,
+.quadratic-lesson .level-pill,
+.quadratic-lesson .mini-index {
+  color: var(--orange);
+  background: var(--orange-soft);
+}
+
+.quadratic-lesson .answer-choice:hover,
+.quadratic-lesson .answer-choice.is-selected {
+  border-color: var(--orange);
+  background: var(--orange-soft);
+}
+
+.quadratic-lesson .answer-choice.is-selected {
+  box-shadow: 0 0 0 3px rgba(184, 93, 22, 0.1);
+}
+
+.quadratic-foundation {
+  border-color: #efd1b9;
+  background: linear-gradient(145deg, rgba(255, 240, 228, 0.76), rgba(255, 255, 255, 0.9));
+}
+
+.prerequisite-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 22px 0 25px;
+}
+
+.prerequisite-strip span {
+  padding: 7px 11px;
+  border: 1px solid #efd1b9;
+  border-radius: 999px;
+  color: #7c451c;
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.step-back-link,
+.section-back-button {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 18px;
+  color: var(--orange);
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.step-back-link {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.section-back-button {
+  padding: 9px 12px;
+  border: 1px solid #e9c6ab;
+  border-radius: 10px;
+  background: #fffaf6;
+  cursor: pointer;
+}
+
+.standard-form-card,
+.discriminant-formula,
+.solution-formula-card {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(280px, 0.9fr);
+  align-items: center;
+  gap: 34px;
+  padding: 28px 30px;
+  border: 1px solid #efd1b9;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #fffaf6, var(--orange-soft));
+}
+
+.standard-form-card > div > span,
+.discriminant-formula > span,
+.solution-formula-card > span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--orange);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.standard-form-card math[display="block"],
+.discriminant-formula math[display="block"],
+.solution-formula-card > math {
+  font-size: clamp(1.65rem, 4vw, 2.65rem);
+}
+
+.standard-form-card > p {
+  margin: 0;
+  color: #694d39;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.sign-warning {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-left: 4px solid var(--orange);
+  border-radius: 0 12px 12px 0;
+  color: #68452b;
+  background: #fff8f2;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.discriminant-formula {
+  grid-template-columns: minmax(150px, 0.55fr) minmax(300px, 1.45fr);
+}
+
+.discriminant-formula > span {
+  margin: 0;
+}
+
+.discriminant-cases {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0 22px;
+}
+
+.discriminant-cases article {
+  display: grid;
+  gap: 8px;
+  padding: 21px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.discriminant-cases article:first-child {
+  border-top: 4px solid var(--green);
+}
+
+.discriminant-cases article:nth-child(2) {
+  border-top: 4px solid var(--orange);
+}
+
+.discriminant-cases article:last-child {
+  border-top: 4px solid #8b6475;
+}
+
+.discriminant-cases math {
+  color: var(--orange);
+  font-size: 1.4rem;
+}
+
+.discriminant-cases strong {
+  font-size: 0.94rem;
+}
+
+.discriminant-cases span {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.compact-example {
+  margin-top: 18px;
+}
+
+.solution-formula-card {
+  grid-template-columns: minmax(160px, 0.55fr) minmax(300px, 1.45fr);
+  color: #ffffff;
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.solution-formula-card > span {
+  margin: 0;
+  color: #f2ad76;
+}
+
+.solution-formula-card > math {
+  color: #ffffff;
+}
+
+.method-rail {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin: 14px 0 20px;
+}
+
+.method-rail > span {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink-soft);
+  font-size: 0.77rem;
+  font-weight: 690;
+}
+
+.method-rail b {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  place-items: center;
+  border-radius: 50%;
+  color: #ffffff;
+  background: var(--orange);
+  font-size: 0.7rem;
+}
+
+.root-answer-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.root-answer-row label {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid #ccd5e2;
+  border-radius: 11px;
+  background: #ffffff;
+}
+
+.root-answer-row label:focus-within {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(184, 93, 22, 0.12);
+}
+
+.root-answer-row span {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 0 10px 12px;
+  white-space: nowrap;
+}
+
+.root-answer-row input {
+  width: 100%;
+  min-width: 45px;
+  padding: 11px 10px 11px 4px;
+  border: 0;
+  outline: 0;
+}
+
+.roots-check {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 9px;
+}
+
+.quadratic-test {
+  padding: clamp(22px, 4vw, 36px);
+  border: 1px solid #efd1b9;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255, 240, 228, 0.58), rgba(255, 255, 255, 0.88));
+}
+
+.quadratic-summary {
+  background: linear-gradient(135deg, #251b19, var(--navy));
+}
+
+.quadratic-summary .eyebrow,
+.quadratic-summary .summary-note span {
+  color: #f2ad76;
+}
+
 /* Sammensatte funktioner */
 
 .composite-lesson .lesson-nav {
@@ -1433,6 +1723,17 @@ math {
     grid-template-columns: 1fr;
   }
 
+  .standard-form-card,
+  .discriminant-formula,
+  .solution-formula-card,
+  .discriminant-cases {
+    grid-template-columns: 1fr;
+  }
+
+  .method-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .function-machine,
   .composition-pipeline {
     grid-template-columns: 1fr;
@@ -1618,6 +1919,16 @@ math {
   }
 
   .answer-choices--short {
+    grid-template-columns: 1fr;
+  }
+
+  .sign-warning {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .method-rail,
+  .root-answer-row {
     grid-template-columns: 1fr;
   }
 }

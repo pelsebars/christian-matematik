@@ -37,7 +37,7 @@
           </button>
           <button class="nav-item" type="button" data-view="quadratic">
             <span class="nav-number" aria-hidden="true">02</span>
-            <span>Andengradsligninger</span>
+            <span>Løsning af andengradsligninger</span>
           </button>
           <button class="nav-item" type="button" data-view="composite">
             <span class="nav-number" aria-hidden="true">03</span>
@@ -120,7 +120,7 @@
                   </mrow>
                 </math>
               </span>
-              <span class="card-title">Andengradsligninger</span>
+              <span class="card-title">Løsning af andengradsligninger</span>
               <span class="card-description">
                 Genkend formen, beregn diskriminanten og find ligningens løsninger.
               </span>
@@ -474,6 +474,318 @@
                 <span>Vigtigst</span>
                 <p>Du må gøre næsten hvad som helst ved en ligning — så længe du gør det samme på begge sider.</p>
               </div>
+            </section>
+          </div>
+
+          <div class="lesson-content quadratic-lesson" id="quadraticLesson" hidden>
+            <nav class="lesson-nav" aria-label="Indhold i Løsning af andengradsligninger">
+              <button type="button" data-scroll-to="andengrad-starttjek">Starttjek</button>
+              <button type="button" data-scroll-to="andengrad-form">Standardform</button>
+              <button type="button" data-scroll-to="andengrad-diskriminant">Diskriminant</button>
+              <button type="button" data-scroll-to="andengrad-formel">Løsningsformel</button>
+              <button type="button" data-scroll-to="andengrad-oevelser">Øvelser</button>
+              <button type="button" data-scroll-to="andengrad-test">Sluttest</button>
+            </nav>
+
+            <section class="lesson-section foundation-check-section quadratic-foundation" id="andengrad-starttjek" aria-labelledby="quadraticFoundationHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">0 · Før vi begynder</p>
+                  <h2 id="quadraticFoundationHeading">Seks byggesten — fire korte tjek</h2>
+                </div>
+                <p>Potenser, parenteser, fortegn, ligninger, kvadratrødder og løsninger skal føles trygge. Brug hintet, hvis du går i stå.</p>
+              </div>
+
+              <div class="prerequisite-strip" aria-label="Forudsætninger">
+                <span>Potenser</span><span>Parenteser</span><span>Fortegn</span><span>Ligninger</span><span>Kvadratrødder</span><span>Løsninger</span>
+              </div>
+
+              <div class="exercise-progress" data-progress-group="quadratic-foundation" aria-live="polite">
+                <div><span class="progress-score">0</span> af <span class="progress-total">4</span> på plads</div>
+                <div class="progress-track" aria-hidden="true"><span class="progress-bar"></span></div>
+              </div>
+
+              <div class="exercise-list compact-exercise-list">
+                <article class="exercise-card" data-kind="choice" data-answer="9" data-progress-group="quadratic-foundation">
+                  <div class="exercise-number">A</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Potens og parentes</span>
+                    <p>Hvad er værdien?</p>
+                    <math display="block" aria-label="minus tre i parentes i anden"><msup><mrow><mo>(</mo><mo>−</mo><mn>3</mn><mo>)</mo></mrow><mn>2</mn></msup></math>
+                    <div class="answer-choices answer-choices--short">
+                      <button class="answer-choice" type="button" data-value="9" aria-pressed="false"><math><mn>9</mn></math></button>
+                      <button class="answer-choice" type="button" data-value="-9" aria-pressed="false"><math><mrow><mo>−</mo><mn>9</mn></mrow></math></button>
+                    </div>
+                    <button class="check-answer check-choice" type="button">Tjek svar</button>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Parentesen viser, at hele det negative tal ganges med sig selv.</p>
+                    <template class="feedback-correct">Ja. To negative faktorer giver et positivt produkt.</template>
+                    <template class="feedback-incorrect">Se på parentesen: <math><mrow><mo>(</mo><mo>−</mo><mn>3</mn><mo>)</mo><mo>·</mo><mo>(</mo><mo>−</mo><mn>3</mn><mo>)</mo></mrow></math> er positivt.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="-1" data-progress-group="quadratic-foundation">
+                  <div class="exercise-number">B</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Fortegn og regnerækkefølge</span>
+                    <math display="block" aria-label="tre gange minus to plus fem"><mrow><mn>3</mn><mo>·</mo><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo><mo>+</mo><mn>5</mn></mrow></math>
+                    <div class="answer-row"><label><span>Svar =</span><input type="text" inputmode="numeric" autocomplete="off" aria-label="Svar på starttjek B" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Gang før du lægger til. Begynd med <math><mrow><mn>3</mn><mo>·</mo><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo></mrow></math>.</p>
+                    <template class="feedback-correct">Korrekt. Produktet er <math><mrow><mo>−</mo><mn>6</mn></mrow></math>, og derefter lægges <math><mn>5</mn></math> til.</template>
+                    <template class="feedback-incorrect">Ikke helt. Regn produktet først; et positivt tal gange et negativt tal bliver negativt.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="7" data-progress-group="quadratic-foundation">
+                  <div class="exercise-number">C</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Kvadratrod</span>
+                    <math display="block" aria-label="kvadratroden af niogfyrre"><msqrt><mn>49</mn></msqrt></math>
+                    <div class="answer-row"><label><span>Svar =</span><input type="text" inputmode="numeric" autocomplete="off" aria-label="Svar på starttjek C" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Find det ikke-negative tal, som ganget med sig selv giver <math><mn>49</mn></math>.</p>
+                    <template class="feedback-correct">Korrekt. <math><mrow><mn>7</mn><mo>·</mo><mn>7</mn><mo>=</mo><mn>49</mn></mrow></math>.</template>
+                    <template class="feedback-incorrect">Kvadratrodstegnet giver den ikke-negative kvadratrod. Hvilket positivt tal i anden giver <math><mn>49</mn></math>?</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="5" data-progress-group="quadratic-foundation">
+                  <div class="exercise-number">D</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Betydningen af en løsning</span>
+                    <p>Hvilken værdi gør ligningen sand?</p>
+                    <math display="block" aria-label="x plus fire er ni"><mrow><mi>x</mi><mo>+</mo><mn>4</mn><mo>=</mo><mn>9</mn></mrow></math>
+                    <div class="answer-row"><label><span><math><mi>x</mi></math> =</span><input type="text" inputmode="numeric" autocomplete="off" aria-label="Svar på starttjek D" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Træk <math><mn>4</mn></math> fra på begge sider.</p>
+                    <template class="feedback-correct">Ja. Når værdien sættes ind, bliver venstre side også <math><mn>9</mn></math>. Det er det, en løsning betyder.</template>
+                    <template class="feedback-incorrect">En løsning skal få venstre og højre side til at have samme værdi. Prøv at isolere <math><mi>x</mi></math>.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+              </div>
+              <a class="step-back-link" href="#equations">Har ligningerne brug for mere ro? Gå et emne tilbage.</a>
+            </section>
+
+            <section class="lesson-section" id="andengrad-form" aria-labelledby="quadraticFormHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">1 · Genkend og skriv om</p>
+                  <h2 id="quadraticFormHeading">Få først ligningen på standardform</h2>
+                </div>
+                <p>En andengradsligning har et kvadratled, og den højeste potens af den ukendte er <math><mn>2</mn></math>.</p>
+              </div>
+
+              <div class="standard-form-card">
+                <div>
+                  <span>Standardform</span>
+                  <math display="block" aria-label="a x i anden plus b x plus c er nul"><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo>=</mo><mn>0</mn></mrow></math>
+                </div>
+                <p><math><mi>a</mi><mo>≠</mo><mn>0</mn></math>, ellers forsvinder kvadratleddet. Koefficienterne er tallene foran leddene — med deres fortegn.</p>
+              </div>
+
+              <div class="theory-grid">
+                <article class="theory-card">
+                  <span class="mini-index">A</span>
+                  <h3>Genkend typen</h3>
+                  <p><math><msup><mi>x</mi><mn>2</mn></msup></math> gør ligningen til en andengradsligning, når der ikke findes højere potenser.</p>
+                </article>
+                <article class="theory-card">
+                  <span class="mini-index">B</span>
+                  <h3>Flyt alt til venstre</h3>
+                  <math display="block"><mtable columnalign="left"><mtr><mtd><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>=</mo><mi>x</mi><mo>−</mo><mn>2</mn></mtd></mtr><mtr><mtd><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn><mi>x</mi><mo>+</mo><mn>2</mn><mo>=</mo><mn>0</mn></mtd></mtr></mtable></math>
+                </article>
+                <article class="theory-card">
+                  <span class="mini-index">C</span>
+                  <h3>Et manglende led har koefficient nul</h3>
+                  <p>I <math><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>50</mn><mo>=</mo><mn>0</mn></mrow></math> er <math><mrow><mi>a</mi><mo>=</mo><mn>2</mn><mo>,</mo><mi>b</mi><mo>=</mo><mn>0</mn><mo>,</mo><mi>c</mi><mo>=</mo><mo>−</mo><mn>50</mn></mrow></math>.</p>
+                </article>
+              </div>
+
+              <aside class="sign-warning">
+                <strong>Fortegnet følger med.</strong>
+                <span>I <math><mrow><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn><mo>=</mo><mn>0</mn></mrow></math> er både <math><mi>a</mi></math> og <math><mi>b</mi></math> negative.</span>
+              </aside>
+              <button class="section-back-button" type="button" data-scroll-to="andengrad-starttjek">← Tilbage til starttjek</button>
+            </section>
+
+            <section class="lesson-section" id="andengrad-diskriminant" aria-labelledby="discriminantHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">2 · Diskriminanten</p>
+                  <h2 id="discriminantHeading">Beregn først — fortolk bagefter</h2>
+                </div>
+                <p>Diskriminanten fortæller, hvor mange reelle løsninger ligningen har, før du regner løsningerne ud.</p>
+              </div>
+
+              <div class="discriminant-formula">
+                <span>Diskriminanten</span>
+                <math display="block" aria-label="d er b i anden minus fire a c"><mrow><mi>d</mi><mo>=</mo><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>a</mi><mi>c</mi></mrow></math>
+              </div>
+
+              <div class="discriminant-cases">
+                <article>
+                  <math><mrow><mi>d</mi><mo>&gt;</mo><mn>0</mn></mrow></math>
+                  <strong>To reelle løsninger</strong>
+                  <span>Kvadratroden giver to forskellige veje.</span>
+                </article>
+                <article>
+                  <math><mrow><mi>d</mi><mo>=</mo><mn>0</mn></mrow></math>
+                  <strong>Én reel løsning</strong>
+                  <span>De to veje ender samme sted.</span>
+                </article>
+                <article>
+                  <math><mrow><mi>d</mi><mo>&lt;</mo><mn>0</mn></mrow></math>
+                  <strong>Ingen reelle løsninger</strong>
+                  <span>Et negativt tal har ingen reel kvadratrod.</span>
+                </article>
+              </div>
+
+              <div class="example-card compact-example">
+                <div class="example-topline">
+                  <div><span class="level-pill">Mini-eksempel</span><h3>Én løsning</h3></div>
+                  <math display="block"><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>=</mo><mn>0</mn></mrow></math>
+                </div>
+                <ol class="worked-steps">
+                  <li><div class="worked-math"><math><mrow><mi>a</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>b</mi><mo>=</mo><mo>−</mo><mn>2</mn><mo>,</mo><mi>c</mi><mo>=</mo><mn>1</mn></mrow></math></div><p>Læs koefficienterne med fortegn.</p></li>
+                  <li class="worked-result"><div class="worked-math"><math><mrow><mi>d</mi><mo>=</mo><msup><mrow><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>−</mo><mn>4</mn><mo>·</mo><mn>1</mn><mo>·</mo><mn>1</mn><mo>=</mo><mn>0</mn></mrow></math></div><p>Parentesen beskytter det negative fortegn, når <math><mi>b</mi></math> sættes i anden.</p></li>
+                </ol>
+              </div>
+              <button class="section-back-button" type="button" data-scroll-to="andengrad-form">← Tilbage til standardform</button>
+            </section>
+
+            <section class="lesson-section" id="andengrad-formel" aria-labelledby="solutionFormulaHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">3 · Løsningsformlen</p>
+                  <h2 id="solutionFormulaHeading">Sæt ind i samme faste rækkefølge</h2>
+                </div>
+                <p>Brug kun formlen efter standardform, koefficienter og diskriminant er på plads.</p>
+              </div>
+
+              <div class="solution-formula-card">
+                <span>Når <math><mrow><mi>d</mi><mo>≥</mo><mn>0</mn></mrow></math></span>
+                <math display="block" aria-label="x er minus b plus minus kvadratroden af d over to a"><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mi>b</mi><mo>±</mo><msqrt><mi>d</mi></msqrt></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></mrow></math>
+              </div>
+
+              <div class="method-rail" aria-label="Fast løsningsmetode">
+                <span><b>1</b> Standardform</span><span><b>2</b> Find <math><mi>a</mi></math>, <math><mi>b</mi></math>, <math><mi>c</mi></math></span><span><b>3</b> Beregn <math><mi>d</mi></math></span><span><b>4</b> Brug formlen</span><span><b>5</b> Kontrollér</span>
+              </div>
+
+              <div class="example-list">
+                <article class="example-card">
+                  <div class="example-topline">
+                    <div><span class="level-pill">Fra Word-materialet</span><h3>To løsninger</h3></div>
+                    <math display="block" aria-label="to x i anden minus otte x plus seks er nul"><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>8</mn><mi>x</mi><mo>+</mo><mn>6</mn><mo>=</mo><mn>0</mn></mrow></math>
+                  </div>
+                  <ol class="worked-steps">
+                    <li><div class="worked-math"><math><mrow><mi>a</mi><mo>=</mo><mn>2</mn><mo>,</mo><mi>b</mi><mo>=</mo><mo>−</mo><mn>8</mn><mo>,</mo><mi>c</mi><mo>=</mo><mn>6</mn></mrow></math></div><p>Ligningen står allerede på standardform.</p></li>
+                    <li><div class="worked-math"><math><mrow><mi>d</mi><mo>=</mo><msup><mrow><mo>(</mo><mo>−</mo><mn>8</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>−</mo><mn>4</mn><mo>·</mo><mn>2</mn><mo>·</mo><mn>6</mn><mo>=</mo><mn>16</mn></mrow></math></div><p>Da <math><mrow><mi>d</mi><mo>&gt;</mo><mn>0</mn></mrow></math>, forventer vi to løsninger.</p></li>
+                    <li><div class="worked-math"><math><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mo>(</mo><mo>−</mo><mn>8</mn><mo>)</mo><mo>±</mo><msqrt><mn>16</mn></msqrt></mrow><mrow><mn>2</mn><mo>·</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>8</mn><mo>±</mo><mn>4</mn></mrow><mn>4</mn></mfrac></mrow></math></div><p>Sæt tallene i formlen. Minus foran et negativt <math><mi>b</mi></math> bliver plus.</p></li>
+                    <li class="worked-result"><div class="worked-math"><math><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn><mo>,</mo><mspace width="1em"/><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mn>3</mn></mrow></math></div><p>Regn én gang med minus og én gang med plus.</p></li>
+                  </ol>
+                  <details class="example-check"><summary>Se kontrol ved indsættelse</summary><div><math display="block"><mtable columnalign="left"><mtr><mtd><mn>2</mn><mo>·</mo><msup><mn>1</mn><mn>2</mn></msup><mo>−</mo><mn>8</mn><mo>·</mo><mn>1</mn><mo>+</mo><mn>6</mn><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd><mn>2</mn><mo>·</mo><msup><mn>3</mn><mn>2</mn></msup><mo>−</mo><mn>8</mn><mo>·</mo><mn>3</mn><mo>+</mo><mn>6</mn><mo>=</mo><mn>0</mn></mtd></mtr></mtable></math><p>Begge værdier gør venstre side lig med <math><mn>0</mn></math>.</p></div></details>
+                </article>
+
+                <article class="example-card">
+                  <div class="example-topline">
+                    <div><span class="level-pill">Fra Word-materialet</span><h3>Et manglende førstegradsled</h3></div>
+                    <math display="block"><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>50</mn><mo>=</mo><mn>0</mn></mrow></math>
+                  </div>
+                  <ol class="worked-steps">
+                    <li><div class="worked-math"><math><mrow><mi>a</mi><mo>=</mo><mn>2</mn><mo>,</mo><mi>b</mi><mo>=</mo><mn>0</mn><mo>,</mo><mi>c</mi><mo>=</mo><mo>−</mo><mn>50</mn></mrow></math></div><p>Der står intet <math><mi>x</mi></math>-led, så <math><mrow><mi>b</mi><mo>=</mo><mn>0</mn></mrow></math>.</p></li>
+                    <li><div class="worked-math"><math><mrow><mi>d</mi><mo>=</mo><msup><mn>0</mn><mn>2</mn></msup><mo>−</mo><mn>4</mn><mo>·</mo><mn>2</mn><mo>·</mo><mo>(</mo><mo>−</mo><mn>50</mn><mo>)</mo><mo>=</mo><mn>400</mn></mrow></math></div><p>Det negative <math><mi>c</mi></math> gør sidste produkt positivt.</p></li>
+                    <li class="worked-result"><div class="worked-math"><math><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mn>0</mn><mo>±</mo><msqrt><mn>400</mn></msqrt></mrow><mn>4</mn></mfrac><mo>=</mo><mo>±</mo><mn>5</mn></mrow></math></div><p>Løsningerne er <math><mrow><mo>−</mo><mn>5</mn></mrow></math> og <math><mn>5</mn></math>.</p></li>
+                  </ol>
+                </article>
+              </div>
+              <button class="section-back-button" type="button" data-scroll-to="andengrad-diskriminant">← Tilbage til diskriminanten</button>
+            </section>
+
+            <section class="lesson-section" id="andengrad-oevelser" aria-labelledby="quadraticExercisesHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">4 · Øvelser</p>
+                  <h2 id="quadraticExercisesHeading">Ét trin ad gangen</h2>
+                </div>
+                <p>Opgaverne følger Word-materialets typer, men hvert spørgsmål træner kun ét nyt valg ad gangen.</p>
+              </div>
+
+              <div class="exercise-progress" data-progress-group="quadratic-practice" aria-live="polite">
+                <div><span class="progress-score">0</span> af <span class="progress-total">6</span> løst</div>
+                <div class="progress-track" aria-hidden="true"><span class="progress-bar"></span></div>
+              </div>
+
+              <div class="exercise-list">
+                <article class="exercise-card" data-kind="choice" data-answer="quadratic" data-progress-group="quadratic-practice">
+                  <div class="exercise-number">01</div><div class="exercise-body"><span class="level-pill">Genkend</span><p>Hvilken er en andengradsligning?</p>
+                    <div class="answer-choices"><button class="answer-choice" type="button" data-value="linear" aria-pressed="false"><math><mrow><mn>4</mn><mi>x</mi><mo>+</mo><mn>2</mn><mo>=</mo><mn>0</mn></mrow></math></button><button class="answer-choice" type="button" data-value="quadratic" aria-pressed="false"><math><mrow><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mi>x</mi><mo>=</mo><mn>7</mn></mrow></math></button><button class="answer-choice" type="button" data-value="cubic" aria-pressed="false"><math><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mn>1</mn><mo>=</mo><mn>0</mn></mrow></math></button></div>
+                    <button class="check-answer check-choice" type="button">Tjek svar</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Se efter den højeste potens. Den skal være <math><mn>2</mn></math>.</p><template class="feedback-correct">Korrekt. Den højeste potens er <math><mn>2</mn></math>, og koefficienten foran kvadratleddet er ikke nul.</template><template class="feedback-incorrect">Se på eksponenten: en andengradsligning har højeste potens <math><mn>2</mn></math>.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="standard" data-progress-group="quadratic-practice">
+                  <div class="exercise-number">02</div><div class="exercise-body"><span class="level-pill">Standardform</span><math display="block"><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>=</mo><mi>x</mi><mo>−</mo><mn>2</mn></mrow></math><p>Vælg standardformen.</p>
+                    <div class="answer-choices"><button class="answer-choice" type="button" data-value="standard" aria-pressed="false"><math><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn><mi>x</mi><mo>+</mo><mn>2</mn><mo>=</mo><mn>0</mn></mrow></math></button><button class="answer-choice" type="button" data-value="wrong-sign" aria-pressed="false"><math><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo>=</mo><mn>0</mn></mrow></math></button></div>
+                    <button class="check-answer check-choice" type="button">Tjek svar</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Træk <math><mi>x</mi></math> fra og læg <math><mn>2</mn></math> til på begge sider.</p><template class="feedback-correct">Korrekt. Nu står alle led til venstre og <math><mn>0</mn></math> til højre.</template><template class="feedback-incorrect">Fortegnet ændres, når et led flyttes ved at udføre den modsatte handling på begge sider.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="coefficients" data-progress-group="quadratic-practice">
+                  <div class="exercise-number">03</div><div class="exercise-body"><span class="level-pill">Koefficienter</span><math display="block"><mrow><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn><mo>=</mo><mn>0</mn></mrow></math><p>Vælg de rigtige koefficienter.</p>
+                    <div class="answer-choices"><button class="answer-choice" type="button" data-value="coefficients" aria-pressed="false"><math><mrow><mi>a</mi><mo>=</mo><mo>−</mo><mn>1</mn><mo>,</mo><mi>b</mi><mo>=</mo><mo>−</mo><mn>2</mn><mo>,</mo><mi>c</mi><mo>=</mo><mn>3</mn></mrow></math></button><button class="answer-choice" type="button" data-value="lost-signs" aria-pressed="false"><math><mrow><mi>a</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>b</mi><mo>=</mo><mn>2</mn><mo>,</mo><mi>c</mi><mo>=</mo><mn>3</mn></mrow></math></button></div>
+                    <button class="check-answer check-choice" type="button">Tjek svar</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Læs hvert led sammen med tegnet lige foran.</p><template class="feedback-correct">Ja. Et usynligt ettal foran kvadratleddet er negativt her.</template><template class="feedback-incorrect">Fortegnene er en del af koefficienterne. De må ikke falde væk.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="4" data-progress-group="quadratic-practice">
+                  <div class="exercise-number">04</div><div class="exercise-body"><span class="level-pill">Diskriminant</span><math display="block"><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>6</mn><mi>x</mi><mo>+</mo><mn>4</mn><mo>=</mo><mn>0</mn></mrow></math><p>Beregn <math><mi>d</mi></math>.</p>
+                    <div class="answer-row"><label><span><math><mi>d</mi></math> =</span><input type="text" inputmode="numeric" autocomplete="off" aria-label="Diskriminanten i øvelse 4" /></label><button class="check-answer" type="button">Tjek svar</button></div><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Sæt <math><mrow><mi>a</mi><mo>=</mo><mn>2</mn><mo>,</mo><mi>b</mi><mo>=</mo><mo>−</mo><mn>6</mn><mo>,</mo><mi>c</mi><mo>=</mo><mn>4</mn></mrow></math> ind i diskriminanten.</p><template class="feedback-correct">Korrekt. <math><mrow><msup><mrow><mo>(</mo><mo>−</mo><mn>6</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>−</mo><mn>4</mn><mo>·</mo><mn>2</mn><mo>·</mo><mn>4</mn><mo>=</mo><mn>4</mn></mrow></math>.</template><template class="feedback-incorrect">Kontrollér især <math><msup><mrow><mo>(</mo><mo>−</mo><mn>6</mn><mo>)</mo></mrow><mn>2</mn></msup></math>: parentesen gør kvadratet positivt.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="one" data-progress-group="quadratic-practice">
+                  <div class="exercise-number">05</div><div class="exercise-body"><span class="level-pill">Fortolk</span><p>Hvor mange reelle løsninger er der, når</p><math display="block"><mrow><mi>d</mi><mo>=</mo><mn>0</mn></mrow></math>
+                    <div class="answer-choices"><button class="answer-choice" type="button" data-value="two" aria-pressed="false">To</button><button class="answer-choice" type="button" data-value="one" aria-pressed="false">Én</button><button class="answer-choice" type="button" data-value="none" aria-pressed="false">Ingen</button></div><button class="check-answer check-choice" type="button">Tjek svar</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Når kvadratroden af diskriminanten er nul, bliver plus- og minusvejen ens.</p><template class="feedback-correct">Korrekt. De to formelgrene giver samme værdi.</template><template class="feedback-incorrect">Ved <math><mrow><mi>d</mi><mo>=</mo><mn>0</mn></mrow></math> er <math><mrow><msqrt><mi>d</mi></msqrt><mo>=</mo><mn>0</mn></mrow></math>, så plus og minus ender samme sted.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-kind="roots" data-answer="1,2" data-progress-group="quadratic-practice">
+                  <div class="exercise-number">06</div><div class="exercise-body"><span class="level-pill">Hele metoden</span><math display="block"><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>6</mn><mi>x</mi><mo>+</mo><mn>4</mn><mo>=</mo><mn>0</mn></mrow></math>
+                    <div class="root-answer-row"><label><span><math><msub><mi>x</mi><mn>1</mn></msub></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Første løsning i øvelse 6" /></label><label><span><math><msub><mi>x</mi><mn>2</mn></msub></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Anden løsning i øvelse 6" /></label></div><button class="check-answer roots-check" type="button">Tjek begge svar</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Du har allerede fundet <math><mrow><mi>d</mi><mo>=</mo><mn>4</mn></mrow></math>. Sæt <math><mrow><mi>a</mi><mo>=</mo><mn>2</mn></mrow></math>, <math><mrow><mi>b</mi><mo>=</mo><mo>−</mo><mn>6</mn></mrow></math> og <math><mi>d</mi></math> i løsningsformlen.</p><template class="feedback-correct">Flot. Begge løsninger er fundet; rækkefølgen er ligegyldig.</template><template class="feedback-incorrect">Ikke helt. Nævneren er <math><mrow><mn>2</mn><mi>a</mi><mo>=</mo><mn>4</mn></mrow></math>. Regn én gang med minus og én gang med plus.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+              </div>
+              <button class="section-back-button" type="button" data-scroll-to="andengrad-formel">← Se løsningsformlen igen</button>
+            </section>
+
+            <section class="lesson-section quadratic-test" id="andengrad-test" aria-labelledby="quadraticTestHeading">
+              <div class="section-heading">
+                <div><p class="eyebrow">5 · Blandet sluttest</p><h2 id="quadraticTestHeading">Kan du vælge næste trin selv?</h2></div>
+                <p>Her blandes opgavetyperne fra Word-materialet. Brug hints sparsomt, og kontrollér dine løsninger.</p>
+              </div>
+              <div class="exercise-progress" data-progress-group="quadratic-test" aria-live="polite"><div><span class="progress-score">0</span> af <span class="progress-total">6</span> løst</div><div class="progress-track" aria-hidden="true"><span class="progress-bar"></span></div></div>
+              <div class="exercise-list">
+                <article class="exercise-card" data-kind="choice" data-answer="zero-b" data-progress-group="quadratic-test"><div class="exercise-number">01</div><div class="exercise-body"><span class="level-pill">Koefficienter</span><math display="block"><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>50</mn><mo>=</mo><mn>0</mn></mrow></math><div class="answer-choices"><button class="answer-choice" type="button" data-value="zero-b" aria-pressed="false"><math><mrow><mi>a</mi><mo>=</mo><mn>2</mn><mo>,</mo><mi>b</mi><mo>=</mo><mn>0</mn><mo>,</mo><mi>c</mi><mo>=</mo><mo>−</mo><mn>50</mn></mrow></math></button><button class="answer-choice" type="button" data-value="zero-c" aria-pressed="false"><math><mrow><mi>a</mi><mo>=</mo><mn>2</mn><mo>,</mo><mi>b</mi><mo>=</mo><mo>−</mo><mn>50</mn><mo>,</mo><mi>c</mi><mo>=</mo><mn>0</mn></mrow></math></button></div><button class="check-answer check-choice" type="button">Tjek svar</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Det manglende led er det almindelige <math><mi>x</mi></math>-led.</p><template class="feedback-correct">Korrekt. Det manglende førstegradsled betyder <math><mrow><mi>b</mi><mo>=</mo><mn>0</mn></mrow></math>.</template><template class="feedback-incorrect">Sammenlign led for led med standardformen. Konstanten <math><mrow><mo>−</mo><mn>50</mn></mrow></math> er <math><mi>c</mi></math>.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-answer="0" data-progress-group="quadratic-test"><div class="exercise-number">02</div><div class="exercise-body"><span class="level-pill">Diskriminant</span><math display="block"><mrow><mo>−</mo><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo>=</mo><mn>2</mn></mrow></math><p>Skriv først på standardform, og beregn <math><mi>d</mi></math>.</p><div class="answer-row"><label><span><math><mi>d</mi></math> =</span><input type="text" inputmode="numeric" autocomplete="off" aria-label="Diskriminanten i sluttest 2" /></label><button class="check-answer" type="button">Tjek svar</button></div><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Træk <math><mn>2</mn></math> fra på begge sider. Så er <math><mrow><mi>c</mi><mo>=</mo><mo>−</mo><mn>2</mn></mrow></math>.</p><template class="feedback-correct">Korrekt. Diskriminanten er nul, så ligningen har én reel løsning.</template><template class="feedback-incorrect">Pas på konstantleddet efter omskrivning og brug parentes om negative koefficienter.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-answer="-1" data-progress-group="quadratic-test"><div class="exercise-number">03</div><div class="exercise-body"><span class="level-pill">Én løsning</span><math display="block"><mrow><mo>−</mo><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo>=</mo><mn>2</mn></mrow></math><div class="answer-row"><label><span><math><mi>x</mi></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Løsning i sluttest 3" /></label><button class="check-answer" type="button">Tjek svar</button></div><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Du ved, at <math><mrow><mi>d</mi><mo>=</mo><mn>0</mn></mrow></math>. Derfor forsvinder kvadratrodsleddet i tælleren.</p><template class="feedback-correct">Ja. Der er én reel løsning.</template><template class="feedback-incorrect">Brug <math><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mi>b</mi></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></mrow></math>, fordi diskriminanten er nul.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="roots" data-answer="-2,2" data-progress-group="quadratic-test"><div class="exercise-number">04</div><div class="exercise-body"><span class="level-pill">To løsninger</span><math display="block"><mrow><msup><mi>t</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mo>=</mo><mn>0</mn></mrow></math><div class="root-answer-row"><label><span><math><msub><mi>t</mi><mn>1</mn></msub></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Første løsning i sluttest 4" /></label><label><span><math><msub><mi>t</mi><mn>2</mn></msub></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Anden løsning i sluttest 4" /></label></div><button class="check-answer roots-check" type="button">Tjek begge svar</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Her er <math><mrow><mi>b</mi><mo>=</mo><mn>0</mn></mrow></math>. Hvilke to tal har kvadratet <math><mn>4</mn></math>?</p><template class="feedback-correct">Korrekt. Både <math><mrow><mo>−</mo><mn>2</mn></mrow></math> og <math><mn>2</mn></math> giver kvadratet <math><mn>4</mn></math>.</template><template class="feedback-incorrect">Der skal være én negativ og én positiv løsning. Kontrollér begge ved at sætte dem i anden.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="none" data-progress-group="quadratic-test"><div class="exercise-number">05</div><div class="exercise-body"><span class="level-pill">Ingen reel løsning</span><math display="block"><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn><mo>=</mo><mn>0</mn></mrow></math><p>Hvor mange reelle løsninger har ligningen?</p><div class="answer-choices"><button class="answer-choice" type="button" data-value="two" aria-pressed="false">To</button><button class="answer-choice" type="button" data-value="one" aria-pressed="false">Én</button><button class="answer-choice" type="button" data-value="none" aria-pressed="false">Ingen</button></div><button class="check-answer check-choice" type="button">Tjek svar</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Beregn kun diskriminanten først. Du behøver ikke bruge løsningsformlen, hvis den er negativ.</p><template class="feedback-correct">Korrekt. <math><mrow><mi>d</mi><mo>=</mo><mo>−</mo><mn>8</mn></mrow></math>, så der er ingen reelle løsninger.</template><template class="feedback-incorrect">Diskriminanten bliver negativ. Derfor findes der ingen reel kvadratrod at sætte i formlen.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="both" data-progress-group="quadratic-test"><div class="exercise-number">06</div><div class="exercise-body"><span class="level-pill">Kontrol</span><p>Hvilke værdier opfylder ligningen?</p><math display="block"><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>8</mn><mi>x</mi><mo>+</mo><mn>6</mn><mo>=</mo><mn>0</mn></mrow></math><div class="answer-choices"><button class="answer-choice" type="button" data-value="one" aria-pressed="false"><math><mrow><mi>x</mi><mo>=</mo><mn>1</mn></mrow></math> alene</button><button class="answer-choice" type="button" data-value="three" aria-pressed="false"><math><mrow><mi>x</mi><mo>=</mo><mn>3</mn></mrow></math> alene</button><button class="answer-choice" type="button" data-value="both" aria-pressed="false">Begge værdier</button></div><button class="check-answer check-choice" type="button">Tjek svar</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Sæt først <math><mn>1</mn></math> ind overalt, hvor der står <math><mi>x</mi></math>. Gentag derefter med <math><mn>3</mn></math>.</p><template class="feedback-correct">Korrekt. Begge indsættelser giver <math><mn>0</mn></math>, så begge er løsninger.</template><template class="feedback-incorrect">En andengradsligning kan have to løsninger. Kontrollér hver værdi i hele venstresiden.</template><p class="answer-feedback" role="status"></p></div></article>
+              </div>
+            </section>
+
+            <section class="lesson-section summary-section quadratic-summary" aria-labelledby="quadraticSummaryHeading">
+              <div class="summary-copy"><p class="eyebrow">Din faste metode</p><h2 id="quadraticSummaryHeading">Fem rolige skridt</h2><ol><li>Skriv ligningen som <math><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo>=</mo><mn>0</mn></mrow></math>.</li><li>Læs <math><mi>a</mi></math>, <math><mi>b</mi></math> og <math><mi>c</mi></math> med fortegn.</li><li>Beregn <math><mrow><mi>d</mi><mo>=</mo><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>a</mi><mi>c</mi></mrow></math>.</li><li>Afgør antal løsninger, og brug formlen.</li><li>Sæt hver løsning ind i den oprindelige ligning.</li></ol></div><div class="summary-note"><span>Når du går i stå</span><p>Gå kun ét trin tilbage: Er standardformen rigtig? Er fortegnene fulgt med?</p></div>
             </section>
           </div>
 
