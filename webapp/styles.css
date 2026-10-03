@@ -1146,6 +1146,241 @@ math {
   font-size: clamp(1.4rem, 3vw, 2.1rem);
 }
 
+/* Sammensatte funktioner */
+
+.composite-lesson .lesson-nav {
+  border-color: color-mix(in srgb, var(--violet), white 72%);
+}
+
+.function-machine,
+.composition-pipeline {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.65fr) auto minmax(250px, 1.5fr) auto minmax(110px, 0.65fr);
+  align-items: stretch;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.machine-value,
+.machine-rule,
+.pipeline-input,
+.pipeline-output,
+.pipeline-function {
+  display: grid;
+  min-height: 138px;
+  align-content: center;
+  justify-items: center;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.machine-value > span,
+.machine-rule > span,
+.pipeline-input > span,
+.pipeline-output > span,
+.pipeline-function > span {
+  margin-bottom: 12px;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.machine-value math,
+.machine-rule math,
+.pipeline-input math,
+.pipeline-output math,
+.pipeline-function math {
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+}
+
+.machine-rule {
+  border-color: #cfc5f6;
+  background: var(--violet-soft);
+}
+
+.machine-value--output {
+  border-color: #a9dbce;
+  background: var(--green-soft);
+}
+
+.machine-arrow {
+  display: grid;
+  place-items: center;
+  color: var(--violet);
+  font-size: 1.7rem;
+  font-weight: 760;
+}
+
+.composite-theory-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.math-note {
+  margin: 20px 0 0;
+  padding: 13px;
+  border-radius: 11px;
+  background: #f2f5fa;
+}
+
+.math-note math {
+  font-size: 1.05rem;
+}
+
+.calm-reminder {
+  border-color: #d9d0f8;
+  background: #f8f6ff;
+}
+
+.calm-reminder ol {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 22px;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.foundation-check-section {
+  padding: clamp(22px, 4vw, 36px);
+  border: 1px solid #d9d0f8;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(240, 236, 255, 0.74), rgba(255, 255, 255, 0.88));
+}
+
+.foundation-status {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 24px 0 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  color: #4e4770;
+  background: rgba(114, 87, 217, 0.09);
+  font-size: 0.88rem;
+}
+
+.foundation-status.is-ready {
+  color: #0d6555;
+  background: #e5f6f1;
+}
+
+.compact-exercise-list {
+  grid-template-columns: 1fr;
+}
+
+.composition-pipeline {
+  grid-template-columns: minmax(95px, 0.65fr) auto minmax(145px, 1fr) auto minmax(145px, 1fr) auto minmax(170px, 1.2fr);
+}
+
+.pipeline-function--inner {
+  border-color: #d6c9ff;
+  background: var(--violet-soft);
+}
+
+.pipeline-function--outer {
+  border-color: #bfd8ff;
+  background: var(--blue-soft);
+}
+
+.pipeline-output {
+  border-color: #a9dbce;
+  background: var(--green-soft);
+}
+
+.pipeline-function small {
+  margin-top: 9px;
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+}
+
+.inside-out-card {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.8fr) minmax(260px, 0.9fr) minmax(260px, 1fr);
+  align-items: center;
+  gap: 26px;
+  margin-top: 18px;
+  padding: 25px 28px;
+  border: 1px solid #d9d0f8;
+  border-radius: 18px;
+  background: #fbfaff;
+}
+
+.inside-out-card h3 {
+  margin: 9px 0 0;
+  line-height: 1.4;
+}
+
+.inside-out-card > math {
+  font-size: clamp(1.7rem, 4vw, 2.7rem);
+}
+
+.inside-out-card > p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.context-example > p {
+  margin: 8px 0 20px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.answer-choices {
+  display: grid;
+  gap: 9px;
+  margin: 16px 0 12px;
+}
+
+.answer-choices--short {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.answer-choice {
+  min-height: 48px;
+  padding: 11px 14px;
+  border: 1px solid #ccd5e2;
+  border-radius: 11px;
+  color: var(--ink);
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+
+.answer-choice:hover {
+  border-color: #ab99eb;
+  background: #faf8ff;
+}
+
+.answer-choice.is-selected {
+  border-color: var(--violet);
+  background: var(--violet-soft);
+  box-shadow: 0 0 0 3px rgba(114, 87, 217, 0.1);
+}
+
+.answer-choice math {
+  font-size: 1.13rem;
+}
+
+.check-choice {
+  min-height: 42px;
+  margin-top: 3px;
+}
+
+.composite-summary-note math {
+  margin-top: 15px;
+  color: #ffffff;
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+}
+
 [hidden] {
   display: none !important;
 }
@@ -1191,6 +1426,22 @@ math {
   .theory-grid,
   .exercise-list {
     grid-template-columns: 1fr;
+  }
+
+  .composite-theory-grid,
+  .inside-out-card {
+    grid-template-columns: 1fr;
+  }
+
+  .function-machine,
+  .composition-pipeline {
+    grid-template-columns: 1fr;
+  }
+
+  .function-machine .machine-arrow,
+  .composition-pipeline .machine-arrow {
+    min-height: 22px;
+    transform: rotate(90deg);
   }
 }
 
@@ -1358,6 +1609,16 @@ math {
 
   .summary-section {
     padding: 26px 22px;
+  }
+
+  .foundation-status {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .answer-choices--short {
+    grid-template-columns: 1fr;
   }
 }
 

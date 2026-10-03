@@ -376,13 +376,13 @@
                 <p>Skriv værdien af <math><mi>x</mi></math>. Du kan bruge både komma og punktum i decimaltal.</p>
               </div>
 
-              <div class="exercise-progress" aria-live="polite">
+              <div class="exercise-progress" data-progress-group="equations" aria-live="polite">
                 <div><span id="exerciseScore">0</span> af <span id="exerciseTotal">6</span> løst</div>
                 <div class="progress-track" aria-hidden="true"><span id="exerciseProgressBar"></span></div>
               </div>
 
               <div class="exercise-list">
-                <article class="exercise-card" data-answer="5">
+                <article class="exercise-card" data-answer="5" data-progress-group="equations">
                   <div class="exercise-number">01</div>
                   <div class="exercise-body">
                     <span class="level-pill">Kom i gang</span>
@@ -397,7 +397,7 @@
                   </div>
                 </article>
 
-                <article class="exercise-card" data-answer="3">
+                <article class="exercise-card" data-answer="3" data-progress-group="equations">
                   <div class="exercise-number">02</div>
                   <div class="exercise-body">
                     <span class="level-pill">Ét ekstra trin</span>
@@ -409,7 +409,7 @@
                   </div>
                 </article>
 
-                <article class="exercise-card" data-answer="3">
+                <article class="exercise-card" data-answer="3" data-progress-group="equations">
                   <div class="exercise-number">03</div>
                   <div class="exercise-body">
                     <span class="level-pill">Fra materialet</span>
@@ -421,7 +421,7 @@
                   </div>
                 </article>
 
-                <article class="exercise-card" data-answer="2">
+                <article class="exercise-card" data-answer="2" data-progress-group="equations">
                   <div class="exercise-number">04</div>
                   <div class="exercise-body">
                     <span class="level-pill">Fortegn</span>
@@ -433,7 +433,7 @@
                   </div>
                 </article>
 
-                <article class="exercise-card" data-answer="2">
+                <article class="exercise-card" data-answer="2" data-progress-group="equations">
                   <div class="exercise-number">05</div>
                   <div class="exercise-body">
                     <span class="level-pill">Parentes</span>
@@ -445,7 +445,7 @@
                   </div>
                 </article>
 
-                <article class="exercise-card" data-answer="-2">
+                <article class="exercise-card" data-answer="-2" data-progress-group="equations">
                   <div class="exercise-number">06</div>
                   <div class="exercise-body">
                     <span class="level-pill">Udfordring</span>
@@ -473,6 +473,447 @@
               <div class="summary-note">
                 <span>Vigtigst</span>
                 <p>Du må gøre næsten hvad som helst ved en ligning — så længe du gør det samme på begge sider.</p>
+              </div>
+            </section>
+          </div>
+
+          <div class="lesson-content composite-lesson" id="compositeLesson" hidden>
+            <nav class="lesson-nav" aria-label="Indhold i Sammensatte funktioner">
+              <button type="button" data-scroll-to="funktioner-grundlag">Grundlag</button>
+              <button type="button" data-scroll-to="grundtjek">Grundtjek</button>
+              <button type="button" data-scroll-to="sammensaetning">Sammensætning</button>
+              <button type="button" data-scroll-to="sammensatte-eksempler">Eksempler</button>
+              <button type="button" data-scroll-to="sammensatte-oevelser">Øvelser</button>
+              <button type="button" data-scroll-to="sammensatte-husk">Husk</button>
+            </nav>
+
+            <section class="lesson-section" id="funktioner-grundlag" aria-labelledby="functionBasicsHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">1 · Helt fra begyndelsen</p>
+                  <h2 id="functionBasicsHeading">En funktion er en regel</h2>
+                </div>
+                <p>
+                  En funktion tager ét input, bruger en fast regel og giver ét output.
+                  Samme input skal altid give samme output.
+                </p>
+              </div>
+
+              <div class="function-machine" aria-label="Fire sendes gennem funktionen f og bliver til elleve">
+                <div class="machine-value">
+                  <span>Input</span>
+                  <math display="block"><mn>4</mn></math>
+                </div>
+                <span class="machine-arrow" aria-hidden="true">→</span>
+                <div class="machine-rule">
+                  <span>Regel</span>
+                  <math display="block">
+                    <mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn></mrow>
+                  </math>
+                </div>
+                <span class="machine-arrow" aria-hidden="true">→</span>
+                <div class="machine-value machine-value--output">
+                  <span>Output</span>
+                  <math display="block"><mn>11</mn></math>
+                </div>
+              </div>
+
+              <div class="theory-grid composite-theory-grid">
+                <article class="theory-card">
+                  <span class="mini-index">A</span>
+                  <h3>Sådan læses notation</h3>
+                  <p>
+                    <math aria-label="f af x"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>
+                    læses “<em>f af x</em>”. Bogstavet <math><mi>x</mi></math> er pladsen til inputtet.
+                  </p>
+                  <p class="math-note">
+                    <math display="block" aria-label="f af fire betyder funktionens værdi, når x er fire">
+                      <mrow><mi>f</mi><mo>(</mo><mn>4</mn><mo>)</mo><mo>=</mo><mtext>værdien, når </mtext><mi>x</mi><mo>=</mo><mn>4</mn></mrow>
+                    </math>
+                  </p>
+                </article>
+
+                <article class="theory-card">
+                  <span class="mini-index">B</span>
+                  <h3>Indsæt hele værdien</h3>
+                  <p>Er inputtet negativt, beskytter parenteser fortegnet.</p>
+                  <math display="block" aria-label="h af minus to er minus to i anden plus en, som er fem">
+                    <mtable columnalign="left">
+                      <mtr><mtd><mi>h</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn></mtd></mtr>
+                      <mtr><mtd><mi>h</mi><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo><mo>=</mo><msup><mrow><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>=</mo><mn>5</mn></mtd></mtr>
+                    </mtable>
+                  </math>
+                </article>
+
+                <article class="theory-card">
+                  <span class="mini-index">C</span>
+                  <h3>Input er ikke et gangetegn</h3>
+                  <p>
+                    Parentesen i <math><mrow><mi>f</mi><mo>(</mo><mn>4</mn><mo>)</mo></mrow></math>
+                    fortæller, hvilket input funktionen får. Den betyder ikke, at
+                    <math><mi>f</mi></math> skal ganges med <math><mn>4</mn></math>.
+                  </p>
+                </article>
+              </div>
+
+              <aside class="rule-reminder calm-reminder">
+                <div>
+                  <p class="eyebrow">Fast metode</p>
+                  <h3>Tre trin til en funktionsværdi</h3>
+                </div>
+                <ol>
+                  <li>Find forskriften.</li>
+                  <li>Erstat hver <math><mi>x</mi></math> med inputtet.</li>
+                  <li>Regn ud i den sædvanlige regnerækkefølge.</li>
+                </ol>
+              </aside>
+            </section>
+
+            <section class="lesson-section foundation-check-section" id="grundtjek" aria-labelledby="foundationHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">2 · Kort grundtjek</p>
+                  <h2 id="foundationHeading">Er byggestenene på plads?</h2>
+                </div>
+                <p>Tre små spørgsmål viser, om du er klar til at sætte to funktioner sammen.</p>
+              </div>
+
+              <div class="foundation-status" id="foundationStatus" role="status">
+                <strong>Begynd her.</strong>
+                <span>Løs de tre spørgsmål. Du kan altid fortsætte og vende tilbage.</span>
+              </div>
+
+              <div class="exercise-progress" data-progress-group="composite-foundation" aria-live="polite">
+                <div><span class="progress-score">0</span> af <span class="progress-total">3</span> forstået</div>
+                <div class="progress-track" aria-hidden="true"><span class="progress-bar"></span></div>
+              </div>
+
+              <div class="exercise-list compact-exercise-list">
+                <article class="exercise-card" data-answer="11" data-progress-group="composite-foundation">
+                  <div class="exercise-number">A</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Indsæt et tal</span>
+                    <p>Funktionen er</p>
+                    <math display="block" aria-label="f af x er to x plus tre">
+                      <mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn></mrow>
+                    </math>
+                    <p>Bestem <math><mrow><mi>f</mi><mo>(</mo><mn>4</mn><mo>)</mo></mrow></math>.</p>
+                    <div class="answer-row">
+                      <label><span>Svar =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Svar på grundtjek A" /></label>
+                      <button class="check-answer" type="button">Tjek svar</button>
+                    </div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Erstat <math><mi>x</mi></math> med <math><mn>4</mn></math>: <math><mrow><mn>2</mn><mo>·</mo><mn>4</mn><mo>+</mo><mn>3</mn></mrow></math>.</p>
+                    <template class="feedback-correct">Korrekt. <math><mrow><mn>2</mn><mo>·</mo><mn>4</mn><mo>+</mo><mn>3</mn><mo>=</mo><mn>11</mn></mrow></math>.</template>
+                    <template class="feedback-incorrect">Ikke endnu. Du skal erstatte <math><mi>x</mi></math> med <math><mn>4</mn></math>, før du regner.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="5" data-progress-group="composite-foundation">
+                  <div class="exercise-number">B</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Fortegn og potens</span>
+                    <p>Funktionen er</p>
+                    <math display="block" aria-label="h af x er x i anden plus en">
+                      <mrow><mi>h</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn></mrow>
+                    </math>
+                    <p>Bestem <math><mrow><mi>h</mi><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo></mrow></math>.</p>
+                    <div class="answer-row">
+                      <label><span>Svar =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Svar på grundtjek B" /></label>
+                      <button class="check-answer" type="button">Tjek svar</button>
+                    </div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Skriv inputtet i parentes: <math><mrow><msup><mrow><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>1</mn></mrow></math>.</p>
+                    <template class="feedback-correct">Korrekt. Kvadratet på <math><mrow><mo>−</mo><mn>2</mn></mrow></math> er <math><mn>4</mn></math>, og derefter lægges <math><mn>1</mn></math> til.</template>
+                    <template class="feedback-incorrect">Ikke helt. Husk parentesen om det negative input. Potensen gælder hele <math><mrow><mo>−</mo><mn>2</mn></mrow></math>.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card choice-exercise" data-kind="choice" data-answer="replace" data-progress-group="composite-foundation">
+                  <div class="exercise-number">C</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Læs notation</span>
+                    <p>Hvad betyder <math><mrow><mi>g</mi><mo>(</mo><mn>3</mn><mo>)</mo></mrow></math>?</p>
+                    <div class="answer-choices" role="group" aria-label="Vælg betydningen af g af tre">
+                      <button type="button" class="answer-choice" data-value="multiply"><math><mrow><mi>g</mi><mo>·</mo><mn>3</mn></mrow></math></button>
+                      <button type="button" class="answer-choice" data-value="replace">Erstat <math><mi>x</mi></math> med <math><mn>3</mn></math> i forskriften for <math><mi>g</mi></math></button>
+                      <button type="button" class="answer-choice" data-value="equal"><math><mrow><mi>g</mi><mo>=</mo><mn>3</mn></mrow></math></button>
+                    </div>
+                    <button class="check-answer check-choice" type="button">Tjek valg</button>
+                    <template class="feedback-correct">Ja. Tallet i parentesen er funktionens input.</template>
+                    <template class="feedback-incorrect">Nej. Parentesen viser inputtet; den er hverken et gangetegn eller en ligning.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="lesson-section" id="sammensaetning" aria-labelledby="compositionHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">3 · To funktioner i kæde</p>
+                  <h2 id="compositionHeading">Regn indefra og ud</h2>
+                </div>
+                <p>Outputtet fra den indre funktion sendes direkte videre som input til den ydre.</p>
+              </div>
+
+              <div class="composition-pipeline">
+                <div class="pipeline-input"><span>Start</span><math display="block"><mi>x</mi></math></div>
+                <span class="machine-arrow" aria-hidden="true">→</span>
+                <div class="pipeline-function pipeline-function--inner">
+                  <span>Indre funktion</span>
+                  <math display="block"><mi>g</mi></math>
+                  <small>bruges først</small>
+                </div>
+                <span class="machine-arrow" aria-hidden="true">→</span>
+                <div class="pipeline-function pipeline-function--outer">
+                  <span>Ydre funktion</span>
+                  <math display="block"><mi>f</mi></math>
+                  <small>bruges bagefter</small>
+                </div>
+                <span class="machine-arrow" aria-hidden="true">→</span>
+                <div class="pipeline-output">
+                  <span>Resultat</span>
+                  <math display="block"><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>
+                </div>
+              </div>
+
+              <div class="inside-out-card">
+                <div>
+                  <span class="level-pill">Læs parenteserne</span>
+                  <h3>Den funktion, der står tættest på <math><mi>x</mi></math>, starter</h3>
+                </div>
+                <math display="block" aria-label="f af g af x; g er indre funktion og f er ydre funktion">
+                  <mrow>
+                    <munder><mi>f</mi><mtext>ydre</mtext></munder>
+                    <mo>(</mo>
+                    <munder><mi>g</mi><mtext>indre</mtext></munder>
+                    <mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo>
+                  </mrow>
+                </math>
+                <p>
+                  Rækkefølgen er vigtig. I almindelighed er
+                  <math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>
+                  ikke det samme som
+                  <math><mrow><mi>g</mi><mo>(</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>.
+                </p>
+              </div>
+            </section>
+
+            <section class="lesson-section" id="sammensatte-eksempler" aria-labelledby="compositeExamplesHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">4 · Gennemregnede eksempler</p>
+                  <h2 id="compositeExamplesHeading">Fra tal til forskrift</h2>
+                </div>
+                <p>Hvert eksempel viser, hvad der sker med inputtet i hvert led af kæden.</p>
+              </div>
+
+              <div class="example-list">
+                <article class="example-card">
+                  <div class="example-topline">
+                    <div><span class="level-pill">Niveau 1</span><h3>En sammensat funktionsværdi</h3></div>
+                    <math display="block" aria-label="f af x er x plus to, og g af x er x i anden">
+                      <mtable columnalign="left"><mtr><mtd><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>x</mi><mo>+</mo><mn>2</mn></mtd></mtr><mtr><mtd><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mtd></mtr></mtable>
+                    </math>
+                  </div>
+                  <p>Bestem <math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mn>3</mn><mo>)</mo><mo>)</mo></mrow></math>.</p>
+                  <ol class="worked-steps">
+                    <li><div class="worked-math"><math><mrow><mi>g</mi><mo>(</mo><mn>3</mn><mo>)</mo><mo>=</mo><msup><mn>3</mn><mn>2</mn></msup><mo>=</mo><mn>9</mn></mrow></math></div><p>Begynd med den indre funktion.</p></li>
+                    <li><div class="worked-math"><math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mn>3</mn><mo>)</mo><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mn>9</mn><mo>)</mo></mrow></math></div><p>Den indre funktions output bliver den ydres input.</p></li>
+                    <li class="worked-result"><div class="worked-math"><math><mrow><mi>f</mi><mo>(</mo><mn>9</mn><mo>)</mo><mo>=</mo><mn>9</mn><mo>+</mo><mn>2</mn><mo>=</mo><mn>11</mn></mrow></math></div><p>Brug nu den ydre funktion.</p></li>
+                  </ol>
+                </article>
+
+                <article class="example-card">
+                  <div class="example-topline">
+                    <div><span class="level-pill">Niveau 2</span><h3>Bestem en forskrift</h3></div>
+                    <math display="block" aria-label="f af x er x i anden plus tre, og g af x er to x minus en">
+                      <mtable columnalign="left"><mtr><mtd><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>3</mn></mtd></mtr><mtr><mtd><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>1</mn></mtd></mtr></mtable>
+                    </math>
+                  </div>
+                  <p>Bestem en forskrift for <math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>.</p>
+                  <ol class="worked-steps">
+                    <li><div class="worked-math"><math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>=</mo><msup><mrow><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>3</mn></mrow></math></div><p>Udskift inputpladsen i <math><mi>f</mi></math> med hele <math><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>.</p></li>
+                    <li><div class="worked-math"><math><mrow><mo>=</mo><msup><mrow><mo>(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>3</mn></mrow></math></div><p>Behold parentesen. Hele den indre funktion skal opløftes i anden.</p></li>
+                    <li class="worked-result"><div class="worked-math"><math><mrow><mo>=</mo><mn>4</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>4</mn></mrow></math></div><p>Hæv parentesen og saml konstantleddene.</p></li>
+                  </ol>
+                </article>
+
+                <article class="example-card context-example">
+                  <div class="example-topline">
+                    <div><span class="level-pill">Niveau 3</span><h3>En model med mening</h3></div>
+                  </div>
+                  <p>
+                    Et føls vægt efter <math><mi>t</mi></math> måneder beskrives af
+                    <math><mrow><mi>g</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>40</mn><mo>+</mo><mn>22</mn><msup><mi>t</mi><mn>0,8</mn></msup></mrow></math>
+                    kilogram. Fodermængden ved vægten <math><mi>w</mi></math> er
+                    <math><mrow><mi>f</mi><mo>(</mo><mi>w</mi><mo>)</mo><mo>=</mo><mn>0,005</mn><mi>w</mi></mrow></math>
+                    kilogram pr. dag.
+                  </p>
+                  <ol class="worked-steps">
+                    <li><div class="worked-math"><math><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>)</mo></mrow></math></div><p>Tiden giver først en vægt, og vægten giver derefter en fodermængde.</p></li>
+                    <li><div class="worked-math"><math><mrow><mo>=</mo><mn>0,005</mn><mo>(</mo><mn>40</mn><mo>+</mo><mn>22</mn><msup><mi>t</mi><mn>0,8</mn></msup><mo>)</mo></mrow></math></div><p>Sæt hele vægtfunktionen ind på vægtens plads.</p></li>
+                    <li class="worked-result"><div class="worked-math"><math><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>0,2</mn><mo>+</mo><mn>0,11</mn><msup><mi>t</mi><mn>0,8</mn></msup></mrow></math></div><p>Forskriften giver nu fodermængden direkte ud fra tiden.</p></li>
+                  </ol>
+                </article>
+              </div>
+            </section>
+
+            <section class="lesson-section" id="sammensatte-oevelser" aria-labelledby="compositeExercisesHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">5 · Øvelser</p>
+                  <h2 id="compositeExercisesHeading">Fra første kæde til pensumniveau</h2>
+                </div>
+                <p>Opgaverne bliver gradvist sværere. Brug hintet, hvis du går i stå.</p>
+              </div>
+
+              <div class="exercise-progress" data-progress-group="composite-practice" aria-live="polite">
+                <div><span class="progress-score">0</span> af <span class="progress-total">6</span> løst</div>
+                <div class="progress-track" aria-hidden="true"><span class="progress-bar"></span></div>
+              </div>
+
+              <div class="exercise-list">
+                <article class="exercise-card" data-answer="19" data-progress-group="composite-practice">
+                  <div class="exercise-number">01</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Kom i gang</span>
+                    <math display="block" aria-label="f af x er to x plus en, og g af x er x i anden">
+                      <mtable columnalign="left"><mtr><mtd><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn></mtd></mtr><mtr><mtd><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mtd></mtr></mtable>
+                    </math>
+                    <p>Bestem <math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mn>3</mn><mo>)</mo><mo>)</mo></mrow></math>.</p>
+                    <div class="answer-row"><label><span>Svar =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Svar på sammensat øvelse 1" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Regn først <math><mrow><mi>g</mi><mo>(</mo><mn>3</mn><mo>)</mo></mrow></math>. Brug derefter resultatet som input i <math><mi>f</mi></math>.</p>
+                    <template class="feedback-correct">Korrekt. Den indre funktion giver <math><mn>9</mn></math>, og <math><mrow><mi>f</mi><mo>(</mo><mn>9</mn><mo>)</mo><mo>=</mo><mn>19</mn></mrow></math>.</template>
+                    <template class="feedback-incorrect">Ikke helt. Du må ikke bruge begge forskrifter på <math><mn>3</mn></math> samtidig. Find først <math><mrow><mi>g</mi><mo>(</mo><mn>3</mn><mo>)</mo></mrow></math>.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="3" data-progress-group="composite-practice">
+                  <div class="exercise-number">02</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">To tydelige trin</span>
+                    <math display="block" aria-label="f af x er tre x minus fire, og g af x er kvadratroden af x i anden plus fem">
+                      <mtable columnalign="left"><mtr><mtd><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>4</mn></mtd></mtr><mtr><mtd><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msqrt><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>5</mn></mrow></msqrt></mtd></mtr></mtable>
+                    </math>
+                    <p>Bestem <math><mrow><mi>g</mi><mo>(</mo><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo><mo>)</mo></mrow></math>.</p>
+                    <div class="answer-row"><label><span>Svar =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Svar på sammensat øvelse 2" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Den inderste beregning er <math><mrow><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>2</mn></mrow></math>.</p>
+                    <template class="feedback-correct">Korrekt. <math><mrow><mi>g</mi><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><msqrt><mrow><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>5</mn></mrow></msqrt><mo>=</mo><mn>3</mn></mrow></math>.</template>
+                    <template class="feedback-incorrect">Ikke endnu. Når <math><mrow><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>2</mn></mrow></math>, skal dette resultat sættes ind i <math><mi>g</mi></math>.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card choice-exercise" data-kind="choice" data-answer="g" data-progress-group="composite-practice">
+                  <div class="exercise-number">03</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Indre eller ydre?</span>
+                    <p>Hvilken funktion er den indre i <math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>?</p>
+                    <div class="answer-choices answer-choices--short" role="group" aria-label="Vælg den indre funktion">
+                      <button type="button" class="answer-choice" data-value="f"><math><mi>f</mi></math></button>
+                      <button type="button" class="answer-choice" data-value="g"><math><mi>g</mi></math></button>
+                    </div>
+                    <button class="check-answer check-choice" type="button">Tjek valg</button>
+                    <template class="feedback-correct">Korrekt. <math><mi>g</mi></math> står tættest på <math><mi>x</mi></math> og bruges først.</template>
+                    <template class="feedback-incorrect">Ikke helt. Læs indefra: Funktionen tættest på <math><mi>x</mi></math> bruges først.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card choice-exercise" data-kind="choice" data-answer="x" data-progress-group="composite-practice">
+                  <div class="exercise-number">04</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Bestem en forskrift</span>
+                    <math display="block" aria-label="f af x er x i anden plus tre, og g af x er kvadratroden af x minus tre for x større end tre">
+                      <mtable columnalign="left"><mtr><mtd><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>3</mn></mtd></mtr><mtr><mtd><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msqrt><mrow><mi>x</mi><mo>−</mo><mn>3</mn></mrow></msqrt><mo>,</mo><mspace width="0.5em"/><mi>x</mi><mo>&gt;</mo><mn>3</mn></mtd></mtr></mtable>
+                    </math>
+                    <p>Hvilken forskrift får <math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>?</p>
+                    <div class="answer-choices" role="group" aria-label="Vælg forskriften for den sammensatte funktion">
+                      <button type="button" class="answer-choice" data-value="x"><math><mrow><mi>x</mi><mo>,</mo><mspace width="0.5em"/><mi>x</mi><mo>&gt;</mo><mn>3</mn></mrow></math></button>
+                      <button type="button" class="answer-choice" data-value="xplus3"><math><mrow><mi>x</mi><mo>+</mo><mn>3</mn></mrow></math></button>
+                      <button type="button" class="answer-choice" data-value="sqrt"><math><msqrt><mi>x</mi></msqrt></math></button>
+                    </div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden><math><mrow><msup><mrow><mo>(</mo><msqrt><mrow><mi>x</mi><mo>−</mo><mn>3</mn></mrow></msqrt><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>3</mn></mrow></math>. Kvadrat og kvadratrod ophæver hinanden.</p>
+                    <button class="check-answer check-choice" type="button">Tjek valg</button>
+                    <template class="feedback-correct">Korrekt. <math><mrow><msup><mrow><mo>(</mo><msqrt><mrow><mi>x</mi><mo>−</mo><mn>3</mn></mrow></msqrt><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>3</mn><mo>=</mo><mi>x</mi><mo>,</mo><mspace width="0.5em"/><mi>x</mi><mo>&gt;</mo><mn>3</mn></mrow></math>.</template>
+                    <template class="feedback-incorrect">Ikke helt. Sæt hele <math><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math> ind på <math><mi>x</mi></math>-pladsen i <math><mi>f</mi></math>, og behold parentesen.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card choice-exercise" data-kind="choice" data-answer="two-three" data-progress-group="composite-practice">
+                  <div class="exercise-number">05</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Sammensat ligning</span>
+                    <math display="block" aria-label="f af x er x i anden plus tre, og g af x er to x minus fem">
+                      <mtable columnalign="left"><mtr><mtd><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>3</mn></mtd></mtr><mtr><mtd><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>5</mn></mtd></mtr></mtable>
+                    </math>
+                    <p>Løs ligningen <math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>=</mo><mn>4</mn></mrow></math>.</p>
+                    <div class="answer-choices" role="group" aria-label="Vælg løsningerne">
+                      <button type="button" class="answer-choice" data-value="two-three"><math><mrow><mi>x</mi><mo>=</mo><mn>2</mn><mo>∨</mo><mi>x</mi><mo>=</mo><mn>3</mn></mrow></math></button>
+                      <button type="button" class="answer-choice" data-value="one-four"><math><mrow><mi>x</mi><mo>=</mo><mn>1</mn><mo>∨</mo><mi>x</mi><mo>=</mo><mn>4</mn></mrow></math></button>
+                      <button type="button" class="answer-choice" data-value="three"><math><mrow><mi>x</mi><mo>=</mo><mn>3</mn></mrow></math></button>
+                    </div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Ligningen bliver <math><mrow><msup><mrow><mo>(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>5</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mn>3</mn><mo>=</mo><mn>4</mn></mrow></math>. Derfor er <math><mrow><mn>2</mn><mi>x</mi><mo>−</mo><mn>5</mn><mo>=</mo><mo>±</mo><mn>1</mn></mrow></math>.</p>
+                    <button class="check-answer check-choice" type="button">Tjek valg</button>
+                    <template class="feedback-correct">Korrekt. De to fortegn giver de to løsninger <math><mrow><mi>x</mi><mo>=</mo><mn>2</mn></mrow></math> og <math><mrow><mi>x</mi><mo>=</mo><mn>3</mn></mrow></math>.</template>
+                    <template class="feedback-incorrect">Ikke helt. Når et kvadrat er <math><mn>1</mn></math>, kan udtrykket både være <math><mn>1</mn></math> og <math><mrow><mo>−</mo><mn>1</mn></mrow></math>.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card choice-exercise" data-kind="choice" data-answer="model" data-progress-group="composite-practice">
+                  <div class="exercise-number">06</div>
+                  <div class="exercise-body">
+                    <span class="level-pill">Model fra pensum</span>
+                    <p>
+                      Et føls vægt er <math><mrow><mi>g</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>40</mn><mo>+</mo><mn>22</mn><msup><mi>t</mi><mn>0,8</mn></msup></mrow></math>,
+                      og fodermængden ved vægten <math><mi>w</mi></math> er
+                      <math><mrow><mi>f</mi><mo>(</mo><mi>w</mi><mo>)</mo><mo>=</mo><mn>0,005</mn><mi>w</mi></mrow></math>.
+                    </p>
+                    <p>Hvilken funktion giver fodermængden direkte ud fra tiden?</p>
+                    <div class="answer-choices" role="group" aria-label="Vælg modellen for fodermængde som funktion af tiden">
+                      <button type="button" class="answer-choice" data-value="model"><math><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>0,2</mn><mo>+</mo><mn>0,11</mn><msup><mi>t</mi><mn>0,8</mn></msup></mrow></math></button>
+                      <button type="button" class="answer-choice" data-value="reverse"><math><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>40</mn><mo>+</mo><mn>22</mn><msup><mrow><mo>(</mo><mn>0,005</mn><mi>t</mi><mo>)</mo></mrow><mn>0,8</mn></msup></mrow></math></button>
+                      <button type="button" class="answer-choice" data-value="add"><math><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>+</mo><mi>g</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow></math></button>
+                    </div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div>
+                    <p class="hint" hidden>Tiden giver vægten, så brug først <math><mi>g</mi></math>. Brug derefter <math><mi>f</mi></math> på hele vægtudtrykket.</p>
+                    <button class="check-answer check-choice" type="button">Tjek valg</button>
+                    <template class="feedback-correct">Korrekt. Modellen er <math><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>)</mo></mrow></math>, fordi vægten skal findes før fodermængden.</template>
+                    <template class="feedback-incorrect">Ikke helt. Følg enhederne: måneder → kilogram kropsvægt → kilogram foder pr. dag.</template>
+                    <p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="lesson-section summary-section" id="sammensatte-husk" aria-labelledby="compositeSummaryHeading">
+              <div class="summary-copy">
+                <p class="eyebrow">6 · Opsummering</p>
+                <h2 id="compositeSummaryHeading">Din faste rækkefølge</h2>
+                <ol>
+                  <li>Find den funktion, der står tættest på inputtet.</li>
+                  <li>Beregn den indre funktion først.</li>
+                  <li>Brug resultatet som input i den ydre funktion.</li>
+                  <li>Behold parenteser om hele indre udtryk, når du bestemmer en forskrift.</li>
+                  <li>Kontrollér rækkefølgen med ord eller enheder i modelopgaver.</li>
+                </ol>
+              </div>
+              <div class="summary-note composite-summary-note">
+                <span>Vigtigst</span>
+                <math display="block" aria-label="f af g af x betyder g først og derefter f">
+                  <mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>:</mo><mspace width="0.5em"/><mi>g</mi><mspace width="0.4em"/><mtext>først</mtext><mo>,</mo><mspace width="0.4em"/><mi>f</mi><mspace width="0.4em"/><mtext>bagefter</mtext></mrow>
+                </math>
               </div>
             </section>
           </div>

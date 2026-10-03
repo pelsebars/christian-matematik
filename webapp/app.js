@@ -65,6 +65,7 @@ const sidebar = document.querySelector("#sidebar");
 const menuButton = document.querySelector("#menuButton");
 const backdrop = document.querySelector("#backdrop");
 const equationLesson = document.querySelector("#equationLesson");
+const compositeLesson = document.querySelector("#compositeLesson");
 const subjectPlaceholder = document.querySelector("#subjectPlaceholder");
 const exerciseCards = document.querySelectorAll(".exercise-card");
 
@@ -98,7 +99,8 @@ function showView(view, shouldFocus = true) {
   }
 
   equationLesson.hidden = view !== "equations";
-  subjectPlaceholder.hidden = view === "equations";
+  compositeLesson.hidden = view !== "composite";
+  subjectPlaceholder.hidden = view === "equations" || view === "composite";
 
   setActiveNavigation(view);
   window.location.hash = view === "home" ? "" : view;
@@ -149,50 +151,99 @@ function parseAnswer(value) {
   return Number(normalized);
 }
 
-function updateExerciseProgress() {
-  const solved = document.querySelectorAll('.exercise-card[data-solved="true"]').length;
-  const score = document.querySelector("#exerciseScore");
-  const total = document.querySelector("#exerciseTotal");
-  const progressBar = document.querySelector("#exerciseProgressBar");
+function updateExerciseProgress(group) {
+  const cards = document.querySelectorAll(`.exercise-card[data-progress-group="${group}"]`);
+  const solved = document.querySelectorAll(
+    `.exercise-card[data-progress-group="${group}"][data-solved="true"]`,
+  ).length;
+  const progress = document.querySelector(`.exercise-progress[data-progress-group="${group}"]`);
 
-  score.textContent = String(solved);
-  total.textContent = String(exerciseCards.length);
-  progressBar.style.width = `${(solved / exerciseCards.length) * 100}%`;
+  if (progress) {
+    const score = progress.querySelector(".progress-score") || progress.querySelector("#exerciseScore");
+    const total = progress.querySelector(".progress-total") || progress.querySelector("#exerciseTotal");
+    const progressBar = progress.querySelector(".progress-bar") || progress.querySelector("#exerciseProgressBar");
+
+    score.textContent = String(solved);
+    total.textContent = String(cards.length);
+    progressBar.style.width = `${cards.length ? (solved / cards.length) * 100 : 0}%`;
+  }
+
+  if (group === "composite-foundation") {
+    const status = document.querySelector("#foundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Grundlaget er på plads.</strong><span>Du er klar til at sætte funktioner sammen.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken og prøv igen på resten.</span>`;
+  }
+}
+
+function setFeedback(card, type, fallback) {
+  const feedback = card.querySelector(".answer-feedback");
+  const template = card.querySelector(`template.feedback-${type}`);
+
+  feedback.classList.remove("is-correct", "is-incorrect");
+  feedback.innerHTML = template ? template.innerHTML : fallback;
+  feedback.classList.add(type === "correct" ? "is-correct" : "is-incorrect");
 }
 
 function checkExercise(card) {
-  const input = card.querySelector("input");
-  const feedback = card.querySelector(".answer-feedback");
-  const answer = parseAnswer(input.value);
-  const expected = Number(card.dataset.answer);
+  const isChoice = card.dataset.kind === "choice";
+  let isCorrect = false;
 
-  feedback.classList.remove("is-correct", "is-incorrect");
+  if (isChoice) {
+    const selected = card.querySelector(".answer-choice.is-selected");
+    if (!selected) {
+      setFeedback(card, "incorrect", "Vælg først en mulighed.");
+      return;
+    }
+    isCorrect = selected.dataset.value === card.dataset.answer;
+  } else {
+    const input = card.querySelector("input");
+    const answer = parseAnswer(input.value);
+    const expected = Number(card.dataset.answer);
 
-  if (!Number.isFinite(answer)) {
-    feedback.textContent = "Skriv et tal, fx 3 eller −2.";
-    feedback.classList.add("is-incorrect");
-    return;
+    if (!Number.isFinite(answer)) {
+      setFeedback(card, "incorrect", "Skriv et tal, fx 3 eller −2.");
+      return;
+    }
+    isCorrect = Math.abs(answer - expected) < 0.000001;
   }
 
-  if (Math.abs(answer - expected) < 0.000001) {
+  if (isCorrect) {
     card.dataset.solved = "true";
     card.classList.add("is-correct");
-    feedback.textContent = "Korrekt! Sæt gerne svaret ind i ligningen som kontrol.";
-    feedback.classList.add("is-correct");
-    updateExerciseProgress();
+    setFeedback(card, "correct", "Korrekt!");
+    updateExerciseProgress(card.dataset.progressGroup);
     return;
   }
 
-  feedback.textContent = "Ikke helt endnu. Kontrollér dit seneste regnetrin, eller åbn hintet.";
-  feedback.classList.add("is-incorrect");
+  setFeedback(
+    card,
+    "incorrect",
+    "Ikke helt endnu. Kontrollér dit seneste regnetrin, eller åbn hintet.",
+  );
 }
 
 exerciseCards.forEach((card) => {
   const button = card.querySelector(".check-answer");
   const input = card.querySelector("input");
   button.addEventListener("click", () => checkExercise(card));
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") checkExercise(card);
+  if (input) {
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") checkExercise(card);
+    });
+  }
+});
+
+document.querySelectorAll(".answer-choice").forEach((choice) => {
+  choice.addEventListener("click", () => {
+    const card = choice.closest(".exercise-card");
+    card.querySelectorAll(".answer-choice").forEach((option) => {
+      const selected = option === choice;
+      option.classList.toggle("is-selected", selected);
+      option.setAttribute("aria-pressed", String(selected));
+    });
   });
 });
 
