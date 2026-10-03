@@ -1229,6 +1229,243 @@
               </div>
             </section>
           </div>
+
+          <div class="lesson-content differentiation-lesson" id="differentiationLesson" hidden>
+            <nav class="lesson-nav" aria-label="Indhold i Differentialregning">
+              <button type="button" data-scroll-to="diff-forloeb">Forløb</button>
+              <button type="button" data-scroll-to="diff-starttjek">Starttjek</button>
+              <button type="button" data-scroll-to="diff-ide">Idéen</button>
+              <button type="button" data-scroll-to="diff-regler">Regler</button>
+              <button type="button" data-scroll-to="diff-eksempler">Eksempler</button>
+              <button type="button" data-scroll-to="diff-oevelser">Øvelser</button>
+              <button type="button" data-scroll-to="diff-sluttjek">Forståelsestjek</button>
+            </nav>
+
+            <section class="lesson-section curriculum-section" id="diff-forloeb" aria-labelledby="differentiationPathHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Samlet læringsrækkefølge</p>
+                  <h2 id="differentiationPathHeading">Fra hældning til optimering</h2>
+                </div>
+                <p>Forløbet følger de fire undervisningsgange. Kernestof, der ikke har sin egen undervisningsgang, samles til sidst.</p>
+              </div>
+
+              <ol class="module-roadmap">
+                <li class="module-card is-current">
+                  <div class="module-card-top"><span>01</span><strong>Åbent nu</strong></div>
+                  <h3>Differentialkvotient</h3>
+                  <p>Hældning, tretrinsregel, grundregler og væksthastighed med enheder.</p>
+                  <ul><li>Bestem en afledt funktion og en afledt værdi.</li><li>Sammenlign ændring over diskrete skridt med øjeblikkelig ændring.</li><li>Forklar fortegn, tidspunkt og enhed i en model.</li></ul>
+                </li>
+                <li class="module-card">
+                  <div class="module-card-top"><span>02</span><strong>Næste modul</strong></div>
+                  <h3>Produktreglen</h3>
+                  <p>Genkend to faktorer, differentier hver for sig, og kombiner grundreglerne.</p>
+                  <ul><li>Anvend produktreglen sikkert.</li><li>Undersøg vækst og parallelle tangenter.</li></ul>
+                </li>
+                <li class="module-card">
+                  <div class="module-card-top"><span>03</span><strong>Planlagt</strong></div>
+                  <h3>Kædereglen</h3>
+                  <p>Find indre og ydre funktion, og differentier sammensatte udtryk.</p>
+                  <ul><li>Kombinér kæde- og produktreglen.</li><li>Arbejd med vækst- og henfaldsmodeller.</li></ul>
+                </li>
+                <li class="module-card">
+                  <div class="module-card-top"><span>04</span><strong>Planlagt</strong></div>
+                  <h3>Vendetangent</h3>
+                  <p>Bestem tangenter, vendepunkter og tidspunkter med størst væksthastighed.</p>
+                  <ul><li>Find tangenters ligninger og skæringer.</li><li>Forbind graf, hældning og model.</li></ul>
+                </li>
+                <li class="module-card module-card--summary">
+                  <div class="module-card-top"><span>05</span><strong>Opsamling</strong></div>
+                  <h3>Monotoni og optimering</h3>
+                  <p>Det resterende kernestof samles i et blandet eksamensspor.</p>
+                  <ul><li>Monotoniforhold, ekstrema og optimering.</li><li>Opgaver uden hjælpemidler og bevidst CAS-brug.</li></ul>
+                </li>
+              </ol>
+
+              <div class="module-template" aria-labelledby="moduleTemplateHeading">
+                <div>
+                  <p class="eyebrow">Fælles modulskabelon</p>
+                  <h3 id="moduleTemplateHeading">Samme rolige rytme hver gang</h3>
+                </div>
+                <ol>
+                  <li><span>1</span>Starttjek</li>
+                  <li><span>2</span>Kort teori</li>
+                  <li><span>3</span>Gennemregnet</li>
+                  <li><span>4</span>Træn i niveauer</li>
+                  <li><span>5</span>Forståelsestjek</li>
+                </ol>
+              </div>
+            </section>
+
+            <section class="lesson-section foundation-check-section differentiation-foundation" id="diff-starttjek" aria-labelledby="differentiationFoundationHeading">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Modul 1 · Kort forudsætningstjek</p>
+                  <h2 id="differentiationFoundationHeading">Er fundamentet klar?</h2>
+                </div>
+                <p>Fem korte spørgsmål tjekker funktioner, hældning, potenser, parenteser og ligninger. Du må gerne gå tilbage og komme igen.</p>
+              </div>
+
+              <div class="prerequisite-strip" aria-label="Forudsætninger">
+                <span>Funktioner</span><span>Grafer</span><span>Hældning</span><span>Potenser</span><span>Parenteser</span><span>Ligninger</span>
+              </div>
+              <div class="foundation-status" id="differentiationFoundationStatus" role="status">
+                <strong>Begynd her.</strong><span>Løs de fem spørgsmål. Resultatet låser ikke resten af modulet.</span>
+              </div>
+              <div class="exercise-progress" data-progress-group="differentiation-foundation" aria-live="polite">
+                <div><span class="progress-score">0</span> af <span class="progress-total">5</span> forstået</div>
+                <div class="progress-track" aria-hidden="true"><span class="progress-bar"></span></div>
+              </div>
+
+              <div class="exercise-list compact-exercise-list">
+                <article class="exercise-card" data-answer="5" data-progress-group="differentiation-foundation">
+                  <div class="exercise-number">A</div><div class="exercise-body"><span class="level-pill">Funktionsværdi</span>
+                    <math display="block" aria-label="f af x er to x minus en"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>1</mn></mrow></math>
+                    <p>Bestem <math><mrow><mi>f</mi><mo>(</mo><mn>3</mn><mo>)</mo></mrow></math>.</p>
+                    <div class="answer-row"><label><span>Svar =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Funktionsværdien i starttjek A" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Erstat <math><mi>x</mi></math> med <math><mn>3</mn></math>, og regn gange før minus.</p>
+                    <template class="feedback-correct">Korrekt. <math><mrow><mn>2</mn><mo>·</mo><mn>3</mn><mo>−</mo><mn>1</mn><mo>=</mo><mn>5</mn></mrow></math>.</template><template class="feedback-incorrect">Ikke helt. Funktionsparentesen viser inputtet. Sæt <math><mn>3</mn></math> ind på alle <math><mi>x</mi></math>-pladser.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="2" data-progress-group="differentiation-foundation">
+                  <div class="exercise-number">B</div><div class="exercise-body"><span class="level-pill">Hældning</span>
+                    <p>En ret linje går gennem punkterne <math><mrow><mo>(</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>)</mo></mrow></math> og <math><mrow><mo>(</mo><mn>3</mn><mo>,</mo><mn>6</mn><mo>)</mo></mrow></math>. Bestem linjens hældning.</p>
+                    <div class="answer-row"><label><span>Hældning =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Hældningen i starttjek B" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Hældning er ændringen lodret divideret med ændringen vandret: <math><mfrac><mrow><mn>6</mn><mo>−</mo><mn>2</mn></mrow><mrow><mn>3</mn><mo>−</mo><mn>1</mn></mrow></mfrac></math>.</p>
+                    <template class="feedback-correct">Ja. Linjen går <math><mn>2</mn></math> op, hver gang den går <math><mn>1</mn></math> mod højre.</template><template class="feedback-incorrect">Brug samme rækkefølge i tæller og nævner. Her er ændringerne <math><mn>4</mn></math> og <math><mn>2</mn></math>.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card choice-exercise" data-kind="choice" data-answer="power-five" data-progress-group="differentiation-foundation">
+                  <div class="exercise-number">C</div><div class="exercise-body"><span class="level-pill">Potenser</span><p>Hvilken omskrivning er rigtig?</p>
+                    <div class="answer-choices answer-choices--short"><button class="answer-choice" type="button" data-value="power-five"><math><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>·</mo><msup><mi>x</mi><mn>2</mn></msup><mo>=</mo><msup><mi>x</mi><mn>5</mn></msup></mrow></math></button><button class="answer-choice" type="button" data-value="power-six"><math><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>·</mo><msup><mi>x</mi><mn>2</mn></msup><mo>=</mo><msup><mi>x</mi><mn>6</mn></msup></mrow></math></button></div><button class="check-answer check-choice" type="button">Tjek valg</button>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Når grundtallet er det samme, lægges eksponenterne sammen ved multiplikation.</p>
+                    <template class="feedback-correct">Korrekt. <math><mrow><mn>3</mn><mo>+</mo><mn>2</mn><mo>=</mo><mn>5</mn></mrow></math>.</template><template class="feedback-incorrect">Du skal lægge eksponenterne sammen, ikke gange dem.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="4" data-progress-group="differentiation-foundation">
+                  <div class="exercise-number">D</div><div class="exercise-body"><span class="level-pill">Parenteser</span><p>Beregn</p><math display="block"><msup><mrow><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo></mrow><mn>2</mn></msup></math>
+                    <div class="answer-row"><label><span>Svar =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Potensværdien i starttjek D" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Parentesen betyder, at hele det negative tal ganges med sig selv.</p>
+                    <template class="feedback-correct">Korrekt. To negative faktorer giver et positivt produkt.</template><template class="feedback-incorrect">Potensen gælder hele parentesen: <math><mrow><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo><mo>·</mo><mo>(</mo><mo>−</mo><mn>2</mn><mo>)</mo></mrow></math>.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+
+                <article class="exercise-card" data-answer="3" data-progress-group="differentiation-foundation">
+                  <div class="exercise-number">E</div><div class="exercise-body"><span class="level-pill">Ligning</span><p>Løs ligningen</p><math display="block"><mrow><mn>3</mn><mi>x</mi><mo>+</mo><mn>2</mn><mo>=</mo><mn>11</mn></mrow></math>
+                    <div class="answer-row"><label><span><math><mi>x</mi></math> =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Løsningen i starttjek E" /></label><button class="check-answer" type="button">Tjek svar</button></div>
+                    <div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Fjern først <math><mn>2</mn></math> på begge sider. Divider derefter begge sider med <math><mn>3</mn></math>.</p>
+                    <template class="feedback-correct">Korrekt. Indsættelse giver <math><mrow><mn>3</mn><mo>·</mo><mn>3</mn><mo>+</mo><mn>2</mn><mo>=</mo><mn>11</mn></mrow></math>.</template><template class="feedback-incorrect">Bevar balancen: udfør den samme handling på begge sider af lighedstegnet.</template><p class="answer-feedback" role="status"></p>
+                  </div>
+                </article>
+              </div>
+              <div class="foundation-links"><span>Har du brug for mere grundlag?</span><button type="button" data-view="equations">Gå til ligninger</button><button type="button" data-view="composite">Gå til funktioner</button></div>
+            </section>
+
+            <section class="lesson-section" id="diff-ide" aria-labelledby="differentiationIdeaHeading">
+              <div class="section-heading"><div><p class="eyebrow">Modul 1 · Idéen</p><h2 id="differentiationIdeaHeading">Fra gennemsnitlig til øjeblikkelig ændring</h2></div><p>Den afledte fortæller, hvor stejlt grafen går netop nu. Vi nærmer os punktet med et stadig mindre vandret skridt.</p></div>
+              <div class="derivative-hero">
+                <div><span>To punkter · sekant</span><math display="block"><mrow><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mi>h</mi></mfrac></mrow></math><p>Gennemsnitlig ændring over et interval.</p></div>
+                <div class="derivative-arrow" aria-hidden="true">→</div>
+                <div><span>Ét punkt · tangent</span><math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mi>h</mi></mfrac></mrow></math><p>Øjeblikkelig ændring i punktet.</p></div>
+              </div>
+              <div class="concept-grid">
+                <article><span class="mini-index">A</span><h3>Grafisk</h3><p>Den afledte værdi er tangentens hældning. Positiv værdi betyder, at grafen stiger lokalt; negativ værdi betyder, at den falder.</p></article>
+                <article><span class="mini-index">B</span><h3>Som model</h3><p>Hvis funktionen måles i kilometer og inputtet i timer, måles den afledte i kilometer pr. time.</p></article>
+                <article><span class="mini-index">C</span><h3>Som funktion</h3><p><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math> giver hældningen ved hvert tilladt input. <math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>3</mn><mo>)</mo></mrow></math> er én bestemt hældning.</p></article>
+              </div>
+            </section>
+
+            <section class="lesson-section" id="diff-regler" aria-labelledby="differentiationRulesHeading">
+              <div class="section-heading"><div><p class="eyebrow">Modul 1 · Kort teori</p><h2 id="differentiationRulesHeading">Tretrinsreglen forklarer — reglerne gør arbejdet hurtigt</h2></div><p>Start med at genkende funktionstypen. Differentier derefter led for led, og sæt først et tal ind til sidst.</p></div>
+              <div class="three-step-card">
+                <div><span>1</span><strong>Tilvækst</strong><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></div>
+                <div><span>2</span><strong>Differenskvotient</strong><math><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mi>h</mi></mfrac></math></div>
+                <div><span>3</span><strong>Grænseværdi</strong><math><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></math></div>
+              </div>
+              <div class="derivative-rule-grid" aria-label="Grundlæggende afledningsregler">
+                <article><span>Konstant</span><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>k</mi></mrow></math><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>0</mn></mrow></math></article>
+                <article><span>Potens</span><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mi>n</mi></msup></mrow></math><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>n</mi><msup><mi>x</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></math></article>
+                <article><span>Kvadratrod</span><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msqrt><mi>x</mi></msqrt></mrow></math><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><msqrt><mi>x</mi></msqrt></mrow></mfrac></mrow></math></article>
+                <article><span>Reciprok</span><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow></math><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac></mrow></math></article>
+                <article><span>Eksponential</span><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>e</mi><mi>x</mi></msup></mrow></math><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>e</mi><mi>x</mi></msup></mrow></math></article>
+                <article><span>Logaritme</span><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">ln</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow></math></article>
+                <article><span>Sinus</span><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">cos</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></article>
+              </div>
+              <aside class="rule-reminder differentiation-reminder"><div><p class="eyebrow">Vigtig skelnen</p><h3>Funktion først, tal bagefter</h3></div><div><math display="block"><mrow><mi>f</mi><mo>→</mo><msup><mi>f</mi><mo>′</mo></msup><mo>→</mo><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>a</mi><mo>)</mo></mrow></math><p>Differentier hele forskriften. Indsæt derefter det ønskede input.</p></div></aside>
+            </section>
+
+            <section class="lesson-section" id="diff-eksempler" aria-labelledby="differentiationExamplesHeading">
+              <div class="section-heading"><div><p class="eyebrow">Modul 1 · Gennemregnede eksempler</p><h2 id="differentiationExamplesHeading">Se både hvorfor og hvordan</h2></div><p>Eksemplerne går fra tretrinsreglen til pensummets modelopgaver med en tydelig fortolkning.</p></div>
+              <div class="example-list">
+                <article class="example-card"><div class="example-topline"><div><span class="level-pill">Tretrinsreglen</span><h3>Bevis potensreglen i det første tilfælde</h3></div><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></math></div>
+                  <ol class="worked-steps"><li><math class="worked-math"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>=</mo><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></math><p>Erstat inputtet med hele parentesen.</p></li><li><math class="worked-math"><mrow><mfrac><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><mi>h</mi></mfrac><mo>=</mo><mfrac><mrow><mn>2</mn><mi>x</mi><mi>h</mi><mo>+</mo><msup><mi>h</mi><mn>2</mn></msup></mrow><mi>h</mi></mfrac></mrow></math><p>Udvid parentesen, og reducer ens led.</p></li><li><math class="worked-math"><mrow><mfrac><mrow><mi>h</mi><mo>(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo></mrow><mi>h</mi></mfrac><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>h</mi></mrow></math><p>Forkort først, mens skridtet stadig er forskelligt fra nul.</p></li><li class="worked-result"><math class="worked-math"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math><p>Når skridtet nærmer sig nul, forsvinder det sidste led.</p></li></ol>
+                </article>
+
+                <article class="example-card"><div class="example-topline"><div><span class="level-pill">Uden hjælpemidler</span><h3>Differentier led for led</h3></div><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msqrt><mi>x</mi></msqrt></mrow></math></div>
+                  <ol class="worked-steps"><li><math class="worked-math"><mrow><msqrt><mi>x</mi></msqrt><mo>=</mo><msup><mi>x</mi><mfrac><mn>1</mn><mn>2</mn></mfrac></msup></mrow></math><p>Omskriv roden som en potens, hvis det gør reglen lettere at se.</p></li><li><math class="worked-math"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mfrac><mn>1</mn><mrow><mn>2</mn><msqrt><mi>x</mi></msqrt></mrow></mfrac></mrow></math><p>Hvert led differentieres med sin egen regel.</p></li><li class="worked-result"><math class="worked-math"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>4</mn><mo>)</mo><mo>=</mo><mn>8</mn><mo>+</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo>=</mo><mn>8,25</mn></mrow></math><p>Indsæt først efter differentieringen.</p></li></ol>
+                </article>
+
+                <article class="example-card"><div class="example-topline"><div><span class="level-pill">Blandet forskrift</span><h3>Pas på fortegnet ved den reciprokke funktion</h3></div><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><msup><mi>x</mi><mn>4</mn></msup><mo>−</mo><mfrac><mn>1</mn><mi>x</mi></mfrac><mo>+</mo><mi mathvariant="normal">ln</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></div>
+                  <ol class="worked-steps"><li><math class="worked-math"><mrow><mo>−</mo><mfrac><mn>1</mn><mi>x</mi></mfrac><mo>=</mo><mo>−</mo><msup><mi>x</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></math><p>Omskriv, så potensreglen kan bruges.</p></li><li><math class="worked-math"><mrow><mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>(</mo><mo>−</mo><msup><mi>x</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>)</mo><mo>=</mo><msup><mi>x</mi><mrow><mo>−</mo><mn>2</mn></mrow></msup></mrow></math><p>De to minusfortegn giver plus.</p></li><li class="worked-result"><math class="worked-math"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>8</mn><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac><mo>+</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow></math><p>Kontrollér hvert oprindeligt led én gang.</p></li></ol>
+                </article>
+
+                <article class="example-card context-example"><div class="example-topline"><div><span class="level-pill">Model fra undervisningsarket</span><h3>Væksthastighed skal have enhed</h3></div><math><mrow><mi>A</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>8</mn><msup><mi>t</mi><mn>1,5</mn></msup></mrow></math></div>
+                  <p>Olieudslippets areal måles i kvadratmeter, og tiden måles i timer.</p>
+                  <ol class="worked-steps"><li><math class="worked-math"><mrow><msup><mi>A</mi><mo>′</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>8</mn><mo>·</mo><mn>1,5</mn><msup><mi>t</mi><mn>0,5</mn></msup><mo>=</mo><mn>12</mn><msqrt><mi>t</mi></msqrt></mrow></math><p>Brug potensreglen.</p></li><li><math class="worked-math"><mrow><msup><mi>A</mi><mo>′</mo></msup><mo>(</mo><mn>100</mn><mo>)</mo><mo>=</mo><mn>12</mn><mo>·</mo><mn>10</mn><mo>=</mo><mn>120</mn></mrow></math><p>Indsæt tidspunktet i den afledte.</p></li><li class="worked-result"><math class="worked-math"><mrow><mn>120</mn><mspace width="0.35em"/><mfrac><msup><mtext>m</mtext><mn>2</mn></msup><mtext>time</mtext></mfrac></mrow></math><p>Efter præcis hundrede timer vokser arealet med denne hastighed.</p></li></ol>
+                  <div class="cas-check"><span>CAS som kontrol</span><p>Bed værktøjet om den afledte, sammenlign udtrykket led for led, og indsæt derefter tidspunktet. Din besvarelse skal stadig forklare fortegn og enhed.</p></div>
+                </article>
+              </div>
+            </section>
+
+            <section class="lesson-section differentiation-practice" id="diff-oevelser" aria-labelledby="differentiationExercisesHeading">
+              <div class="section-heading"><div><p class="eyebrow">Modul 1 · Øvelser i stigende sværhedsgrad</p><h2 id="differentiationExercisesHeading">Genkend, beregn, anvend og forklar</h2></div><p>Brug hints, når du har forsøgt selv. Den forkerte feedback peger på det konkrete trin, der skal rettes.</p></div>
+              <div class="exercise-progress" data-progress-group="differentiation-practice" aria-live="polite"><div><span class="progress-score">0</span> af <span class="progress-total">8</span> løst</div><div class="progress-track" aria-hidden="true"><span class="progress-bar"></span></div></div>
+              <div class="exercise-list">
+                <article class="exercise-card" data-kind="choice" data-answer="two-x-plus-one" data-progress-group="differentiation-practice"><div class="exercise-number">01</div><div class="exercise-body"><span class="level-pill">Niveau 1 · Potens</span><math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>x</mi></mrow></math><p>Vælg den afledte.</p><div class="answer-choices"><button class="answer-choice" type="button" data-value="two-x-plus-one"><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn></mrow></math></button><button class="answer-choice" type="button" data-value="x-plus-one"><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>x</mi><mo>+</mo><mn>1</mn></mrow></math></button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Flyt eksponenten ned foran, og gør eksponenten én mindre.</p><template class="feedback-correct">Korrekt. Det lineære led får den afledte værdi <math><mn>1</mn></math>.</template><template class="feedback-incorrect">Ved potensreglen skal eksponenten <math><mn>2</mn></math> både ned foran og reduceres med <math><mn>1</mn></math>.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="mixed-correct" data-progress-group="differentiation-practice"><div class="exercise-number">02</div><div class="exercise-body"><span class="level-pill">Niveau 1 · Led for led</span><math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>4</mn></msup><mo>+</mo><mn>3</mn><mi mathvariant="normal">ln</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mn>2</mn></mrow></math><div class="answer-choices"><button class="answer-choice" type="button" data-value="mixed-correct"><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>12</mn><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mfrac><mn>3</mn><mi>x</mi></mfrac></mrow></math></button><button class="answer-choice" type="button" data-value="mixed-wrong"><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>12</mn><msup><mi>x</mi><mn>4</mn></msup><mo>+</mo><mn>3</mn><mi>x</mi></mrow></math></button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Konstanten forsvinder. Logaritmens afledte er en brøk.</p><template class="feedback-correct">Ja. Potensens eksponent falder med én, logaritmen bliver reciprok, og konstanten bliver nul.</template><template class="feedback-incorrect">Kontrollér alle tre led hver for sig. Især skal eksponenten ændres, og logaritmens regel skal bruges.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="trig-correct" data-progress-group="differentiation-practice"><div class="exercise-number">03</div><div class="exercise-body"><span class="level-pill">Niveau 2 · Negativ potens</span><math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi mathvariant="normal">sin</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><msup><mi>x</mi><mrow><mo>−</mo><mn>3</mn></mrow></msup></mrow></math><div class="answer-choices"><button class="answer-choice" type="button" data-value="trig-correct"><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>−</mo><mn>3</mn><msup><mi>x</mi><mrow><mo>−</mo><mn>4</mn></mrow></msup></mrow></math></button><button class="answer-choice" type="button" data-value="trig-wrong"><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi mathvariant="normal">cos</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mn>3</mn><msup><mi>x</mi><mrow><mo>−</mo><mn>2</mn></mrow></msup></mrow></math></button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Eksponenten <math><mrow><mo>−</mo><mn>3</mn></mrow></math> bliver både faktor og én mindre.</p><template class="feedback-correct">Korrekt. Et negativt eksponenttal bliver stående som negativ faktor.</template><template class="feedback-incorrect">Når eksponenten er <math><mrow><mo>−</mo><mn>3</mn></mrow></math>, bliver den nye eksponent <math><mrow><mo>−</mo><mn>4</mn></mrow></math>, ikke <math><mrow><mo>−</mo><mn>2</mn></mrow></math>.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-answer="15" data-progress-group="differentiation-practice"><div class="exercise-number">04</div><div class="exercise-body"><span class="level-pill">Niveau 2 · Afledt værdi</span><math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>x</mi></mrow></math><p>Bestem <math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>7</mn><mo>)</mo></mrow></math>.</p><div class="answer-row"><label><span>Svar =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Afledt værdi i øvelse 4" /></label><button class="check-answer" type="button">Tjek svar</button></div><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Find først <math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>. Sæt derefter <math><mn>7</mn></math> ind.</p><template class="feedback-correct">Korrekt. Tangenten har hældningen <math><mn>15</mn></math> ved dette input.</template><template class="feedback-incorrect">Du har måske beregnet funktionsværdien. Opgaven spørger efter en værdi af den afledte funktion.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-answer="12" data-progress-group="differentiation-practice"><div class="exercise-number">05</div><div class="exercise-body"><span class="level-pill">Niveau 2 · Koefficient</span><math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>4</mn><msup><mi>x</mi><mn>3</mn></msup></mrow></math><p>Hvilket tal står foran <math><msup><mi>x</mi><mn>2</mn></msup></math> i den afledte funktion?</p><div class="answer-row"><label><span>Tal =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Koefficienten i øvelse 5" /></label><button class="check-answer" type="button">Tjek svar</button></div><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Gang den eksisterende koefficient med eksponenten.</p><template class="feedback-correct">Korrekt. <math><mrow><mn>4</mn><mo>·</mo><mn>3</mn><mo>=</mo><mn>12</mn></mrow></math>.</template><template class="feedback-incorrect">Den gamle koefficient skal ganges med den gamle eksponent.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-answer="120" data-progress-group="differentiation-practice"><div class="exercise-number">06</div><div class="exercise-body"><span class="level-pill">Niveau 3 · Model</span><math display="block"><mrow><mi>A</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>8</mn><msup><mi>t</mi><mn>1,5</mn></msup></mrow></math><p>Bestem <math><mrow><msup><mi>A</mi><mo>′</mo></msup><mo>(</mo><mn>100</mn><mo>)</mo></mrow></math>.</p><div class="answer-row"><label><span>Svar =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Væksthastigheden i øvelse 6" /></label><button class="check-answer" type="button">Tjek svar</button></div><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden><math><mrow><mn>1,5</mn><mo>−</mo><mn>1</mn><mo>=</mo><mn>0,5</mn></mrow></math>, og <math><mrow><msup><mn>100</mn><mn>0,5</mn></msup><mo>=</mo><mn>10</mn></mrow></math>.</p><template class="feedback-correct">Korrekt. Husk i en fuld besvarelse enheden kvadratmeter pr. time.</template><template class="feedback-incorrect">Differentier først til <math><mrow><mn>12</mn><msup><mi>t</mi><mn>0,5</mn></msup></mrow></math>, og indsæt derefter tidspunktet.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="falling-rate" data-progress-group="differentiation-practice"><div class="exercise-number">07</div><div class="exercise-body"><span class="level-pill">Niveau 3 · Fortolkning</span><p>En gryde har temperaturen <math><mrow><mi>T</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow></math> i grader Celsius efter <math><mi>t</mi></math> minutter. Det er beregnet, at</p><math display="block"><mrow><msup><mi>T</mi><mo>′</mo></msup><mo>(</mo><mn>5</mn><mo>)</mo><mo>=</mo><mo>−</mo><mn>3,67</mn></mrow></math><div class="answer-choices"><button class="answer-choice" type="button" data-value="falling-rate">Efter præcis fem minutter falder temperaturen med <math><mrow><mn>3,67</mn><mspace width="0.3em"/><mfrac><mtext>°C</mtext><mtext>minut</mtext></mfrac></mrow></math>.</button><button class="answer-choice" type="button" data-value="temperature">Efter fem minutter er temperaturen <math><mrow><mo>−</mo><mn>3,67</mn><mtext>°C</mtext></mrow></math>.</button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>En afledt værdi er en hastighed, ikke selve temperaturen. Minus fortæller retningen.</p><template class="feedback-correct">Korrekt. Tidspunkt, retning og enhed er alle med.</template><template class="feedback-incorrect">Du læser tallet som en funktionsværdi. Den afledte beskriver ændring pr. tidsenhed.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="cas-check" data-progress-group="differentiation-practice"><div class="exercise-number">08</div><div class="exercise-body"><span class="level-pill">Niveau 4 · Metodevalg</span><p>Du har differentieret en lang model i CAS. Hvad gør besvarelsen fagligt færdig?</p><div class="answer-choices"><button class="answer-choice" type="button" data-value="cas-check">Vis den afledte med korrekt notation, indsæt det relevante input, og fortolk svaret med enhed.</button><button class="answer-choice" type="button" data-value="cas-only">Indsæt et skærmbillede fra værktøjet uden yderligere forklaring.</button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Et værktøj kan udføre symbolbehandling, men det kan ikke erstatte din matematiske forklaring.</p><template class="feedback-correct">Ja. CAS er et værktøj; notation, argumentation og fortolkning er stadig en del af løsningen.</template><template class="feedback-incorrect">Et skærmbillede viser ikke i sig selv, at du forstår resultatets betydning eller enhed.</template><p class="answer-feedback" role="status"></p></div></article>
+              </div>
+            </section>
+
+            <section class="lesson-section differentiation-test" id="diff-sluttjek" aria-labelledby="differentiationTestHeading">
+              <div class="section-heading"><div><p class="eyebrow">Modul 1 · Afsluttende forståelsestjek</p><h2 id="differentiationTestHeading">Kan du forbinde symbol, graf og virkelighed?</h2></div><p>Her blandes idé, regneregler og fortolkning. Målet er forståelse, ikke hastighed.</p></div>
+              <div class="exercise-progress" data-progress-group="differentiation-test" aria-live="polite"><div><span class="progress-score">0</span> af <span class="progress-total">6</span> løst</div><div class="progress-track" aria-hidden="true"><span class="progress-bar"></span></div></div>
+              <div class="exercise-list">
+                <article class="exercise-card" data-kind="choice" data-answer="quotient" data-progress-group="differentiation-test"><div class="exercise-number">01</div><div class="exercise-body"><span class="level-pill">Begreb</span><p>Hvilket udtryk er differenskvotienten?</p><div class="answer-choices"><button class="answer-choice" type="button" data-value="quotient"><math><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mi>h</mi></mfrac></math></button><button class="answer-choice" type="button" data-value="difference"><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>En kvotient er en division. Den lodrette ændring skal divideres med den vandrette.</p><template class="feedback-correct">Korrekt. Udtrykket er sekantens hældning.</template><template class="feedback-incorrect">Det andet udtryk er kun funktionens tilvækst. Der mangler division med skridtlængden.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="tangent" data-progress-group="differentiation-test"><div class="exercise-number">02</div><div class="exercise-body"><span class="level-pill">Graf</span><p>Hvad beskriver <math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo></mrow></math> grafisk?</p><div class="answer-choices"><button class="answer-choice" type="button" data-value="tangent">Tangentens hældning ved inputtet <math><mn>2</mn></math>.</button><button class="answer-choice" type="button" data-value="height">Grafens højde ved inputtet <math><mn>2</mn></math>.</button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Den almindelige funktionsværdi giver højden. Mærket ved funktionsnavnet viser, at der spørges efter den afledte.</p><template class="feedback-correct">Ja. Den afledte værdi er den lokale hældning.</template><template class="feedback-incorrect">Grafens højde er <math><mrow><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo></mrow></math>. Her spørges efter den afledte værdi.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-answer="10.5" data-progress-group="differentiation-test"><div class="exercise-number">03</div><div class="exercise-body"><span class="level-pill">Beregning</span><math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>5</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msqrt><mi>x</mi></msqrt></mrow></math><p>Bestem <math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>1</mn><mo>)</mo></mrow></math>.</p><div class="answer-row"><label><span>Svar =</span><input type="text" inputmode="decimal" autocomplete="off" aria-label="Afledt værdi i forståelsestjek 3" /></label><button class="check-answer" type="button">Tjek svar</button></div><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Den afledte af første led er <math><mrow><mn>10</mn><mi>x</mi></mrow></math>. Rodleddet bidrager med en brøk.</p><template class="feedback-correct">Korrekt. Bidragene er <math><mn>10</mn></math> og <math><mn>0,5</mn></math>.</template><template class="feedback-incorrect">Kontrollér, at koefficienten <math><mn>5</mn></math> bliver ganget med eksponenten <math><mn>2</mn></math>, og at roden også differentieres.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="unit" data-progress-group="differentiation-test"><div class="exercise-number">04</div><div class="exercise-body"><span class="level-pill">Enhed</span><p>En funktion måler en længde i centimeter som funktion af alder i år. Hvilken enhed har den afledte?</p><div class="answer-choices"><button class="answer-choice" type="button" data-value="unit"><math><mfrac><mtext>cm</mtext><mtext>år</mtext></mfrac></math></button><button class="answer-choice" type="button" data-value="square"><math><mrow><mtext>cm</mtext><mo>·</mo><mtext>år</mtext></mrow></math></button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Den afledte måler ændring i output pr. ændring i input.</p><template class="feedback-correct">Korrekt. Længdens ændring måles pr. år.</template><template class="feedback-incorrect">En væksthastighed er outputenhed divideret med inputenhed.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="reciprocal" data-progress-group="differentiation-test"><div class="exercise-number">05</div><div class="exercise-body"><span class="level-pill">Regel</span><math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow></math><p>Vælg den afledte.</p><div class="answer-choices"><button class="answer-choice" type="button" data-value="reciprocal"><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac></mrow></math></button><button class="answer-choice" type="button" data-value="same"><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac></mrow></math></button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Omskriv som en potens med eksponenten <math><mrow><mo>−</mo><mn>1</mn></mrow></math>.</p><template class="feedback-correct">Korrekt. Det negative fortegn kommer fra den gamle eksponent.</template><template class="feedback-incorrect">Fortegnet mangler. Potensreglen flytter eksponenten <math><mrow><mo>−</mo><mn>1</mn></mrow></math> ned foran.</template><p class="answer-feedback" role="status"></p></div></article>
+
+                <article class="exercise-card" data-kind="choice" data-answer="increasing" data-progress-group="differentiation-test"><div class="exercise-number">06</div><div class="exercise-body"><span class="level-pill">Bro til næste mål</span><p>Hvad kan du konkludere i et interval, hvor</p><math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>&gt;</mo><mn>0</mn></mrow></math><div class="answer-choices"><button class="answer-choice" type="button" data-value="increasing">Funktionen er voksende i intervallet.</button><button class="answer-choice" type="button" data-value="positive">Alle funktionsværdier er positive i intervallet.</button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Fortegnet for den afledte fortæller retningen på grafen, ikke om grafen ligger over aksen.</p><template class="feedback-correct">Korrekt. Positiv hældning betyder, at grafen stiger. Det bliver centralt i monotoniforhold.</template><template class="feedback-incorrect">En funktion kan godt have negative funktionsværdier og samtidig være voksende. Her beskrives hældningen.</template><p class="answer-feedback" role="status"></p></div></article>
+              </div>
+            </section>
+
+            <section class="lesson-section summary-section differentiation-summary" aria-labelledby="differentiationSummaryHeading">
+              <div class="summary-copy"><p class="eyebrow">Modul 1 · Din faste metode</p><h2 id="differentiationSummaryHeading">Fem rolige skridt</h2><ol><li>Genkend hvert led og den regel, der passer.</li><li>Differentier forskriften led for led.</li><li>Forenkl kun så langt, som du sikkert kan.</li><li>Indsæt et bestemt input til sidst, hvis opgaven beder om det.</li><li>Fortolk værdien med tidspunkt, retning og enhed.</li></ol></div>
+              <div class="summary-note"><span>Næste modul</span><p>Produktreglen bygger oven på præcis de grundregler, du netop har trænet.</p></div>
+            </section>
+          </div>
         </section>
 
         <section class="formula-view" data-page="formulas" hidden>

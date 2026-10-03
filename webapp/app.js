@@ -67,6 +67,7 @@ const backdrop = document.querySelector("#backdrop");
 const equationLesson = document.querySelector("#equationLesson");
 const quadraticLesson = document.querySelector("#quadraticLesson");
 const compositeLesson = document.querySelector("#compositeLesson");
+const differentiationLesson = document.querySelector("#differentiationLesson");
 const subjectPlaceholder = document.querySelector("#subjectPlaceholder");
 const exerciseCards = document.querySelectorAll(".exercise-card");
 
@@ -102,7 +103,12 @@ function showView(view, shouldFocus = true) {
   equationLesson.hidden = view !== "equations";
   quadraticLesson.hidden = view !== "quadratic";
   compositeLesson.hidden = view !== "composite";
-  subjectPlaceholder.hidden = view === "equations" || view === "quadratic" || view === "composite";
+  differentiationLesson.hidden = view !== "differentiation";
+  subjectPlaceholder.hidden =
+    view === "equations" ||
+    view === "quadratic" ||
+    view === "composite" ||
+    view === "differentiation";
 
   setActiveNavigation(view);
   window.location.hash = view === "home" ? "" : view;
@@ -177,6 +183,15 @@ function updateExerciseProgress(group) {
     status.innerHTML = ready
       ? "<strong>Grundlaget er på plads.</strong><span>Du er klar til at sætte funktioner sammen.</span>"
       : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken og prøv igen på resten.</span>`;
+  }
+
+  if (group === "differentiation-foundation") {
+    const status = document.querySelector("#differentiationFoundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Byggestenene er på plads.</strong><span>Fortsæt til idéen bag differentialkvotienten.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller gå tilbage til et grundemne.</span>`;
   }
 }
 
