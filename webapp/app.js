@@ -133,6 +133,149 @@ document.querySelectorAll("[data-scroll-to]").forEach((button) => {
   });
 });
 
+const secantDemo = document.querySelector("#secantDemo");
+
+if (secantDemo) {
+  const hValues = [2, 1.5, 1, 0.75, 0.5, 0.25, 0.1, 0.05, 0.01];
+  const initialHIndex = 2;
+  let hIndex = initialHIndex;
+
+  const graph = {
+    left: 54,
+    right: 700,
+    top: 24,
+    bottom: 330,
+    xMin: -0.25,
+    xMax: 3.25,
+    yMin: -0.5,
+    yMax: 10.5,
+  };
+
+  const curve = secantDemo.querySelector("#functionCurve");
+  const tangentLine = secantDemo.querySelector("#tangentLine");
+  const secantLine = secantDemo.querySelector("#secantLine");
+  const fixedPoint = secantDemo.querySelector("#fixedPoint");
+  const movingPoint = secantDemo.querySelector("#movingPoint");
+  const fixedPointLabel = secantDemo.querySelector("#fixedPointLabel");
+  const movingPointLabel = secantDemo.querySelector("#movingPointLabel");
+  const liveReadout = secantDemo.querySelector("#secantLive");
+  const observation = secantDemo.querySelector("#secantObservation");
+  const graphSvg = secantDemo.querySelector("#secantGraph");
+  const closerButton = secantDemo.querySelector("#secantCloser");
+  const fartherButton = secantDemo.querySelector("#secantFarther");
+  const resetButton = secantDemo.querySelector("#secantReset");
+
+  const graphX = (value) =>
+    graph.left + ((value - graph.xMin) / (graph.xMax - graph.xMin)) * (graph.right - graph.left);
+  const graphY = (value) =>
+    graph.bottom - ((value - graph.yMin) / (graph.yMax - graph.yMin)) * (graph.bottom - graph.top);
+
+  function formatGraphNumber(value, maximumFractionDigits = 4) {
+    return Number(value.toFixed(maximumFractionDigits)).toLocaleString("da-DK", {
+      maximumFractionDigits,
+    });
+  }
+
+  function setLine(line, slope, intercept) {
+    line.setAttribute("x1", String(graphX(graph.xMin)));
+    line.setAttribute("y1", String(graphY(slope * graph.xMin + intercept)));
+    line.setAttribute("x2", String(graphX(graph.xMax)));
+    line.setAttribute("y2", String(graphY(slope * graph.xMax + intercept)));
+  }
+
+  function positionPoint(point, label, x, y, labelOffsetX, labelOffsetY) {
+    const cx = graphX(x);
+    const cy = graphY(y);
+    point.setAttribute("cx", String(cx));
+    point.setAttribute("cy", String(cy));
+    label.setAttribute("x", String(cx + labelOffsetX));
+    label.setAttribute("y", String(cy + labelOffsetY));
+  }
+
+  function updateSecantDemo() {
+    const h = hValues[hIndex];
+    const qX = 1 + h;
+    const qY = qX ** 2;
+    const secantSlope = 2 + h;
+    const secantIntercept = 1 - secantSlope;
+    const hText = formatGraphNumber(h, 2);
+    const qXText = formatGraphNumber(qX, 2);
+    const qYText = formatGraphNumber(qY);
+    const slopeText = formatGraphNumber(secantSlope, 2);
+
+    setLine(tangentLine, 2, -1);
+    setLine(secantLine, secantSlope, secantIntercept);
+    positionPoint(fixedPoint, fixedPointLabel, 1, 1, -24, 25);
+    positionPoint(movingPoint, movingPointLabel, qX, qY, 12, -12);
+
+    liveReadout.innerHTML = `
+      <div class="secant-values">
+        <div><span>Afstanden mellem punkterne</span><math><mrow><mi>h</mi><mo>=</mo><mn>${hText}</mn></mrow></math></div>
+        <div><span>Det bevægelige punkt</span><math><mrow><mi>Q</mi><mo>=</mo><mo>(</mo><mn>${qXText}</mn><mo>,</mo><mn>${qYText}</mn><mo>)</mo></mrow></math></div>
+      </div>
+      <div class="secant-equation-wrap">
+        <span>Sekantens hældning</span>
+        <math display="block" class="secant-equation">
+          <mrow>
+            <msub><mi>m</mi><mtext>sekant</mtext></msub><mo>=</mo>
+            <mfrac><mrow><mn>${qYText}</mn><mo>−</mo><mn>1</mn></mrow><mrow><mn>${qXText}</mn><mo>−</mo><mn>1</mn></mrow></mfrac>
+            <mo>=</mo><mn>${slopeText}</mn>
+          </mrow>
+        </math>
+      </div>`;
+
+    observation.innerHTML =
+      h <= 0.05
+        ? `Sekanten ligger nu næsten oven i tangenten. Vi stopper ved et lille positivt <math><mi>h</mi></math>, fordi differenskvotienten ikke kan beregnes med <math><mrow><mi>h</mi><mo>=</mo><mn>0</mn></mrow></math>.`
+        : `Sekantens hældning er <math><mn>${hText}</mn></math> større end tangentens. Når <math><mi>h</mi></math> bliver mindre, bliver forskellen lige så meget mindre.`;
+
+    graphSvg.setAttribute(
+      "aria-label",
+      `Graf for f af x lig x i anden. Punkt P er fast ved en komma en. Punkt Q er ved ${qXText} komma ${qYText}. Sekantens hældning er ${slopeText}, og tangentens hældning er to.`,
+    );
+
+    closerButton.disabled = hIndex === hValues.length - 1;
+    fartherButton.disabled = hIndex === 0;
+  }
+
+  const curvePoints = Array.from({ length: 81 }, (_, index) => {
+    const x = (3.2 * index) / 80;
+    return `${index === 0 ? "M" : "L"}${graphX(x).toFixed(2)},${graphY(x ** 2).toFixed(2)}`;
+  });
+  curve.setAttribute("d", curvePoints.join(" "));
+
+  closerButton.addEventListener("click", () => {
+    hIndex = Math.min(hIndex + 1, hValues.length - 1);
+    updateSecantDemo();
+  });
+
+  fartherButton.addEventListener("click", () => {
+    hIndex = Math.max(hIndex - 1, 0);
+    updateSecantDemo();
+  });
+
+  resetButton.addEventListener("click", () => {
+    hIndex = initialHIndex;
+    updateSecantDemo();
+  });
+
+  secantDemo.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      hIndex = Math.min(hIndex + 1, hValues.length - 1);
+      updateSecantDemo();
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      hIndex = Math.max(hIndex - 1, 0);
+      updateSecantDemo();
+    }
+  });
+
+  updateSecantDemo();
+}
+
 document.querySelectorAll(".hint-button").forEach((button) => {
   button.addEventListener("click", () => {
     const hint = button.closest(".exercise-body").querySelector(".hint");

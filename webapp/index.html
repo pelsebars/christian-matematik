@@ -1372,6 +1372,70 @@
                 <div class="derivative-arrow" aria-hidden="true">→</div>
                 <div><span>Ét punkt · tangent</span><math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo><mo>−</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mi>h</mi></mfrac></mrow></math><p>Øjeblikkelig ændring i punktet.</p></div>
               </div>
+
+              <figure class="secant-lab" id="secantDemo" tabindex="0" aria-labelledby="secantLabHeading" aria-describedby="secantInstructions">
+                <figcaption class="secant-lab-header">
+                  <div>
+                    <p class="eyebrow">Prøv selv · interaktiv graf</p>
+                    <h3 id="secantLabHeading">Flyt punktet <math><mi>Q</mi></math> hen mod <math><mi>P</mi></math></h3>
+                    <p id="secantInstructions">Brug venstre piletast for at gå tættere på. Se sekanten nærme sig tangenten.</p>
+                  </div>
+                  <div class="secant-function">
+                    <span>Grafen viser</span>
+                    <math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></math>
+                  </div>
+                </figcaption>
+
+                <div class="secant-lab-body">
+                  <div class="secant-canvas">
+                    <svg id="secantGraph" viewBox="0 0 720 370" role="img" aria-label="Graf for f af x lig x i anden med et fast punkt P og et bevægeligt punkt Q">
+                      <defs>
+                        <clipPath id="secantPlotClip"><rect x="54" y="24" width="646" height="306" rx="10" /></clipPath>
+                      </defs>
+                      <rect class="graph-paper" x="54" y="24" width="646" height="306" rx="10" />
+                      <g class="graph-grid" aria-hidden="true">
+                        <line x1="100" y1="24" x2="100" y2="330" /><line x1="285" y1="24" x2="285" y2="330" /><line x1="469" y1="24" x2="469" y2="330" /><line x1="654" y1="24" x2="654" y2="330" />
+                        <line x1="54" y1="316" x2="700" y2="316" /><line x1="54" y1="261" x2="700" y2="261" /><line x1="54" y1="205" x2="700" y2="205" /><line x1="54" y1="149" x2="700" y2="149" /><line x1="54" y1="94" x2="700" y2="94" /><line x1="54" y1="38" x2="700" y2="38" />
+                      </g>
+                      <g class="graph-axes" aria-hidden="true">
+                        <line x1="54" y1="316" x2="700" y2="316" /><line x1="100" y1="24" x2="100" y2="330" />
+                        <text x="96" y="350">0</text><text x="280" y="350">1</text><text x="464" y="350">2</text><text x="649" y="350">3</text>
+                        <text x="32" y="266">2</text><text x="32" y="210">4</text><text x="32" y="154">6</text><text x="32" y="99">8</text><text x="24" y="43">10</text>
+                      </g>
+                      <g clip-path="url(#secantPlotClip)">
+                        <path id="functionCurve" class="function-curve" d="" />
+                        <line id="tangentLine" class="tangent-line" x1="0" y1="0" x2="0" y2="0" />
+                        <line id="secantLine" class="secant-line" x1="0" y1="0" x2="0" y2="0" />
+                      </g>
+                      <circle id="fixedPoint" class="fixed-point" cx="0" cy="0" r="7" />
+                      <circle id="movingPoint" class="moving-point" cx="0" cy="0" r="9" />
+                      <text id="fixedPointLabel" class="point-label point-label--fixed" x="0" y="0">P</text>
+                      <text id="movingPointLabel" class="point-label point-label--moving" x="0" y="0">Q</text>
+                    </svg>
+                    <div class="graph-legend" aria-label="Farveforklaring">
+                      <span><i class="legend-curve" aria-hidden="true"></i><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></math></span>
+                      <span><i class="legend-secant" aria-hidden="true"></i>Sekant</span>
+                      <span><i class="legend-tangent" aria-hidden="true"></i>Tangent</span>
+                    </div>
+                  </div>
+
+                  <div class="secant-panel">
+                    <div class="secant-live" id="secantLive" role="status" aria-live="polite"></div>
+                    <div class="secant-target">
+                      <span>Målet ved det faste punkt</span>
+                      <math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>1</mn><mo>)</mo><mo>=</mo><mn>2</mn></mrow></math>
+                    </div>
+                    <p class="secant-observation" id="secantObservation"></p>
+                    <div class="secant-controls" aria-label="Styr punktet Q">
+                      <button id="secantCloser" type="button"><span aria-hidden="true">←</span> Tættere på</button>
+                      <button id="secantFarther" type="button">Længere væk <span aria-hidden="true">→</span></button>
+                      <button class="secant-reset" id="secantReset" type="button">Nulstil</button>
+                    </div>
+                    <p class="keyboard-note"><span aria-hidden="true">⌨</span> Fokusér kortet, og brug venstre eller højre piletast.</p>
+                  </div>
+                </div>
+              </figure>
+
               <div class="concept-grid">
                 <article><span class="mini-index">A</span><h3>Grafisk</h3><p>Den afledte værdi er tangentens hældning. Positiv værdi betyder, at grafen stiger lokalt; negativ værdi betyder, at den falder.</p></article>
                 <article><span class="mini-index">B</span><h3>Som model</h3><p>Hvis funktionen måles i kilometer og inputtet i timer, måles den afledte i kilometer pr. time.</p></article>
