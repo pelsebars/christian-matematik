@@ -276,6 +276,87 @@ if (secantDemo) {
   updateSecantDemo();
 }
 
+const productRuleBuilder = document.querySelector("#productRuleBuilder");
+
+if (productRuleBuilder) {
+  const live = productRuleBuilder.querySelector("#productBuilderLive");
+  const previousButton = productRuleBuilder.querySelector("#productBuilderPrevious");
+  const nextButton = productRuleBuilder.querySelector("#productBuilderNext");
+  const resetButton = productRuleBuilder.querySelector("#productBuilderReset");
+  const progressDots = [...productRuleBuilder.querySelectorAll(".product-builder-progress span")];
+  let step = 0;
+
+  const steps = [
+    {
+      label: "Trin 1 · Find faktorerne",
+      math: `<math display="block"><mtable columnalign="left"><mtr><mtd><mi>u</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mtd></mtr><mtr><mtd><mi>v</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">ln</mi><mo>(</mo><mi>x</mi><mo>)</mo></mtd></mtr></mtable></math>`,
+      explanation: "Gangetegnet deler forskriften i to faktorer. Skriv dem hver for sig, før du differentierer.",
+    },
+    {
+      label: "Trin 2 · Differentier hver faktor",
+      math: `<math display="block"><mtable columnalign="left"><mtr><mtd><msup><mi>u</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi></mtd></mtr><mtr><mtd><msup><mi>v</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mtd></mtr></mtable></math>`,
+      explanation: "Nu har du fire brikker: de to oprindelige faktorer og deres to afledede.",
+    },
+    {
+      label: "Trin 3 · Sæt ind i produktreglen",
+      math: `<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mo>·</mo><mi mathvariant="normal">ln</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo>·</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow></math>`,
+      explanation: "Første led ændrer den første faktor. Andet led ændrer den anden. Derfor er der et plustegn.",
+    },
+    {
+      label: "Trin 4 · Forenkl sikkert",
+      math: `<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mi mathvariant="normal">ln</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mi>x</mi></mrow></math>`,
+      explanation: "Kun det sidste produkt forkortes. Nu er reglen stadig synlig i regnegangen, og svaret er ryddeligt.",
+    },
+  ];
+
+  function updateProductBuilder() {
+    const current = steps[step];
+    live.innerHTML = `<span>${current.label}</span>${current.math}<p>${current.explanation}</p>`;
+    progressDots.forEach((dot, index) => {
+      dot.classList.toggle("is-active", index === step);
+      dot.classList.toggle("is-complete", index < step);
+    });
+    previousButton.disabled = step === 0;
+    nextButton.disabled = step === steps.length - 1;
+    nextButton.textContent = step === steps.length - 2 ? "Vis resultat →" : "Næste trin →";
+    productRuleBuilder.setAttribute(
+      "aria-label",
+      `Produktreglen trin for trin. Viser trin ${step + 1} af ${steps.length}: ${current.label.replace(/^Trin \d · /, "")}.`,
+    );
+  }
+
+  previousButton.addEventListener("click", () => {
+    step = Math.max(0, step - 1);
+    updateProductBuilder();
+  });
+
+  nextButton.addEventListener("click", () => {
+    step = Math.min(steps.length - 1, step + 1);
+    updateProductBuilder();
+  });
+
+  resetButton.addEventListener("click", () => {
+    step = 0;
+    updateProductBuilder();
+  });
+
+  productRuleBuilder.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      step = Math.max(0, step - 1);
+      updateProductBuilder();
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      step = Math.min(steps.length - 1, step + 1);
+      updateProductBuilder();
+    }
+  });
+
+  updateProductBuilder();
+}
+
 document.querySelectorAll(".hint-button").forEach((button) => {
   button.addEventListener("click", () => {
     const hint = button.closest(".exercise-body").querySelector(".hint");
@@ -335,6 +416,15 @@ function updateExerciseProgress(group) {
     status.innerHTML = ready
       ? "<strong>Byggestenene er på plads.</strong><span>Fortsæt til idéen bag differentialkvotienten.</span>"
       : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller gå tilbage til et grundemne.</span>`;
+  }
+
+  if (group === "product-foundation") {
+    const status = document.querySelector("#productFoundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at samle de to bidrag i produktreglen.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller gå tilbage til Modul 1.</span>`;
   }
 }
 

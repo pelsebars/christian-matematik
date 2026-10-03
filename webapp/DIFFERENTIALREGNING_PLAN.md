@@ -5,7 +5,7 @@ Planen bygger på `Pensum/Læseplan.pdf`, `Pensum/Undervisningsbeskrivelse.pdf` 
 ## Samlet læringsrækkefølge
 
 1. **Differentialkvotient** — fra funktionsværdi, graf og hældning til sekant, tangent og differentialkvotient. Tretrinsreglen bruges som ræsonnement, hvorefter de grundlæggende afledningsregler trænes både uden hjælpemidler og med CAS-kontrol. Væksthastigheder fortolkes med fortegn og enheder.
-2. **Produktreglen** — genkend produkter, navngiv de to faktorer og anvend produktreglen. Kombinér med grundregler, bestem funktionsværdier og væksthastigheder, og løs tangentopgaver med parallelle linjer.
+2. **Produktreglen** *(implementeret)* — genkend produkter, navngiv de to faktorer og anvend produktreglen. Kombinér med grundregler, bestem funktionsværdier og væksthastigheder, og løs tangentopgaver med parallelle linjer.
 3. **Kædereglen** — genkend indre og ydre funktion, differentier indefra og ud, og kombiner kædereglen med produktreglen. Arbejd med eksponential-, logaritme-, potens- og trigonometriske modeller.
 4. **Vendetangent** — bestem tangentligninger, skæringer og parallelle tangenter. Undersøg vendepunkter og tidspunkter med størst eller mindst væksthastighed i modeller.
 5. **Opsamling og eksamenstræning** — saml fortegnet for den afledte i monotoniforhold, ekstrema og optimering. Vælg bevidst mellem håndregning og CAS, og træn blandede opgaver med og uden hjælpemidler.
