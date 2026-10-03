@@ -4,7 +4,7 @@ Første lokale version af Christians matematikapp.
 
 ## Indhold
 
-- startside med tre emner;
+- startside med fire emner;
 - fast venstremenu på desktop og mobilmenu på små skærme;
 - emneoversigter;
 - side med formler og huskeregler;

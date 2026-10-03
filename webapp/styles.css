@@ -11,6 +11,8 @@
   --blue-soft: #e9f2ff;
   --violet: #7257d9;
   --violet-soft: #f0ecff;
+  --orange: #b85d16;
+  --orange-soft: #fff0e4;
   --green: #147d69;
   --green-soft: #e6f6f1;
   --amber-soft: #fff6df;
@@ -280,7 +282,7 @@ h2 {
 
 .topic-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -326,6 +328,11 @@ h2 {
 .topic-card--violet {
   --card-color: var(--violet);
   --card-soft: var(--violet-soft);
+}
+
+.topic-card--orange {
+  --card-color: var(--orange);
+  --card-soft: var(--orange-soft);
 }
 
 .topic-card--green {

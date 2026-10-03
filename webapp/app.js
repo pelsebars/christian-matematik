@@ -11,8 +11,23 @@ const subjects = {
         <mrow><mn>3</mn><mi>x</mi><mo>+</mo><mn>5</mn><mo>=</mo><mn>20</mn></mrow>
       </math>`,
   },
+  quadratic: {
+    kicker: "02 · Algebra",
+    title: "Andengradsligninger",
+    description:
+      "En andengradsligning indeholder et led med den ukendte i anden potens og kan have to, én eller ingen reelle løsninger.",
+    understand:
+      "Lær at skrive ligningen på standardform, beregne diskriminanten og bruge den til at finde løsningerne.",
+    formula: `
+      <math display="block" aria-label="x i anden minus fem x plus seks er lig med nul">
+        <mrow>
+          <msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>5</mn><mi>x</mi>
+          <mo>+</mo><mn>6</mn><mo>=</mo><mn>0</mn>
+        </mrow>
+      </math>`,
+  },
   composite: {
-    kicker: "02 · Funktioner",
+    kicker: "03 · Funktioner",
     title: "Sammensatte funktioner",
     description:
       "Når funktioner sættes sammen, bliver resultatet fra den ene funktion input til den næste.",
@@ -24,7 +39,7 @@ const subjects = {
       </math>`,
   },
   differentiation: {
-    kicker: "03 · A-niveau",
+    kicker: "04 · A-niveau",
     title: "Differentialregning",
     description:
       "Den afledte fortæller, hvor hurtigt en funktion ændrer sig i et bestemt punkt.",
