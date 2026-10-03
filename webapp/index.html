@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Et roligt arbejdsrum til Christians matematikforløb."
+    />
+    <title>Christians matematik</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Hovedmenu">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">f′</span>
+          <div>
+            <p class="brand-name">Christians matematik</p>
+            <p class="brand-meta">Fra fundament til A-niveau</p>
+          </div>
+        </div>
+
+        <nav class="navigation" aria-label="Navigation">
+          <button class="nav-item is-active" type="button" data-view="home">
+            <span class="nav-symbol" aria-hidden="true">⌂</span>
+            <span>Start</span>
+          </button>
+
+          <p class="nav-heading">Emner</p>
+
+          <button class="nav-item" type="button" data-view="equations">
+            <span class="nav-number" aria-hidden="true">01</span>
+            <span>Løsning af ligninger</span>
+          </button>
+          <button class="nav-item" type="button" data-view="composite">
+            <span class="nav-number" aria-hidden="true">02</span>
+            <span>Sammensatte funktioner</span>
+          </button>
+          <button class="nav-item" type="button" data-view="differentiation">
+            <span class="nav-number" aria-hidden="true">03</span>
+            <span>Differentialregning</span>
+          </button>
+
+          <div class="nav-divider" aria-hidden="true"></div>
+
+          <button class="nav-item" type="button" data-view="formulas">
+            <span class="nav-symbol" aria-hidden="true">Σ</span>
+            <span>Formler &amp; huskeregler</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-note">
+          <p>Ét trin ad gangen.</p>
+          <span>Forstå først. Regn bagefter.</span>
+        </div>
+      </aside>
+
+      <div class="mobile-bar">
+        <div class="mobile-brand">
+          <span class="brand-mark" aria-hidden="true">f′</span>
+          <span>Christians matematik</span>
+        </div>
+        <button
+          class="menu-button"
+          id="menuButton"
+          type="button"
+          aria-expanded="false"
+          aria-controls="sidebar"
+        >
+          <span class="sr-only">Åbn menu</span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <button class="backdrop" id="backdrop" type="button" aria-label="Luk menu"></button>
+
+      <main class="main-content" id="mainContent" tabindex="-1">
+        <section class="home-view" data-page="home">
+          <header class="page-intro">
+            <p class="eyebrow">Start her</p>
+            <h1>Hvad vil du arbejde med?</h1>
+            <p class="page-lead">
+              Vælg et emne. Du får først en enkel forklaring, derefter eksempler og til sidst opgaver.
+            </p>
+          </header>
+
+          <div class="topic-grid" aria-label="Matematikemner">
+            <button class="topic-card topic-card--blue" type="button" data-view="equations">
+              <span class="card-index">01 · Grundlag</span>
+              <span class="formula-preview" aria-label="Tre x plus fem er lig med tyve">
+                <math display="block">
+                  <mrow>
+                    <mn>3</mn><mi>x</mi><mo>+</mo><mn>5</mn><mo>=</mo><mn>20</mn>
+                  </mrow>
+                </math>
+              </span>
+              <span class="card-title">Løsning af ligninger</span>
+              <span class="card-description">
+                Lær at isolere den ukendte og kontrollere, om dit svar passer.
+              </span>
+              <span class="card-action">Åbn emnet</span>
+            </button>
+
+            <button class="topic-card topic-card--violet" type="button" data-view="composite">
+              <span class="card-index">02 · Funktioner</span>
+              <span class="formula-preview" aria-label="f af g af x">
+                <math display="block">
+                  <mrow>
+                    <mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo>
+                  </mrow>
+                </math>
+              </span>
+              <span class="card-title">Sammensatte funktioner</span>
+              <span class="card-description">
+                Find den indre og den ydre funktion, og forstå rækkefølgen.
+              </span>
+              <span class="card-action">Åbn emnet</span>
+            </button>
+
+            <button class="topic-card topic-card--green" type="button" data-view="differentiation">
+              <span class="card-index">03 · A-niveau</span>
+              <span class="formula-preview" aria-label="Den afledte af x i anden er to x">
+                <math display="block">
+                  <mrow>
+                    <mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac>
+                    <mo>(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>)</mo>
+                    <mo>=</mo><mn>2</mn><mi>x</mi>
+                  </mrow>
+                </math>
+              </span>
+              <span class="card-title">Differentialregning</span>
+              <span class="card-description">
+                Genkend funktionstypen, vælg reglen og find den afledte.
+              </span>
+              <span class="card-action">Åbn emnet</span>
+            </button>
+          </div>
+
+          <section class="path-panel" aria-labelledby="pathHeading">
+            <div>
+              <p class="eyebrow">Anbefalet rækkefølge</p>
+              <h2 id="pathHeading">Byg forståelsen nedefra</h2>
+            </div>
+            <ol class="path-list">
+              <li><span>1</span>Ligninger</li>
+              <li><span>2</span>Sammensatte funktioner</li>
+              <li><span>3</span>Differentialregning</li>
+            </ol>
+          </section>
+        </section>
+
+        <section class="subject-view" data-page="subject" hidden>
+          <button class="text-button" type="button" data-view="home">Tilbage til emner</button>
+          <header class="subject-header">
+            <div>
+              <p class="eyebrow" id="subjectKicker">Emne</p>
+              <h1 id="subjectTitle"></h1>
+              <p class="page-lead" id="subjectDescription"></p>
+            </div>
+            <div class="subject-formula" id="subjectFormula" aria-hidden="true"></div>
+          </header>
+
+          <div class="learning-steps">
+            <article>
+              <span class="step-number">1</span>
+              <div><h2>Forstå</h2><p id="understandText"></p></div>
+            </article>
+            <article>
+              <span class="step-number">2</span>
+              <div><h2>Se eksempler</h2><p>Følg hvert regnetrin, og se hvorfor metoden virker.</p></div>
+            </article>
+            <article>
+              <span class="step-number">3</span>
+              <div><h2>Løs opgaver</h2><p>Begynd med støtte, og prøv derefter selv.</p></div>
+            </article>
+          </div>
+
+          <div class="next-step-card">
+            <div>
+              <p class="eyebrow">Næste udviklingstrin</p>
+              <h2>Vi fylder emnet med teori og opgaver</h2>
+              <p>Strukturen er klar. Det faglige indhold bygges ind emne for emne.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="formula-view" data-page="formulas" hidden>
+          <header class="page-intro">
+            <p class="eyebrow">Opslagsværk</p>
+            <h1>Formler &amp; huskeregler</h1>
+            <p class="page-lead">
+              Korte regler med korrekt notation, et eksempel og den fejl, man typisk skal undgå.
+            </p>
+          </header>
+
+          <div class="rule-list">
+            <article class="rule-card">
+              <div class="rule-copy">
+                <p class="rule-category">Brøker</p>
+                <h2>Division med en brøk</h2>
+                <p>Man dividerer med en brøk ved at gange med den omvendte brøk.</p>
+                <p class="pitfall"><strong>Pas på:</strong> Det er kun den brøk, du dividerer med, der vendes om.</p>
+              </div>
+              <div class="rule-math" aria-label="Seks divideret med to tredjedele er lig med seks gange tre halve, som er ni">
+                <math display="block">
+                  <mrow>
+                    <mn>6</mn><mo>÷</mo><mfrac><mn>2</mn><mn>3</mn></mfrac>
+                    <mo>=</mo><mn>6</mn><mo>·</mo><mfrac><mn>3</mn><mn>2</mn></mfrac>
+                    <mo>=</mo><mn>9</mn>
+                  </mrow>
+                </math>
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <div class="rule-copy">
+                <p class="rule-category">Potenser</p>
+                <h2>Gange med samme grundtal</h2>
+                <p>Når grundtallet er det samme, lægges eksponenterne sammen.</p>
+                <p class="pitfall"><strong>Pas på:</strong> Reglen gælder ikke ved addition.</p>
+              </div>
+              <div class="rule-math" aria-label="x i a gange x i b er x i a plus b">
+                <math display="block">
+                  <mrow>
+                    <msup><mi>x</mi><mi>a</mi></msup><mo>·</mo><msup><mi>x</mi><mi>b</mi></msup>
+                    <mo>=</mo><msup><mi>x</mi><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></msup>
+                  </mrow>
+                </math>
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <div class="rule-copy">
+                <p class="rule-category">Differentialregning</p>
+                <h2>Potensreglen</h2>
+                <p>Eksponenten flyttes ned foran, og eksponenten mindskes med én.</p>
+                <p class="pitfall"><strong>Pas på:</strong> Konstantleddet forsvinder ved differentiation.</p>
+              </div>
+              <div class="rule-math" aria-label="Den afledte af x i n er n gange x i n minus en">
+                <math display="block">
+                  <mrow>
+                    <mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac>
+                    <mo>(</mo><msup><mi>x</mi><mi>n</mi></msup><mo>)</mo>
+                    <mo>=</mo><mi>n</mi><mo>·</mo><msup><mi>x</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup>
+                  </mrow>
+                </math>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+# Private undervisnings- og arbejdsfiler
+/Pensum/
+/OVERBLIK.md
+/Differentialregning/
+/output/
+/tmp/
+/*.docx
+/*.pdf
+*.xlsx
+*.ggb
+~$*
+
+# Lokale system- og deploymentfiler
+.DS_Store
+.vercel/

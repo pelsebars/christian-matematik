@@ -1,0 +1,116 @@
+const subjects = {
+  equations: {
+    kicker: "01 · Grundlag",
+    title: "Løsning af ligninger",
+    description:
+      "En ligning er en balance. Målet er at få den ukendte alene uden at ændre balancen.",
+    understand:
+      "Se hvad lighedstegnet betyder, og lær hvorfor den samme handling skal udføres på begge sider.",
+    formula: `
+      <math display="block" aria-label="Tre x plus fem er lig med tyve">
+        <mrow><mn>3</mn><mi>x</mi><mo>+</mo><mn>5</mn><mo>=</mo><mn>20</mn></mrow>
+      </math>`,
+  },
+  composite: {
+    kicker: "02 · Funktioner",
+    title: "Sammensatte funktioner",
+    description:
+      "Når funktioner sættes sammen, bliver resultatet fra den ene funktion input til den næste.",
+    understand:
+      "Lær at finde den indre og den ydre funktion og at holde styr på den rækkefølge, de bruges i.",
+    formula: `
+      <math display="block" aria-label="f af g af x">
+        <mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow>
+      </math>`,
+  },
+  differentiation: {
+    kicker: "03 · A-niveau",
+    title: "Differentialregning",
+    description:
+      "Den afledte fortæller, hvor hurtigt en funktion ændrer sig i et bestemt punkt.",
+    understand:
+      "Genkend funktionstypen, vælg den relevante differentiationsregel og kontroller dit resultat.",
+    formula: `
+      <math display="block" aria-label="Den afledte af x i anden er to x">
+        <mrow>
+          <mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac>
+          <mo>(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>)</mo>
+          <mo>=</mo><mn>2</mn><mi>x</mi>
+        </mrow>
+      </math>`,
+  },
+};
+
+const mainContent = document.querySelector("#mainContent");
+const homeView = document.querySelector('[data-page="home"]');
+const subjectView = document.querySelector('[data-page="subject"]');
+const formulaView = document.querySelector('[data-page="formulas"]');
+const navigationButtons = document.querySelectorAll("[data-view]");
+const sidebar = document.querySelector("#sidebar");
+const menuButton = document.querySelector("#menuButton");
+const backdrop = document.querySelector("#backdrop");
+
+function setActiveNavigation(view) {
+  document.querySelectorAll(".nav-item").forEach((item) => {
+    const isActive = item.dataset.view === view;
+    item.classList.toggle("is-active", isActive);
+    if (isActive) item.setAttribute("aria-current", "page");
+    else item.removeAttribute("aria-current");
+  });
+}
+
+function closeMenu() {
+  sidebar.classList.remove("is-open");
+  backdrop.classList.remove("is-visible");
+  menuButton.setAttribute("aria-expanded", "false");
+}
+
+function showView(view, shouldFocus = true) {
+  homeView.hidden = view !== "home";
+  formulaView.hidden = view !== "formulas";
+  subjectView.hidden = !subjects[view];
+
+  if (subjects[view]) {
+    const subject = subjects[view];
+    document.querySelector("#subjectKicker").textContent = subject.kicker;
+    document.querySelector("#subjectTitle").textContent = subject.title;
+    document.querySelector("#subjectDescription").textContent = subject.description;
+    document.querySelector("#understandText").textContent = subject.understand;
+    document.querySelector("#subjectFormula").innerHTML = subject.formula;
+  }
+
+  setActiveNavigation(view);
+  window.location.hash = view === "home" ? "" : view;
+  closeMenu();
+
+  if (shouldFocus) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    mainContent.focus({ preventScroll: true });
+  }
+}
+
+navigationButtons.forEach((button) => {
+  button.addEventListener("click", () => showView(button.dataset.view));
+});
+
+menuButton.addEventListener("click", () => {
+  const willOpen = !sidebar.classList.contains("is-open");
+  sidebar.classList.toggle("is-open", willOpen);
+  backdrop.classList.toggle("is-visible", willOpen);
+  menuButton.setAttribute("aria-expanded", String(willOpen));
+});
+
+backdrop.addEventListener("click", closeMenu);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeMenu();
+});
+
+window.addEventListener("hashchange", () => {
+  const requestedView = window.location.hash.slice(1) || "home";
+  const validView = requestedView === "formulas" || subjects[requestedView] ? requestedView : "home";
+  showView(validView, false);
+});
+
+const initialView = window.location.hash.slice(1) || "home";
+showView(initialView === "formulas" || subjects[initialView] ? initialView : "home", false);
