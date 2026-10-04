@@ -3722,6 +3722,286 @@ math {
   color: #ffffff;
 }
 
+.scalar-module-goals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+  margin: 4px 0 16px;
+}
+
+.scalar-module-goals span {
+  padding: 11px 12px;
+  border: 1px solid #a9d9dd;
+  border-radius: 999px;
+  color: #086975;
+  background: rgba(255, 255, 255, 0.88);
+  font-size: 0.72rem;
+  font-weight: 760;
+  text-align: center;
+}
+
+.scalar-basics-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.scalar-basics-grid article {
+  min-height: 205px;
+}
+
+.scalar-formula-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.scalar-formula-grid article {
+  display: grid;
+  min-width: 0;
+  min-height: 220px;
+  align-content: center;
+  padding: 22px;
+  border: 1px solid #c8e5e8;
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.scalar-formula-grid article > span {
+  color: var(--cyan);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.scalar-formula-grid math {
+  max-width: 100%;
+  margin: 19px 0;
+  color: #086975;
+  font-size: 1.04rem;
+  overflow-x: auto;
+}
+
+.scalar-formula-grid p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.scalar-angle-lab {
+  margin: 18px 0 0;
+  overflow: hidden;
+  border: 1px solid #a9d9dd;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 14px 34px rgba(8, 127, 140, 0.08);
+}
+
+.scalar-angle-lab:focus-visible {
+  outline: 3px solid rgba(8, 127, 140, 0.3);
+  outline-offset: 4px;
+}
+
+.scalar-angle-lab figcaption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+  padding: 24px 27px;
+  border-bottom: 1px solid #d3eaec;
+  background: linear-gradient(135deg, #fbffff, var(--cyan-soft));
+}
+
+.scalar-angle-lab figcaption h3 {
+  margin: 0 0 7px;
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+}
+
+.scalar-angle-lab figcaption p:last-child {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.scalar-live-math {
+  max-width: 100%;
+  padding: 13px 16px;
+  overflow-x: auto;
+  border: 1px solid #a9d9dd;
+  border-radius: 13px;
+  color: #086975;
+  background: #ffffff;
+  font-size: 1.08rem;
+}
+
+.scalar-lab-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+}
+
+.scalar-angle-canvas {
+  min-width: 0;
+  padding: 18px;
+  border-right: 1px solid var(--line);
+  background: #fbfdff;
+}
+
+.scalar-angle-canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.scalar-axis {
+  stroke: #c7d1dd;
+  stroke-width: 1.5;
+}
+
+.scalar-vector {
+  stroke-width: 5;
+}
+
+.scalar-vector-a {
+  stroke: var(--blue);
+}
+
+.scalar-vector-b {
+  stroke: var(--cyan);
+}
+
+#scalarArrowHead path {
+  fill: var(--cyan);
+}
+
+.scalar-origin {
+  fill: var(--navy);
+}
+
+.scalar-angle-arc,
+.scalar-right-mark {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 3;
+}
+
+.scalar-vector-label,
+.scalar-angle-label {
+  fill: var(--ink-soft);
+  font-family: Cambria, "Times New Roman", serif;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.scalar-angle-label {
+  fill: #8f4a15;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 760;
+}
+
+.scalar-angle-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+}
+
+.scalar-stage {
+  min-height: 115px;
+  padding: 17px;
+  border: 1px solid #c8e5e8;
+  border-radius: 13px;
+  background: var(--cyan-soft);
+}
+
+.scalar-stage strong {
+  color: #086975;
+}
+
+.scalar-stage p {
+  margin: 9px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.scalar-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.scalar-controls button {
+  min-height: 41px;
+  padding: 9px 11px;
+  border: 1px solid #a9d9dd;
+  border-radius: 10px;
+  color: #086975;
+  background: #ffffff;
+  font-size: 0.77rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.scalar-controls button:hover,
+.scalar-controls button.is-active {
+  color: #ffffff;
+  background: var(--cyan);
+}
+
+.scalar-angle-panel .keyboard-note {
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.scalar-sign-rule {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.scalar-sign-rule article {
+  padding: 20px;
+  border: 1px solid #c8e5e8;
+  border-radius: 16px;
+  text-align: center;
+  background: #ffffff;
+}
+
+.scalar-sign-rule span {
+  color: var(--cyan);
+  font-size: 0.68rem;
+  font-weight: 820;
+  letter-spacing: 0.08em;
+}
+
+.scalar-sign-rule math {
+  max-width: 100%;
+  margin: 15px 0;
+  color: #086975;
+  overflow-x: auto;
+}
+
+.scalar-sign-rule p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.79rem;
+}
+
+.scalar-summary {
+  background: linear-gradient(135deg, #0b5057, #122e50);
+}
+
 [hidden] {
   display: none !important;
 }
@@ -4201,15 +4481,20 @@ math {
 @media (max-width: 1040px) {
   .vector-lab figcaption,
   .vector-lab-body,
-  .vector-operation-figure {
+  .vector-operation-figure,
+  .scalar-angle-lab figcaption,
+  .scalar-lab-body {
     grid-template-columns: 1fr;
   }
 
-  .vector-basics-grid {
+  .vector-basics-grid,
+  .scalar-formula-grid,
+  .scalar-module-goals {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .vector-canvas {
+  .vector-canvas,
+  .scalar-angle-canvas {
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
@@ -4222,20 +4507,27 @@ math {
 @media (max-width: 760px) {
   .vector-basics-grid,
   .vector-concept-grid,
-  .vector-cas-workflow {
+  .vector-cas-workflow,
+  .scalar-formula-grid,
+  .scalar-sign-rule,
+  .scalar-module-goals {
     grid-template-columns: 1fr;
   }
 
   .vector-lab figcaption,
-  .vector-panel {
+  .vector-panel,
+  .scalar-angle-lab figcaption,
+  .scalar-angle-panel {
     padding: 21px 18px;
   }
 
-  .vector-lab figcaption > math {
+  .vector-lab figcaption > math,
+  .scalar-live-math {
     width: 100%;
   }
 
-  .vector-canvas {
+  .vector-canvas,
+  .scalar-angle-canvas {
     padding: 10px 4px 15px;
   }
 

@@ -5,7 +5,7 @@ Planen bygger på `Pensum/Læseplan.pdf`, `Pensum/Undervisningsbeskrivelse.pdf` 
 ## Samlet læringsrækkefølge
 
 1. **Vektorer i planen** *(implementeret)* — skeln mellem punkt og vektor; aflæs koordinater; bestem vektoren mellem to punkter; regn med sum, differens, skalarmultiplikation og linearkombinationer; bestem længde og midtpunkt; fortolk regningerne i et koordinatsystem. Enkle parameteropgaver løses med håndregning og kontrolleres med CAS.
-2. **Skalarprodukt og vinklen mellem to vektorer** — beregn skalarproduktet; afgør om en vinkel er spids, ret eller stump; undersøg ortogonalitet; bestem vinkler og ukendte parametre; anvend metoderne i geometriske problemer.
+2. **Skalarprodukt og vinklen mellem to vektorer** *(implementeret)* — beregn skalarproduktet; afgør om en vinkel er spids, ret eller stump; undersøg ortogonalitet; bestem vinkler og ukendte parametre; anvend metoderne i geometriske problemer.
 3. **Projektion, tværvektor og determinant** — tegn og beregn projektioner begge veje; bestem tværvektorer; beregn determinant og trekantsareal; undersøg parallelitet, ortogonalitet og orientering; kombinér begreberne i parameteropgaver.
 4. **Linjen** — skift mellem ligning og parameterfremstilling; brug retnings- og normalvektor; opstil en linje gennem et punkt; bestem skæringspunkter, parallelitet, ortogonalitet, vinkler og punkt–linje-afstand; løs geometriske og enkle optimeringsprægede problemer.
 5. **Cirklen** — aflæs og opstil cirklens ligning; brug kvadratkomplettering til centrum og radius; undersøg om et punkt ligger på cirklen; bestem skæringer med linjer og akser; opstil tangenter og løs blandede problemer med cirkler og linjer.
@@ -63,7 +63,7 @@ Der er dermed ingen uplacerede formelle mål eller kernestofpunkter. F5 har svag
 ## Navigation og progression i appen
 
 - Et nyt hovedemne får sin egen startside og et synligt femtrins-moduloverblik.
-- Modul 1 markeres **åbent nu**; Modul 2–5 vises som **klar i strukturen**, så hele rejsen og alle afhængigheder er tydelige uden at foregive, at indholdet er implementeret.
+- Modul 1 markeres **gennemført**, Modul 2 **åbent nu**, og Modul 3–5 vises som **klar i strukturen**, så hele rejsen og alle afhængigheder er tydelige uden at foregive, at resten er implementeret.
 - En fast lokal navigationsbjælke fører til forløb, starttjek, grundlag, teori, eksempler, øvelser, CAS og forståelsestjek.
 - Starttjekket låser ikke modulet. Specifik feedback peger på det relevante grundkort, og ligningsopgaver linker til appens eksisterende ligningsforløb.
 - Fremdrift vises separat for starttjek, træning og forståelsestjek. Korrekte svar kan altid gennemgås igen.

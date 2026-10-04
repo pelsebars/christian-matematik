@@ -666,6 +666,69 @@ if (vectorPointLab) {
   updateVectorLab();
 }
 
+const scalarAngleLab = document.querySelector("#scalarAngleLab");
+
+if (scalarAngleLab) {
+  const groups = [...scalarAngleLab.querySelectorAll("[data-angle-stage]")];
+  const buttons = [...scalarAngleLab.querySelectorAll("[data-angle-target]")];
+  const status = scalarAngleLab.querySelector("#scalarAngleStatus");
+  const math = scalarAngleLab.querySelector("#scalarAngleMath");
+  const stages = ["acute", "right", "obtuse"];
+  let stageIndex = 0;
+
+  const content = {
+    acute: {
+      title: "Spids vinkel",
+      body: "Skalarproduktet er positivt, fordi cosinus til vinklen er positiv.",
+      math: `<math display="block"><mrow><mover><mi>a</mi><mo>→</mo></mover><mo>·</mo><mover><mi>b</mi><mo>→</mo></mover><mo>=</mo><mn>12</mn><mo>&gt;</mo><mn>0</mn></mrow></math>`,
+    },
+    right: {
+      title: "Ret vinkel",
+      body: "Skalarproduktet er nul. Derfor er vektorerne ortogonale.",
+      math: `<math display="block"><mrow><mover><mi>a</mi><mo>→</mo></mover><mo>·</mo><mover><mi>b</mi><mo>→</mo></mover><mo>=</mo><mn>0</mn></mrow></math>`,
+    },
+    obtuse: {
+      title: "Stump vinkel",
+      body: "Skalarproduktet er negativt, fordi cosinus til vinklen er negativ.",
+      math: `<math display="block"><mrow><mover><mi>a</mi><mo>→</mo></mover><mo>·</mo><mover><mi>b</mi><mo>→</mo></mover><mo>=</mo><mo>−</mo><mn>12</mn><mo>&lt;</mo><mn>0</mn></mrow></math>`,
+    },
+  };
+
+  function updateScalarAngleLab() {
+    const activeStage = stages[stageIndex];
+    groups.forEach((group) => group.toggleAttribute("hidden", group.dataset.angleStage !== activeStage));
+    buttons.forEach((button) => {
+      const active = button.dataset.angleTarget === activeStage;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    status.innerHTML = `<strong>${content[activeStage].title}</strong><p>${content[activeStage].body}</p>`;
+    math.innerHTML = content[activeStage].math;
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      stageIndex = stages.indexOf(button.dataset.angleTarget);
+      updateScalarAngleLab();
+    });
+  });
+
+  scalarAngleLab.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      stageIndex = Math.max(0, stageIndex - 1);
+      updateScalarAngleLab();
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      stageIndex = Math.min(stages.length - 1, stageIndex + 1);
+      updateScalarAngleLab();
+    }
+  });
+
+  updateScalarAngleLab();
+}
+
 document.querySelectorAll(".hint-button").forEach((button) => {
   button.addEventListener("click", () => {
     const hint = button.closest(".exercise-body").querySelector(".hint");
@@ -771,6 +834,15 @@ function updateExerciseProgress(group) {
       ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at forbinde koordinater med vektorer.</span>"
       : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller genbesøg det relevante grundkort.</span>`;
   }
+
+  if (group === "scalar-foundation") {
+    const status = document.querySelector("#scalarFoundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at forbinde skalarprodukt og vinkel.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, grundkortene eller Modul 1.</span>`;
+  }
 }
 
 function setFeedback(card, type, fallback) {
@@ -786,6 +858,7 @@ function checkExercise(card) {
   const isChoice = card.dataset.kind === "choice";
   const isRoots = card.dataset.kind === "roots";
   const isOrderedPair = card.dataset.kind === "ordered-pair";
+  const tolerance = Number(card.dataset.tolerance || 0.000001);
   let isCorrect = false;
 
   if (isChoice) {
@@ -815,7 +888,7 @@ function checkExercise(card) {
     }
     isCorrect =
       answers.length === expected.length &&
-      answers.every((answer, index) => Math.abs(answer - expected[index]) < 0.000001);
+      answers.every((answer, index) => Math.abs(answer - expected[index]) <= tolerance);
   } else {
     const input = card.querySelector("input");
     const answer = parseAnswer(input.value);
@@ -825,7 +898,7 @@ function checkExercise(card) {
       setFeedback(card, "incorrect", "Skriv et tal, fx 3 eller −2.");
       return;
     }
-    isCorrect = Math.abs(answer - expected) < 0.000001;
+    isCorrect = Math.abs(answer - expected) <= tolerance;
   }
 
   if (isCorrect) {
