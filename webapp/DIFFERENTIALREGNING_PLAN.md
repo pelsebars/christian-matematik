@@ -8,7 +8,7 @@ Planen bygger på `Pensum/Læseplan.pdf`, `Pensum/Undervisningsbeskrivelse.pdf` 
 2. **Produktreglen** *(implementeret)* — genkend produkter, navngiv de to faktorer og anvend produktreglen. Kombinér med grundregler, bestem funktionsværdier og væksthastigheder, og løs tangentopgaver med parallelle linjer.
 3. **Kædereglen** *(implementeret)* — genkend indre og ydre funktion, differentier indefra og ud, og kombiner kædereglen med produktreglen. Arbejd med eksponential-, logaritme-, potens- og trigonometriske modeller.
 4. **Vendetangent** *(implementeret)* — bestem tangentligninger, skæringer og parallelle tangenter. Undersøg vendepunkter og tidspunkter med størst eller mindst væksthastighed i modeller.
-5. **Opsamling og eksamenstræning** — saml fortegnet for den afledte i monotoniforhold, ekstrema og optimering. Vælg bevidst mellem håndregning og CAS, og træn blandede opgaver med og uden hjælpemidler.
+5. **Opsamling og eksamenstræning** *(implementeret)* — saml fortegnet for den afledte i monotoniforhold, ekstrema og optimering. Vælg bevidst mellem håndregning og CAS, og træn blandede opgaver med og uden hjælpemidler.
 
 ## Læringsmål fordelt på moduler
 
@@ -77,7 +77,7 @@ De formelle mål fra undervisningsbeskrivelsen er kodet sådan:
 ## Navigation og progression
 
 - Hovedemnet åbner med et moduloverblik, så hele forløbet er synligt fra begyndelsen.
-- Modul 1–4 er åbne; den afsluttende opsamling vises som næste trin, så strukturen kan udbygges uden at ændre navigationen.
+- Modul 1–5 er åbne, og forløbsoversigten viser hele læringsrejsen fra differentialkvotient til eksamenstræning.
 - En fast lokal indholdsnav fører til forløbsplan, starttjek, idé, regler, eksempler, øvelser og forståelsestjek.
 - Hvert starttjek linker tilbage til relevante grundforløb om ligninger og sammensatte funktioner.
 - Fremdrift vises særskilt for starttjek, træning og forståelsestjek. Et korrekt svar låses ikke; eleven kan altid prøve igen.

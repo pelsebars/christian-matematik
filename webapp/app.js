@@ -517,6 +517,77 @@ if (turningTangentDemo) {
   updateTurningTangent();
 }
 
+const recapMonotonyDemo = document.querySelector("#recapMonotonyDemo");
+
+if (recapMonotonyDemo) {
+  const sampleValues = [-2, 0, 2];
+  const initialSample = 1;
+  let sampleIndex = initialSample;
+  const graph = { left: 50, right: 720, top: 24, bottom: 356, xMin: -2.5, xMax: 2.5, yMin: -6, yMax: 6 };
+  const curve = recapMonotonyDemo.querySelector("#recapFunctionCurve");
+  const guide = recapMonotonyDemo.querySelector("#recapGuide");
+  const point = recapMonotonyDemo.querySelector("#recapPoint");
+  const pointLabel = recapMonotonyDemo.querySelector("#recapPointLabel");
+  const criticalPoints = recapMonotonyDemo.querySelectorAll(".recap-critical");
+  const live = recapMonotonyDemo.querySelector("#recapLive");
+  const observation = recapMonotonyDemo.querySelector("#recapObservation");
+  const graphSvg = recapMonotonyDemo.querySelector("#recapGraph");
+  const leftButton = recapMonotonyDemo.querySelector("#recapLeft");
+  const rightButton = recapMonotonyDemo.querySelector("#recapRight");
+  const resetButton = recapMonotonyDemo.querySelector("#recapReset");
+  const graphX = (value) => graph.left + ((value - graph.xMin) / (graph.xMax - graph.xMin)) * (graph.right - graph.left);
+  const graphY = (value) => graph.bottom - ((value - graph.yMin) / (graph.yMax - graph.yMin)) * (graph.bottom - graph.top);
+  const f = (x) => x ** 3 - 3 * x;
+  const derivative = (x) => 3 * x ** 2 - 3;
+
+  function recapMathNumber(value) {
+    const safe = Math.abs(value) < 0.000001 ? 0 : value;
+    const number = Number(Math.abs(safe).toFixed(2)).toLocaleString("da-DK", { maximumFractionDigits: 2 });
+    return safe < 0 ? `<mrow><mo>−</mo><mn>${number}</mn></mrow>` : `<mn>${number}</mn>`;
+  }
+
+  function updateRecapMonotony() {
+    const x = sampleValues[sampleIndex];
+    const y = f(x);
+    const slope = derivative(x);
+    const direction = slope > 0 ? "voksende" : "aftagende";
+    guide.setAttribute("x1", String(graphX(x)));
+    guide.setAttribute("x2", String(graphX(x)));
+    point.setAttribute("cx", String(graphX(x)));
+    point.setAttribute("cy", String(graphY(y)));
+    pointLabel.setAttribute("x", String(graphX(x) + 12));
+    pointLabel.setAttribute("y", String(graphY(y) - 12));
+    live.innerHTML = `<div><span>Testtal</span><math><mrow><mi>x</mi><mo>=</mo>${recapMathNumber(x)}</mrow></math></div><div><span>Afledt værdi</span><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo>${recapMathNumber(x)}<mo>)</mo><mo>=</mo>${recapMathNumber(slope)}</mrow></math></div><div><span>Grafens retning</span><strong>${direction}</strong></div>`;
+    observation.innerHTML = sampleIndex === 0
+      ? `Testtallet ligger før <math><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mn>1</mn></mrow></math>. Den afledte er positiv, så grafen er voksende.`
+      : sampleIndex === 1
+        ? `Testtallet ligger mellem de to stationære punkter. Den afledte er negativ, så grafen er aftagende.`
+        : `Testtallet ligger efter <math><mrow><mi>x</mi><mo>=</mo><mn>1</mn></mrow></math>. Den afledte er positiv, så grafen er voksende igen.`;
+    graphSvg.setAttribute("aria-label", `Graf for f af x lig x i tredje minus tre x. Testtallet er ${x}, den afledte værdi er ${slope}, og grafen er ${direction}.`);
+    leftButton.disabled = sampleIndex === 0;
+    rightButton.disabled = sampleIndex === sampleValues.length - 1;
+  }
+
+  const curvePoints = Array.from({ length: 121 }, (_, index) => {
+    const x = graph.xMin + ((graph.xMax - graph.xMin) * index) / 120;
+    return `${index === 0 ? "M" : "L"}${graphX(x).toFixed(2)},${graphY(f(x)).toFixed(2)}`;
+  });
+  curve.setAttribute("d", curvePoints.join(" "));
+  [-1, 1].forEach((x, index) => {
+    criticalPoints[index].setAttribute("cx", String(graphX(x)));
+    criticalPoints[index].setAttribute("cy", String(graphY(f(x))));
+  });
+
+  leftButton.addEventListener("click", () => { sampleIndex = Math.max(0, sampleIndex - 1); updateRecapMonotony(); });
+  rightButton.addEventListener("click", () => { sampleIndex = Math.min(sampleValues.length - 1, sampleIndex + 1); updateRecapMonotony(); });
+  resetButton.addEventListener("click", () => { sampleIndex = initialSample; updateRecapMonotony(); });
+  recapMonotonyDemo.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") { event.preventDefault(); sampleIndex = Math.max(0, sampleIndex - 1); updateRecapMonotony(); }
+    if (event.key === "ArrowRight") { event.preventDefault(); sampleIndex = Math.min(sampleValues.length - 1, sampleIndex + 1); updateRecapMonotony(); }
+  });
+  updateRecapMonotony();
+}
+
 document.querySelectorAll(".hint-button").forEach((button) => {
   button.addEventListener("click", () => {
     const hint = button.closest(".exercise-body").querySelector(".hint");
@@ -603,6 +674,15 @@ function updateExerciseProgress(group) {
     status.innerHTML = ready
       ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at samle punkt, hældning og krumning.</span>"
       : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller gå tilbage til afledningsregler og ligninger.</span>`;
+  }
+
+  if (group === "recap-foundation") {
+    const status = document.querySelector("#recapFoundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Værktøjerne er på plads.</strong><span>Du er klar til at samle monotoni, ekstrema og optimering.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller genbesøg det relevante modul.</span>`;
   }
 }
 

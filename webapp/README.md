@@ -8,7 +8,7 @@ Første lokale version af Christians matematikapp.
 - fast venstremenu på desktop og mobilmenu på små skærme;
 - emneoversigter;
 - komplette læringsforløb om lineære ligninger, løsning af andengradsligninger og sammensatte funktioner med teori, grundtjek, gennemregnede eksempler, hints og interaktive øvelser;
-- samlet læringsplan for differentialregning samt komplette moduler om differentialkvotienten, produktreglen, kædereglen og vendetangenten med starttjek, tastaturstyrede visualiseringer, afledningsregler, modeller, CAS-perspektiv og forståelsestjek;
+- samlet læringsplan for differentialregning samt fem komplette moduler om differentialkvotienten, produktreglen, kædereglen, vendetangenten og eksamensopsamling med starttjek, tastaturstyrede visualiseringer, monotoniforhold, optimering, modeller, dokumenteret CAS-brug og forståelsestjek;
 - et trinvist andengradsforløb baseret på opgavearket, inklusive standardform, koefficienter, diskriminant, løsningsformel, indsættelseskontrol og blandet sluttest;
 - side med formler og huskeregler;
 - matematisk notation med indbygget MathML.
