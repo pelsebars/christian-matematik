@@ -438,6 +438,85 @@ if (chainRuleBuilder) {
   updateChainBuilder();
 }
 
+const turningTangentDemo = document.querySelector("#turningTangentDemo");
+
+if (turningTangentDemo) {
+  const xValues = [-1.5, -1, -0.5, 0, 0.5, 1, 1.5];
+  const initialIndex = 5;
+  let xIndex = initialIndex;
+  const graph = { left: 50, right: 720, top: 24, bottom: 356, xMin: -2.4, xMax: 2.4, yMin: -6, yMax: 6 };
+  const curve = turningTangentDemo.querySelector("#turnFunctionCurve");
+  const tangent = turningTangentDemo.querySelector("#turnTangentLine");
+  const point = turningTangentDemo.querySelector("#turnPoint");
+  const pointLabel = turningTangentDemo.querySelector("#turnPointLabel");
+  const live = turningTangentDemo.querySelector("#turnLive");
+  const observation = turningTangentDemo.querySelector("#turnObservation");
+  const graphSvg = turningTangentDemo.querySelector("#turnGraph");
+  const leftButton = turningTangentDemo.querySelector("#turnLeft");
+  const rightButton = turningTangentDemo.querySelector("#turnRight");
+  const resetButton = turningTangentDemo.querySelector("#turnReset");
+
+  const graphX = (value) => graph.left + ((value - graph.xMin) / (graph.xMax - graph.xMin)) * (graph.right - graph.left);
+  const graphY = (value) => graph.bottom - ((value - graph.yMin) / (graph.yMax - graph.yMin)) * (graph.bottom - graph.top);
+  const f = (x) => x ** 3 - 3 * x;
+
+  function formatTurnNumber(value) {
+    const safe = Math.abs(value) < 0.000001 ? 0 : value;
+    return Number(safe.toFixed(2)).toLocaleString("da-DK", { maximumFractionDigits: 2 });
+  }
+
+  function turnMathNumber(value) {
+    const safe = Math.abs(value) < 0.000001 ? 0 : value;
+    const magnitude = Math.abs(safe);
+    const number = Number(magnitude.toFixed(2)).toLocaleString("da-DK", { maximumFractionDigits: 2 });
+    return safe < 0 ? `<mrow><mo>−</mo><mn>${number}</mn></mrow>` : `<mn>${number}</mn>`;
+  }
+
+  function updateTurningTangent() {
+    const x = xValues[xIndex];
+    const y = f(x);
+    const slope = 3 * x ** 2 - 3;
+    const curvature = 6 * x;
+    const intercept = y - slope * x;
+    tangent.setAttribute("x1", String(graphX(graph.xMin)));
+    tangent.setAttribute("y1", String(graphY(slope * graph.xMin + intercept)));
+    tangent.setAttribute("x2", String(graphX(graph.xMax)));
+    tangent.setAttribute("y2", String(graphY(slope * graph.xMax + intercept)));
+    point.setAttribute("cx", String(graphX(x)));
+    point.setAttribute("cy", String(graphY(y)));
+    point.classList.toggle("is-at-inflection", x === 0);
+    pointLabel.setAttribute("x", String(graphX(x) + 12));
+    pointLabel.setAttribute("y", String(graphY(y) - 12));
+
+    live.innerHTML = `<div><span>Røringspunkt</span><math><mrow><mi>P</mi><mo>=</mo><mo>(</mo>${turnMathNumber(x)}<mo>,</mo>${turnMathNumber(y)}<mo>)</mo></mrow></math></div><div><span>Hældning</span><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo>${turnMathNumber(x)}<mo>)</mo><mo>=</mo>${turnMathNumber(slope)}</mrow></math></div><div><span>Krumning</span><math><mrow><msup><mi>f</mi><mo>″</mo></msup><mo>(</mo>${turnMathNumber(x)}<mo>)</mo><mo>=</mo>${turnMathNumber(curvature)}</mrow></math></div>`;
+
+    observation.innerHTML = x === 0
+      ? `Her skifter <math><msup><mi>f</mi><mo>″</mo></msup></math> fortegn. Punktet er et vendepunkt, og den orange linje er vendetangenten <math><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mn>3</mn><mi>x</mi></mrow></math>.`
+      : curvature < 0
+        ? `Anden afledte er negativ, så grafen er nedadkrummet her. Flyt punktet mod <math><mrow><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>.`
+        : `Anden afledte er positiv, så grafen er opadkrummet her. Flyt punktet mod <math><mrow><mi>x</mi><mo>=</mo><mn>0</mn></mrow></math>.`;
+
+    graphSvg.setAttribute("aria-label", `Graf for f af x lig x i tredje minus tre x. Røringspunktet har x-koordinat ${formatTurnNumber(x)}, tangentens hældning er ${formatTurnNumber(slope)}, og anden afledte er ${formatTurnNumber(curvature)}.`);
+    leftButton.disabled = xIndex === 0;
+    rightButton.disabled = xIndex === xValues.length - 1;
+  }
+
+  const curvePoints = Array.from({ length: 121 }, (_, index) => {
+    const x = graph.xMin + ((graph.xMax - graph.xMin) * index) / 120;
+    return `${index === 0 ? "M" : "L"}${graphX(x).toFixed(2)},${graphY(f(x)).toFixed(2)}`;
+  });
+  curve.setAttribute("d", curvePoints.join(" "));
+
+  leftButton.addEventListener("click", () => { xIndex = Math.max(0, xIndex - 1); updateTurningTangent(); });
+  rightButton.addEventListener("click", () => { xIndex = Math.min(xValues.length - 1, xIndex + 1); updateTurningTangent(); });
+  resetButton.addEventListener("click", () => { xIndex = initialIndex; updateTurningTangent(); });
+  turningTangentDemo.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") { event.preventDefault(); xIndex = Math.max(0, xIndex - 1); updateTurningTangent(); }
+    if (event.key === "ArrowRight") { event.preventDefault(); xIndex = Math.min(xValues.length - 1, xIndex + 1); updateTurningTangent(); }
+  });
+  updateTurningTangent();
+}
+
 document.querySelectorAll(".hint-button").forEach((button) => {
   button.addEventListener("click", () => {
     const hint = button.closest(".exercise-body").querySelector(".hint");
@@ -515,6 +594,15 @@ function updateExerciseProgress(group) {
     status.innerHTML = ready
       ? "<strong>Lagene er på plads.</strong><span>Du er klar til at følge kædereglen indefra og ud.</span>"
       : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller gå tilbage til sammensatte funktioner.</span>`;
+  }
+
+  if (group === "turn-foundation") {
+    const status = document.querySelector("#turnFoundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at samle punkt, hældning og krumning.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller gå tilbage til afledningsregler og ligninger.</span>`;
   }
 }
 
