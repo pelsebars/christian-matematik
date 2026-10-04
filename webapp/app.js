@@ -357,6 +357,87 @@ if (productRuleBuilder) {
   updateProductBuilder();
 }
 
+const chainRuleBuilder = document.querySelector("#chainRuleBuilder");
+
+if (chainRuleBuilder) {
+  const live = chainRuleBuilder.querySelector("#chainBuilderLive");
+  const previousButton = chainRuleBuilder.querySelector("#chainBuilderPrevious");
+  const nextButton = chainRuleBuilder.querySelector("#chainBuilderNext");
+  const resetButton = chainRuleBuilder.querySelector("#chainBuilderReset");
+  const progressDots = [...chainRuleBuilder.querySelectorAll(".chain-builder-progress span")];
+  let step = 0;
+
+  const steps = [
+    {
+      label: "Trin 1 · Find de to lag",
+      math: `<math display="block"><mtable columnalign="left"><mtr><mtd><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn></mtd><mtd><mtext>indre</mtext></mtd></mtr><mtr><mtd><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msup><mi>t</mi><mn>3</mn></msup></mtd><mtd><mtext>ydre</mtext></mtd></mtr></mtable></math>`,
+      explanation: "Parentesen beregnes først og bliver input til tredje potens. Pladsholderen t gør lagene lettere at se.",
+    },
+    {
+      label: "Trin 2 · Differentier hvert lag",
+      math: `<math display="block"><mtable columnalign="left"><mtr><mtd><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>6</mn><mi>x</mi></mtd></mtr><mtr><mtd><msup><mi>h</mi><mo>′</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mi>t</mi><mn>2</mn></msup></mtd></mtr></mtable></math>`,
+      explanation: "Differentier lagene hver for sig. Det reducerer risikoen for at miste den indre faktor.",
+    },
+    {
+      label: "Trin 3 · Sæt indersiden tilbage",
+      math: `<math display="block"><mrow><msup><mi>h</mi><mo>′</mo></msup><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>=</mo><mn>3</mn><msup><mrow><mo>(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></msup></mrow></math>`,
+      explanation: "Den ydre afledte bestemmer formen. Hele den oprindelige parentes står stadig på t's plads.",
+    },
+    {
+      label: "Trin 4 · Gang med den indre afledte",
+      math: `<math display="block"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mrow><mo>(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>·</mo><mn>6</mn><mi>x</mi><mo>=</mo><mn>18</mn><mi>x</mi><msup><mrow><mo>(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></msup></mrow></math>`,
+      explanation: "Nu er kæden komplet: ydre afledte gange indre afledte. Først til sidst samles de numeriske faktorer.",
+    },
+  ];
+
+  function updateChainBuilder() {
+    const current = steps[step];
+    live.innerHTML = `<span>${current.label}</span>${current.math}<p>${current.explanation}</p>`;
+    progressDots.forEach((dot, index) => {
+      dot.classList.toggle("is-active", index === step);
+      dot.classList.toggle("is-complete", index < step);
+    });
+    previousButton.disabled = step === 0;
+    nextButton.disabled = step === steps.length - 1;
+    nextButton.textContent = step === steps.length - 2 ? "Vis resultat →" : "Næste trin →";
+    chainRuleBuilder.setAttribute(
+      "aria-label",
+      `Kædereglen trin for trin. Viser trin ${step + 1} af ${steps.length}: ${current.label.replace(/^Trin \d · /, "")}.`,
+    );
+  }
+
+  previousButton.addEventListener("click", () => {
+    step = Math.max(0, step - 1);
+    updateChainBuilder();
+  });
+
+  nextButton.addEventListener("click", () => {
+    step = Math.min(steps.length - 1, step + 1);
+    updateChainBuilder();
+  });
+
+  resetButton.addEventListener("click", () => {
+    step = 0;
+    updateChainBuilder();
+  });
+
+  chainRuleBuilder.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      step = Math.max(0, step - 1);
+      updateChainBuilder();
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      step = Math.min(steps.length - 1, step + 1);
+      updateChainBuilder();
+    }
+  });
+
+  updateChainBuilder();
+}
+
 document.querySelectorAll(".hint-button").forEach((button) => {
   button.addEventListener("click", () => {
     const hint = button.closest(".exercise-body").querySelector(".hint");
@@ -425,6 +506,15 @@ function updateExerciseProgress(group) {
     status.innerHTML = ready
       ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at samle de to bidrag i produktreglen.</span>"
       : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller gå tilbage til Modul 1.</span>`;
+  }
+
+  if (group === "chain-foundation") {
+    const status = document.querySelector("#chainFoundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Lagene er på plads.</strong><span>Du er klar til at følge kædereglen indefra og ud.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller gå tilbage til sammensatte funktioner.</span>`;
   }
 }
 

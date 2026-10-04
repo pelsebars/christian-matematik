@@ -6,7 +6,7 @@ Planen bygger på `Pensum/Læseplan.pdf`, `Pensum/Undervisningsbeskrivelse.pdf` 
 
 1. **Differentialkvotient** — fra funktionsværdi, graf og hældning til sekant, tangent og differentialkvotient. Tretrinsreglen bruges som ræsonnement, hvorefter de grundlæggende afledningsregler trænes både uden hjælpemidler og med CAS-kontrol. Væksthastigheder fortolkes med fortegn og enheder.
 2. **Produktreglen** *(implementeret)* — genkend produkter, navngiv de to faktorer og anvend produktreglen. Kombinér med grundregler, bestem funktionsværdier og væksthastigheder, og løs tangentopgaver med parallelle linjer.
-3. **Kædereglen** — genkend indre og ydre funktion, differentier indefra og ud, og kombiner kædereglen med produktreglen. Arbejd med eksponential-, logaritme-, potens- og trigonometriske modeller.
+3. **Kædereglen** *(implementeret)* — genkend indre og ydre funktion, differentier indefra og ud, og kombiner kædereglen med produktreglen. Arbejd med eksponential-, logaritme-, potens- og trigonometriske modeller.
 4. **Vendetangent** — bestem tangentligninger, skæringer og parallelle tangenter. Undersøg vendepunkter og tidspunkter med størst eller mindst væksthastighed i modeller.
 5. **Opsamling og eksamenstræning** — saml fortegnet for den afledte i monotoniforhold, ekstrema og optimering. Vælg bevidst mellem håndregning og CAS, og træn blandede opgaver med og uden hjælpemidler.
 
@@ -77,7 +77,7 @@ De formelle mål fra undervisningsbeskrivelsen er kodet sådan:
 ## Navigation og progression
 
 - Hovedemnet åbner med et moduloverblik, så hele forløbet er synligt fra begyndelsen.
-- Modul 1 er åbent; senere moduler vises som næste trin, så strukturen kan udbygges uden at ændre navigationen.
+- Modul 1–3 er åbne; senere moduler vises som næste trin, så strukturen kan udbygges uden at ændre navigationen.
 - En fast lokal indholdsnav fører til forløbsplan, starttjek, idé, regler, eksempler, øvelser og forståelsestjek.
 - Hvert starttjek linker tilbage til relevante grundforløb om ligninger og sammensatte funktioner.
 - Fremdrift vises særskilt for starttjek, træning og forståelsestjek. Et korrekt svar låses ikke; eleven kan altid prøve igen.
