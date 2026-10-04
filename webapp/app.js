@@ -54,6 +54,21 @@ const subjects = {
         </mrow>
       </math>`,
   },
+  planeGeometry: {
+    kicker: "05 · A-niveau",
+    title: "Plangeometri og vektorer",
+    description:
+      "Vektorer forbinder koordinater og geometri. Du lærer at regne med retning og længde og bruger det senere til linjer og cirkler.",
+    understand:
+      "Skeln mellem punkter og vektorer, se regningerne i koordinatsystemet, og byg videre mod vinkler, linjer og cirkler.",
+    formula: `
+      <math display="block" aria-label="Vektoren fra A til B er B minus A">
+        <mrow>
+          <mover><mrow><mi>A</mi><mi>B</mi></mrow><mo>→</mo></mover><mo>=</mo>
+          <mo>(</mo><mtable><mtr><mtd><msub><mi>x</mi><mi>B</mi></msub><mo>−</mo><msub><mi>x</mi><mi>A</mi></msub></mtd></mtr><mtr><mtd><msub><mi>y</mi><mi>B</mi></msub><mo>−</mo><msub><mi>y</mi><mi>A</mi></msub></mtd></mtr></mtable><mo>)</mo>
+        </mrow>
+      </math>`,
+  },
 };
 
 const mainContent = document.querySelector("#mainContent");
@@ -68,6 +83,7 @@ const equationLesson = document.querySelector("#equationLesson");
 const quadraticLesson = document.querySelector("#quadraticLesson");
 const compositeLesson = document.querySelector("#compositeLesson");
 const differentiationLesson = document.querySelector("#differentiationLesson");
+const planeGeometryLesson = document.querySelector("#planeGeometryLesson");
 const subjectPlaceholder = document.querySelector("#subjectPlaceholder");
 const exerciseCards = document.querySelectorAll(".exercise-card");
 
@@ -104,11 +120,13 @@ function showView(view, shouldFocus = true) {
   quadraticLesson.hidden = view !== "quadratic";
   compositeLesson.hidden = view !== "composite";
   differentiationLesson.hidden = view !== "differentiation";
+  planeGeometryLesson.hidden = view !== "planeGeometry";
   subjectPlaceholder.hidden =
     view === "equations" ||
     view === "quadratic" ||
     view === "composite" ||
-    view === "differentiation";
+    view === "differentiation" ||
+    view === "planeGeometry";
 
   setActiveNavigation(view);
   window.location.hash = view === "home" ? "" : view;
@@ -588,6 +606,66 @@ if (recapMonotonyDemo) {
   updateRecapMonotony();
 }
 
+const vectorPointLab = document.querySelector("#vectorPointLab");
+
+if (vectorPointLab) {
+  const points = vectorPointLab.querySelector("#vectorLabPoints");
+  const arrow = vectorPointLab.querySelector("#vectorLabArrow");
+  const components = vectorPointLab.querySelector("#vectorLabComponents");
+  const stageText = vectorPointLab.querySelector("#vectorStageText");
+  const buttons = [...vectorPointLab.querySelectorAll("[data-vector-stage]")];
+  let stage = 0;
+
+  const stages = [
+    {
+      title: "1 · Punkter",
+      body: `<math><mi>A</mi></math> og <math><mi>B</mi></math> er to faste steder i planen.`,
+    },
+    {
+      title: "2 · Vektoren",
+      body: `Pilen viser flytningen fra <math><mi>A</mi></math> til <math><mi>B</mi></math>. Den kan flyttes parallelt uden at ændre sig.`,
+    },
+    {
+      title: "3 · Koordinatdelene",
+      body: `Fra <math><mi>A</mi></math> til <math><mi>B</mi></math> går vi <math><mn>5</mn></math> mod højre og <math><mn>3</mn></math> op.`,
+    },
+  ];
+
+  function updateVectorLab() {
+    points.toggleAttribute("hidden", stage !== 0);
+    arrow.toggleAttribute("hidden", stage === 0);
+    components.toggleAttribute("hidden", stage !== 2);
+    stageText.innerHTML = `<strong>${stages[stage].title}</strong><p>${stages[stage].body}</p>`;
+    buttons.forEach((button, index) => {
+      const active = index === stage;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      stage = Number(button.dataset.vectorStage);
+      updateVectorLab();
+    });
+  });
+
+  vectorPointLab.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      stage = Math.max(0, stage - 1);
+      updateVectorLab();
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      stage = Math.min(stages.length - 1, stage + 1);
+      updateVectorLab();
+    }
+  });
+
+  updateVectorLab();
+}
+
 document.querySelectorAll(".hint-button").forEach((button) => {
   button.addEventListener("click", () => {
     const hint = button.closest(".exercise-body").querySelector(".hint");
@@ -684,6 +762,15 @@ function updateExerciseProgress(group) {
       ? "<strong>Værktøjerne er på plads.</strong><span>Du er klar til at samle monotoni, ekstrema og optimering.</span>"
       : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller genbesøg det relevante modul.</span>`;
   }
+
+  if (group === "vector-foundation") {
+    const status = document.querySelector("#vectorFoundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at forbinde koordinater med vektorer.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, eller genbesøg det relevante grundkort.</span>`;
+  }
 }
 
 function setFeedback(card, type, fallback) {
@@ -698,6 +785,7 @@ function setFeedback(card, type, fallback) {
 function checkExercise(card) {
   const isChoice = card.dataset.kind === "choice";
   const isRoots = card.dataset.kind === "roots";
+  const isOrderedPair = card.dataset.kind === "ordered-pair";
   let isCorrect = false;
 
   if (isChoice) {
@@ -707,17 +795,24 @@ function checkExercise(card) {
       return;
     }
     isCorrect = selected.dataset.value === card.dataset.answer;
-  } else if (isRoots) {
+  } else if (isRoots || isOrderedPair) {
     const inputs = [...card.querySelectorAll("input")];
     const answers = inputs.map((input) => parseAnswer(input.value));
-    const expected = card.dataset.answer.split(",").map(Number).sort((a, b) => a - b);
+    const expected = card.dataset.answer.split(",").map(Number);
 
     if (answers.some((answer) => !Number.isFinite(answer))) {
-      setFeedback(card, "incorrect", "Skriv begge løsninger som tal.");
+      setFeedback(
+        card,
+        "incorrect",
+        isOrderedPair ? "Skriv begge koordinater som tal." : "Skriv begge løsninger som tal.",
+      );
       return;
     }
 
-    answers.sort((a, b) => a - b);
+    if (isRoots) {
+      answers.sort((a, b) => a - b);
+      expected.sort((a, b) => a - b);
+    }
     isCorrect =
       answers.length === expected.length &&
       answers.every((answer, index) => Math.abs(answer - expected[index]) < 0.000001);
