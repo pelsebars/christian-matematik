@@ -389,12 +389,12 @@ if (chainRuleBuilder) {
     {
       label: "Trin 1 · Find de to lag",
       math: `<math display="block"><mtable columnalign="left"><mtr><mtd><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn></mtd><mtd><mtext>indre</mtext></mtd></mtr><mtr><mtd><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msup><mi>t</mi><mn>3</mn></msup></mtd><mtd><mtext>ydre</mtext></mtd></mtr></mtable></math>`,
-      explanation: "Parentesen beregnes først og bliver input til tredje potens. Pladsholderen t gør lagene lettere at se.",
+      explanation: "g er den indre funktion, fordi x sættes ind i g først. Resultatet g(x) sendes videre til den ydre funktion h, hvor pladsholderen t opløftes i tredje.",
     },
     {
       label: "Trin 2 · Differentier hvert lag",
       math: `<math display="block"><mtable columnalign="left"><mtr><mtd><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>6</mn><mi>x</mi></mtd></mtr><mtr><mtd><msup><mi>h</mi><mo>′</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mi>t</mi><mn>2</mn></msup></mtd></mtr></mtable></math>`,
-      explanation: "Differentier lagene hver for sig. Det reducerer risikoen for at miste den indre faktor.",
+      explanation: "Differentier g og h hver for sig: g′ hører til det indre lag, mens h′ hører til det ydre lag.",
     },
     {
       label: "Trin 3 · Sæt indersiden tilbage",

@@ -1726,13 +1726,18 @@
                 </div>
               </div>
               <div class="chain-module-formula">
-                <span>Modulets hovedregel</span>
-                <math display="block" aria-label="Den afledte af h af g af x er h mærke af g af x gange g mærke af x"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>h</mi><mo>′</mo></msup><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>
-                <p>Differentier den ydre form, behold det indre udtryk, og gang med den indre afledte.</p>
+                <span>Læs først opbygningen</span>
+                <math class="chain-compose-title" display="block" aria-label="f af x er h af g af x"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>h</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>
+                <div class="chain-intro-identities">
+                  <div class="chain-intro-inner"><strong>1 · Indre funktion</strong><math display="block"><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn></mrow></math><p>Det oprindelige input sættes ind her først.</p></div>
+                  <div class="chain-intro-arrow" aria-hidden="true">↓</div>
+                  <div class="chain-intro-outer"><strong>2 · Ydre funktion</strong><math display="block"><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msup><mi>t</mi><mn>3</mn></msup></mrow></math><p>Resultatet fra den indre funktion sættes på pladsholderens plads.</p></div>
+                </div>
+                <math class="chain-compose-result" display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>h</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>=</mo><msup><mrow><mo>(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mn>3</mn></msup></mrow></math>
               </div>
               <nav class="module-jump-nav chain-jump-nav" aria-label="Indhold i Modul 3">
                 <button type="button" data-scroll-to="diff-kaede-starttjek">Starttjek</button>
-                <button type="button" data-scroll-to="diff-kaede-ide">Reglen</button>
+                <button type="button" data-scroll-to="diff-kaede-ide">Indre og ydre</button>
                 <button type="button" data-scroll-to="diff-kaede-eksempler">Eksempler</button>
                 <button type="button" data-scroll-to="diff-kaede-oevelser">Øvelser</button>
                 <button type="button" data-scroll-to="diff-kaede-sluttjek">Forståelsestjek</button>
@@ -1762,12 +1767,18 @@
             </section>
 
             <section class="lesson-section chain-idea" id="diff-kaede-ide" aria-labelledby="chainIdeaHeading">
-              <div class="section-heading"><div><p class="eyebrow">Modul 3 · Kort teori</p><h2 id="chainIdeaHeading">Arbejd udefra — men glem aldrig indersiden</h2></div><p>Den ydre regel bestemmer formen på svaret. Den indre afledte fortæller, hvor hurtigt det ydre input bevæger sig.</p></div>
-              <div class="chain-layer-card">
-                <div class="chain-layer chain-layer--outer"><span>Ydre funktion</span><math display="block"><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msup><mi>t</mi><mn>3</mn></msup></mrow></math><p>Se midlertidigt hele parentesen som ét input.</p></div>
-                <div class="chain-layer-arrow" aria-hidden="true">←</div>
-                <div class="chain-layer chain-layer--inner"><span>Indre funktion</span><math display="block"><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn></mrow></math><p>Dette udtryk ligger på <math><mi>t</mi></math>s plads.</p></div>
+              <div class="section-heading"><div><p class="eyebrow">Modul 3 · Før regnereglen</p><h2 id="chainIdeaHeading">Find først <math><mi>g</mi></math> indeni og <math><mi>h</mi></math> udenom</h2></div><p>Begynd ikke med at differentiere. Pak først funktionen ud i to navngivne lag, og skriv tydeligt, hvilket lag der beregnes først.</p></div>
+              <div class="chain-identify-example">
+                <div><span>Konkret eksempel</span><math display="block"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mo>(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mn>3</mn></msup></mrow></math></div>
+                <p>Spørg: “Hvad rammer inputtet først?” Svaret er parentesen. Derfor kalder vi parentesen den indre funktion. Derefter opløftes resultatet i tredje, og den operation kalder vi den ydre funktion.</p>
               </div>
+              <div class="chain-layer-card">
+                <div class="chain-layer chain-layer--inner"><span>1 · Indre funktion</span><strong>Modtager det oprindelige input</strong><math display="block"><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn></mrow></math><p>Dette lag beregnes først.</p></div>
+                <div class="chain-layer-arrow" aria-hidden="true"><span>resultatet fra det indre lag</span><b>→</b></div>
+                <div class="chain-layer chain-layer--outer"><span>2 · Ydre funktion</span><strong>Modtager resultatet fra det indre lag</strong><math display="block"><mrow><mi>h</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msup><mi>t</mi><mn>3</mn></msup></mrow></math><p>Pladsholderen står for hele resultatet fra den indre funktion.</p></div>
+              </div>
+
+              <div class="chain-rule-reveal"><div><span>Først nu kommer reglen</span><h3>Ydre afledte gange indre afledte</h3><p>Den ydre og den indre funktion beholder deres roller i hele reglen.</p></div><math display="block" aria-label="Den afledte af h af g af x er h mærke af g af x gange g mærke af x"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>h</mi><mo>′</mo></msup><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>·</mo><msup><mi>g</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></div>
 
               <figure class="chain-builder" id="chainRuleBuilder" tabindex="0" aria-labelledby="chainBuilderHeading" aria-describedby="chainBuilderInstructions">
                 <figcaption><div><p class="eyebrow">Interaktiv regelbygger</p><h3 id="chainBuilderHeading">Følg kæden trin for trin</h3><p id="chainBuilderInstructions">Brug knapperne eller venstre og højre piletast. Se præcis, hvor den indre afledte kommer ind.</p></div><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mrow><mo>(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mn>3</mn></msup></mrow></math></figcaption>
