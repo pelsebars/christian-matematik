@@ -4400,6 +4400,264 @@ math {
   color: #ffffff;
 }
 
+.line-foundation .progress-track span,
+.line-practice .progress-track span,
+.line-cas-section .progress-track span,
+.line-test .progress-track span,
+.circle-foundation .progress-track span,
+.circle-practice .progress-track span,
+.circle-cas-section .progress-track span,
+.circle-test .progress-track span {
+  background: var(--cyan);
+}
+
+.line-formula-grid,
+.circle-formula-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.line-formula-grid article,
+.circle-formula-grid article {
+  min-height: 250px;
+}
+
+.geometry-tool-lab {
+  margin: 18px 0 0;
+  overflow: hidden;
+  border: 1px solid #a9d9dd;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 14px 34px rgba(8, 127, 140, 0.08);
+}
+
+.geometry-tool-lab:focus-visible {
+  outline: 3px solid rgba(8, 127, 140, 0.3);
+  outline-offset: 4px;
+}
+
+.geometry-tool-lab figcaption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+  padding: 24px 27px;
+  border-bottom: 1px solid #d3eaec;
+  background: linear-gradient(135deg, #fbffff, var(--cyan-soft));
+}
+
+.geometry-tool-lab figcaption h3 {
+  margin: 0 0 7px;
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+}
+
+.geometry-tool-lab figcaption p:last-child {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.geometry-live-math {
+  max-width: 100%;
+  padding: 13px 16px;
+  overflow-x: auto;
+  border: 1px solid #a9d9dd;
+  border-radius: 13px;
+  color: #086975;
+  background: #ffffff;
+  font-size: 1.06rem;
+}
+
+.geometry-lab-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+}
+
+.geometry-canvas {
+  min-width: 0;
+  padding: 18px;
+  border-right: 1px solid var(--line);
+  background: #fbfdff;
+}
+
+.geometry-canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  background: linear-gradient(rgba(8, 127, 140, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 127, 140, 0.045) 1px, transparent 1px), #ffffff;
+  background-size: 30px 30px;
+}
+
+.geometry-axis {
+  stroke: #c7d1dd;
+  stroke-width: 1.5;
+}
+
+.line-main {
+  stroke: var(--blue);
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.line-direction,
+.line-normal,
+.circle-radius {
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.line-direction {
+  stroke: var(--cyan);
+}
+
+.line-normal,
+.circle-radius {
+  stroke: var(--orange);
+}
+
+.line-distance {
+  stroke: var(--orange);
+  stroke-dasharray: 8 7;
+  stroke-width: 3;
+}
+
+#lineArrowHead path {
+  fill: var(--cyan);
+}
+
+.geometry-right-mark {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 3;
+}
+
+.geometry-point {
+  fill: #ffffff;
+  stroke: var(--cyan);
+  stroke-width: 4;
+}
+
+.geometry-point--orange {
+  stroke: var(--orange);
+}
+
+.geometry-canvas text {
+  fill: var(--ink-soft);
+  font-family: Cambria, "Times New Roman", serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.geometry-canvas .geometry-note {
+  fill: #086975;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 780;
+}
+
+.geometry-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+}
+
+.geometry-stage {
+  min-height: 125px;
+  padding: 17px;
+  border: 1px solid #c8e5e8;
+  border-radius: 13px;
+  background: var(--cyan-soft);
+}
+
+.geometry-stage strong {
+  color: #086975;
+}
+
+.geometry-stage p {
+  margin: 9px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.geometry-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.geometry-controls button {
+  min-height: 41px;
+  padding: 9px 8px;
+  border: 1px solid #a9d9dd;
+  border-radius: 10px;
+  color: #086975;
+  background: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.geometry-controls button:hover,
+.geometry-controls button.is-active {
+  color: #ffffff;
+  background: var(--cyan);
+}
+
+.geometry-panel .keyboard-note {
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.circle-main {
+  fill: rgba(8, 127, 140, 0.08);
+  stroke: var(--cyan);
+  stroke-width: 4;
+}
+
+.circle-center {
+  fill: var(--navy);
+}
+
+.circle-point {
+  fill: #ffffff;
+  stroke: var(--orange);
+  stroke-width: 4;
+}
+
+.circle-tangent {
+  stroke: var(--blue);
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.line-summary,
+.circle-summary {
+  background: linear-gradient(135deg, #0b5057, #122e50);
+}
+
+.line-summary .eyebrow,
+.line-summary .summary-note span,
+.circle-summary .eyebrow,
+.circle-summary .summary-note span {
+  color: #8fe2e8;
+}
+
+.line-summary math,
+.circle-summary math {
+  color: #ffffff;
+}
+
 .scalar-summary {
   background: linear-gradient(135deg, #0b5057, #122e50);
 }
@@ -4892,7 +5150,9 @@ math {
   .scalar-angle-lab figcaption,
   .scalar-lab-body,
   .projection-lab figcaption,
-  .projection-lab-body {
+  .projection-lab-body,
+  .geometry-tool-lab figcaption,
+  .geometry-lab-body {
     grid-template-columns: 1fr;
   }
 
@@ -4900,13 +5160,16 @@ math {
   .scalar-formula-grid,
   .scalar-module-goals,
   .projection-basics-grid,
-  .projection-formula-grid {
+  .projection-formula-grid,
+  .line-formula-grid,
+  .circle-formula-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .vector-canvas,
   .scalar-angle-canvas,
-  .projection-canvas {
+  .projection-canvas,
+  .geometry-canvas {
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
@@ -4924,7 +5187,9 @@ math {
   .scalar-sign-rule,
   .scalar-module-goals,
   .projection-basics-grid,
-  .projection-formula-grid {
+  .projection-formula-grid,
+  .line-formula-grid,
+  .circle-formula-grid {
     grid-template-columns: 1fr;
   }
 
@@ -4933,23 +5198,28 @@ math {
   .scalar-angle-lab figcaption,
   .scalar-angle-panel,
   .projection-lab figcaption,
-  .projection-panel {
+  .projection-panel,
+  .geometry-tool-lab figcaption,
+  .geometry-panel {
     padding: 21px 18px;
   }
 
   .vector-lab figcaption > math,
   .scalar-live-math,
-  .projection-live-math {
+  .projection-live-math,
+  .geometry-live-math {
     width: 100%;
   }
 
   .vector-canvas,
   .scalar-angle-canvas,
-  .projection-canvas {
+  .projection-canvas,
+  .geometry-canvas {
     padding: 10px 4px 15px;
   }
 
-  .projection-controls {
+  .projection-controls,
+  .geometry-controls {
     grid-template-columns: 1fr;
   }
 

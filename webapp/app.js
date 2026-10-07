@@ -794,6 +794,105 @@ if (projectionGeometryLab) {
   updateProjectionGeometryLab();
 }
 
+function setupGeometryToolLab({ rootSelector, stageAttribute, targetAttribute, statusSelector, mathSelector, stages, content }) {
+  const root = document.querySelector(rootSelector);
+  if (!root) return;
+
+  const groups = [...root.querySelectorAll(`[${stageAttribute}]`)];
+  const buttons = [...root.querySelectorAll(`[${targetAttribute}]`)];
+  const status = root.querySelector(statusSelector);
+  const math = root.querySelector(mathSelector);
+  let stageIndex = 0;
+
+  function update() {
+    const activeStage = stages[stageIndex];
+    groups.forEach((group) =>
+      group.toggleAttribute("hidden", group.getAttribute(stageAttribute) !== activeStage),
+    );
+    buttons.forEach((button) => {
+      const active = button.getAttribute(targetAttribute) === activeStage;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    status.innerHTML = `<strong>${content[activeStage].title}</strong><p>${content[activeStage].body}</p>`;
+    math.innerHTML = content[activeStage].math;
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      stageIndex = stages.indexOf(button.getAttribute(targetAttribute));
+      update();
+    });
+  });
+
+  root.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      stageIndex = Math.max(0, stageIndex - 1);
+      update();
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      stageIndex = Math.min(stages.length - 1, stageIndex + 1);
+      update();
+    }
+  });
+
+  update();
+}
+
+setupGeometryToolLab({
+  rootSelector: "#lineGeometryLab",
+  stageAttribute: "data-line-stage",
+  targetAttribute: "data-line-target",
+  statusSelector: "#lineLabStatus",
+  mathSelector: "#lineLabMath",
+  stages: ["normal", "parameter", "distance"],
+  content: {
+    normal: {
+      title: "Normal og retning",
+      body: "Normalvektoren står vinkelret på linjens retningsvektor. Derfor er skalarproduktet nul.",
+      math: `<math display="block"><mrow><mover><mi>n</mi><mo>→</mo></mover><mo>·</mo><mover><mi>r</mi><mo>→</mo></mover><mo>=</mo><mn>0</mn></mrow></math>`,
+    },
+    parameter: {
+      title: "Punkt og retning",
+      body: "Når parameteren ændres, flyttes punktet frem og tilbage langs retningsvektoren — og bliver på den samme linje.",
+      math: `<math display="block"><mrow><mover><mi>p</mi><mo>→</mo></mover><mo>=</mo><msub><mover><mi>p</mi><mo>→</mo></mover><mn>0</mn></msub><mo>+</mo><mi>t</mi><mover><mi>r</mi><mo>→</mo></mover></mrow></math>`,
+    },
+    distance: {
+      title: "Korteste afstand",
+      body: "Den korteste vej fra punktet til linjen går vinkelret på linjen og følger derfor normalens retning.",
+      math: `<math display="block"><mrow><mi mathvariant="normal">dist</mi><mo>(</mo><mi>P</mi><mo>,</mo><mi>l</mi><mo>)</mo><mo>⊥</mo><mi>l</mi></mrow></math>`,
+    },
+  },
+});
+
+setupGeometryToolLab({
+  rootSelector: "#circleGeometryLab",
+  stageAttribute: "data-circle-stage",
+  targetAttribute: "data-circle-target",
+  statusSelector: "#circleLabStatus",
+  mathSelector: "#circleLabMath",
+  stages: ["center", "point", "tangent"],
+  content: {
+    center: {
+      title: "Centrum og radius",
+      body: "Alle punkter på cirklen ligger præcis radius fra centrum.",
+      math: `<math display="block"><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>−</mo><mi>a</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mrow><mo>(</mo><mi>y</mi><mo>−</mo><mi>b</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></math>`,
+    },
+    point: {
+      title: "Punktkontrol",
+      body: "Punktet ligger på cirklen, når afstanden til centrum er lig radius. Mindre afstand er inde; større er udenfor.",
+      math: `<math display="block"><mrow><mo>|</mo><mover><mrow><mi>C</mi><mi>P</mi></mrow><mo>→</mo></mover><mo>|</mo><mo>=</mo><mi>r</mi></mrow></math>`,
+    },
+    tangent: {
+      title: "Tangent",
+      body: "Radiusvektoren til røringspunktet er tangentens normalvektor, fordi de står vinkelret på hinanden.",
+      math: `<math display="block"><mrow><mover><mrow><mi>C</mi><mi>P</mi></mrow><mo>→</mo></mover><mo>·</mo><mover><mi>r</mi><mo>→</mo></mover><mo>=</mo><mn>0</mn></mrow></math>`,
+    },
+  },
+});
+
 document.querySelectorAll(".hint-button").forEach((button) => {
   button.addEventListener("click", () => {
     const hint = button.closest(".exercise-body").querySelector(".hint");
@@ -916,6 +1015,24 @@ function updateExerciseProgress(group) {
     status.innerHTML = ready
       ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at forbinde retning, vinkelrethed og areal.</span>"
       : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, grundkortene eller Modul 1–2.</span>`;
+  }
+
+  if (group === "line-foundation") {
+    const status = document.querySelector("#lineFoundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at skifte mellem linjens to beskrivelser.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, ligningsforløbet eller Modul 1–3.</span>`;
+  }
+
+  if (group === "circle-foundation") {
+    const status = document.querySelector("#circleFoundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at forbinde afstand, ligning og tangent.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, grundkortene eller Modul 4.</span>`;
   }
 }
 
