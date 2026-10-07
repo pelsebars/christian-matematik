@@ -729,6 +729,71 @@ if (scalarAngleLab) {
   updateScalarAngleLab();
 }
 
+const projectionGeometryLab = document.querySelector("#projectionGeometryLab");
+
+if (projectionGeometryLab) {
+  const groups = [...projectionGeometryLab.querySelectorAll("[data-projection-stage]")];
+  const buttons = [...projectionGeometryLab.querySelectorAll("[data-projection-target]")];
+  const status = projectionGeometryLab.querySelector("#projectionLabStatus");
+  const math = projectionGeometryLab.querySelector("#projectionLabMath");
+  const stages = ["projection", "perpendicular", "determinant"];
+  let stageIndex = 0;
+
+  const content = {
+    projection: {
+      title: "Projektion",
+      body: "Den stiplede linje falder vinkelret ned. Resultatet ligger altid langs den vektor, der projiceres på.",
+      math: `<math display="block"><mrow><msub><mi mathvariant="normal">proj</mi><mover><mi>b</mi><mo>→</mo></mover></msub><mo>(</mo><mover><mi>a</mi><mo>→</mo></mover><mo>)</mo><mo>=</mo><mo>(</mo><mtable><mtr><mtd><mn>4</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd></mtr></mtable><mo>)</mo></mrow></math>`,
+    },
+    perpendicular: {
+      title: "Tværvektor",
+      body: "Tværvektoren er drejet 90° mod uret. Derfor er skalarproduktet mellem de to vektorer nul.",
+      math: `<math display="block"><mrow><mover><mi>a</mi><mo>→</mo></mover><mo>·</mo><msup><mover><mi>a</mi><mo>→</mo></mover><mo>⊥</mo></msup><mo>=</mo><mn>0</mn></mrow></math>`,
+    },
+    determinant: {
+      title: "Determinant",
+      body: "Determinantens absolutværdi er parallelogrammets areal. Det positive fortegn viser drejning mod uret fra første til anden vektor.",
+      math: `<math display="block"><mrow><mi mathvariant="normal">det</mi><mo>(</mo><mover><mi>a</mi><mo>→</mo></mover><mo>,</mo><mover><mi>b</mi><mo>→</mo></mover><mo>)</mo><mo>=</mo><mn>8</mn><mo>&gt;</mo><mn>0</mn></mrow></math>`,
+    },
+  };
+
+  function updateProjectionGeometryLab() {
+    const activeStage = stages[stageIndex];
+    groups.forEach((group) =>
+      group.toggleAttribute("hidden", group.dataset.projectionStage !== activeStage),
+    );
+    buttons.forEach((button) => {
+      const active = button.dataset.projectionTarget === activeStage;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    status.innerHTML = `<strong>${content[activeStage].title}</strong><p>${content[activeStage].body}</p>`;
+    math.innerHTML = content[activeStage].math;
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      stageIndex = stages.indexOf(button.dataset.projectionTarget);
+      updateProjectionGeometryLab();
+    });
+  });
+
+  projectionGeometryLab.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      stageIndex = Math.max(0, stageIndex - 1);
+      updateProjectionGeometryLab();
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      stageIndex = Math.min(stages.length - 1, stageIndex + 1);
+      updateProjectionGeometryLab();
+    }
+  });
+
+  updateProjectionGeometryLab();
+}
+
 document.querySelectorAll(".hint-button").forEach((button) => {
   button.addEventListener("click", () => {
     const hint = button.closest(".exercise-body").querySelector(".hint");
@@ -843,6 +908,15 @@ function updateExerciseProgress(group) {
       ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at forbinde skalarprodukt og vinkel.</span>"
       : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, grundkortene eller Modul 1.</span>`;
   }
+
+  if (group === "projection-foundation") {
+    const status = document.querySelector("#projectionFoundationStatus");
+    const ready = solved === cards.length;
+    status.classList.toggle("is-ready", ready);
+    status.innerHTML = ready
+      ? "<strong>Byggestenene er på plads.</strong><span>Du er klar til at forbinde retning, vinkelrethed og areal.</span>"
+      : `<strong>${solved} af ${cards.length} på plads.</strong><span>Brug feedbacken, grundkortene eller Modul 1–2.</span>`;
+  }
 }
 
 function setFeedback(card, type, fallback) {
@@ -858,6 +932,7 @@ function checkExercise(card) {
   const isChoice = card.dataset.kind === "choice";
   const isRoots = card.dataset.kind === "roots";
   const isOrderedPair = card.dataset.kind === "ordered-pair";
+  const isOrderedValues = card.dataset.kind === "ordered-values";
   const tolerance = Number(card.dataset.tolerance || 0.000001);
   let isCorrect = false;
 
@@ -868,7 +943,7 @@ function checkExercise(card) {
       return;
     }
     isCorrect = selected.dataset.value === card.dataset.answer;
-  } else if (isRoots || isOrderedPair) {
+  } else if (isRoots || isOrderedPair || isOrderedValues) {
     const inputs = [...card.querySelectorAll("input")];
     const answers = inputs.map((input) => parseAnswer(input.value));
     const expected = card.dataset.answer.split(",").map(Number);
@@ -877,7 +952,11 @@ function checkExercise(card) {
       setFeedback(
         card,
         "incorrect",
-        isOrderedPair ? "Skriv begge koordinater som tal." : "Skriv begge løsninger som tal.",
+        isOrderedPair
+          ? "Skriv begge koordinater som tal."
+          : isOrderedValues
+            ? "Skriv begge værdier som tal."
+            : "Skriv begge løsninger som tal.",
       );
       return;
     }

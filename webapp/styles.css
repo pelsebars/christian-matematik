@@ -4165,6 +4165,241 @@ math {
   font-size: 0.79rem;
 }
 
+.projection-foundation .progress-track span,
+.projection-practice .progress-track span,
+.projection-cas-section .progress-track span,
+.projection-test .progress-track span {
+  background: var(--cyan);
+}
+
+.projection-basics-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.projection-basics-grid article {
+  min-height: 205px;
+}
+
+.projection-formula-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.projection-lab {
+  margin: 18px 0 0;
+  overflow: hidden;
+  border: 1px solid #a9d9dd;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 14px 34px rgba(8, 127, 140, 0.08);
+}
+
+.projection-lab:focus-visible {
+  outline: 3px solid rgba(8, 127, 140, 0.3);
+  outline-offset: 4px;
+}
+
+.projection-lab figcaption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+  padding: 24px 27px;
+  border-bottom: 1px solid #d3eaec;
+  background: linear-gradient(135deg, #fbffff, var(--cyan-soft));
+}
+
+.projection-lab figcaption h3 {
+  margin: 0 0 7px;
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+}
+
+.projection-lab figcaption p:last-child {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.projection-live-math {
+  max-width: 100%;
+  padding: 13px 16px;
+  overflow-x: auto;
+  border: 1px solid #a9d9dd;
+  border-radius: 13px;
+  color: #086975;
+  background: #ffffff;
+  font-size: 1.08rem;
+}
+
+.projection-lab-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+}
+
+.projection-canvas {
+  min-width: 0;
+  padding: 18px;
+  border-right: 1px solid var(--line);
+  background: #fbfdff;
+}
+
+.projection-canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  background: linear-gradient(rgba(8, 127, 140, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 127, 140, 0.045) 1px, transparent 1px), #ffffff;
+  background-size: 30px 30px;
+}
+
+.projection-axis {
+  stroke: #c7d1dd;
+  stroke-width: 1.5;
+}
+
+.projection-vector,
+.projection-result,
+.determinant-copy {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 5;
+}
+
+.projection-vector-a {
+  stroke: var(--blue);
+}
+
+.projection-vector-b,
+.projection-result,
+.projection-vector-perp {
+  stroke: var(--cyan);
+}
+
+.projection-result {
+  stroke-width: 7;
+}
+
+.projection-drop {
+  stroke: var(--orange);
+  stroke-dasharray: 8 7;
+  stroke-width: 3;
+}
+
+.projection-right-mark {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 3;
+}
+
+.determinant-area {
+  fill: rgba(8, 127, 140, 0.15);
+  stroke: none;
+}
+
+.determinant-copy {
+  stroke: #7fbfc6;
+  stroke-dasharray: 9 7;
+  stroke-width: 2.5;
+}
+
+#projectionArrowHead path {
+  fill: var(--cyan);
+}
+
+.projection-canvas text {
+  fill: var(--ink-soft);
+  font-family: Cambria, "Times New Roman", serif;
+  font-size: 21px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.projection-canvas .projection-note {
+  fill: #086975;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 780;
+}
+
+.projection-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+}
+
+.projection-stage {
+  min-height: 125px;
+  padding: 17px;
+  border: 1px solid #c8e5e8;
+  border-radius: 13px;
+  background: var(--cyan-soft);
+}
+
+.projection-stage strong {
+  color: #086975;
+}
+
+.projection-stage p {
+  margin: 9px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.projection-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.projection-controls button {
+  min-height: 41px;
+  padding: 9px 8px;
+  border: 1px solid #a9d9dd;
+  border-radius: 10px;
+  color: #086975;
+  background: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.projection-controls button:hover,
+.projection-controls button.is-active {
+  color: #ffffff;
+  background: var(--cyan);
+}
+
+.projection-panel .keyboard-note {
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.determinant-sign-rule {
+  margin-top: 18px;
+}
+
+.projection-summary {
+  background: linear-gradient(135deg, #0b5057, #122e50);
+}
+
+.projection-summary .eyebrow,
+.projection-summary .summary-note span {
+  color: #8fe2e8;
+}
+
+.projection-summary math {
+  color: #ffffff;
+}
+
 .scalar-summary {
   background: linear-gradient(135deg, #0b5057, #122e50);
 }
@@ -4655,18 +4890,23 @@ math {
   .vector-lab-body,
   .vector-operation-figure,
   .scalar-angle-lab figcaption,
-  .scalar-lab-body {
+  .scalar-lab-body,
+  .projection-lab figcaption,
+  .projection-lab-body {
     grid-template-columns: 1fr;
   }
 
   .vector-basics-grid,
   .scalar-formula-grid,
-  .scalar-module-goals {
+  .scalar-module-goals,
+  .projection-basics-grid,
+  .projection-formula-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .vector-canvas,
-  .scalar-angle-canvas {
+  .scalar-angle-canvas,
+  .projection-canvas {
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
@@ -4682,25 +4922,35 @@ math {
   .vector-cas-workflow,
   .scalar-formula-grid,
   .scalar-sign-rule,
-  .scalar-module-goals {
+  .scalar-module-goals,
+  .projection-basics-grid,
+  .projection-formula-grid {
     grid-template-columns: 1fr;
   }
 
   .vector-lab figcaption,
   .vector-panel,
   .scalar-angle-lab figcaption,
-  .scalar-angle-panel {
+  .scalar-angle-panel,
+  .projection-lab figcaption,
+  .projection-panel {
     padding: 21px 18px;
   }
 
   .vector-lab figcaption > math,
-  .scalar-live-math {
+  .scalar-live-math,
+  .projection-live-math {
     width: 100%;
   }
 
   .vector-canvas,
-  .scalar-angle-canvas {
+  .scalar-angle-canvas,
+  .projection-canvas {
     padding: 10px 4px 15px;
+  }
+
+  .projection-controls {
+    grid-template-columns: 1fr;
   }
 
   .vector-operation-figure {
