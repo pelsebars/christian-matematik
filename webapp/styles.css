@@ -4421,6 +4421,116 @@ math {
   min-height: 250px;
 }
 
+#linje-eksempler .worked-example-grid,
+#cirkel-eksempler .worked-example-grid {
+  display: grid;
+  gap: 18px;
+}
+
+#linje-eksempler .worked-example,
+#cirkel-eksempler .worked-example {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 12px 30px rgba(24, 48, 86, 0.06);
+}
+
+#linje-eksempler .worked-example > .example-tag,
+#cirkel-eksempler .worked-example > .example-tag {
+  display: inline-flex;
+  margin: 22px 24px 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+#linje-eksempler .worked-example > h3,
+#cirkel-eksempler .worked-example > h3 {
+  margin: 10px 24px 0;
+  font-size: clamp(1.18rem, 2.3vw, 1.45rem);
+}
+
+#linje-eksempler .worked-example > p,
+#cirkel-eksempler .worked-example > p {
+  margin: 13px 24px 21px;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.solution-steps {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.solution-steps li {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 17px 24px;
+}
+
+.solution-steps li + li {
+  border-top: 1px solid #edf0f5;
+}
+
+.solution-steps li:last-child {
+  background: linear-gradient(90deg, rgba(8, 127, 140, 0.07), rgba(241, 248, 255, 0.65));
+}
+
+.solution-steps li > span {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #b9dce0;
+  border-radius: 50%;
+  color: #087f8c;
+  background: var(--cyan-soft);
+  font-size: 0.76rem;
+  font-weight: 850;
+}
+
+.solution-steps li > div {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+}
+
+.solution-steps strong {
+  color: var(--ink);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.solution-steps li > div > math {
+  display: block;
+  max-width: 100%;
+  padding: 2px 0 4px;
+  overflow-x: auto;
+  color: #1b4f70;
+  font-size: 1.12rem;
+}
+
+.solution-steps p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
 .geometry-tool-lab {
   margin: 18px 0 0;
   overflow: hidden;
