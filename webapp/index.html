@@ -11,6 +11,8 @@
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="stylesheet" href="./styles.css" />
     <script src="./app.js" defer></script>
+    <script src="./tasks/ui.js" type="module"></script>
+    <link rel="stylesheet" href="./tasks/tasks.css" />
   </head>
   <body>
     <div class="app-shell">
@@ -53,6 +55,11 @@
           </button>
 
           <div class="nav-divider" aria-hidden="true"></div>
+
+          <button class="nav-item" type="button" data-view="tasks">
+            <span class="nav-symbol" aria-hidden="true">✓</span>
+            <span>Opgaver</span>
+          </button>
 
           <button class="nav-item" type="button" data-view="formulas">
             <span class="nav-symbol" aria-hidden="true">Σ</span>
@@ -197,6 +204,8 @@
             </ol>
           </section>
         </section>
+
+        <section id="tasksView" data-page="tasks" hidden aria-label="Opgaver"></section>
 
         <section class="subject-view" data-page="subject" hidden>
           <button class="text-button" type="button" data-view="home">Tilbage til emner</button>

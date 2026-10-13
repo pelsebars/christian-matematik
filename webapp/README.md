@@ -17,3 +17,11 @@ Første lokale version af Christians matematikapp.
 ## Lokal visning
 
 Servér mappen med en lokal webserver, og åbn `index.html` gennem serverens adresse.
+
+## Fælles opgaver
+
+Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har ni gennemgåede demonstrationsopgaver fra alle fem hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og lokal lagring.
+
+Format, integrationspunkt og eksempler er beskrevet i [OPGAVEBANK.md](../OPGAVEBANK.md). Nye emnepakker tilføjes i `tasks/bank/` og registreres i `tasks/bank/index.js`.
+
+Kør `npm test` i denne mappe. `npm run test:browser` kræver Playwright som lokal testafhængighed; se opgavebankens dokumentation for alternative runtime-stier og Chrome.

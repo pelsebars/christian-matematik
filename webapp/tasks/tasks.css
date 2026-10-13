@@ -1,0 +1,233 @@
+#tasksView {
+  max-width: 1180px;
+}
+.task-panel {
+  padding: clamp(18px, 3vw, 32px);
+  margin-bottom: 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  line-height: 1.65;
+}
+.task-panel h2 {
+  font-size: 1.4rem;
+}
+.task-panel h4 {
+  margin: 0 0 8px;
+}
+.task-save,
+.task-muted {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+.task-settings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0;
+}
+.task-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+}
+.task-panel input:not([type="checkbox"]):not([type="radio"]),
+.task-panel select,
+.task-panel textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 12px;
+  color: var(--ink);
+  background: var(--paper);
+}
+.task-panel input:focus-visible,
+.task-panel select:focus-visible,
+.task-panel textarea:focus-visible,
+.task-panel summary:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+.task-panel input:disabled,
+.task-panel textarea:disabled {
+  opacity: 1;
+  color: var(--ink-soft);
+}
+.task-panel fieldset {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px 0;
+}
+.task-panel legend {
+  max-width: 100%;
+  padding: 0 8px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.task-panel details {
+  margin: 20px 0;
+}
+.task-panel summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.task-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+}
+.task-panel .task-checks label,
+.task-panel .task-check {
+  flex-direction: row;
+  align-items: baseline;
+  font-weight: 500;
+}
+.task-panel .task-check {
+  margin: 16px 0;
+}
+.task-panel input[type="checkbox"],
+.task-panel input[type="radio"] {
+  accent-color: var(--blue);
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+.task-button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-weight: 700;
+  cursor: pointer;
+}
+.task-button:hover {
+  border-color: var(--blue);
+}
+.task-primary,
+.task-button.is-active,
+[data-task-action="check"],
+[data-task-action="submit"] {
+  color: white;
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.task-actions,
+.task-numbers,
+.task-topline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+.task-topline {
+  justify-content: space-between;
+  align-items: baseline;
+}
+.task-topline p,
+.task-topline h2 {
+  margin-bottom: 0;
+}
+.task-numbers {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.task-numbers .task-button {
+  min-width: 44px;
+}
+.task-question {
+  padding-top: 4px;
+}
+.task-question > p {
+  font-size: 1.05rem;
+}
+.task-input-help {
+  color: var(--ink-soft);
+  font-size: 0.82rem !important;
+}
+.task-components {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.task-preview {
+  min-height: 30px;
+  padding-top: 8px;
+}
+.task-panel math {
+  font-size: 1.15em;
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: middle;
+}
+.task-panel math[display="block"] {
+  display: block;
+  overflow-x: auto;
+  padding: 8px 0;
+}
+.task-feedback {
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 14px;
+  background: var(--green-soft);
+}
+.task-feedback ol {
+  padding-left: 24px;
+}
+.task-feedback li {
+  margin: 12px 0;
+}
+.task-confirm {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid var(--orange);
+  border-radius: 12px;
+  background: var(--amber-soft);
+}
+.task-confirm button {
+  margin: 4px;
+}
+.task-score {
+  font-size: 2rem;
+  font-weight: 750;
+  color: var(--green);
+}
+.task-figure {
+  margin: 24px 0;
+  max-width: 480px;
+}
+.task-figure svg {
+  width: 100%;
+  height: auto;
+  background: var(--paper);
+  border-radius: 12px;
+}
+.task-figure figcaption {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+@media (max-width: 700px) {
+  .task-settings {
+    grid-template-columns: 1fr;
+  }
+  .task-components {
+    grid-template-columns: 1fr;
+  }
+  .task-feedback {
+    padding: 14px;
+  }
+  .task-panel legend {
+    font-size: 0.95rem;
+  }
+  .task-actions .task-button {
+    flex: 1 1 140px;
+  }
+}

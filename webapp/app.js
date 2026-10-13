@@ -103,6 +103,7 @@ function closeMenu() {
 }
 
 function showView(view, shouldFocus = true) {
+  document.querySelector("#tasksView").hidden = view !== "tasks";
   homeView.hidden = view !== "home";
   formulaView.hidden = view !== "formulas";
   subjectView.hidden = !subjects[view];
@@ -1149,9 +1150,12 @@ document.addEventListener("keydown", (event) => {
 
 window.addEventListener("hashchange", () => {
   const requestedView = window.location.hash.slice(1) || "home";
-  const validView = requestedView === "formulas" || subjects[requestedView] ? requestedView : "home";
+  const validView = requestedView === "formulas" || requestedView === "tasks" || subjects[requestedView] ? requestedView : "home";
   showView(validView, false);
 });
 
 const initialView = window.location.hash.slice(1) || "home";
-showView(initialView === "formulas" || subjects[initialView] ? initialView : "home", false);
+showView(initialView === "formulas" || initialView === "tasks" || subjects[initialView] ? initialView : "home", false);
+
+// Shared navigation hook for targeted repetition from the task bank.
+window.showMathView = showView;
