@@ -1,4 +1,6 @@
+import { integralModules } from "../integral-plan.js";
 export const topics = {
+  integration: "Integralregning",
   equations: "Løsning af ligninger",
   quadratic: "Andengradsligninger",
   composite: "Sammensatte funktioner",
@@ -6,6 +8,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  ...Object.fromEntries(integralModules.map(m => [m.id, {topic:"integration", name:m.title, section:m.section}])),
   "eq.basic": { topic: "equations", name: "Ligninger", section: "teori" },
   "quad.basic": {
     topic: "quadratic",
@@ -61,6 +64,11 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "int.definition": {module:"int.1",text:"Kontrollere en stamfunktion ved differentiation"},
+  "int.family": {module:"int.1",text:"Skelne mellem én og samtlige stamfunktioner"},
+  "int.rules": {module:"int.1",text:"Integrere med grundregler og korrekt domæne"},
+  "int.model": {module:"int.1",text:"Fortolke stamfunktioner i en model med enheder"},
+  "int.cas": {module:"int.1",text:"Dokumentere og kontrollere CAS-resultater"},
   "eq.isolate": {
     module: "eq.basic",
     text: "Isolere den ukendte og kontrollere løsningen",

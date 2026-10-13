@@ -4,7 +4,7 @@ Første lokale version af Christians matematikapp.
 
 ## Indhold
 
-- startside med fem emner;
+- startside med seks emner;
 - fast venstremenu på desktop og mobilmenu på små skærme;
 - emneoversigter;
 - komplette læringsforløb om lineære ligninger, løsning af andengradsligninger og sammensatte funktioner med teori, grundtjek, gennemregnede eksempler, hints og interaktive øvelser;
@@ -12,6 +12,7 @@ Første lokale version af Christians matematikapp.
 - komplet læringsforløb i plangeometri og vektorer med fem moduler om vektorer, skalarprodukt/vinkler, projektion/tværvektor/determinant, linjen og cirklen med forudsætningstjek, grundkort, interaktive figurer, håndregning, CAS-spor og forståelsestjek;
 - et trinvist andengradsforløb baseret på opgavearket, inklusive standardform, koefficienter, diskriminant, løsningsformel, indsættelseskontrol og blandet sluttest;
 - side med formler og huskeregler;
+- integralregning med læringsmålskort, struktur for syv moduler og B-repetition samt komplet modul 1 om stamfunktioner, grundregler, kontrol, CAS og modelopgaver;
 - matematisk notation med indbygget MathML.
 
 ## Lokal visning
@@ -20,7 +21,7 @@ Servér mappen med en lokal webserver, og åbn `index.html` gennem serverens adr
 
 ## Fælles opgaver
 
-Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har ni gennemgåede demonstrationsopgaver fra alle fem hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og lokal lagring.
+Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 16 gennemgåede opgaver fra alle seks hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og lokal lagring.
 
 Format, integrationspunkt og eksempler er beskrevet i [OPGAVEBANK.md](../OPGAVEBANK.md). Nye emnepakker tilføjes i `tasks/bank/` og registreres i `tasks/bank/index.js`.
 

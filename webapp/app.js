@@ -1,4 +1,5 @@
 const subjects = {
+  integration: { kicker: "06 · A-niveau", title: "Integralregning", description: "Fra stamfunktioner til areal, rumfang og substitution. Byg forståelsen ét modul ad gangen.", understand: "Find en funktion ud fra dens afledte, og kontrollér dit resultat ved at differentiere.", formula: `<math display="block"><mrow><msup><mi>F</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>` },
   equations: {
     kicker: "01 · Grundlag",
     title: "Løsning af ligninger",
@@ -122,12 +123,13 @@ function showView(view, shouldFocus = true) {
   compositeLesson.hidden = view !== "composite";
   differentiationLesson.hidden = view !== "differentiation";
   planeGeometryLesson.hidden = view !== "planeGeometry";
+  document.querySelector("#integralLesson").hidden = view !== "integration";
   subjectPlaceholder.hidden =
     view === "equations" ||
     view === "quadratic" ||
     view === "composite" ||
     view === "differentiation" ||
-    view === "planeGeometry";
+    view === "planeGeometry" || view === "integration";
 
   setActiveNavigation(view);
   window.location.hash = view === "home" ? "" : view;

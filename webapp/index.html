@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="./styles.css" />
     <script src="./app.js" defer></script>
     <script src="./tasks/ui.js" type="module"></script>
+    <script src="./integral.js" type="module"></script>
+    <link rel="stylesheet" href="./integral.css" />
     <link rel="stylesheet" href="./tasks/tasks.css" />
   </head>
   <body>
@@ -54,6 +56,7 @@
             <span>Plangeometri og vektorer</span>
           </button>
 
+          <button class="nav-item" type="button" data-view="integration"><span class="nav-number" aria-hidden="true">06</span><span>Integralregning</span></button>
           <div class="nav-divider" aria-hidden="true"></div>
 
           <button class="nav-item" type="button" data-view="tasks">
@@ -188,6 +191,7 @@
               </span>
               <span class="card-action">Åbn emnet</span>
             </button>
+            <button class="topic-card topic-card--cyan" type="button" data-view="integration"><span class="card-index">06 · Integralregning</span><span class="formula-preview"><math display="block"><mrow><mo>∫</mo><mn>2</mn><mi>x</mi><mspace width="0.2em"/><mi mathvariant="normal">d</mi><mi>x</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>C</mi></mrow></math></span><span class="card-title">Integralregning</span><span class="card-description">Syv moduler og en mellemstation. Begynd med stamfunktioner og kontrol ved differentiation.</span><span class="card-action">Åbn emnet</span></button>
           </div>
 
           <section class="path-panel" aria-labelledby="pathHeading">
@@ -201,6 +205,7 @@
               <li><span>3</span>Sammensatte funktioner</li>
               <li><span>4</span>Differentialregning</li>
               <li><span>5</span>Plangeometri</li>
+              <li><span>6</span>Integralregning</li>
             </ol>
           </section>
         </section>
@@ -240,6 +245,8 @@
               <p>Strukturen er klar. Det faglige indhold bygges ind emne for emne.</p>
             </div>
           </div>
+
+          <div class="lesson-content" id="integralLesson" hidden></div>
 
           <div class="lesson-content" id="equationLesson" hidden>
             <nav class="lesson-nav" aria-label="Indhold i Ligninger">

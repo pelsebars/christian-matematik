@@ -1,0 +1,33 @@
+export const integralModules = [
+  {id:'int.1', section:'int-modul-1', title:'Stamfunktion og det ubestemte integral', date:'20. oktober', pages:'6–9', summary:'Stamfunktioner, integrationskonstant, grundregler og kontrol ved differentiation.', prerequisites:'Funktionsnotation, differentiation, brøker, fortegn og potenser.', practice:'Polynomier, eksponentialfunktioner, negative potenser og rødder; logaritmer og CAS.'},
+  {id:'int.2', section:'int-modul-2', title:'Grafen for en stamfunktion', date:'21. oktober', pages:'12–13', summary:'Grafiske sammenhænge og valg af stamfunktion ud fra punkt eller tangent.', prerequisites:'Grafer, koordinater, funktionsværdier, ligninger og tangenthældning.', practice:'Lodret forskydning, fortegn og monotoniforhold; punkt- og tangentbetingelser.'},
+  {id:'int.3', section:'int-modul-3', title:'Areal og det bestemte integral', date:'21. oktober', pages:'10–11', summary:'Fortegnet integral, geometrisk areal og ændring i en stamfunktion.', prerequisites:'Areal, enheder, funktionsværdier, interval og fortegn.', practice:'Grænser, stamfunktionstabeller, integralregningens hovedsætning og hastighedsmodeller.'},
+  {id:'int.4', section:'int-modul-4', title:'Arealberegninger og regneregler', date:'22. oktober', pages:'24–25 og 32–33', summary:'Skæringer, øvre minus nedre graf, intervalopdeling og numeriske summer.', prerequisites:'Ligninger, nulpunkter, skæringspunkter, parenteser og fortegn.', practice:'To grafer, todelte områder, parameterbestemmelse, vandstandsmodel og trapezmetoden.'},
+  {id:'int.rep', section:'int-repetition', title:'Virtuel repetition B-niveau 6–7', date:'23. oktober', pages:null, summary:'Potensregneregler og omvendte funktioner. En mellemstation uden integralmodulnummer.', prerequisites:'Parenteser, brøker, eksponenter, funktioner og ligningsløsning.', practice:'Diagnostisk tjek med mulighed for hurtig videregang; målrettet repetition af potenser, rødder, definitions- og værdimængde, reciprok versus omvendt funktion og spejling i diagonalen.'},
+  {id:'int.5', section:'int-modul-5', title:'Rumfang af omdrejningslegemer og kurvelængde', date:'26. oktober', pages:'26–27 og 35', summary:'Skiver, skiver med hul, radius, enheder og længde af en graf.', prerequisites:'Repetitionens potenser og rødder; areal, længde og afledte.', practice:'Keramikskål, karaffel, bue og brokabel; både håndregning og numerisk CAS-beregning.'},
+  {id:'int.6', section:'int-modul-6', title:'Substitution i ubestemte integraler', date:'26. oktober', pages:'14–15 og 28–29', summary:'Kædereglen baglæns: vælg ny variabel, omskriv og substituer tilbage.', prerequisites:'Sammensatte funktioner, kædereglen, brøker og potensregler.', practice:'Eksponential-, potens-, logaritme- og trigonometriske udtryk; kontrol og løbermodel.'},
+  {id:'int.7', section:'int-modul-7', title:'Substitution i bestemte integraler', date:'27. oktober', pages:'14–15 og 28–29', summary:'Nye grænser, konsekvent variabelvalg og samlet anvendelse.', prerequisites:'Modul 3 og 6: grænser, substitution og fortegn.', practice:'Håndregning og sammensatte areal-, rumfangs-, kurvelængde- og transportopgaver; afsluttende opsamling.'},
+];
+// U1–U7 are all seven objectives under “Titel Integralregning”. K = core content; A = source-supported additions.
+export const integralGoals = [
+ ['U1','Anvende forskellige fortolkninger af stamfunktionsbegrebet','1','1–3: algebra, graf og akkumuleret ændring','1: begreb; 2: graf; 3: fortolkning','Begge'],
+ ['U2','Anvende matematiske værktøjsprogrammer til symbolbehandling og problemløsning','1','1–7: opsætning, CAS-resultat og kontrol','1: CAS-kontrol; 7: dokumenteret løsning','Med'],
+ ['U3','Operere med og redegøre for matematiske ræsonnementer og beviser','1','1: kontrol og konstant; 3: hovedsætning; 4: regneregler; 6: kæderegel','1: begrundelse; 3/6: bevis; 7: opsamling','Begge'],
+ ['U4','Demonstrere viden om matematikanvendelse inden for udvalgte områder','1','1: hastighed; 3/4: energi og vandstand; 5: geometri; 6/7: transport','1: model; 5/7: tekstbaserede opgaver','Begge'],
+ ['U5','Demonstrere viden om fagets metoder og identitet','1','1–7: metodevalg, antagelser, domæne og kontrol','1: metodeforklaring; 7: sammenlign metoder','Begge'],
+ ['U6','Anvende begreber og metoder fra diskret matematik inden for udvalgte områder','4','4: endelige rektangel- og trapezsummer fra tabeldata','4: numerisk overslag; 7: vurder nøjagtighed','Begge'],
+ ['U7','Beherske mindstekrav: grundlæggende matematiske færdigheder og kompetencer','1','Alle modulers forudsætningstjek og korte færdighedsopgaver','Sluttjek i hvert modul og blandet opsamling i 7','Uden først'],
+ ['K1','Bestemme ubestemte integraler og samtlige stamfunktioner','1','1: grundregler; 6: substitution','1: træning og sluttjek; 6: kontrol','Begge'],
+ ['K2','Beregne og fortolke bestemte integraler','3','3–5 og 7: grænser, ændring og enheder','3: sluttjek; 7: blandede opgaver','Begge'],
+ ['K3','Integrere ved substitution','6','6: ubestemte; 7: bestemte','6/7: variabel, differential og grænser','Begge'],
+ ['K4','Beregne rumfang af omdrejningslegemer','5','5: skiver og skiver med hul; 7: kombinerede opgaver','5: model og enheder; 7: opsamling','Begge'],
+ ['K5','Udføre numerisk integration','4','4: trapezsummer; 5/7: CAS og sammenligning','4: tabelopgave; 7: nøjagtighed','Begge'],
+ ['K6','Løse opgaver uden hjælpemidler','1','1–7: særskilt håndregningsspor','Hvert moduls sluttjek','Uden'],
+ ['K7','Bruge CAS relevant og kontrollere resultatet','1','1–7: giv forskrift, variabel, domæne og kontrol','1: produkt og logaritme; 7: dokumentation','Med'],
+ ['A1','Forbinde differentiation og integration','1','1: kontrol; 2: hældning; 3: hovedsætning; 6: kæderegel','1: afledt forskrift; 3/6: ræsonnement','Begge'],
+ ['A2','Beregne areal ved skæringer og intervalopdeling','3','3/4: fortegn, to grafer, delte områder; 7: sammensat problem','4: sluttest; 7: opsamling','Begge'],
+ ['A3','Beregne kurvelængde med enheder og modelantagelser','5','5: bue, lamel og kabel; 7: samlet geometrisk problem','5: opstilling og kontrol; 7: opsamling','Med; simpel opstilling uden'],
+ ['A4','Opstille og vurdere matematiske modeller','1','1: bevægelse; 3/4: energi/vandstand; 5: rumfang/længde','1: begyndelsesværdi og enhed; 5/7: vurdering','Begge'],
+ ['B6','Anvende potensregneregler med negative og rationale eksponenter','Repetition','Repetition og 5–7; kort støtte allerede i 1','Repetitionens diagnostiske tjek og sluttest','Uden'],
+ ['B7','Bestemme og fortolke omvendte funktioner','Repetition','Repetition: en-til-en, domæne, spejling, eksponential/logaritme','Repetitionens diagnostiske tjek og sluttest','Begge'],
+];

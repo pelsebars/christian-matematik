@@ -1,0 +1,10 @@
+import { math, n, x, power } from './tasks/math.js';
+export { math, n, x, power };
+export const C = '<mi>C</mi>';
+export const plus = '<mo>+</mo>', minus = '<mo>−</mo>', eq = '<mo>=</mo>';
+export const frac = (a,b) => `<mfrac><mrow>${a}</mrow><mrow>${b}</mrow></mfrac>`;
+export const fn = (name='F',arg=x) => `<mi>${name}</mi><mo>(</mo>${arg}<mo>)</mo>`;
+export const prime = (name='F',arg=x) => `<msup><mi>${name}</mi><mo>′</mo></msup><mo>(</mo>${arg}<mo>)</mo>`;
+export const exp = (arg=x) => `<msup><mi mathvariant="normal">e</mi><mrow>${arg}</mrow></msup>`;
+export const ln = (arg=x) => `<mi mathvariant="normal">ln</mi><mo>(</mo>${arg}<mo>)</mo>`;
+export const integral = (body) => `<mo>∫</mo><mrow>${body}</mrow><mspace width="0.2em"/><mi mathvariant="normal">d</mi>${x}`;

@@ -223,3 +223,13 @@ Kør `cd webapp && npm test`. Testene validerer alle opgaver, verificerer automa
 Til browserforløbet bruges Playwright uden produktionsafhængighed: installer Playwright lokalt og dets browser, og kør `npm run test:browser`. Alternativt kan `PLAYWRIGHT_MODULE_PATH` pege på Playwrights `index.mjs`; `BROWSER_CHANNEL=chrome` bruger en allerede installeret Chrome. Testen starter og lukker sin egen lokale HTTP-server.
 
 Browsertesten dækker eksisterende sider og en eksisterende øvelse, prøvens skjulte metadata, svar ved navigation og genindlæsning, hints kun i træning, aflevering og genforsøg, delpoint, egen vurdering, repetition, MathML namespace, mobilbredde, tastaturfokus, blokeret localStorage og fravær af JavaScript-/konsolfejl. Screenshots gemmes i `/tmp/matematik-tasks-mobile.png` og `/tmp/matematik-tasks-desktop.png` til visuel kontrol.
+
+## Integralregning, første arbejdsgang
+
+Hovedemnet `integration` og `int.1`–`int.7` samt `int.rep` er registreret. `int.rep` er mellemstationen om B-niveau 6–7, ikke et nummereret integralmodul. Modul 1 er åbent; de øvrige sektioner viser deres plan. Læringsmålskort og kildeafgrænsning findes i `webapp/INTEGRALREGNING_PLAN.md`.
+
+`webapp/tasks/bank/integration.js` tilføjer syv gennemgåede opgaver: kort stamfunktion/familie, ledvis integration, eksponentialfunktion, negativ potens, kontrol af et forkert forslag, en positionsmodel og en CAS-opgave. De har hints i niveauer, løsninger, typiske fejl og målrettet feedback. Alle prøvetekster er uden metodeoverskrift. Modeller og CAS-forklaringer kræver egen vurdering med tjekliste.
+
+Forskriftsfelter til én stamfunktion med polynomiumsbedømmelse beder eksplicit om konstantled nul. Dermed afvises alternative integrationskonstanter ikke som fejl i en opgave, der ellers tillader dem. Eksponentialfunktioner og negative potenser benytter MathML-valg, fordi parseren ikke håndterer disse udtryk. Gennemførte moduler i Opgaver registreres fortsat manuelt.
+
+Undervisningsmodulets egne starttjek, mikroøvelser og sluttjek gemmes under `christian-matematik.integration.v1`, uafhængigt af prøvesæt. Browserforløbet for integralregning ligger i `webapp/tests/integral.browser.test.js` og indgår i `npm run test:browser`.

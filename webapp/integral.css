@@ -1,0 +1,49 @@
+#integralLesson .module-roadmap { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); padding:0; }
+#integralLesson .module-card { min-width:0; grid-column:auto; }
+#integralLesson .module-card:nth-child(5) { grid-column:1/-1; border-left:4px solid #087f8c; }
+.int-table { overflow-x:auto; margin:20px 0; border:1px solid var(--line); border-radius:12px; }
+.int-table table { width:100%; min-width:650px; border-collapse:collapse; font-size:.9rem; }
+.int-table th,.int-table td { padding:14px; vertical-align:top; text-align:left; border-bottom:1px solid var(--line); }
+.int-table th { min-width:180px; }
+.int-table thead { background:var(--surface-soft,#f4f6f8); }
+.int-exercises { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin:22px 0; }
+.integral-exercise { background:var(--surface,#fff); border:1px solid var(--line); border-radius:16px; padding:22px; min-width:0; }
+.integral-exercise.is-correct { border-color:#087f8c; }
+.integral-exercise p { line-height:1.7; }
+.int-part { margin:18px 0; }
+.int-part label,#integralLesson label { display:block; font-weight:600; margin-bottom:8px; }
+.int-part input,.int-part select,.int-part textarea { width:100%; max-width:100%; border:1px solid var(--line); border-radius:8px; padding:12px; font:inherit; background:white; color:inherit; }
+.int-preview { min-height:1.5rem; margin-top:8px; }
+.int-options { display:grid; gap:4px; }
+.int-options p { display:flex; gap:10px; align-items:center; margin:3px 0; }
+.int-actions { display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin:14px 0; }
+.int-feedback { margin:10px 0; padding:10px; border-radius:8px; background:#f1f5f8; }
+.int-feedback.correct { color:#06644f; background:#eaf6ef; }
+.int-feedback.incorrect { color:#85451e; background:#fff1e2; }
+#integralLesson details { border:1px solid var(--line); border-radius:10px; padding:14px; margin:12px 0; }
+#integralLesson summary { cursor:pointer; font-weight:600; }
+#integralLesson details[open] summary { margin-bottom:14px; }
+.int-formula { padding:18px; background:var(--surface-soft,#f4f6f8); border-radius:12px; overflow:auto; text-align:center; }
+#integralLesson math { font-size:1.12em; }
+#integralLesson .example-card { padding:24px; margin:20px 0; border:1px solid var(--line); border-radius:14px; }
+#integralLesson li { margin:10px 0; line-height:1.7; }
+.int-figure { margin:24px 0; padding:20px; border:1px solid var(--line); border-radius:14px; }
+.int-figure svg { width:100%; height:auto; max-height:360px; font-size:16px; }
+.int-figure figcaption,.int-source { font-size:.9rem; line-height:1.65; color:var(--ink-soft); }
+#int-c-slider { width:100%; max-width:500px; }
+#int-storage-warning { padding:16px; border:1px solid #b77b28; background:#fff1e2; border-radius:12px; }
+#integralLesson .int-solution { overflow-x:auto; }
+@media(max-width:700px){
+ #integralLesson .module-roadmap,.int-exercises { grid-template-columns:1fr; }
+ .integral-exercise { padding:16px; }
+ #integralLesson .example-card { padding:18px; }
+ .int-figure { padding:8px; margin:20px 0; }
+}
+
+#integralLesson .primary-button,#integralLesson .secondary-button { padding:11px 16px; border:1px solid var(--blue); border-radius:11px; font:inherit; font-size:.86rem; font-weight:700; cursor:pointer; }
+#integralLesson .primary-button { color:white; background:var(--blue); }
+#integralLesson .secondary-button { color:var(--blue); background:var(--blue-soft); }
+#integralLesson button:disabled { opacity:.6; cursor:default; }
+#integralLesson button:focus-visible,#integralLesson input:focus-visible,#integralLesson select:focus-visible,#integralLesson textarea:focus-visible,#integralLesson summary:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
+#integralLesson .module-card:nth-child(5) .module-card-top span { width:auto; height:auto; min-height:34px; padding:8px 12px; border-radius:8px; white-space:nowrap; }
+#integralLesson .int-figure svg { font-size:22px; }

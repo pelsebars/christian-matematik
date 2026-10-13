@@ -16,7 +16,7 @@ export const power = (body, exponent) => {
   const base = /^<(mi|mn)>[^<]+<\/\1>$/.test(body)
     ? body
     : `<mo>(</mo>${body}<mo>)</mo>`;
-  return `<msup><mrow>${base}</mrow>${n(exponent)}</msup>`;
+  return `<msup><mrow>${base}</mrow><mrow>${n(exponent)}</mrow></msup>`;
 };
 export const tuple = (values) =>
   math(`<mo>(</mo>${values.map(n).join("<mo>;</mo>")}<mo>)</mo>`);

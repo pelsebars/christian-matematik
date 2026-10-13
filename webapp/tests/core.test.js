@@ -136,7 +136,7 @@ test("Balanced sets are reproducible, diverse, bounded and filterable", () => {
   const options = { seed: "balanced", minutes: 60 };
   const result = composeSet(options);
   assert.equal(result.tasks.length, 9);
-  assert.equal(new Set(result.tasks.map((t) => t.topic)).size, 5);
+  assert.equal(new Set(result.tasks.map((t) => t.topic)).size, 6);
   assert.ok(result.minutes <= 60);
   assert.equal(new Set(result.tasks.map((t) => t.id)).size, 9);
   assert.deepEqual(result, composeSet(options));
@@ -159,7 +159,7 @@ test("Balanced sets are reproducible, diverse, bounded and filterable", () => {
     }).tasks.map((t) => t.id),
     ["eq.balance"],
   );
-  assert.equal(composeSet({ ...options, difficulty: 3 }).tasks.length, 2);
+  assert.equal(composeSet({ ...options, difficulty: 3 }).tasks.length, 3);
   assert.ok(composeSet({ ...options, minutes: 6 }).minutes <= 6);
   assert.equal(
     composeSet({
@@ -288,4 +288,38 @@ test('MathML powers visibly group negative and compound bases', () => {
   assert.match(power(n(-5), 2), /<mo>\(<\/mo>/);
   assert.match(power(x + '<mo>−</mo>' + n(2), 2), /<mo>\(<\/mo>/);
   assert.ok(!power(x, 2).includes('<mo>(</mo>'));
+});
+
+test('Integral module polynomials satisfy their independently specified derivative and initial condition', () => {
+  const differentiate = coefficients => coefficients.slice(1).map((c,i)=>c*(i+1));
+  const examples = [
+    ['int.polynomial','expr',[0,0,3]],
+    ['int.sum','expr',[2,8,6]],
+    ['int.motion','position',[2,6]],
+  ];
+  for(const [id,part,expected] of examples){
+    const task=instantiate(id,'independent');
+    const coefficients=polynomial(task.parts.find(p=>p.id===part).answer);
+    assert.deepEqual(differentiate(coefficients),expected);
+  }
+  const motion=instantiate('int.motion','independent');
+  const p=polynomial(motion.parts[0].answer);
+  assert.equal(p[0],5);
+  assert.equal(p.reduce((sum,c,i)=>sum+c*2**i,0),21);
+  const check=instantiate('int.check','independent');
+  assert.deepEqual(polynomial(check.parts[0].answer),differentiate([5,0,-3,4,0,2]));
+  assert.notDeepEqual(polynomial(check.parts[0].answer),[0,-6,8,0,10]);
+  for(const id of ['int.polynomial','int.sum']) assert.equal(gradePart(instantiate(id,'a').parts[0], 'x^3+1').status,'incorrect');
+});
+
+test('Integral targeted feedback distinguishes arithmetic, integration and initial-value errors', async () => {
+  const {targetedFeedback}=await import('../tasks/grading.js');
+  const poly=instantiate('int.polynomial','a');
+  assert.match(targetedFeedback(poly,poly.parts[0],'3*x^3'),/mangler division/);
+  const motion=instantiate('int.motion','a');
+  assert.match(targetedFeedback(motion,motion.parts[0],'3*x^2+2*x'),/integrationsregel passer.*begyndelsespositionen/);
+  assert.match(targetedFeedback(motion,motion.parts[1],'16'),/ændringen fra starten/);
+  assert.equal(gradePart(motion.parts[0],'e^x').status,'review');
+  assert.equal(composeSet({seed:'int',topics:['integration'],minutes:90,onlyCompleted:true,completed:['int.1']}).tasks.length,7);
+  assert.equal(composeSet({seed:'int',topics:['integration'],onlyCompleted:true,completed:['int.2']}).tasks.length,0);
 });
