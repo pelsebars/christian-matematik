@@ -102,3 +102,7 @@
 #int5-lesson select { width:100%; max-width:550px; padding:11px 12px; border:1px solid var(--line); border-radius:9px; font:inherit; background:var(--surface); color:var(--ink); margin-bottom:16px; }
 #int5-lesson input[type=range] { width:100%; max-width:550px; margin-bottom:16px; }
 #int5-storage-warning { padding:16px; border:1px solid #b77b28; background:#fff1e2; border-radius:12px; }
+#int6-lesson select { width:100%; max-width:550px; padding:11px 12px; border:1px solid var(--line); border-radius:9px; font:inherit; background:var(--surface); color:var(--ink); margin-bottom:16px; }
+#int6-lesson input[type=range] { width:100%; max-width:550px; margin-bottom:16px; }
+#int6-storage-warning { padding:16px; border:1px solid #b77b28; background:#fff1e2; border-radius:12px; }
+#int6-lesson [data-int6-stage][aria-pressed=true] { border-color:var(--blue); background:var(--blue); color:white; font-weight:700; }

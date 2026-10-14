@@ -474,3 +474,17 @@ test('Module 5 volumes and lengths match independent analytical and numerical mo
  const limit=Math.acosh(211.4885/(2*10.4801))/.0329;assert.ok(Math.abs(2*limit-182.51)<.01);assert.ok(Math.abs(simpsonIntegral(t=>Math.hypot(1,-2*10.4801*.0329*Math.sinh(.0329*t)),-limit,limit)-451.26)<.01);
  const incomplete=composeSet({seed:'solid',topics:['integration'],onlyCompleted:true,completed:['int.5'],minutes:180});assert.equal(incomplete.tasks.length,0);const ready=composeSet({seed:'solid',topics:['integration'],onlyCompleted:true,completed:['int.3','int.4','int.rep','int.5'],minutes:180});assert.ok(ready.tasks.some(t=>t.module==='int.5'));
 });
+
+test('Module 6 substitution families satisfy independent chain-rule, domain and model checks',async()=>{
+ const {substitutionCase}=await import('../integral-substitution-lesson.js');const {pagesForIntegralModule,parseIntegralRoute}=await import('../integral-routes.js');
+ assert.equal(pagesForIntegralModule('6').length,28);for(const p of pagesForIntegralModule('6'))assert.equal(parseIntegralRoute('#'+p).path,p);
+ const derivative=(f,t)=>{const h=1e-5;return(f(t+h)-f(t-h))/(2*h);};
+ for(const type of ['linear','exponential','trig'])for(const a of [1,2,3,4])for(const t of [-1,-.5,0,.5,1]){const m=substitutionCase(type,a);assert.ok(Math.abs(derivative(m.F,t)-m.f(t))<1e-6*Math.max(1,Math.abs(m.f(t))));assert.ok(Math.abs(derivative(m.wrongF,t)-m.wrongFactor*m.f(t))<1e-6*Math.max(1,Math.abs(m.f(t))));}
+ const poly=polynomial(instantiate('int6.linear','a').parts[0].answer),D=poly.slice(1).map((c,i)=>c*(i+1)),at=(p,t)=>p.reduce((s,c,i)=>s+c*t**i,0);for(const t of [-2,0,.5,2])assert.ok(Math.abs(at(D,t)-(2*t-1)**4)<1e-9);assert.ok(Math.abs(at(poly,.5))<1e-12);
+ const powerPrimitive=t=>(t*t+3)**4/4;for(const t of [-1,0,1])assert.ok(Math.abs(derivative(powerPrimitive,t)-2*t*(t*t+3)**3)<1e-5);
+ const logPrimitive=t=>3*Math.log(Math.abs(t*t+t));for(const t of [-2,-.75,-.25,1,2])assert.ok(Math.abs(derivative(logPrimitive,t)-(6*t+3)/(t*t+t))<1e-6);
+ const pointPrimitive=t=>-1.5*Math.log((4-2*t)/4);assert.ok(Math.abs(pointPrimitive(0))<1e-12);assert.ok(Math.abs(pointPrimitive(1)-number(instantiate('int6.point','a').parts[1].answer))<.01);for(const t of [-1,0,1])assert.ok(Math.abs(derivative(pointPrimitive,t)-3/(4-2*t))<1e-8);
+ const base=.4937,v=t=>12.42-.0944*t-12.42*base**t,S=t=>12.42*t-.0472*t*t-12.42*(base**t-1)/Math.log(base);assert.equal(S(0),0);for(const t of [0,1,2,4]){assert.ok(v(t)>=0);assert.ok(Math.abs(derivative(S,t)-v(t))<1e-8);}const runner=instantiate('int6.runner','a');assert.ok(Math.abs(v(3)-number(runner.parts[0].answer))<.01);assert.ok(Math.abs(S(2)-number(runner.parts[1].answer))<.01);assert.ok(Math.abs(S(4)-S(2)-number(runner.parts[2].answer))<.01);
+ const u9=t=>(t**3+2)*Math.log(t**3+2)-(t**3+2);for(const t of [-1,0,1])assert.ok(Math.abs(derivative(u9,t)-3*t*t*Math.log(t**3+2))<1e-7);
+ const incomplete=composeSet({seed:'sub',topics:['integration'],onlyCompleted:true,completed:['int.6'],minutes:180});assert.equal(incomplete.tasks.length,0);const ready=composeSet({seed:'sub',topics:['integration'],onlyCompleted:true,completed:['int.1','int.rep','int.6'],minutes:180});assert.ok(ready.tasks.some(t=>t.module==='int.6'));
+});

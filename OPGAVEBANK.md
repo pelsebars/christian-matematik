@@ -269,3 +269,9 @@ Potenser, fortegn, rødder, lineær omvending, domænebegrænset kvadratfunktion
 `tasks/bank/integration-solids.js` tilføjer syv opgaver i `int.5` med `int.3`, `int.4` og `int.rep` som forudsætninger. Banken har nu 51 opgaver. Målene er `int.discs`, `int.washers`, `int.volume-units`, `int.volume-model`, `int.arc`, `int.length-units` og `int.length-model`.
 
 Skiver og skiver med hul kan besvares med den præcise koefficient foran pi. En eksakt kurvelængde med kvadratrod stilles som valg, da polynomiumsparseren ikke understøtter rodudtryk. Skål, lampe, kabel og karaffel kræver dokumenteret modelkontrol; numeriske svar har angivne afrundinger og absolutte tolerancer. Forklaringer har egen vurdering. Prøvetekster indeholder ingen hints eller metodeoverskrifter.
+
+## Integralregning, modul 6
+
+`tasks/bank/integration-substitution.js` tilføjer syv opgaver i `int.6`, med `int.1` og `int.rep` som forudsætninger. Banken har nu 58 opgaver. Målene er `int.substitution`, `int.sub-factor`, `int.sub-power`, `int.sub-log`, `int.sub-domain`, `int.sub-trig`, `int.sub-check`, `int.sub-cas` og `int.sub-model`.
+
+Familier med eksponentialfunktion, logaritme og trigonometri stilles som valg med integrationskonstant, da den fælles parser er begrænset til polynomier. Den lineære potensopgave har en punktbetingelse, så ækvivalente polynomielle svar kan kontrolleres entydigt. Logaritmeopgaven kræver absolutværdi på alle definitionsintervaller. CAS-punktopgaven bruger en præcis konstant; løbermodellen adskiller fart fra stamfunktionsforskelle og efterfølgende tidsinterval. Forklaringer har egen vurdering, og prøvetekster har ingen hints eller metodeoverskrifter.

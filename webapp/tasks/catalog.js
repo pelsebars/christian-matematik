@@ -64,6 +64,15 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "int.substitution": {module:"int.6",text:"Vælge indre funktion og omskrive hele differentialet"},
+  "int.sub-factor": {module:"int.6",text:"Bevare konstantfaktorer og fortegn fra den indre afledte"},
+  "int.sub-power": {module:"int.6",text:"Integrere potenser i ny variabel og substituere tilbage"},
+  "int.sub-log": {module:"int.6",text:"Integrere en indre afledt divideret med funktionen"},
+  "int.sub-domain": {module:"int.6",text:"Kontrollere nævnere, logaritmeargumenter og intervaller"},
+  "int.sub-trig": {module:"int.6",text:"Brug substitution med sinus og cosinus i radianer"},
+  "int.sub-check": {module:"int.6",text:"Begrunde substitution med kædereglen og kontrollere resultat"},
+  "int.sub-cas": {module:"int.6",text:"Dokumentere CAS, punktbetingelse og præcise konstanter"},
+  "int.sub-model": {module:"int.6",text:"Fortolke stamfunktion som strækning med tidsgrænser og enheder"},
   "int.discs": {module:"int.5",text:"Opstille rumfang med cirkelskiver og radius i anden"},
   "int.washers": {module:"int.5",text:"Beregne skiver med hul og medtage massive dele"},
   "int.volume-units": {module:"int.5",text:"Skelne mellem radius, diameter og volumen med enheder"},

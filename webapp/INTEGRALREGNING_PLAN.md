@@ -1,6 +1,6 @@
 # Integralregning – læringsmål og progression
 
-Modul 1–5 og den unummererede B-repetition 6–7 er implementeret. Modul 6–7 har struktur og mål, men ingen færdige undervisningsforløb endnu.
+Modul 1–6 og den unummererede B-repetition 6–7 er implementeret. Modul 7 har struktur og mål, men intet færdigt undervisningsforløb endnu.
 
 ## Læringsmålskort
 
@@ -35,7 +35,7 @@ Integralregning er hovedemne 06 i sidebaren og på startsiden. Oversigten `#inte
 
 Modul 1 har seks trin: Mål og starttjek, Teori, Eksempler, Øvelser, Forståelsestjek og Opsummering. Starttjek (fem spørgsmål), teori (fem dele), eksempler (seks), træning (syv opgaver) og forståelsestjek (fire spørgsmål) viser én del ad gangen. En trinmenu og delmenu samt Forrige/Næste giver fri navigation. En adresse som `#integration/1/teori/konstant` kan deles eller genåbnes direkte. Browserens Tilbage/Frem følger sideskiftene. `#integration/1` starter ved det første spørgsmål; svar og hints bevares under sideskift og genindlæsning.
 
-Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2–5 og B-repetitionen har samme trinopdeling. Modul 6–7 får den, når deres undervisningsindhold implementeres.
+Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2–6 og B-repetitionen har samme trinopdeling. Modul 7 får den, når undervisningsindholdet implementeres.
 
 ### Stamfunktion og det ubestemte integral
 
@@ -205,4 +205,16 @@ Seks eksempler og syv bankopgaver dækker håndregning, skiver med hul, linjelæ
 
 Primær kilde er ark 5, især eksempel uden hjælpemidler, eksempel 3 med hjælpemidler, u1 og opgaver 6–7, 9, 11–12. Enkle cylinder-, kegle-, hul- og linjeopgaver samt figurer og småtrin er egne pædagogiske tilføjelser. Mål U2–U7, K2, K4–K7 og A1–A4 øves eller kontrolleres.
 
-Svar og hints gemmes under `christian-matematik.integration.solids.v1`. De nye bankopgaver kræver `int.3`, `int.4` og `int.rep`. Tests sammenligner med uafhængige analytiske integraler og numeriske modelkontroller, samt alle mobiladresser, MathML, figurkontroller, tastatur, feedback, lagring, historik, prøvetilstand og repetition. Næste side er planen for modul 6.
+Svar og hints gemmes under `christian-matematik.integration.solids.v1`. De nye bankopgaver kræver `int.3`, `int.4` og `int.rep`. Tests sammenligner med uafhængige analytiske integraler og numeriske modelkontroller, samt alle mobiladresser, MathML, figurkontroller, tastatur, feedback, lagring, historik, prøvetilstand og repetition. Næste side er det åbne modul 6.
+
+## Modul 6 – substitution i ubestemte integraler
+
+Åbent på `#integration/6`, med seks trin og 28 korte adresser. Fem grundspørgsmål og mikroøvelser støtter indre afledt, kæderegel, potensregel, konstantfaktor og logaritmedomæne. Beviset følger Pensum/Definitioner, sætninger og beviser.docx: differentiation af den sammensatte stamfunktion giver den indre afledte som faktor. En global omvendt funktion til den indre funktion er ikke påkrævet for den ubestemte substitutionsformel.
+
+Den interaktive substitution viser fire regnetrin for lineær indre funktion, eksponentialfunktion med kvadrat og cosinus med sinus udenfor. Indre koefficient og prøveværdi kan ændres. Korrekt forskrift sammenlignes med en typisk faktor- eller fortegnsfejl, både symbolsk og ved en talværdi. Et match ved et nulpunkt vises eksplicit som utilstrækkelig kontrol.
+
+Seks eksempler, syv bankopgaver og fire sluttjek dækker potenser, eksponentialfunktion, logaritme på flere definitionsintervaller, trigonometri, en punktbetingelse og løbermodellens strækning. Integrationskonstanter med logaritmer beholdes præcist; numeriske svar afrundes til sidst. Absolutværdi bruges i logaritmefamilier på negative indre værdier, med uafhængige konstanter på hvert sammenhængende interval. U9 viser, at en substitution kan efterlade et integral, der kræver en yderligere regel eller CAS.
+
+Primær kilde er ark 6, eksempel 1, u1–u8 og opgaver med hjælpemidler 1 og 5. Word-OMML i eksempel 2 og 3 grupperer koefficient og variabel under samme eksponent; den indre afledte ville passe til en anden læsning. Disse tvetydige eksempler er derfor ikke kopieret til banken. Entydige u-opgaver bruges i stedet, og alle svar kontrolleres uafhængigt. Mål U1–U5, U7, K1, K3, K6–K7, A1 og A4 behandles.
+
+Svar, hints og kontroller gemmes under `christian-matematik.integration.substitution.v1`. Bankopgaver kræver `int.1` og `int.rep`. Polynomielle forskrifter graderes ved ækvivalens med en entydig punktbetingelse; eksponential-, logaritme- og trigonometriske familier er valg med MathML. Forklaringer har egen vurdering. Tests kontrollerer kæderegel, alle interaktive faktorer, logaritmer på positive og negative intervaller, punktbetingelse, løbermodel, alle mobiladresser, MathML, tastatur, historik, hints, lagring, prøvebank og repetitionslink. Næste side er planen for modul 7.
