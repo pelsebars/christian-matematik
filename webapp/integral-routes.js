@@ -11,7 +11,8 @@ export const integralGraphSteps = integralSteps.map(s => s.id === 'teori'
   ? { ...s, parts: ['sammenhaeng', 'forskydning', 'fortegn', 'punkt', 'tangent'] }
   : { ...s, parts: [...s.parts] });
 export const integralDefiniteSteps = integralSteps.map(s => s.id === 'teori' ? { ...s, parts: ['areal', 'hovedsaetning', 'beregning', 'fortegn', 'modeller'] } : { ...s, parts: [...s.parts] });
-export const stepsForIntegralModule = module => ({ '1': integralSteps, '2': integralGraphSteps, '3': integralDefiniteSteps })[module];
+export const integralAreaSteps = integralSteps.map(s => s.id === 'teori' ? { ...s, parts: ['graenser', 'mellem', 'regler', 'numerisk', 'modeller'] } : { ...s, parts: [...s.parts] });
+export const stepsForIntegralModule = module => ({ '1': integralSteps, '2': integralGraphSteps, '3': integralDefiniteSteps, '4': integralAreaSteps })[module];
 export const integralRoute = (module = '', step = '', part = '') =>
   ['integration', module, step, part].filter(Boolean).join('/');
 export function parseIntegralRoute(hash) {

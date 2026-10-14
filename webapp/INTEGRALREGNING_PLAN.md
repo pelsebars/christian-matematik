@@ -1,6 +1,6 @@
 # Integralregning – læringsmål og progression
 
-Modul 1, 2 og 3 er implementeret. Modul 4–7 og den unummererede mellemstation har struktur og mål, men ingen færdige undervisningsforløb endnu.
+Modul 1, 2, 3 og 4 er implementeret. Modul 5–7 og den unummererede mellemstation har struktur og mål, men ingen færdige undervisningsforløb endnu.
 
 ## Læringsmålskort
 
@@ -35,7 +35,7 @@ Integralregning er hovedemne 06 i sidebaren og på startsiden. Oversigten `#inte
 
 Modul 1 har seks trin: Mål og starttjek, Teori, Eksempler, Øvelser, Forståelsestjek og Opsummering. Starttjek (fem spørgsmål), teori (fem dele), eksempler (seks), træning (syv opgaver) og forståelsestjek (fire spørgsmål) viser én del ad gangen. En trinmenu og delmenu samt Forrige/Næste giver fri navigation. En adresse som `#integration/1/teori/konstant` kan deles eller genåbnes direkte. Browserens Tilbage/Frem følger sideskiftene. `#integration/1` starter ved det første spørgsmål; svar og hints bevares under sideskift og genindlæsning.
 
-Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2 og 3 har nu også den samme trinopdeling. Modul 4–7 og mellemstationen får den, når deres undervisningsindhold implementeres.
+Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2, 3 og 4 har nu også den samme trinopdeling. Modul 5–7 og mellemstationen får den, når deres undervisningsindhold implementeres.
 
 ### Stamfunktion og det ubestemte integral
 
@@ -163,7 +163,7 @@ Verifikation omfatter uafhængig differentiation og punktkontrol, tangenters hæ
 
 Modulet er åbent på `#integration/3`, med seks trin og 28 korte adresser. Fem startspørgsmål tjekker indsættelse, stamfunktioner, potenser, subtraktion og enheder. Fem teoridele dækker areal/akkumulation, hovedsætningen, grænseberegning og tabelværdier, fortegnet integral versus geometrisk areal samt modeller og CAS. Hver teoridel har en mikroøvelse.
 
-Den interaktive figur har tre kendte forskrifter, flytbare grænser og et valgfrit rektangeloverslag. Den viser præcist fortegnet integral og geometrisk areal samt ændringen ved omvendte eller ens grænser. Delarealer beregnes ved kendte nulpunkter og tælles positivt til geometrisk areal. Overslaget bruger venstrerektangler på intervallet fra venstre mod højre og vender fortegn ved omvendte integrationsgrænser. Dette er intuition til definitionen; systematisk numerisk integration og trapezmetoden er fortsat planlagt i modul 4.
+Den interaktive figur har tre kendte forskrifter, flytbare grænser og et valgfrit rektangeloverslag. Den viser præcist fortegnet integral og geometrisk areal samt ændringen ved omvendte eller ens grænser. Delarealer beregnes ved kendte nulpunkter og tælles positivt til geometrisk areal. Overslaget bruger venstrerektangler på intervallet fra venstre mod højre og vender fortegn ved omvendte integrationsgrænser. Dette er intuition til definitionen; systematisk numerisk integration og trapezmetoden er implementeret i modul 4.
 
 Bevisidéerne for arealfunktionen og stamfunktionsforskellen bygger på Pensum/Definitioner, sætninger og beviser.docx. Arealfunktionens bevis gengives med kildens afgrænsning: ikke-negativ kontinuert funktion, positivt skridt og det tilfælde, hvor funktionen er voksende til højre for punktet. Den generelle sætning og fortegnet akkumulation forklares særskilt.
 
@@ -174,3 +174,13 @@ Det primære opgaveark er ark 3, især eksempler 1–3 uden hjælpemidler, eksem
 Læringsmålskortets U1–U5, U7, K2, K6–K7, A1, A2 og A4 øves og kontrolleres her. Fire sluttjek og en egen forklaringsvurdering afslutter modulet. Svar og hints gemmes separat under `christian-matematik.integration.definite.v1`; data og bankversioner fra tidligere moduler bevares.
 
 Verifikation omfatter uafhængig differentiation og grænseberegning, fortegnet integral versus geometrisk areal, omvendte/ens grænser, rektangeloverslagenes tilnærmelse, energimodellens tider via uafhængig intervalhalvering, parameterkontrol, prerequisites, alle mobiladresser, MathML-grænser/potenser, lokal lagring, browserhistorik, prøvebank og repetition. Browsertests for eksisterende app samt modul 1 og 2 indgår i regressionstesten.
+
+## Modul 4 – arealberegninger og regneregler
+
+Åbent på `#integration/4` med seks trin og 28 korte adresser. Fem grundspørgsmål og fem mikroøvelser støtter ligninger, parenteser, grænser, grafplacering og enheder. Teorien behandler skæringer, øvre minus nedre, intervalopdeling, linearitet med en stamfunktionsbegrundelse, diskrete trapezsummer samt parametre og vandstand.
+
+Figuren mellem to grafer viser en første-kvadrant-opgave og kildens kubiske funktion over for en linje. Den opdeler ved kendte skæringspunkter, viser den øvre graf i hvert delinterval og sammenligner geometrisk areal med det fortegnede integral. Den numeriske figur sammenligner trapezer med det præcise integral af kvadratet på intervallet nul til to. Måledataopgaven skelner mellem præcis integration af en stykkevis lineær model og overslag over virkeligheden.
+
+Seks gennemregnede eksempler, syv bankopgaver og fire sluttjek dækker håndregning, stamfunktionstabel, skift af fortegn, regneregler, måledata, vandstandsændring og parameterbestemmelse. Primær kilde er ark 4, særligt u1–u2, eksempel 1 med hjælpemidler og opgaver med hjælpemidler 5–7. Numerisk integration supplerer efter undervisningsbeskrivelsens U6 og K5. Læringsmål U1–U7, K2, K5–K7, A1, A2 og A4 dækkes; A3 om kurvelængde afventer modul 5.
+
+Svar, kontroller og hints gemmes under `christian-matematik.integration.areas.v1`. Næste side er den unummererede B-repetition mellem modul 4 og 5. Tests kontrollerer uafhængige areal-/modelberegninger, alle adresser på mobil, MathML, figurkontroller, tastatur, feedback, hints, genindlæsning, historik og utilgængelig eller beskadiget lagring. Alle tidligere browserforløb indgår i regressionstesten.

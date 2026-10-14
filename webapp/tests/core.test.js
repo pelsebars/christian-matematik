@@ -425,3 +425,21 @@ test('Module 3 routes, prerequisites and feedback distinguish integration from a
  const completed=composeSet({seed:'int3',topics:['integration'],onlyCompleted:true,completed:['int.1','int.2','int.3'],minutes:180});assert.ok(completed.tasks.some(t=>t.module==='int.3'));
  assert.ok(instantiate('int3.energy','a').aids);assert.ok(!instantiate('int3.exponential','a').aids);
 });
+
+test('Module 4 area, linearity, data and parameter answers agree with independent calculations', async()=>{
+ const {betweenModels,betweenMeasurements,trapezoidSum}=await import('../integral-areas-lesson.js');
+ const {parseIntegralRoute,pagesForIntegralModule}=await import('../integral-routes.js');
+ assert.equal(pagesForIntegralModule('4').length,28);for(const p of pagesForIntegralModule('4'))assert.equal(parseIntegralRoute('#'+p).path,p);
+ assert.equal(betweenMeasurements(betweenModels.basic,0,1).area,3);
+ const cross=betweenMeasurements(betweenModels.cross,-1,3);assert.ok(Math.abs(cross.area-71/6)<1e-12);assert.ok(Math.abs(cross.value+32/3)<1e-12);assert.deepEqual(cross.segments.map(s=>s.upper),['f','g']);
+ const P=t=>t**4/4-2*t**3+4*t*t;assert.equal(P(4)-P(0),0);assert.equal(Math.abs(P(2)-P(0))+Math.abs(P(4)-P(2)),8);
+ assert.equal(number(instantiate('int4.table','a').parts[0].answer),(12+1.5)-(7-2.5));
+ assert.equal(number(instantiate('int4.rules','a').parts[0].answer),3*4-2*(-1));
+ assert.equal(trapezoidSum([{x:0,y:0},{x:1,y:2},{x:2,y:3},{x:3,y:3}]),6.5);
+ assert.equal(trapezoidSum([{x:0,y:1},{x:2,y:3},{x:5,y:3}]),13);
+ for(const N of [2,4,8,16,32]){const pts=Array.from({length:N+1},(_,i)=>({x:2*i/N,y:(2*i/N)**2}));assert.ok(Math.abs(trapezoidSum(pts)-8/3-4/(3*N*N))<1e-12);}
+ assert.ok(Math.abs(.037*22**2+22-number(instantiate('int4.water','a').parts[1].answer))<.01);
+ const base=2*4**2-4**3/3;assert.ok(Math.abs(base-32/3)<1e-12);assert.ok(Math.abs((7-1)*base-64)<1e-12);
+ const incomplete=composeSet({seed:'int4',topics:['integration'],onlyCompleted:true,completed:['int.4'],minutes:180});assert.equal(incomplete.tasks.length,0);
+ const completed=composeSet({seed:'int4',topics:['integration'],onlyCompleted:true,completed:['int.1','int.2','int.3','int.4'],minutes:180});assert.ok(completed.tasks.some(t=>t.module==='int.4'));
+});

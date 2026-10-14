@@ -64,6 +64,14 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "int.intersections": {module:"int.4",text:"Bestemme relevante skæringer og nulpunkter til arealgrænser"},
+  "int.between": {module:"int.4",text:"Beregne areal mellem grafer med øvre minus nedre"},
+  "int.split": {module:"int.4",text:"Opdele intervallet når fortegn eller grafplacering ændrer sig"},
+  "int.area-rules": {module:"int.4",text:"Anvende lineæritet og intervaladdition for bestemte integraler"},
+  "int.numeric": {module:"int.4",text:"Udføre og vurdere numerisk integration med trapezmetoden"},
+  "int.discrete": {module:"int.4",text:"Fortolke endelige summer fra diskrete måledata"},
+  "int.area-model": {module:"int.4",text:"Fortolke integralmodeller og enheder med kontrol af antagelser"},
+  "int.area-parameter": {module:"int.4",text:"Bestemme parametre ud fra arealbetingelser"},
   "int.definite": {module:"int.3",text:"Beregne bestemte integraler med korrekte grænser"},
   "int.ftc": {module:"int.3",text:"Forbinde det bestemte integral med stamfunktionsforskellen"},
   "int.bounds": {module:"int.3",text:"Indsætte grænser med korrekte potenser, parenteser og fortegn"},

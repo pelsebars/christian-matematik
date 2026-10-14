@@ -251,3 +251,9 @@ Browserforløbet `tests/integral-graphs.browser.test.js` tester alle moduldele o
 Forskellige fejlsvar udløser konkret feedback om potensregning, forkert række i en tabel, omvendte grænser, glemt nedre grænseværdi eller sammenblanding af integral og geometrisk areal. Energi- og parameterforklaringer kræver egen vurdering med tjekliste. CAS- og modelopgaver angiver domæne, enheder og afrunding; prøveteksterne har ingen metodeoverskrifter eller hints.
 
 Modulets egne svar gemmes under `christian-matematik.integration.definite.v1`. `tests/integral-definite.browser.test.js` tester alle dele, figurens grænser og rektangler, MathML-grænser, fejlfeedback, hints, lokal lagring, mobil, bankprøver og repetition. Den indgår i `npm run test:browser`.
+
+## Integralregning, modul 4
+
+`tasks/bank/integration-areas.js` tilføjer syv opgaver med `int.1`, `int.2` og `int.3` som forudsætninger. Banken har nu 37 opgaver. De nye mål er `int.intersections`, `int.between`, `int.split`, `int.area-rules`, `int.numeric`, `int.discrete`, `int.area-model` og `int.area-parameter`.
+
+Opgaverne dækker areal mellem grafer, stamfunktionstabel, todelte områder, linearitet, diskrete data, historisk vandstandsmodel og en parameter. Forklaringer har egen vurdering; prøvetekster indeholder ingen hints eller metodeoverskrifter. Nye opgaver og eksisterende versioner bruger samme bankformat og sikker svarparser.

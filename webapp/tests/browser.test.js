@@ -1,3 +1,4 @@
+import {instantiate} from '../tasks/bank/index.js';
 // Run with Playwright installed, or PLAYWRIGHT_MODULE_PATH pointing to its index.mjs.
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
@@ -103,7 +104,7 @@ try {
     .locator("[data-task-action=jump]")
     .nth(
       active.items.findIndex(
-        (r, i) => r.id !== "geo.angle" && i < active.items.length - 1,
+        (r, i) => ["number","expression"].includes(instantiate(r.id, r.seed).parts[0].type) && i < active.items.length - 1,
       ),
     )
     .click();

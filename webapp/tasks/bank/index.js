@@ -1,3 +1,4 @@
+import { integrationAreaTasks } from "./integration-areas.js";
 import { integrationDefiniteTasks } from "./integration-definite.js";
 import { integrationGraphTasks } from "./integration-graphs.js";
 // Integration point: import a new topic pack and add it here.
@@ -6,7 +7,7 @@ import { algebraTasks } from "./algebra.js";
 import { calculusTasks } from "./calculus.js";
 import { geometryTasks } from "./geometry.js";
 import { validateTask } from "../schema.js";
-export const bank = [...algebraTasks, ...calculusTasks, ...geometryTasks, ...integrationTasks, ...integrationGraphTasks, ...integrationDefiniteTasks];
+export const bank = [...algebraTasks, ...calculusTasks, ...geometryTasks, ...integrationTasks, ...integrationGraphTasks, ...integrationDefiniteTasks, ...integrationAreaTasks];
 if (new Set(bank.map((t) => t.id)).size !== bank.length)
   throw Error("Opgave-id skal være entydige i banken.");
 export function seededRandom(seed) {
