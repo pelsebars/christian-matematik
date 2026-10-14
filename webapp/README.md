@@ -12,7 +12,7 @@ Første lokale version af Christians matematikapp.
 - komplet læringsforløb i plangeometri og vektorer med fem moduler om vektorer, skalarprodukt/vinkler, projektion/tværvektor/determinant, linjen og cirklen med forudsætningstjek, grundkort, interaktive figurer, håndregning, CAS-spor og forståelsestjek;
 - et trinvist andengradsforløb baseret på opgavearket, inklusive standardform, koefficienter, diskriminant, løsningsformel, indsættelseskontrol og blandet sluttest;
 - side med formler og huskeregler;
-- integralregning med foldbart læringsmålskort, separate sider for syv undervisningsgange og B-repetition samt komplet modul 1, 2, 3 og 4 med seks trin og én del ad gangen om stamfunktioner, grundregler, grafiske sammenhænge, punkt- og tangentbetingelser, bestemte integraler, fortegnet integral/geometrisk areal, arealer mellem grafer, regneregler, trapezmetoden, CAS og modeller;
+- integralregning med foldbart læringsmålskort, separate sider for syv undervisningsgange og B-repetition samt komplet modul 1, 2, 3 og 4 samt B-repetition 6–7 med seks trin og én del ad gangen om stamfunktioner, grundregler, grafiske sammenhænge, punkt- og tangentbetingelser, bestemte integraler, fortegnet integral/geometrisk areal, arealer mellem grafer, regneregler, trapezmetoden, potensregneregler, rødder, omvendte funktioner, domæner, CAS og modeller;
 - matematisk notation med indbygget MathML.
 
 ## Lokal visning
@@ -21,7 +21,7 @@ Servér mappen med en lokal webserver, og åbn `index.html` gennem serverens adr
 
 ## Fælles opgaver
 
-Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 37 gennemgåede opgaver fra alle seks hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og lokal lagring.
+Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 44 gennemgåede opgaver fra alle seks hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og lokal lagring.
 
 Format, integrationspunkt og eksempler er beskrevet i [OPGAVEBANK.md](../OPGAVEBANK.md). Nye emnepakker tilføjes i `tasks/bank/` og registreres i `tasks/bank/index.js`.
 

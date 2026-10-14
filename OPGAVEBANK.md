@@ -257,3 +257,9 @@ Modulets egne svar gemmes under `christian-matematik.integration.definite.v1`. `
 `tasks/bank/integration-areas.js` tilføjer syv opgaver med `int.1`, `int.2` og `int.3` som forudsætninger. Banken har nu 37 opgaver. De nye mål er `int.intersections`, `int.between`, `int.split`, `int.area-rules`, `int.numeric`, `int.discrete`, `int.area-model` og `int.area-parameter`.
 
 Opgaverne dækker areal mellem grafer, stamfunktionstabel, todelte områder, linearitet, diskrete data, historisk vandstandsmodel og en parameter. Forklaringer har egen vurdering; prøvetekster indeholder ingen hints eller metodeoverskrifter. Nye opgaver og eksisterende versioner bruger samme bankformat og sikker svarparser.
+
+## B-repetition 6–7 i integralforløbet
+
+`tasks/bank/integration-repetition.js` tilføjer syv selvstændige opgaver i `int.rep`, uden integralforudsætninger. Banken har nu 44 opgaver. Målene er `rep.powers`, `rep.roots`, `rep.inverse`, `rep.domain`, `rep.graph` og `rep.model`.
+
+Potenser, fortegn, rødder, lineær omvending, domænebegrænset kvadratfunktion, eksponentialfunktion/logaritme og en temperaturmodel bruger fælles sikker bedømmelse. Rødder og logaritmiske forskrifter, som polynomiumsparseren ikke understøtter, stilles som valg; polynomielle inverse forskrifter accepterer ækvivalente udtryk. Forklaringer har egen vurdering. Prøvetekster har ingen metodeoverskrifter eller hints; repetitionslinket åbner den unummererede mellemstation.

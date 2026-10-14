@@ -443,3 +443,17 @@ test('Module 4 area, linearity, data and parameter answers agree with independen
  const incomplete=composeSet({seed:'int4',topics:['integration'],onlyCompleted:true,completed:['int.4'],minutes:180});assert.equal(incomplete.tasks.length,0);
  const completed=composeSet({seed:'int4',topics:['integration'],onlyCompleted:true,completed:['int.1','int.2','int.3','int.4'],minutes:180});assert.ok(completed.tasks.some(t=>t.module==='int.4'));
 });
+
+test('B-repetition powers and inverse answers satisfy independent values, compositions and domain checks',async()=>{
+ const {inverseModels,reflectedPoint}=await import('../integral-repetition-lesson.js');const {parseIntegralRoute,pagesForIntegralModule}=await import('../integral-routes.js');
+ assert.equal(parseIntegralRoute('#integration/repetition').path,'integration/repetition/start/1');assert.equal(pagesForIntegralModule('repetition').length,28);for(const p of pagesForIntegralModule('repetition'))assert.equal(parseIntegralRoute('#'+p).path,p);
+ const at=(p,a)=>p.reduce((s,c,i)=>s+c*a**i,0);
+ const product=polynomial(instantiate('rep.product','a').parts[0].answer);for(const t of [-3,-1,.5,2])assert.equal(at(product,t),t**5*t**2/t**3);
+ const neg=instantiate('rep.negative','a');assert.equal(number(neg.parts[0].answer),2**-3);assert.equal(number(neg.parts[1].answer),(-2)**4);assert.equal(number(neg.parts[2].answer),-(2**4));
+ const roots=instantiate('rep.roots','a');assert.equal(number(roots.parts[0].answer),Math.cbrt(27)**2);assert.equal(number(roots.parts[1].answer),1/Math.sqrt(16));assert.equal(Math.sqrt((-3)**2),Math.abs(-3));
+ const inv=polynomial(instantiate('rep.linear','a').parts[0].answer);for(const t of [-10,0,2,9]){assert.ok(Math.abs(at(inv,3*t-6)-t)<1e-12);assert.ok(Math.abs(3*at(inv,t)-6-t)<1e-12);}
+ for(const m of [inverseModels.linear,inverseModels.square])for(const t of [m.lo,(m.lo+m.hi)/2,m.hi]){assert.ok(Math.abs(m.inverse(m.f(t))-t)<1e-12);const p=reflectedPoint(m,t);assert.deepEqual(p.reflected,[p.original[1],p.original[0]]);}
+ assert.equal(inverseModels.full.f(-2),inverseModels.full.f(2));assert.equal(inverseModels.full.oneToOne,false);assert.ok(Math.abs(Math.log(2+Math.exp(3)-2)-3)<1e-12);
+ const model=polynomial(instantiate('rep.temperature','a').parts[0].answer);for(const c of [0,20,100])assert.ok(Math.abs(at(model,1.8*c+32)-c)<1e-12);
+ const set=composeSet({seed:'rep',topics:['integration'],onlyCompleted:true,completed:['int.rep'],minutes:90});assert.equal(set.tasks.length,7);assert.ok(set.tasks.every(t=>t.module==='int.rep'&&t.prerequisites.length===0));
+});

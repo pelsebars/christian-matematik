@@ -96,3 +96,6 @@
 #int4-storage-warning { padding:16px; border:1px solid #b77b28; background:#fff1e2; border-radius:12px; }
 #int4-lesson .int-table table { min-width:360px; }
 #int4-lesson .int-table th { min-width:70px; }
+#rep-lesson select { width:100%; max-width:550px; padding:11px 12px; border:1px solid var(--line); border-radius:9px; font:inherit; background:var(--surface); color:var(--ink); margin-bottom:16px; }
+#rep-lesson input[type=range] { width:100%; max-width:550px; margin-bottom:16px; }
+#rep-storage-warning { padding:16px; border:1px solid #b77b28; background:#fff1e2; border-radius:12px; }

@@ -1,6 +1,6 @@
 # Integralregning – læringsmål og progression
 
-Modul 1, 2, 3 og 4 er implementeret. Modul 5–7 og den unummererede mellemstation har struktur og mål, men ingen færdige undervisningsforløb endnu.
+Modul 1–4 og den unummererede B-repetition 6–7 er implementeret. Modul 5–7 har struktur og mål, men ingen færdige undervisningsforløb endnu.
 
 ## Læringsmålskort
 
@@ -35,7 +35,7 @@ Integralregning er hovedemne 06 i sidebaren og på startsiden. Oversigten `#inte
 
 Modul 1 har seks trin: Mål og starttjek, Teori, Eksempler, Øvelser, Forståelsestjek og Opsummering. Starttjek (fem spørgsmål), teori (fem dele), eksempler (seks), træning (syv opgaver) og forståelsestjek (fire spørgsmål) viser én del ad gangen. En trinmenu og delmenu samt Forrige/Næste giver fri navigation. En adresse som `#integration/1/teori/konstant` kan deles eller genåbnes direkte. Browserens Tilbage/Frem følger sideskiftene. `#integration/1` starter ved det første spørgsmål; svar og hints bevares under sideskift og genindlæsning.
 
-Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2, 3 og 4 har nu også den samme trinopdeling. Modul 5–7 og mellemstationen får den, når deres undervisningsindhold implementeres.
+Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2–4 og B-repetitionen har samme trinopdeling. Modul 5–7 får den, når deres undervisningsindhold implementeres.
 
 ### Stamfunktion og det ubestemte integral
 
@@ -184,3 +184,13 @@ Figuren mellem to grafer viser en første-kvadrant-opgave og kildens kubiske fun
 Seks gennemregnede eksempler, syv bankopgaver og fire sluttjek dækker håndregning, stamfunktionstabel, skift af fortegn, regneregler, måledata, vandstandsændring og parameterbestemmelse. Primær kilde er ark 4, særligt u1–u2, eksempel 1 med hjælpemidler og opgaver med hjælpemidler 5–7. Numerisk integration supplerer efter undervisningsbeskrivelsens U6 og K5. Læringsmål U1–U7, K2, K5–K7, A1, A2 og A4 dækkes; A3 om kurvelængde afventer modul 5.
 
 Svar, kontroller og hints gemmes under `christian-matematik.integration.areas.v1`. Næste side er den unummererede B-repetition mellem modul 4 og 5. Tests kontrollerer uafhængige areal-/modelberegninger, alle adresser på mobil, MathML, figurkontroller, tastatur, feedback, hints, genindlæsning, historik og utilgængelig eller beskadiget lagring. Alle tidligere browserforløb indgår i regressionstesten.
+
+## Virtuel repetition B-niveau 6–7
+
+Mellemstationen er åben på `#integration/repetition`, med seks trin og 28 korte adresser. Den har intet integralmodulnummer. Læseplanen placerer de to emner den 23. oktober efter modul 4; der findes ikke et separat B-repetitionsark i det lokale Pensum. Undervisning, opgaver og figurer er egne pædagogiske tilføjelser til læseplanens emner.
+
+Fem grundspørgsmål giver særskilte anbefalinger for potenssporet og sporet om omvendte funktioner. Elever kan vælge et spor eller gå direkte til sluttjekket. Teorien behandler potensregler med betingelser, negative grundtal og eksponenter, rationale eksponenter, rødder, reciprok versus omvendt, isolering, sammensætningskontrol, en-til-en, definitions- og værdimængde, eksponentialfunktion/logaritme og spejling i diagonalen. Det fulde kvadratdomæne og begge mulige domænebegrænsninger forklares særskilt.
+
+En potensvælger viser præcise værdier for halve eksponenter. Den interaktive graf har ens akseforhold, ombytter punktkoordinater og sammenligner en linje, en begrænset kvadratfunktion og den fulde kvadratfunktion, hvis spejlede relation ikke er en funktion. Seks gennemregnede eksempler, syv bankopgaver og fire sluttjek dækker B6, B7 og støtte til U7. Temperaturmodellen bytter både domæne og enheder ved omvending.
+
+Svar, hints og kontroller gemmes separat under `christian-matematik.integration.repetition.v1`. De syv bankopgaver kræver ingen integralmoduler som forudsætning, så repetitionen kan bruges selvstændigt. Tests kontrollerer uafhængige potensværdier, inverse sammensætninger, domæner og endepunkter, begge anbefalingsspor, alle mobiladresser, MathML, figurkontroller, tastatur, fejlsvar, hints, historik, lagringsfejl, prøvetilstand og repetitionslink. Næste side er planen for modul 5.

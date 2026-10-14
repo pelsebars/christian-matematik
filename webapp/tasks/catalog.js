@@ -64,6 +64,12 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "rep.powers": {module:"int.rep",text:"Bruge potensregneregler med korrekte fortegn og betingelser"},
+  "rep.roots": {module:"int.rep",text:"Forbinde rødder med rationale og negative eksponenter"},
+  "rep.inverse": {module:"int.rep",text:"Bestemme og kontrollere en omvendt funktion"},
+  "rep.domain": {module:"int.rep",text:"Vælge domæne og værdimængde og kontrollere en-til-en"},
+  "rep.graph": {module:"int.rep",text:"Forklare spejling og ombytning af koordinater"},
+  "rep.model": {module:"int.rep",text:"Fortolke en omvendt model med enheder og begrænset domæne"},
   "int.intersections": {module:"int.4",text:"Bestemme relevante skæringer og nulpunkter til arealgrænser"},
   "int.between": {module:"int.4",text:"Beregne areal mellem grafer med øvre minus nedre"},
   "int.split": {module:"int.4",text:"Opdele intervallet når fortegn eller grafplacering ændrer sig"},

@@ -73,7 +73,7 @@ try {
  await page.locator('.int-goal-map > summary').click();
  assert.ok(await page.locator('#int-maal').isVisible());
  await page.locator('.int-goal-map > summary').click();
- for (const [id, path] of [['int-repetition','repetition'],['int-modul-5','5'],['int-modul-6','6'],['int-modul-7','7']]) {
+ for (const [id, path] of [['int-modul-5','5'],['int-modul-6','6'],['int-modul-7','7']]) {
   await page.locator(`#int-forloeb [data-int-jump="${id}"]`).click();
   await page.waitForURL(`**/#integration/${path}`);
   assert.match(await page.locator('#' + id).innerText(), /Planlagt/);
