@@ -64,6 +64,13 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "int.graph": {module:"int.2",text:"Forbinde funktionens fortegn med stamfunktionens vækst"},
+  "int.shift": {module:"int.2",text:"Forstå lodret forskydning og integrationskonstant"},
+  "int.stationary": {module:"int.2",text:"Skelne mellem vandret tangent og ekstremum"},
+  "int.point": {module:"int.2",text:"Bestemme stamfunktion ud fra et punkt eller en funktionsværdi"},
+  "int.tangent": {module:"int.2",text:"Bestemme stamfunktion med en given tangent"},
+  "int.reasoning": {module:"int.2",text:"Begrunde graf- og modelkonklusioner og kontrollere alle muligheder"},
+  "int.cas-point": {module:"int.2",text:"Bruge CAS og kontrollere domæne, afledt og punktbetingelse"},
   "int.definition": {module:"int.1",text:"Kontrollere en stamfunktion ved differentiation"},
   "int.family": {module:"int.1",text:"Skelne mellem én og samtlige stamfunktioner"},
   "int.rules": {module:"int.1",text:"Integrere med grundregler og korrekt domæne"},

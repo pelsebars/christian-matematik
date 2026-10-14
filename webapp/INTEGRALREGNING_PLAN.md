@@ -1,6 +1,6 @@
 # Integralregning – læringsmål og progression
 
-Første arbejdsgang: modul 1 er implementeret. Modul 2–7 og den unummererede mellemstation har struktur og mål, men ingen færdige undervisningsforløb endnu.
+Modul 1 og 2 er implementeret. Modul 3–7 og den unummererede mellemstation har struktur og mål, men ingen færdige undervisningsforløb endnu.
 
 ## Læringsmålskort
 
@@ -35,7 +35,7 @@ Integralregning er hovedemne 06 i sidebaren og på startsiden. Oversigten `#inte
 
 Modul 1 har seks trin: Mål og starttjek, Teori, Eksempler, Øvelser, Forståelsestjek og Opsummering. Starttjek (fem spørgsmål), teori (fem dele), eksempler (seks), træning (syv opgaver) og forståelsestjek (fire spørgsmål) viser én del ad gangen. En trinmenu og delmenu samt Forrige/Næste giver fri navigation. En adresse som `#integration/1/teori/konstant` kan deles eller genåbnes direkte. Browserens Tilbage/Frem følger sideskiftene. `#integration/1` starter ved det første spørgsmål; svar og hints bevares under sideskift og genindlæsning.
 
-Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. De får den samme trinopdeling, når deres undervisningsindhold implementeres.
+Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2 har nu også den samme trinopdeling. Modul 3–7 og mellemstationen får den, når deres undervisningsindhold implementeres.
 
 ### Stamfunktion og det ubestemte integral
 
@@ -144,3 +144,17 @@ Tal/polynomier kontrolleres med bankens sikre parser. Eksponential-, logaritme- 
 ## Verifikation
 
 Kør npm test og npm run test:browser i webapp. Browserkontrollen omfatter hele modul 1, eksisterende appforløb, hints, målrettet fejlfeedback, genforsøg, MathML namespace og eksponentstruktur, lokal lagring, blokerede/ugyldige data, tastatur, graf, mobilvisning, prøvebank og konsol. Der kontrolleres også uafhængigt, at polynomiers afledte og modellens begyndelsesværdi passer.
+
+## Modul 2 – grafen for en stamfunktion
+
+Modulet er åbent på `#integration/2`, med de samme seks trin og 28 korte adresser som modul 1. Fem startspørgsmål tjekker notation, afledte, ligninger, linjers hældning og fortegn. Fem teoridele behandler sammenhængen mellem funktionsværdi og hældning, forskydning, monotoniforhold, punktbetingelser og tangentbetingelser. Hver teoridel har en mikroøvelse.
+
+Den interaktive figur viser den oprindelige funktion og en stamfunktion med tangent i et flytbart punkt. Ændring af integrationskonstanten flytter grafen uden at ændre hældningen. Et alternativ med den afledte som kvadrat viser, hvorfor en vandret tangent ikke altid giver et ekstremum. Figurerne er egne skematiske grafer af kendte forskrifter; de gengiver ikke opgavearkets billeder.
+
+Seks eksempler dækker funktionsværdi, punkt, tangent, grafisk forskydning, to mulige røringssteder og CAS med logaritme/positivt domæne. Den konkrete kilde er ark 2, særligt eksempler 1–4 og u1–u7 samt opgaver med hjælpemidler 1 og 7–8. En særskilt foldbar støtte på punkt-siden viser eksponential- og reciprok/logaritmeeksempler. Arkets u3 har OMML-gruppering omkring koefficient og eksponentialbase, der kan læses anderledes end facit; undervisningen bruger den forskrift, der er konsistent med differentiation og facit, og denne opgave er ikke kopieret som en bankopgave.
+
+Syv nye bankopgaver i `tasks/bank/integration-graphs.js` følger det fælles format og kræver `int.1` som forudsætning. De har konkrete mål i modulet: `int.graph`, `int.shift`, `int.stationary`, `int.point`, `int.tangent`, `int.reasoning` og `int.cas-point`. Læringsmålskortets U1–U5, U7, K1 og A1 øves/kontrolleres her. Opgaverne omfatter tretrinsarbejde med konstanten, et grafisk fortegnsspørgsmål, begge tangentmuligheder, en vognmodel og dokumenteret CAS-kontrol. Prøveteksterne har ingen metodeoverskrifter eller hints.
+
+Fire sluttjek og en egen forklaringsvurdering undersøger vækst, punkt, tangent og forskellen mellem oprindelig graf og stamfunktionsgraf. Resultatet giver en konkret anbefaling. Svar, kontroller og hints gemmes separat under `christian-matematik.integration.graphs.v1`; modul 1-data og eksisterende bankversioner bevares.
+
+Verifikation omfatter uafhængig differentiation og punktkontrol, tangenters hældning og højde i begge røringssteder, modellens begyndelsesværdi og fortegn, prerequisites i bankudvælgelsen, alle 28 mobiladresser, MathML, figurens kontrolknapper, hints, genforsøg, genindlæsning, browserhistorik, prøvetilstand og repetitionslinks. Modul 1 og resten af appen testes også efter navigationens generalisering.

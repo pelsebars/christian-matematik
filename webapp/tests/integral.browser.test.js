@@ -67,13 +67,13 @@ try {
  await page.locator('#int-forloeb').waitFor({ state: 'visible' });
  assert.equal(await page.locator('#int-start').isVisible(), false);
  assert.equal(await page.locator('#int-maal').isVisible(), false);
- assert.equal(await page.locator('#integralLesson [data-int-card]').count(), 20);
+ assert.equal(await page.locator('[data-int-module="1"] [data-int-card]').count(), 20);
  assert.equal(await page.locator('#int-forloeb .module-card').count(), 8);
  assert.equal(await page.locator('#int-forloeb .module-card').nth(4).locator('.module-card-top span').innerText(), 'B-niveau 6–7');
  await page.locator('.int-goal-map > summary').click();
  assert.ok(await page.locator('#int-maal').isVisible());
  await page.locator('.int-goal-map > summary').click();
- for (const [id, path] of [['int-modul-2','2'],['int-modul-3','3'],['int-modul-4','4'],['int-repetition','repetition'],['int-modul-5','5'],['int-modul-6','6'],['int-modul-7','7']]) {
+ for (const [id, path] of [['int-modul-3','3'],['int-modul-4','4'],['int-repetition','repetition'],['int-modul-5','5'],['int-modul-6','6'],['int-modul-7','7']]) {
   await page.locator(`#int-forloeb [data-int-jump="${id}"]`).click();
   await page.waitForURL(`**/#integration/${path}`);
   assert.match(await page.locator('#' + id).innerText(), /Planlagt/);
@@ -120,7 +120,7 @@ try {
  await page.locator('.int-page-controls a').first().click();
  assert.equal(await poly.locator('[name=expr]').inputValue(), '3x^3');
  assert.equal(await poly.locator('.int-hints p').count(), 2);
- await go('integration/2'); await openCard('int.polynomial');
+ await go('integration/2/start/1'); await openCard('int.polynomial');
  await page.reload(); await poly.waitFor({ state: 'visible' });
  assert.equal(await poly.locator('[name=expr]').inputValue(), '3x^3');
  assert.equal(await poly.locator('.int-hints p').count(), 2);
@@ -185,6 +185,9 @@ try {
  // Exam integration and targeted repetition lead to the session, not the overview.
  await page.locator('.nav-item[data-view=tasks]').click();
  await page.locator('[name=topics][value=integration]').check();
+ await page.locator('#taskSetup details summary').click();
+ await page.locator('[data-completed="int.1"]').check();
+ await page.locator('[name=onlyCompleted]').check();
  await page.locator('[name=mode]').selectOption('exam'); await page.locator('[name=minutes]').fill('90');
  await page.locator('#taskSetup button[type=submit]').click();
  assert.equal(await page.locator('[data-task-action=jump]').count(), 7);

@@ -4,6 +4,6 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/core.test.js",
-    "test:browser": "node tests/browser.test.js && node tests/integral.browser.test.js"
+    "test:browser": "node tests/browser.test.js && node tests/integral.browser.test.js && node tests/integral-graphs.browser.test.js"
   }
 }

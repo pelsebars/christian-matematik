@@ -1,5 +1,6 @@
+import { createIntegralGraphLesson } from './integral-graphs-lesson.js';
 import { integralModules } from './integral-plan.js';
-import { integralSteps, integralRoute, parseIntegralRoute, integralPages } from './integral-routes.js';
+import { integralSteps, integralRoute, parseIntegralRoute, stepsForIntegralModule, pagesForIntegralModule } from './integral-routes.js';
 
 // Move the existing lesson nodes rather than rebuilding forms: answers, open hints,
 // event handlers, the graph and the existing local-storage format remain intact.
@@ -28,7 +29,7 @@ export function mountIntegralNavigation(root) {
   const status = element('p', 'int-location'); status.id = 'int-location'; status.setAttribute('role', 'status'); lesson.append(status);
   const panels = new Map();
   for (const step of integralSteps) {
-    const panel = element('div', 'int-step-panel'); panel.id = `int-step-${step.id}`; panel.hidden = true;
+    const panel = element('div', 'int-step-panel'); panel.id = `int-step-${step.id}`; panel.dataset.intModule = "1"; panel.hidden = true;
     panels.set(step.id, panel); lesson.append(panel);
   }
   const choices = new Map();
@@ -79,8 +80,12 @@ export function mountIntegralNavigation(root) {
   panels.get('sluttjek').append(end);
   const finalCards = [...end.querySelectorAll('[data-int-card]')];
   picker('sluttjek', finalCards, finalCards.map((_, i) => `Spørgsmål ${i + 1}`));
+  get("int-modul-2").remove();
+  const graphLesson = createIntegralGraphLesson(lesson);
+  const panelGroups = new Map([["1", panels], ["2", graphLesson.panels]]);
+  const choiceGroups = new Map([["1", choices], ["2", graphLesson.choices]]);
   const plans = new Map();
-  integralModules.slice(1).forEach(m => { const plan = get(m.section); plan.hidden = true; plans.set(moduleKey(m), plan); lesson.append(plan); });
+  integralModules.slice(2).forEach(m => { const plan = get(m.section); plan.hidden = true; plans.set(moduleKey(m), plan); lesson.append(plan); });
   const pager = element('nav', 'int-page-controls'); pager.setAttribute('aria-label', 'Forrige og næste del'); lesson.append(pager);
   root.querySelectorAll('#int-session .section-heading h2').forEach(h => { h.textContent = h.textContent.replace(/^\d+\. /, ''); });
   const sections = new Map([
@@ -91,7 +96,8 @@ export function mountIntegralNavigation(root) {
     ['int-regler', integralRoute('1', 'teori', 'grundregler')], ['int-cas-spor', integralRoute('1', 'teori', 'cas')],
     ['int-traening', integralRoute('1', 'oevelser')], ['int-fejl', integralRoute('1', 'oevelser')],
     ['int-slut', integralRoute('1', 'sluttjek')], ['int-opsummering', integralRoute('1', 'opsummering')],
-    ...integralModules.slice(1).map(m => [m.section, integralRoute(moduleKey(m))]),
+    ...graphLesson.sections,
+    ...integralModules.slice(2).map(m => [m.section, integralRoute(moduleKey(m))]),
   ]);
   function render(focus = false) {
     const route = parseIntegralRoute(location.hash);
@@ -99,15 +105,21 @@ export function mountIntegralNavigation(root) {
     // Canonicalize bad/incomplete routes without adding an extra history entry.
     if (location.hash !== `#${route.path}`) history.replaceState(null, '', `#${route.path}`);
     overview.hidden = Boolean(route.module); lesson.hidden = !route.module;
-    menu.hidden = route.module !== '1'; status.hidden = !route.module;
-    for (const [step, panel] of panels) panel.hidden = route.module !== '1' || route.step !== step;
+    const steps = stepsForIntegralModule(route.module);
+    menu.hidden = !steps; status.hidden = !route.module;
+    if (steps && menu.dataset.module !== route.module) {
+      menu.dataset.module = route.module;
+      menu.innerHTML = steps.map((s, i) => `<a href="#${integralRoute(route.module, s.id)}" data-int-step="${s.id}"><span>${i + 1}</span>${s.title}</a>`).join('');
+    }
+    graphLesson.host.hidden = route.module !== '2';
+    for (const [module, group] of panelGroups) for (const [step, panel] of group) panel.hidden = route.module !== module || route.step !== step;
     for (const [id, plan] of plans) plan.hidden = route.module !== id;
-    for (const [step, items] of choices) items.forEach(el => { el.hidden = route.step !== step || el.dataset.intPartPanel !== route.part; });
+    for (const [module, group] of choiceGroups) for (const [step, items] of group) items.forEach(el => { el.hidden = route.module !== module || route.step !== step || el.dataset.intPartPanel !== route.part; });
     root.querySelectorAll('[data-int-step]').forEach(a => {
       if (a.dataset.intStep === route.step) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current');
     });
     root.querySelectorAll('[data-int-part]').forEach(a => {
-      if (a.closest('.int-step-panel')?.id === `int-step-${route.step}` && a.dataset.intPart === route.part) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      if (a.closest('.int-step-panel')?.dataset.intModule === route.module && a.closest('.int-step-panel')?.id.endsWith(`step-${route.step}`) && a.dataset.intPart === route.part) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     const subject = document.querySelector('[data-page="subject"]');
     subject.classList.toggle('is-integral-session', Boolean(route.module));
@@ -119,13 +131,15 @@ export function mountIntegralNavigation(root) {
     document.querySelector('#subjectKicker').textContent = m ? `${route.module === 'repetition' ? 'Faglig mellemstation' : `Undervisningsgang ${route.module}`} · ${m.date}` : '06 · A-niveau';
     document.querySelector('#subjectDescription').textContent = m?.summary || 'Vælg en undervisningsgang. Du arbejder i korte trin og kan altid vende tilbage til oversigten.';
     document.title = m ? `${m.title} · Christians matematik` : 'Integralregning · Christians matematik';
-    const step = integralSteps.find(s => s.id === route.step);
-    status.textContent = route.module === '1' ? `${step.title}${route.part ? ` · del ${step.parts.indexOf(route.part) + 1} af ${step.parts.length}` : ''}` : 'Planlagt · indholdet åbnes i en senere arbejdsgang';
+    const step = steps?.find(s => s.id === route.step);
+    status.textContent = steps ? `${step.title}${route.part ? ` · del ${step.parts.indexOf(route.part) + 1} af ${step.parts.length}` : ''}` : 'Planlagt · indholdet åbnes i en senere arbejdsgang';
     pager.replaceChildren(); pager.hidden = !route.module;
-    if (route.module === '1') {
-      const index = integralPages.indexOf(route.path);
-      pager.append(link(index > 0 ? integralPages[index - 1] : 'integration', '← Forrige', 'secondary-button'));
-      pager.append(link(index < integralPages.length - 1 ? integralPages[index + 1] : 'integration/2', index < integralPages.length - 1 ? 'Næste →' : 'Se planen for undervisningsgang 2 →', 'primary-button'));
+    if (steps) {
+      const pages = pagesForIntegralModule(route.module);
+      const index = pages.indexOf(route.path);
+      const nextModule = Number(route.module) + 1;
+      pager.append(link(index > 0 ? pages[index - 1] : 'integration', '← Forrige', 'secondary-button'));
+      pager.append(link(index < pages.length - 1 ? pages[index + 1] : `integration/${nextModule}`, index < pages.length - 1 ? 'Næste →' : `${nextModule === 2 ? 'Åbn' : 'Se planen for'} undervisningsgang ${nextModule} →`, 'primary-button'));
     } else if (m) {
       const index = integralModules.indexOf(m);
       pager.append(link(integralRoute(moduleKey(integralModules[index - 1])), '← Forrige undervisningsgang', 'secondary-button'));
@@ -140,13 +154,14 @@ export function mountIntegralNavigation(root) {
     const path = sections.get(id) || 'integration';
     // Ground help should preserve the current start-question instead of resetting it.
     const route = parseIntegralRoute(location.hash);
-    const targetPath = id === 'int-grundkort' && route?.step === 'start' ? route.path : path;
+    const targetPath = (id === 'int-grundkort' || id === 'int2-grundkort') && route?.step === 'start' && route.module === parseIntegralRoute(path)?.module ? route.path : path;
     window.showMathView(targetPath);
     render(true);
     const target = get(id);
     if (id === 'int-maal') goalDetails.open = true;
     if (id === 'int-grundkort') basicsDetails.open = true;
     if (id === 'int-modul-1') goals.open = true;
+    if (target) for (let parent = target.parentElement; parent && parent !== root; parent = parent.parentElement) if (parent.tagName === 'DETAILS') parent.open = true;
     if (target && !target.hidden) { target.tabIndex = -1; target.focus({ preventScroll: true }); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   };
   window.addEventListener('mathviewchange', e => { if (e.detail.view === 'integration') render(e.detail.focus); });

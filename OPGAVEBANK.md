@@ -226,7 +226,7 @@ Browsertesten dækker eksisterende sider og en eksisterende øvelse, prøvens sk
 
 ## Integralregning, første arbejdsgang
 
-Hovedemnet `integration` og `int.1`–`int.7` samt `int.rep` er registreret. `int.rep` er mellemstationen om B-niveau 6–7, ikke et nummereret integralmodul. Modul 1 er åbent; de øvrige sektioner viser deres plan. Læringsmålskort og kildeafgrænsning findes i `webapp/INTEGRALREGNING_PLAN.md`.
+Hovedemnet `integration` og `int.1`–`int.7` samt `int.rep` er registreret. `int.rep` er mellemstationen om B-niveau 6–7, ikke et nummereret integralmodul. Modul 1 og 2 er åbne; de øvrige sektioner viser deres plan. Læringsmålskort og kildeafgrænsning findes i `webapp/INTEGRALREGNING_PLAN.md`.
 
 `webapp/tasks/bank/integration.js` tilføjer syv gennemgåede opgaver: kort stamfunktion/familie, ledvis integration, eksponentialfunktion, negativ potens, kontrol af et forkert forslag, en positionsmodel og en CAS-opgave. De har hints i niveauer, løsninger, typiske fejl og målrettet feedback. Alle prøvetekster er uden metodeoverskrift. Modeller og CAS-forklaringer kræver egen vurdering med tjekliste.
 
@@ -235,3 +235,11 @@ Forskriftsfelter til én stamfunktion med polynomiumsbedømmelse beder eksplicit
 Undervisningsmodulets egne starttjek, mikroøvelser og sluttjek gemmes under `christian-matematik.integration.v1`, uafhængigt af prøvesæt. Browserforløbet for integralregning ligger i `webapp/tests/integral.browser.test.js` og indgår i `npm run test:browser`.
 
 Integralregning bruger nu separate undervisningssider: `#integration/1`–`#integration/7` og `#integration/repetition`. Oversigten er `#integration`. Repetitionsknapper bruger `window.openIntegralSection(section)` til at vise den rigtige side. Sektions-id'er, opgaveversioner og lagringsformat bevares. Modul 1 viser ét spørgsmål eller én teoridel/ét eksempel ad gangen og har Forrige/Næste samt frit valg af trin.
+
+## Integralregning, modul 2
+
+`tasks/bank/integration-graphs.js` tilføjer syv gennemgåede opgaver fra `int.2` med `int.1` som forudsætning: punkt, graf/fortegn, funktionsværdi, tangent, to tangentmuligheder, vognmodel og CAS med punktbetingelse. De har konkrete modulmål, flere hints, løsninger, fejlfeedback og egen vurdering af forklaringer. Banken har nu 23 opgaver.
+
+Skriv begge røringssteder i den eksplicit angivne rækkefølge (mindste/største) i den sammensatte tangentopgave. Konstanter kan indtastes som brøker. CAS-opgaven bruger MathML-valg for logaritmeforskrifter, der ikke understøttes af polynomiumsparseren. Modul 2-svar gemmes separat fra modul 1 under `christian-matematik.integration.graphs.v1`.
+
+Browserforløbet `tests/integral-graphs.browser.test.js` tester alle moduldele og de nye bankopgaver, grafkontroller, punkt-/tangentfeedback, mobillayout, MathML, lokal lagring, prøvebank og repetition. Det indgår i `npm run test:browser`.

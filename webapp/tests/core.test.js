@@ -341,3 +341,48 @@ test('Integral teaching-session routes normalize invalid links and keep every le
   assert.equal(new Set(integralPages).size, integralPages.length);
   for (const path of integralPages) assert.equal(parseIntegralRoute('#' + path).path, path);
 });
+
+test('Module 2 point and tangent answers satisfy independently derived conditions', () => {
+ const derivative = p => p.slice(1).map((c,i)=>c*(i+1));
+ const at = (p,a) => p.reduce((sum,c,i)=>sum+c*a**i,0);
+ const point = instantiate('int2.point','independent');
+ const p=polynomial(point.parts[0].answer);
+ assert.deepEqual(derivative(p),[3,2]); assert.equal(at(p,1),7);
+ const condition=instantiate('int2.condition','independent');
+ const c=polynomial(condition.parts.find(p=>p.id==='expr').answer);
+ assert.deepEqual(derivative(c),[3,-4,3]);assert.equal(at(c,2),9);
+ const tangent=instantiate('int2.tangent','independent');
+ const t=polynomial(tangent.parts.find(p=>p.id==='expr').answer);
+ const a=number(tangent.parts[0].answer);
+ assert.equal(at(derivative(t),a),4);assert.equal(at(t,a),4*a+5);
+ const two=instantiate('int2.two-tangencies','independent');
+ const family=[0,1,-2,1/3];
+ for(const [place,constant] of [['a','c-low'],['b','c-high']]){
+  const x0=number(two.parts.find(p=>p.id===place).answer),k=number(two.parts.find(p=>p.id===constant).answer);
+  assert.ok(Math.abs(at(derivative(family),x0)-(-2))<1e-12);
+  assert.ok(Math.abs(at(family,x0)+k-(-2*x0+1))<1e-12);
+ }
+ const cart=instantiate('int2.cart','independent'),s=polynomial(cart.parts[0].answer);
+ assert.deepEqual(derivative(s),[3,-1]);assert.equal(at(s,1),4.5);assert.equal(at(s,3),6.5);
+ assert.ok(at(derivative(s),2)>0 && at(derivative(s),4)<0);
+ // CAS log formula derivative and initial value are checked analytically.
+ const cas=instantiate('int2.cas-point','independent');assert.equal(cas.parts[0].answer,'right');
+ const F=x=>3*x*x+2*x*Math.log(x)-2*x+4;
+ const dF=x=>6*x+2*Math.log(x)+2-2;
+ assert.equal(F(1),5);for(const v of [0.5,1,2,3])assert.ok(Math.abs(dF(v)-(6*v+2*Math.log(v)))<1e-12);
+});
+
+test('Module 2 requires module 1 and has valid direct links and targeted feedback', async () => {
+ const {targetedFeedback}=await import('../tasks/grading.js');
+ const {parseIntegralRoute,pagesForIntegralModule}=await import('../integral-routes.js');
+ const task=instantiate('int2.point','check');
+ assert.match(targetedFeedback(task,task.parts[0],'x^2+3*x+7'),/ikke nødvendigvis konstanten/);
+ assert.match(targetedFeedback(task,task.parts[0],'x^2+3*x'),/integrationsregel passer/);
+ const graph=instantiate('int2.sign','check');assert.match(targetedFeedback(graph,graph.parts[0],'zero'),/ikke grafens højde/);
+ const noBase=composeSet({seed:'int2',topics:['integration'],onlyCompleted:true,completed:['int.2'],minutes:180});assert.equal(noBase.tasks.length,0);
+ const ready=composeSet({seed:'int2',topics:['integration'],onlyCompleted:true,completed:['int.1','int.2'],minutes:180});assert.ok(ready.tasks.some(t=>t.module==='int.2'));
+ assert.equal(parseIntegralRoute('#integration/2').path,'integration/2/start/1');
+ assert.equal(parseIntegralRoute('#integration/2/teori/fortegn').path,'integration/2/teori/fortegn');
+ assert.equal(pagesForIntegralModule('2').length,28);
+ for(const path of pagesForIntegralModule('2'))assert.equal(parseIntegralRoute('#'+path).path,path);
+});
