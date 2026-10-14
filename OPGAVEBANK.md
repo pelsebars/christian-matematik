@@ -263,3 +263,9 @@ Opgaverne dækker areal mellem grafer, stamfunktionstabel, todelte områder, lin
 `tasks/bank/integration-repetition.js` tilføjer syv selvstændige opgaver i `int.rep`, uden integralforudsætninger. Banken har nu 44 opgaver. Målene er `rep.powers`, `rep.roots`, `rep.inverse`, `rep.domain`, `rep.graph` og `rep.model`.
 
 Potenser, fortegn, rødder, lineær omvending, domænebegrænset kvadratfunktion, eksponentialfunktion/logaritme og en temperaturmodel bruger fælles sikker bedømmelse. Rødder og logaritmiske forskrifter, som polynomiumsparseren ikke understøtter, stilles som valg; polynomielle inverse forskrifter accepterer ækvivalente udtryk. Forklaringer har egen vurdering. Prøvetekster har ingen metodeoverskrifter eller hints; repetitionslinket åbner den unummererede mellemstation.
+
+## Integralregning, modul 5
+
+`tasks/bank/integration-solids.js` tilføjer syv opgaver i `int.5` med `int.3`, `int.4` og `int.rep` som forudsætninger. Banken har nu 51 opgaver. Målene er `int.discs`, `int.washers`, `int.volume-units`, `int.volume-model`, `int.arc`, `int.length-units` og `int.length-model`.
+
+Skiver og skiver med hul kan besvares med den præcise koefficient foran pi. En eksakt kurvelængde med kvadratrod stilles som valg, da polynomiumsparseren ikke understøtter rodudtryk. Skål, lampe, kabel og karaffel kræver dokumenteret modelkontrol; numeriske svar har angivne afrundinger og absolutte tolerancer. Forklaringer har egen vurdering. Prøvetekster indeholder ingen hints eller metodeoverskrifter.

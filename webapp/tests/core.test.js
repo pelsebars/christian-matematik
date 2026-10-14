@@ -457,3 +457,20 @@ test('B-repetition powers and inverse answers satisfy independent values, compos
  const model=polynomial(instantiate('rep.temperature','a').parts[0].answer);for(const c of [0,20,100])assert.ok(Math.abs(at(model,1.8*c+32)-c)<1e-12);
  const set=composeSet({seed:'rep',topics:['integration'],onlyCompleted:true,completed:['int.rep'],minutes:90});assert.equal(set.tasks.length,7);assert.ok(set.tasks.every(t=>t.module==='int.rep'&&t.prerequisites.length===0));
 });
+
+test('Module 5 volumes and lengths match independent analytical and numerical model checks',async()=>{
+ const {volumeModels,volumeMeasurements,arcModels,polygonLength,simpsonIntegral}=await import('../integral-solids-lesson.js');const {pagesForIntegralModule,parseIntegralRoute}=await import('../integral-routes.js');
+ assert.equal(pagesForIntegralModule('5').length,28);for(const p of pagesForIntegralModule('5'))assert.equal(parseIntegralRoute('#'+p).path,p);
+ assert.equal(number(instantiate('int5.root','a').parts[0].answer),2**2/2+2);assert.equal(number(instantiate('int5.washer','a').parts[0].answer),2+4);
+ for(const m of Object.values(volumeModels)){assert.ok(Math.abs(simpsonIntegral(t=>Math.PI*(m.R(t)**2-m.r(t)**2),0,m.end)-volumeMeasurements(m,8).exact)<1e-10);}
+ const cone=volumeModels.cone;assert.ok(Math.abs(volumeMeasurements(cone,40).approximation-volumeMeasurements(cone,40).exact)<Math.abs(volumeMeasurements(cone,2).approximation-volumeMeasurements(cone,2).exact));
+ for(const m of Object.values(arcModels)){assert.ok(Math.abs(simpsonIntegral(t=>Math.hypot(1,m.df(t)),0,2)-m.exact)<1e-10);assert.ok(polygonLength(m.f,0,2,64)<=m.exact+1e-12);}
+ assert.ok(polygonLength(arcModels.curve.f,0,2,64)>polygonLength(arcModels.curve.f,0,2,2));assert.ok(Math.abs(polygonLength(arcModels.line.f,0,2,2)-2*Math.sqrt(5))<1e-12);
+ const bowl=instantiate('int5.bowl','a'),outer=Math.PI*simpsonIntegral(t=>(2.5*Math.sqrt(t+.5)+1.4)**2,0,6.5),inside=162*Math.PI;assert.ok(Math.abs(inside-number(bowl.parts[0].answer))<.01);assert.ok(Math.abs(outer-inside-number(bowl.parts[1].answer))<.01);
+ const R=Math.sqrt(712),lampLength=R*(Math.asin(18/R)-Math.asin(-26/R)),lamp=instantiate('int5.lamp','a');assert.ok(Math.abs(R-number(lamp.parts[1].answer))<.01);assert.ok(Math.abs(lampLength-number(lamp.parts[2].answer))<.01);
+ assert.ok(Math.abs(simpsonIntegral(t=>R/Math.sqrt(712-(t-26)**2),0,44)-lampLength)<1e-7);
+ const a=180/812**2,analyticCable=812*Math.sqrt(1+(2*a*812)**2)+Math.asinh(2*a*812)/(2*a),cable=instantiate('int5.cable','a');assert.ok(Math.abs(analyticCable-number(cable.parts[1].answer))<.01);assert.ok(Math.abs(simpsonIntegral(t=>Math.hypot(1,2*a*t),-812,812)-analyticCable)<1e-8);
+ const radius=t=>-.2*t*t+2*t+2.5,F=t=>.008*t**5-.2*t**4+t**3+5*t*t+6.25*t;assert.equal(radius(5),7.5);assert.ok(Math.abs(simpsonIntegral(t=>radius(t)**2,0,10)-F(10))<1e-7);let lo=0,hi=10;for(let i=0;i<60;i++){const mid=(lo+hi)/2;if(Math.PI*F(mid)<500)lo=mid;else hi=mid;}const h=(lo+hi)/2;assert.ok(Math.abs(h-number(instantiate('int5.carafe','a').parts[2].answer))<.01);assert.ok(Math.abs(Math.PI*F(h)-500)<1e-10);
+ const limit=Math.acosh(211.4885/(2*10.4801))/.0329;assert.ok(Math.abs(2*limit-182.51)<.01);assert.ok(Math.abs(simpsonIntegral(t=>Math.hypot(1,-2*10.4801*.0329*Math.sinh(.0329*t)),-limit,limit)-451.26)<.01);
+ const incomplete=composeSet({seed:'solid',topics:['integration'],onlyCompleted:true,completed:['int.5'],minutes:180});assert.equal(incomplete.tasks.length,0);const ready=composeSet({seed:'solid',topics:['integration'],onlyCompleted:true,completed:['int.3','int.4','int.rep','int.5'],minutes:180});assert.ok(ready.tasks.some(t=>t.module==='int.5'));
+});

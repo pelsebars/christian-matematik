@@ -13,7 +13,8 @@ export const integralGraphSteps = integralSteps.map(s => s.id === 'teori'
 export const integralDefiniteSteps = integralSteps.map(s => s.id === 'teori' ? { ...s, parts: ['areal', 'hovedsaetning', 'beregning', 'fortegn', 'modeller'] } : { ...s, parts: [...s.parts] });
 export const integralAreaSteps = integralSteps.map(s => s.id === 'teori' ? { ...s, parts: ['graenser', 'mellem', 'regler', 'numerisk', 'modeller'] } : { ...s, parts: [...s.parts] });
 export const integralRepetitionSteps = integralSteps.map(s => s.id === 'teori' ? { ...s, parts: ['potenser', 'roedder', 'omvendt', 'domaene', 'graf'] } : { ...s, parts: [...s.parts] });
-export const stepsForIntegralModule = module => ({ '1': integralSteps, '2': integralGraphSteps, '3': integralDefiniteSteps, '4': integralAreaSteps, 'repetition': integralRepetitionSteps })[module];
+export const integralSolidSteps = integralSteps.map(s => s.id === 'teori' ? { ...s, parts: ['skiver', 'hul', 'kurvelaengde', 'modeller', 'cas'] } : { ...s, parts: [...s.parts] });
+export const stepsForIntegralModule = module => ({ '1': integralSteps, '2': integralGraphSteps, '3': integralDefiniteSteps, '4': integralAreaSteps, 'repetition': integralRepetitionSteps, '5': integralSolidSteps })[module];
 export const integralRoute = (module = '', step = '', part = '') =>
   ['integration', module, step, part].filter(Boolean).join('/');
 export function parseIntegralRoute(hash) {

@@ -1,6 +1,6 @@
 # Integralregning – læringsmål og progression
 
-Modul 1–4 og den unummererede B-repetition 6–7 er implementeret. Modul 5–7 har struktur og mål, men ingen færdige undervisningsforløb endnu.
+Modul 1–5 og den unummererede B-repetition 6–7 er implementeret. Modul 6–7 har struktur og mål, men ingen færdige undervisningsforløb endnu.
 
 ## Læringsmålskort
 
@@ -35,7 +35,7 @@ Integralregning er hovedemne 06 i sidebaren og på startsiden. Oversigten `#inte
 
 Modul 1 har seks trin: Mål og starttjek, Teori, Eksempler, Øvelser, Forståelsestjek og Opsummering. Starttjek (fem spørgsmål), teori (fem dele), eksempler (seks), træning (syv opgaver) og forståelsestjek (fire spørgsmål) viser én del ad gangen. En trinmenu og delmenu samt Forrige/Næste giver fri navigation. En adresse som `#integration/1/teori/konstant` kan deles eller genåbnes direkte. Browserens Tilbage/Frem følger sideskiftene. `#integration/1` starter ved det første spørgsmål; svar og hints bevares under sideskift og genindlæsning.
 
-Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2–4 og B-repetitionen har samme trinopdeling. Modul 5–7 får den, når deres undervisningsindhold implementeres.
+Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2–5 og B-repetitionen har samme trinopdeling. Modul 6–7 får den, når deres undervisningsindhold implementeres.
 
 ### Stamfunktion og det ubestemte integral
 
@@ -181,7 +181,7 @@ Verifikation omfatter uafhængig differentiation og grænseberegning, fortegnet 
 
 Figuren mellem to grafer viser en første-kvadrant-opgave og kildens kubiske funktion over for en linje. Den opdeler ved kendte skæringspunkter, viser den øvre graf i hvert delinterval og sammenligner geometrisk areal med det fortegnede integral. Den numeriske figur sammenligner trapezer med det præcise integral af kvadratet på intervallet nul til to. Måledataopgaven skelner mellem præcis integration af en stykkevis lineær model og overslag over virkeligheden.
 
-Seks gennemregnede eksempler, syv bankopgaver og fire sluttjek dækker håndregning, stamfunktionstabel, skift af fortegn, regneregler, måledata, vandstandsændring og parameterbestemmelse. Primær kilde er ark 4, særligt u1–u2, eksempel 1 med hjælpemidler og opgaver med hjælpemidler 5–7. Numerisk integration supplerer efter undervisningsbeskrivelsens U6 og K5. Læringsmål U1–U7, K2, K5–K7, A1, A2 og A4 dækkes; A3 om kurvelængde afventer modul 5.
+Seks gennemregnede eksempler, syv bankopgaver og fire sluttjek dækker håndregning, stamfunktionstabel, skift af fortegn, regneregler, måledata, vandstandsændring og parameterbestemmelse. Primær kilde er ark 4, særligt u1–u2, eksempel 1 med hjælpemidler og opgaver med hjælpemidler 5–7. Numerisk integration supplerer efter undervisningsbeskrivelsens U6 og K5. Læringsmål U1–U7, K2, K5–K7, A1, A2 og A4 dækkes; A3 om kurvelængde behandles i modul 5.
 
 Svar, kontroller og hints gemmes under `christian-matematik.integration.areas.v1`. Næste side er den unummererede B-repetition mellem modul 4 og 5. Tests kontrollerer uafhængige areal-/modelberegninger, alle adresser på mobil, MathML, figurkontroller, tastatur, feedback, hints, genindlæsning, historik og utilgængelig eller beskadiget lagring. Alle tidligere browserforløb indgår i regressionstesten.
 
@@ -193,4 +193,16 @@ Fem grundspørgsmål giver særskilte anbefalinger for potenssporet og sporet om
 
 En potensvælger viser præcise værdier for halve eksponenter. Den interaktive graf har ens akseforhold, ombytter punktkoordinater og sammenligner en linje, en begrænset kvadratfunktion og den fulde kvadratfunktion, hvis spejlede relation ikke er en funktion. Seks gennemregnede eksempler, syv bankopgaver og fire sluttjek dækker B6, B7 og støtte til U7. Temperaturmodellen bytter både domæne og enheder ved omvending.
 
-Svar, hints og kontroller gemmes separat under `christian-matematik.integration.repetition.v1`. De syv bankopgaver kræver ingen integralmoduler som forudsætning, så repetitionen kan bruges selvstændigt. Tests kontrollerer uafhængige potensværdier, inverse sammensætninger, domæner og endepunkter, begge anbefalingsspor, alle mobiladresser, MathML, figurkontroller, tastatur, fejlsvar, hints, historik, lagringsfejl, prøvetilstand og repetitionslink. Næste side er planen for modul 5.
+Svar, hints og kontroller gemmes separat under `christian-matematik.integration.repetition.v1`. De syv bankopgaver kræver ingen integralmoduler som forudsætning, så repetitionen kan bruges selvstændigt. Tests kontrollerer uafhængige potensværdier, inverse sammensætninger, domæner og endepunkter, begge anbefalingsspor, alle mobiladresser, MathML, figurkontroller, tastatur, fejlsvar, hints, historik, lagringsfejl, prøvetilstand og repetitionslink. Næste side er det åbne modul 5.
+
+## Modul 5 – rumfang af omdrejningslegemer og kurvelængde
+
+Åbent på `#integration/5`, med seks trin og 28 korte adresser. Fem grundspørgsmål og mikroøvelser støtter radius/diameter, hele forskrifters kvadrater, grænseværdier, afledte og enheder. Skiver og skiver med hul behandles med afstand til rotationsaksen og forskel mellem radiuskvadrater. Massive bunde og hulrum får forskellige integrationsgrænser. En graf under aksen giver samme radiuskvadrat; flere grænsekurver omkring aksen kræver konkret geometrisk undersøgelse.
+
+Rumfangsfiguren sammenligner cylinder, kegle og hul cylinder med et valgt tværsnit og midtpunktskiveoverslag. Den viser et aksialt profilsnit og et separat cirkeltværsnit. Kurvelængdefiguren sammenligner en parabel og en ret linje med summen af rette delstykker og den direkte endepunktsafstand. Den kontinuerte afledte angives som betingelse for den anvendte kurvelængdeformel. Numeriske resultater mærkes som tilnærmelser.
+
+Seks eksempler og syv bankopgaver dækker håndregning, skiver med hul, linjelængde, kildearkets keramikskål, lampelamel, brokabel og karaffel. Foldbare kildeeksempler dækker reciprok kvadratrodsradius, fortegnsskift og buen modelleret med eksponentialfunktioner. Keramikskålens massive bund fra nul til 0,5 og kabelmodellens minimumshøjde 74 er eksplicitte. Beregninger bruger uafrundede koefficienter og afrunder til sidst; fx kabel 1675,73 meter og karaffelhøjde 4,61 cm, hvor kilden afrunder til én decimal.
+
+Primær kilde er ark 5, især eksempel uden hjælpemidler, eksempel 3 med hjælpemidler, u1 og opgaver 6–7, 9, 11–12. Enkle cylinder-, kegle-, hul- og linjeopgaver samt figurer og småtrin er egne pædagogiske tilføjelser. Mål U2–U7, K2, K4–K7 og A1–A4 øves eller kontrolleres.
+
+Svar og hints gemmes under `christian-matematik.integration.solids.v1`. De nye bankopgaver kræver `int.3`, `int.4` og `int.rep`. Tests sammenligner med uafhængige analytiske integraler og numeriske modelkontroller, samt alle mobiladresser, MathML, figurkontroller, tastatur, feedback, lagring, historik, prøvetilstand og repetition. Næste side er planen for modul 6.

@@ -1,3 +1,4 @@
+import { createIntegralSolidsLesson } from './integral-solids-lesson.js';
 import { createIntegralRepetitionLesson } from './integral-repetition-lesson.js';
 import { createIntegralAreasLesson } from './integral-areas-lesson.js';
 import { createIntegralDefiniteLesson } from './integral-definite-lesson.js';
@@ -91,11 +92,13 @@ export function mountIntegralNavigation(root) {
   const areasLesson = createIntegralAreasLesson(lesson);
   get("int-repetition").remove();
   const repetitionLesson = createIntegralRepetitionLesson(lesson);
-  const lessons = new Map([["2", graphLesson], ["3", definiteLesson], ["4", areasLesson], ["repetition", repetitionLesson]]);
+  get("int-modul-5").remove();
+  const solidsLesson = createIntegralSolidsLesson(lesson);
+  const lessons = new Map([["2", graphLesson], ["3", definiteLesson], ["4", areasLesson], ["repetition", repetitionLesson], ["5", solidsLesson]]);
   const panelGroups = new Map([["1", panels], ...[...lessons].map(([id,l]) => [id,l.panels])]);
   const choiceGroups = new Map([["1", choices], ...[...lessons].map(([id,l]) => [id,l.choices])]);
   const plans = new Map();
-  integralModules.slice(5).forEach(m => { const plan = get(m.section); plan.hidden = true; plans.set(moduleKey(m), plan); lesson.append(plan); });
+  integralModules.slice(6).forEach(m => { const plan = get(m.section); plan.hidden = true; plans.set(moduleKey(m), plan); lesson.append(plan); });
   const pager = element('nav', 'int-page-controls'); pager.setAttribute('aria-label', 'Forrige og næste del'); lesson.append(pager);
   root.querySelectorAll('#int-session .section-heading h2').forEach(h => { h.textContent = h.textContent.replace(/^\d+\. /, ''); });
   const sections = new Map([
@@ -110,7 +113,8 @@ export function mountIntegralNavigation(root) {
     ...definiteLesson.sections,
     ...areasLesson.sections,
     ...repetitionLesson.sections,
-    ...integralModules.slice(5).map(m => [m.section, integralRoute(moduleKey(m))]),
+    ...solidsLesson.sections,
+    ...integralModules.slice(6).map(m => [m.section, integralRoute(moduleKey(m))]),
   ]);
   function render(focus = false) {
     const route = parseIntegralRoute(location.hash);
@@ -168,7 +172,7 @@ export function mountIntegralNavigation(root) {
     const path = sections.get(id) || 'integration';
     // Ground help should preserve the current start-question instead of resetting it.
     const route = parseIntegralRoute(location.hash);
-    const targetPath = (id === 'int-grundkort' || id === 'int2-grundkort' || id === 'int3-grundkort' || id === 'int4-grundkort' || id === 'rep-grundkort') && route?.step === 'start' && route.module === parseIntegralRoute(path)?.module ? route.path : path;
+    const targetPath = (id === 'int-grundkort' || id === 'int2-grundkort' || id === 'int3-grundkort' || id === 'int4-grundkort' || id === 'rep-grundkort' || id === 'int5-grundkort') && route?.step === 'start' && route.module === parseIntegralRoute(path)?.module ? route.path : path;
     window.showMathView(targetPath);
     render(true);
     const target = get(id);

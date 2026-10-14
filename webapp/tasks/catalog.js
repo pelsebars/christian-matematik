@@ -64,6 +64,13 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "int.discs": {module:"int.5",text:"Opstille rumfang med cirkelskiver og radius i anden"},
+  "int.washers": {module:"int.5",text:"Beregne skiver med hul og medtage massive dele"},
+  "int.volume-units": {module:"int.5",text:"Skelne mellem radius, diameter og volumen med enheder"},
+  "int.volume-model": {module:"int.5",text:"Bestemme kapacitet, materiale og ukendt fyldehøjde"},
+  "int.arc": {module:"int.5",text:"Beregne kurvelængde med den afledte"},
+  "int.length-units": {module:"int.5",text:"Fortolke længde og kontrollere enheder og interval"},
+  "int.length-model": {module:"int.5",text:"Dokumentere og kontrollere numerisk kurvelængde i en model"},
   "rep.powers": {module:"int.rep",text:"Bruge potensregneregler med korrekte fortegn og betingelser"},
   "rep.roots": {module:"int.rep",text:"Forbinde rødder med rationale og negative eksponenter"},
   "rep.inverse": {module:"int.rep",text:"Bestemme og kontrollere en omvendt funktion"},
