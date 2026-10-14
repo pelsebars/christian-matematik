@@ -31,7 +31,11 @@ U1–U7 er alle faglige mål i undervisningsbeskrivelsens Integralregning. K1–
 
 ## Navigation og progression
 
-Integralregning er hovedemne 06 i sidebaren og på startsiden. På emnesiden findes forløb, læringsmål, modul 1, starttjek, teori, opgaver og sluttjek. Hvert planlagt modul har et stabilt sektions-id, forudsætninger og en beskrivelse af kommende træning.
+Integralregning er hovedemne 06 i sidebaren og på startsiden. Oversigten `#integration` viser undervisningsgangene og læringsmålskortet i en foldbar sektion. Hver undervisningsgang har en separat side/adresse: `#integration/1`–`#integration/7`; mellemstationen har `#integration/repetition`. Kun den valgte undervisningsgang er synlig.
+
+Modul 1 har seks trin: Mål og starttjek, Teori, Eksempler, Øvelser, Forståelsestjek og Opsummering. Starttjek (fem spørgsmål), teori (fem dele), eksempler (seks), træning (syv opgaver) og forståelsestjek (fire spørgsmål) viser én del ad gangen. En trinmenu og delmenu samt Forrige/Næste giver fri navigation. En adresse som `#integration/1/teori/konstant` kan deles eller genåbnes direkte. Browserens Tilbage/Frem følger sideskiftene. `#integration/1` starter ved det første spørgsmål; svar og hints bevares under sideskift og genindlæsning.
+
+Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. De får den samme trinopdeling, når deres undervisningsindhold implementeres.
 
 ### Stamfunktion og det ubestemte integral
 

@@ -12,7 +12,7 @@ Første lokale version af Christians matematikapp.
 - komplet læringsforløb i plangeometri og vektorer med fem moduler om vektorer, skalarprodukt/vinkler, projektion/tværvektor/determinant, linjen og cirklen med forudsætningstjek, grundkort, interaktive figurer, håndregning, CAS-spor og forståelsestjek;
 - et trinvist andengradsforløb baseret på opgavearket, inklusive standardform, koefficienter, diskriminant, løsningsformel, indsættelseskontrol og blandet sluttest;
 - side med formler og huskeregler;
-- integralregning med læringsmålskort, struktur for syv moduler og B-repetition samt komplet modul 1 om stamfunktioner, grundregler, kontrol, CAS og modelopgaver;
+- integralregning med foldbart læringsmålskort, separate sider for syv undervisningsgange og B-repetition samt komplet modul 1 med seks trin og én del ad gangen om stamfunktioner, grundregler, kontrol, CAS og modelopgaver;
 - matematisk notation med indbygget MathML.
 
 ## Lokal visning

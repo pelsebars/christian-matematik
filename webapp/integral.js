@@ -1,3 +1,4 @@
+import { mountIntegralNavigation } from './integral-navigation.js';
 import {integralModules, integralGoals} from './integral-plan.js';
 import {integrationTasks} from './tasks/bank/integration.js';
 import {gradePart,targetedFeedback} from './tasks/grading.js';
@@ -116,7 +117,7 @@ for(const task of all){
 }
 root.addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
- if(b.dataset.intJump){const section=document.getElementById(b.dataset.intJump);section.scrollIntoView({behavior:'smooth',block:'start'});section.tabIndex=-1;section.focus({preventScroll:true});}
+ if(b.dataset.intJump) window.openIntegralSection(b.dataset.intJump);
  if(b.dataset.intView)window.showMathView(b.dataset.intView);
 });
 function draw(){
@@ -127,3 +128,5 @@ function draw(){
  root.querySelector('#int-graph-readout').innerHTML=eqF(power(x,2)+(c>=0?plus+n(c):minus+n(-c)))+` · ${math(prime()+eq+n(2)+x)} for alle valg af konstanten.`;
 }
 root.querySelector('#int-c-slider').addEventListener('input',draw);draw();progress();
+
+mountIntegralNavigation(root);

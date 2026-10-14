@@ -323,3 +323,21 @@ test('Integral targeted feedback distinguishes arithmetic, integration and initi
   assert.equal(composeSet({seed:'int',topics:['integration'],minutes:90,onlyCompleted:true,completed:['int.1']}).tasks.length,7);
   assert.equal(composeSet({seed:'int',topics:['integration'],onlyCompleted:true,completed:['int.2']}).tasks.length,0);
 });
+
+test('Integral teaching-session routes normalize invalid links and keep every learning part reachable', async () => {
+  const { parseIntegralRoute, integralRoute, integralPages, integralSteps } = await import('../integral-routes.js');
+  assert.equal(parseIntegralRoute('#tasks'), null);
+  assert.equal(parseIntegralRoute('#integration').path, 'integration');
+  assert.equal(parseIntegralRoute('#integration/1').path, 'integration/1/start/1');
+  assert.equal(parseIntegralRoute('#integration/1/teori/konstant').path, 'integration/1/teori/konstant');
+  assert.equal(parseIntegralRoute('#integration/1/unknown/<invalid>').path, 'integration/1/start/1');
+  assert.equal(parseIntegralRoute('#integration/1/oevelser/999').path, 'integration/1/oevelser/1');
+  assert.equal(parseIntegralRoute('#integration/repetition').module, 'repetition');
+  assert.equal(parseIntegralRoute('#integration/99').path, 'integration');
+  assert.equal(parseIntegralRoute('#integration/7/teori').path, 'integration/7');
+  assert.equal(integralRoute('1', 'opsummering'), 'integration/1/opsummering');
+  assert.equal(integralSteps.length, 6);
+  assert.equal(integralPages.length, 28);
+  assert.equal(new Set(integralPages).size, integralPages.length);
+  for (const path of integralPages) assert.equal(parseIntegralRoute('#' + path).path, path);
+});

@@ -328,6 +328,10 @@ root.addEventListener("click", (event) => {
     s = state.session;
   if (action === "repeat-module") {
     const m = modules[b.dataset.module];
+    if (m.topic === "integration" && window.openIntegralSection) {
+      window.openIntegralSection(m.section);
+      return;
+    }
     window.showMathView(m.topic);
     requestAnimationFrame(() =>
       document

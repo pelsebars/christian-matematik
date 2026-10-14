@@ -233,3 +233,5 @@ Hovedemnet `integration` og `int.1`–`int.7` samt `int.rep` er registreret. `in
 Forskriftsfelter til én stamfunktion med polynomiumsbedømmelse beder eksplicit om konstantled nul. Dermed afvises alternative integrationskonstanter ikke som fejl i en opgave, der ellers tillader dem. Eksponentialfunktioner og negative potenser benytter MathML-valg, fordi parseren ikke håndterer disse udtryk. Gennemførte moduler i Opgaver registreres fortsat manuelt.
 
 Undervisningsmodulets egne starttjek, mikroøvelser og sluttjek gemmes under `christian-matematik.integration.v1`, uafhængigt af prøvesæt. Browserforløbet for integralregning ligger i `webapp/tests/integral.browser.test.js` og indgår i `npm run test:browser`.
+
+Integralregning bruger nu separate undervisningssider: `#integration/1`–`#integration/7` og `#integration/repetition`. Oversigten er `#integration`. Repetitionsknapper bruger `window.openIntegralSection(section)` til at vise den rigtige side. Sektions-id'er, opgaveversioner og lagringsformat bevares. Modul 1 viser ét spørgsmål eller én teoridel/ét eksempel ad gangen og har Forrige/Næste samt frit valg af trin.

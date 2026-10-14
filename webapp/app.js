@@ -104,6 +104,12 @@ function closeMenu() {
 }
 
 function showView(view, shouldFocus = true) {
+  const requestedPath = view;
+  if (view.startsWith("integration/")) view = "integration";
+  document.querySelector("[data-page=subject] .learning-steps").hidden = view === "integration";
+  document.querySelector("#subjectFormula").hidden = false;
+  document.title = "Christians matematik";
+  subjectView.classList.remove("is-integral-session", "is-integral-overview");
   document.querySelector("#tasksView").hidden = view !== "tasks";
   homeView.hidden = view !== "home";
   formulaView.hidden = view !== "formulas";
@@ -132,10 +138,12 @@ function showView(view, shouldFocus = true) {
     view === "planeGeometry" || view === "integration";
 
   setActiveNavigation(view);
-  window.location.hash = view === "home" ? "" : view;
+  const hash = view === "home" ? "" : requestedPath;
+  if (window.location.hash.slice(1) !== hash) window.location.hash = hash;
   closeMenu();
+  window.dispatchEvent(new CustomEvent("mathviewchange", { detail: { view, focus: shouldFocus } }));
 
-  if (shouldFocus) {
+  if (shouldFocus && view !== "integration") {
     window.scrollTo({ top: 0, behavior: "smooth" });
     mainContent.focus({ preventScroll: true });
   }
@@ -1152,12 +1160,12 @@ document.addEventListener("keydown", (event) => {
 
 window.addEventListener("hashchange", () => {
   const requestedView = window.location.hash.slice(1) || "home";
-  const validView = requestedView === "formulas" || requestedView === "tasks" || subjects[requestedView] ? requestedView : "home";
-  showView(validView, false);
+  const validView = requestedView === "formulas" || requestedView === "tasks" || (subjects[requestedView] || requestedView.startsWith("integration/")) ? requestedView : "home";
+  showView(validView, validView === "integration" || validView.startsWith("integration/"));
 });
 
 const initialView = window.location.hash.slice(1) || "home";
-showView(initialView === "formulas" || initialView === "tasks" || subjects[initialView] ? initialView : "home", false);
+showView(initialView === "formulas" || initialView === "tasks" || (subjects[initialView] || initialView.startsWith("integration/")) ? initialView : "home", false);
 
 // Shared navigation hook for targeted repetition from the task bank.
 window.showMathView = showView;

@@ -47,3 +47,34 @@
 #integralLesson button:focus-visible,#integralLesson input:focus-visible,#integralLesson select:focus-visible,#integralLesson textarea:focus-visible,#integralLesson summary:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
 #integralLesson .module-card:nth-child(5) .module-card-top span { width:auto; height:auto; min-height:34px; padding:8px 12px; border-radius:8px; white-space:nowrap; }
 #integralLesson .int-figure svg { font-size:22px; }
+/* One teaching session and one small learning part at a time. */
+#integralLesson a { text-decoration:none; }
+.int-breadcrumb { margin-bottom:20px; }
+.int-step-menu { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:20px 0 16px; }
+.int-step-menu a { display:flex; gap:8px; align-items:center; border:1px solid var(--line); border-radius:12px; padding:12px; color:var(--ink-soft); background:var(--surface); font-size:.86rem; font-weight:650; }
+.int-step-menu a span { color:var(--blue); }
+.int-step-menu a[aria-current] { background:var(--blue-soft); border-color:var(--blue); color:var(--ink); }
+.int-location { color:var(--ink-soft); font-size:.9rem; }
+.int-part-menu { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 24px; }
+.int-part-link { padding:9px 13px; border:1px solid var(--line); border-radius:9px; background:white; color:var(--ink-soft); font-size:.85rem; font-weight:650; }
+.int-part-link[aria-current] { color:var(--blue); background:var(--blue-soft); border-color:var(--blue); }
+.int-page-controls { display:flex; justify-content:space-between; align-items:center; gap:16px; margin:28px 0; border-top:1px solid var(--line); padding-top:20px; }
+#integralLesson .int-page-controls a { display:inline-flex; align-items:center; justify-content:center; }
+#integralLesson a:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
+#integralLesson [data-int-part-panel] { min-width:0; }
+#integralLesson .int-step-panel .int-exercises { grid-template-columns:1fr; }
+#integralLesson .int-module-goals .lesson-section { margin:0; }
+#integralLesson .int-goal-map .lesson-section { margin-bottom:0; }
+@media(max-width:700px){
+ .int-step-menu { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .int-step-menu a { padding:10px; font-size:.8rem; }
+ .int-page-controls { flex-wrap:wrap; }
+ .int-page-controls a { flex:1; }
+}
+.subject-view.is-integral-session .subject-header { display:block; margin-bottom:22px; padding-bottom:20px; }
+.subject-view.is-integral-session .subject-header h1 { font-size:clamp(1.7rem,3.2vw,2.6rem); max-width:900px; }
+.subject-view.is-integral-session .subject-header .page-lead { font-size:1rem; line-height:1.6; margin-top:12px; }
+.subject-view.is-integral-overview .subject-formula math { font-size:1.9rem; }
+#integralLesson .int-step-panel > .lesson-section { margin-top:24px; }
+#integralLesson .int-step-panel .section-heading { display:block; margin-bottom:18px; }
+#integralLesson .int-step-panel .section-heading h2 { font-size:clamp(1.45rem,2.5vw,1.9rem); }
