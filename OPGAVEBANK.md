@@ -226,7 +226,7 @@ Browsertesten dækker eksisterende sider og en eksisterende øvelse, prøvens sk
 
 ## Integralregning, første arbejdsgang
 
-Hovedemnet `integration` og `int.1`–`int.7` samt `int.rep` er registreret. `int.rep` er mellemstationen om B-niveau 6–7, ikke et nummereret integralmodul. Modul 1 og 2 er åbne; de øvrige sektioner viser deres plan. Læringsmålskort og kildeafgrænsning findes i `webapp/INTEGRALREGNING_PLAN.md`.
+Hovedemnet `integration` og `int.1`–`int.7` samt `int.rep` er registreret. `int.rep` er mellemstationen om B-niveau 6–7, ikke et nummereret integralmodul. Modul 1, 2 og 3 er åbne; de øvrige sektioner viser deres plan. Læringsmålskort og kildeafgrænsning findes i `webapp/INTEGRALREGNING_PLAN.md`.
 
 `webapp/tasks/bank/integration.js` tilføjer syv gennemgåede opgaver: kort stamfunktion/familie, ledvis integration, eksponentialfunktion, negativ potens, kontrol af et forkert forslag, en positionsmodel og en CAS-opgave. De har hints i niveauer, løsninger, typiske fejl og målrettet feedback. Alle prøvetekster er uden metodeoverskrift. Modeller og CAS-forklaringer kræver egen vurdering med tjekliste.
 
@@ -243,3 +243,11 @@ Integralregning bruger nu separate undervisningssider: `#integration/1`–`#inte
 Skriv begge røringssteder i den eksplicit angivne rækkefølge (mindste/største) i den sammensatte tangentopgave. Konstanter kan indtastes som brøker. CAS-opgaven bruger MathML-valg for logaritmeforskrifter, der ikke understøttes af polynomiumsparseren. Modul 2-svar gemmes separat fra modul 1 under `christian-matematik.integration.graphs.v1`.
 
 Browserforløbet `tests/integral-graphs.browser.test.js` tester alle moduldele og de nye bankopgaver, grafkontroller, punkt-/tangentfeedback, mobillayout, MathML, lokal lagring, prøvebank og repetition. Det indgår i `npm run test:browser`.
+
+## Integralregning, modul 3
+
+`tasks/bank/integration-definite.js` tilføjer syv opgaver fra `int.3` med `int.1` og `int.2` som forudsætninger: positivt integral, stamfunktionstabel, grænseberegninger, fortegnet integral/areal, eksponentialfunktion, energi-/tidsmodel og parametergrænser. Banken har nu 30 opgaver. De nye mål er `int.definite`, `int.ftc`, `int.bounds`, `int.signed`, `int.accumulation` og `int.cas-definite`.
+
+Forskellige fejlsvar udløser konkret feedback om potensregning, forkert række i en tabel, omvendte grænser, glemt nedre grænseværdi eller sammenblanding af integral og geometrisk areal. Energi- og parameterforklaringer kræver egen vurdering med tjekliste. CAS- og modelopgaver angiver domæne, enheder og afrunding; prøveteksterne har ingen metodeoverskrifter eller hints.
+
+Modulets egne svar gemmes under `christian-matematik.integration.definite.v1`. `tests/integral-definite.browser.test.js` tester alle dele, figurens grænser og rektangler, MathML-grænser, fejlfeedback, hints, lokal lagring, mobil, bankprøver og repetition. Den indgår i `npm run test:browser`.

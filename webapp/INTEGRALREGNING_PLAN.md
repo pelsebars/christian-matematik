@@ -1,6 +1,6 @@
 # Integralregning – læringsmål og progression
 
-Modul 1 og 2 er implementeret. Modul 3–7 og den unummererede mellemstation har struktur og mål, men ingen færdige undervisningsforløb endnu.
+Modul 1, 2 og 3 er implementeret. Modul 4–7 og den unummererede mellemstation har struktur og mål, men ingen færdige undervisningsforløb endnu.
 
 ## Læringsmålskort
 
@@ -35,7 +35,7 @@ Integralregning er hovedemne 06 i sidebaren og på startsiden. Oversigten `#inte
 
 Modul 1 har seks trin: Mål og starttjek, Teori, Eksempler, Øvelser, Forståelsestjek og Opsummering. Starttjek (fem spørgsmål), teori (fem dele), eksempler (seks), træning (syv opgaver) og forståelsestjek (fire spørgsmål) viser én del ad gangen. En trinmenu og delmenu samt Forrige/Næste giver fri navigation. En adresse som `#integration/1/teori/konstant` kan deles eller genåbnes direkte. Browserens Tilbage/Frem følger sideskiftene. `#integration/1` starter ved det første spørgsmål; svar og hints bevares under sideskift og genindlæsning.
 
-Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2 har nu også den samme trinopdeling. Modul 3–7 og mellemstationen får den, når deres undervisningsindhold implementeres.
+Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2 og 3 har nu også den samme trinopdeling. Modul 4–7 og mellemstationen får den, når deres undervisningsindhold implementeres.
 
 ### Stamfunktion og det ubestemte integral
 
@@ -158,3 +158,19 @@ Syv nye bankopgaver i `tasks/bank/integration-graphs.js` følger det fælles for
 Fire sluttjek og en egen forklaringsvurdering undersøger vækst, punkt, tangent og forskellen mellem oprindelig graf og stamfunktionsgraf. Resultatet giver en konkret anbefaling. Svar, kontroller og hints gemmes separat under `christian-matematik.integration.graphs.v1`; modul 1-data og eksisterende bankversioner bevares.
 
 Verifikation omfatter uafhængig differentiation og punktkontrol, tangenters hældning og højde i begge røringssteder, modellens begyndelsesværdi og fortegn, prerequisites i bankudvælgelsen, alle 28 mobiladresser, MathML, figurens kontrolknapper, hints, genforsøg, genindlæsning, browserhistorik, prøvetilstand og repetitionslinks. Modul 1 og resten af appen testes også efter navigationens generalisering.
+
+## Modul 3 – areal og det bestemte integral
+
+Modulet er åbent på `#integration/3`, med seks trin og 28 korte adresser. Fem startspørgsmål tjekker indsættelse, stamfunktioner, potenser, subtraktion og enheder. Fem teoridele dækker areal/akkumulation, hovedsætningen, grænseberegning og tabelværdier, fortegnet integral versus geometrisk areal samt modeller og CAS. Hver teoridel har en mikroøvelse.
+
+Den interaktive figur har tre kendte forskrifter, flytbare grænser og et valgfrit rektangeloverslag. Den viser præcist fortegnet integral og geometrisk areal samt ændringen ved omvendte eller ens grænser. Delarealer beregnes ved kendte nulpunkter og tælles positivt til geometrisk areal. Overslaget bruger venstrerektangler på intervallet fra venstre mod højre og vender fortegn ved omvendte integrationsgrænser. Dette er intuition til definitionen; systematisk numerisk integration og trapezmetoden er fortsat planlagt i modul 4.
+
+Bevisidéerne for arealfunktionen og stamfunktionsforskellen bygger på Pensum/Definitioner, sætninger og beviser.docx. Arealfunktionens bevis gengives med kildens afgrænsning: ikke-negativ kontinuert funktion, positivt skridt og det tilfælde, hvor funktionen er voksende til højre for punktet. Den generelle sætning og fortegnet akkumulation forklares særskilt.
+
+Seks gennemregnede eksempler dækker positivt areal, en sum, kildens stamfunktionstabel, fortegnsskift, eksponentialfunktion med CAS og ovnens temperaturstigning. De syv bankopgaver i `tasks/bank/integration-definite.js` dækker polynomier, tabellen, grænseværdier, fortegnet integral/areal, eksponentialfunktion, en energi-/tidsmodel og parametergrænser. De kræver `int.1` og `int.2`. Konkrete bankmål er `int.definite`, `int.ftc`, `int.bounds`, `int.signed`, `int.accumulation` og `int.cas-definite`.
+
+Det primære opgaveark er ark 3, især eksempler 1–3 uden hjælpemidler, eksempel 1 med hjælpemidler, u1–u4 og opgaver med hjælpemidler 2–3 og 5. Eksempler med areal mellem flere grafer, mere omfattende opdeling og parameterafhængige områder følges op i modul 4. Sprintereksemplets model giver en negativ værdi ved tiden nul, selvom teksten kalder størrelsen fart; derfor er det ikke kopieret som en ukritisk fysisk fartmodel. De anvendte energi- og temperaturmodeller har en konsistent fortolkning på deres angivne intervaller.
+
+Læringsmålskortets U1–U5, U7, K2, K6–K7, A1, A2 og A4 øves og kontrolleres her. Fire sluttjek og en egen forklaringsvurdering afslutter modulet. Svar og hints gemmes separat under `christian-matematik.integration.definite.v1`; data og bankversioner fra tidligere moduler bevares.
+
+Verifikation omfatter uafhængig differentiation og grænseberegning, fortegnet integral versus geometrisk areal, omvendte/ens grænser, rektangeloverslagenes tilnærmelse, energimodellens tider via uafhængig intervalhalvering, parameterkontrol, prerequisites, alle mobiladresser, MathML-grænser/potenser, lokal lagring, browserhistorik, prøvebank og repetition. Browsertests for eksisterende app samt modul 1 og 2 indgår i regressionstesten.

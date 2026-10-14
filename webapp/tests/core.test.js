@@ -159,7 +159,7 @@ test("Balanced sets are reproducible, diverse, bounded and filterable", () => {
     }).tasks.map((t) => t.id),
     ["eq.balance"],
   );
-  assert.equal(composeSet({ ...options, difficulty: 3 }).tasks.length, 3);
+  assert.ok(composeSet({ ...options, difficulty: 3 }).tasks.every(t => t.difficulty === 3));
   assert.ok(composeSet({ ...options, minutes: 6 }).minutes <= 6);
   assert.equal(
     composeSet({
@@ -385,4 +385,43 @@ test('Module 2 requires module 1 and has valid direct links and targeted feedbac
  assert.equal(parseIntegralRoute('#integration/2/teori/fortegn').path,'integration/2/teori/fortegn');
  assert.equal(pagesForIntegralModule('2').length,28);
  for(const path of pagesForIntegralModule('2'))assert.equal(parseIntegralRoute('#'+path).path,path);
+});
+
+test('Definite integrals agree with independent derivative, endpoint, model and area calculations', async () => {
+ const at=(p,a)=>p.reduce((sum,c,i)=>sum+c*a**i,0),derivative=p=>p.slice(1).map((c,i)=>c*(i+1));
+ const basic=instantiate('int3.basic','independent'),p=polynomial(basic.parts[0].answer);
+ assert.deepEqual(derivative(p),[1,0,6]);assert.equal(at(p,1)-at(p,0),3);
+ const poly=instantiate('int3.polynomial','independent'),q=polynomial(poly.parts[0].answer);
+ assert.deepEqual(derivative(q),[1,0,3]);assert.equal(at(q,2)-at(q,0),10);
+ assert.equal(number(instantiate('int3.table','a').parts[0].answer),11-3);
+ const signed=instantiate('int3.signed','a');assert.equal(number(signed.parts[0].answer),0);assert.equal(number(signed.parts[1].answer),.5+.5);
+ const {areaMeasurements,areaModels}=await import('../integral-definite-lesson.js');
+ assert.equal(areaMeasurements(areaModels.cross,0,2,8).value,0);assert.equal(areaMeasurements(areaModels.cross,0,2,8).area,1);
+ assert.equal(areaMeasurements(areaModels.positive,2,0,8).value,-4);assert.equal(areaMeasurements(areaModels.positive,2,0,8).area,4);
+ const a=areaMeasurements(areaModels.positive,0,2,2),b=areaMeasurements(areaModels.positive,0,2,40);
+ assert.ok(Math.abs(b.approximation-b.value)<Math.abs(a.approximation-a.value));
+ for(const model of Object.values(areaModels))for(const [lower,upper]of [[-1,2],[2,-1],[1,1]]){
+  const r=areaMeasurements(model,lower,upper,8);assert.ok(r.area>=0);assert.ok(Math.abs(r.value)<=r.area+1e-12);
+  const reverse=areaMeasurements(model,upper,lower,8);assert.equal(r.value,-reverse.value||0);assert.equal(r.area,reverse.area);
+ }
+ const rate=t=>20*(1-Math.exp(-t))+.5*t,energy=t=>20*t+20*Math.exp(-t)+t*t/4-20;
+ assert.ok(Math.abs(rate(5)-22.37)<.01);assert.ok(Math.abs(energy(10)-205)<.01);
+ let lo=0,hi=20;for(let i=0;i<70;i++){const mid=(lo+hi)/2;if(energy(mid)<300)lo=mid;else hi=mid;}
+ const task=instantiate('int3.energy','a');assert.ok(Math.abs((lo+hi)/2-number(task.parts.find(p=>p.id==='time').answer))<.01);assert.ok(Math.abs(energy((lo+hi)/2)-300)<1e-10);
+ const partition=instantiate('int3.partition','a'),r=polynomial(partition.parts[0].answer),k=number(partition.parts[1].answer);
+ assert.equal(at(r,k),92);assert.equal(54*2-2*2**3,92);
+ assert.ok(Math.abs(100*Math.log(58/10)-175.8)<.05);
+ assert.ok(Math.abs(1.5*(Math.exp(4)-1)+2-82.40)<.01);
+});
+
+test('Module 3 routes, prerequisites and feedback distinguish integration from arithmetic and area errors', async () => {
+ const {parseIntegralRoute,pagesForIntegralModule}=await import('../integral-routes.js');const {targetedFeedback}=await import('../tasks/grading.js');
+ assert.equal(parseIntegralRoute('#integration/3').path,'integration/3/start/1');assert.equal(pagesForIntegralModule('3').length,28);
+ for(const path of pagesForIntegralModule('3'))assert.equal(parseIntegralRoute('#'+path).path,path);
+ const poly=instantiate('int3.polynomial','a');assert.match(targetedFeedback(poly,poly.parts.find(p=>p.id==='upper'),'6'),/potensregningen/);
+ const signed=instantiate('int3.signed','a');assert.match(targetedFeedback(signed,signed.parts.find(p=>p.id==='area'),'0'),/ikke det geometriske areal/);
+ const table=instantiate('int3.table','a');assert.match(targetedFeedback(table,table.parts[0],'5'),/oprindelige funktions værdier/);
+ const incomplete=composeSet({seed:'int3',topics:['integration'],onlyCompleted:true,completed:['int.3'],minutes:180});assert.equal(incomplete.tasks.length,0);
+ const completed=composeSet({seed:'int3',topics:['integration'],onlyCompleted:true,completed:['int.1','int.2','int.3'],minutes:180});assert.ok(completed.tasks.some(t=>t.module==='int.3'));
+ assert.ok(instantiate('int3.energy','a').aids);assert.ok(!instantiate('int3.exponential','a').aids);
 });

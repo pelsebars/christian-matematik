@@ -10,7 +10,8 @@ export const integralSteps = [
 export const integralGraphSteps = integralSteps.map(s => s.id === 'teori'
   ? { ...s, parts: ['sammenhaeng', 'forskydning', 'fortegn', 'punkt', 'tangent'] }
   : { ...s, parts: [...s.parts] });
-export const stepsForIntegralModule = module => ({ '1': integralSteps, '2': integralGraphSteps })[module];
+export const integralDefiniteSteps = integralSteps.map(s => s.id === 'teori' ? { ...s, parts: ['areal', 'hovedsaetning', 'beregning', 'fortegn', 'modeller'] } : { ...s, parts: [...s.parts] });
+export const stepsForIntegralModule = module => ({ '1': integralSteps, '2': integralGraphSteps, '3': integralDefiniteSteps })[module];
 export const integralRoute = (module = '', step = '', part = '') =>
   ['integration', module, step, part].filter(Boolean).join('/');
 export function parseIntegralRoute(hash) {
@@ -19,7 +20,7 @@ export function parseIntegralRoute(hash) {
   const module = ['1', '2', '3', '4', 'repetition', '5', '6', '7'].includes(requestedModule) ? requestedModule : '';
   const steps = stepsForIntegralModule(module);
   if (!steps) return { module, step: '', part: '', path: integralRoute(module) };
-  const definition = steps.find(s => s.id === requestedStep) || integralSteps[0];
+  const definition = steps.find(s => s.id === requestedStep) || steps[0];
   const part = definition.parts.includes(requestedPart) ? requestedPart : definition.parts[0] || '';
   return { module, step: definition.id, part, path: integralRoute(module, definition.id, part) };
 }

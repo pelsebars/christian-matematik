@@ -64,6 +64,12 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "int.definite": {module:"int.3",text:"Beregne bestemte integraler med korrekte grænser"},
+  "int.ftc": {module:"int.3",text:"Forbinde det bestemte integral med stamfunktionsforskellen"},
+  "int.bounds": {module:"int.3",text:"Indsætte grænser med korrekte potenser, parenteser og fortegn"},
+  "int.signed": {module:"int.3",text:"Skelne mellem fortegnet integral og geometrisk areal"},
+  "int.accumulation": {module:"int.3",text:"Fortolke akkumuleret ændring og arbejde med enheder"},
+  "int.cas-definite": {module:"int.3",text:"Dokumentere CAS-grænser og kontrollere modeller og parametre"},
   "int.graph": {module:"int.2",text:"Forbinde funktionens fortegn med stamfunktionens vækst"},
   "int.shift": {module:"int.2",text:"Forstå lodret forskydning og integrationskonstant"},
   "int.stationary": {module:"int.2",text:"Skelne mellem vandret tangent og ekstremum"},

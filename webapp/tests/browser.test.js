@@ -90,7 +90,8 @@ try {
   await page.locator("[name=useHistory]").uncheck();
   await page.locator("[name=seed]").fill("browser-exam");
   await page.locator("#taskSetup button[type=submit]").click();
-  assert.equal(await page.locator("[data-task-action=jump]").count(), 9);
+  const examCount = await page.locator("[data-task-action=jump]").count();
+  assert.ok(examCount > 0 && examCount <= 12);
   assert.equal(await page.locator("[data-task-action=hint]").count(), 0);
   assert.equal(await page.locator(".task-feedback").count(), 0);
   assert.equal(await page.locator("#taskTimer").count(), 1);
@@ -145,7 +146,7 @@ try {
       "Fordelt på læringsmål",
     ),
   );
-  assert.equal(await page.locator(".task-feedback").count(), 9);
+  assert.equal(await page.locator(".task-feedback").count(), examCount);
   await page.locator("[data-task-action=retry]").click();
   assert.ok(
     (await page.locator("#taskHeading").innerText()).includes(

@@ -8,3 +8,5 @@ export const prime = (name='F',arg=x) => `<msup><mi>${name}</mi><mo>′</mo></ms
 export const exp = (arg=x) => `<msup><mi mathvariant="normal">e</mi><mrow>${arg}</mrow></msup>`;
 export const ln = (arg=x) => `<mi mathvariant="normal">ln</mi><mo>(</mo>${arg}<mo>)</mo>`;
 export const integral = (body) => `<mo>∫</mo><mrow>${body}</mrow><mspace width="0.2em"/><mi mathvariant="normal">d</mi>${x}`;
+export const definiteIntegral = (body, lower, upper, variable=x) => `<msubsup><mo largeop="true">∫</mo><mrow>${lower}</mrow><mrow>${upper}</mrow></msubsup><mrow>${body}</mrow><mspace width="0.2em"/><mi mathvariant="normal">d</mi>${variable}`;
+export const evaluateBetween = (body, lower, upper) => `<msubsup><mrow><mo>[</mo>${body}<mo>]</mo></mrow><mrow>${lower}</mrow><mrow>${upper}</mrow></msubsup>`;
