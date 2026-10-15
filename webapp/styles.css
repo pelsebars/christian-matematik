@@ -3313,6 +3313,408 @@ math {
   color: #ffffff;
 }
 
+.function-plotter-section {
+  border-color: #d8cff7;
+  background: linear-gradient(145deg, #ffffff 35%, #f8f6ff);
+}
+
+.function-plotter-heading {
+  align-items: end;
+}
+
+.function-plotter-heading > p {
+  max-width: 570px;
+}
+
+.function-plotter {
+  margin-top: 25px;
+  border: 1px solid #d8cff7;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 34px rgba(50, 37, 101, 0.08);
+}
+
+.function-plotter-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 22px 22px 14px;
+}
+
+.function-expression-field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.function-expression-field > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.function-expression-field > span math {
+  font-size: 1.05rem;
+}
+
+.function-expression-field > span em {
+  margin-left: auto;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.function-expression-field input,
+.plot-range-fields input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #cfd7e6;
+  border-radius: 11px;
+  outline: 0;
+  color: var(--ink);
+  background: #ffffff;
+  font: inherit;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.function-expression-field input {
+  height: 48px;
+  padding: 0 14px;
+  font-family: "Cambria Math", "STIX Two Math", Georgia, serif;
+  font-size: 1rem;
+}
+
+.function-expression-field input:focus,
+.plot-range-fields input:focus {
+  border-color: var(--violet);
+  box-shadow: 0 0 0 3px rgba(114, 87, 217, 0.14);
+}
+
+.function-expression-field input.has-error {
+  border-color: #ba3d51;
+  box-shadow: 0 0 0 3px rgba(186, 61, 81, 0.1);
+}
+
+.plot-field-error,
+.plot-range-error {
+  min-height: 18px;
+  margin: 0;
+  color: #a52f43;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.plot-color-key {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 21px;
+  height: 4px;
+  border-radius: 999px;
+}
+
+.plot-color-key--function {
+  background: var(--blue);
+}
+
+.plot-color-key--derivative {
+  background: var(--violet);
+}
+
+.function-plotter-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 22px 14px;
+}
+
+.plot-range-fields {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.plot-range-fields label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.plot-range-fields label math {
+  color: var(--ink);
+  font-size: 0.88rem;
+}
+
+.plot-range-fields input {
+  width: 76px;
+  height: 40px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.plot-submit {
+  min-height: 42px;
+  padding: 0 20px;
+  border: 1px solid var(--violet);
+  border-radius: 11px;
+  color: #ffffff;
+  background: var(--violet);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(114, 87, 217, 0.2);
+}
+
+.plot-submit:hover,
+.plot-submit:focus-visible {
+  background: #6047c5;
+}
+
+.plot-range-error {
+  min-height: 0;
+  padding: 0 22px;
+}
+
+.plot-range-error:not(:empty) {
+  padding-bottom: 13px;
+}
+
+.plot-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 22px;
+  border-top: 1px solid #ebe7f8;
+  background: #fbfaff;
+}
+
+.plot-presets > span {
+  margin-right: 3px;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.plot-presets button {
+  min-height: 34px;
+  padding: 4px 11px;
+  border: 1px solid #d8cff7;
+  border-radius: 9px;
+  color: #4d398f;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.plot-presets button:hover,
+.plot-presets button:focus-visible {
+  border-color: var(--violet);
+  background: var(--violet-soft);
+}
+
+.plot-presets math {
+  font-size: 0.88rem;
+}
+
+.plot-syntax {
+  border-top: 1px solid #ebe7f8;
+  background: #ffffff;
+}
+
+.plot-syntax summary {
+  padding: 14px 22px;
+  color: #4d398f;
+  font-size: 0.76rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.plot-syntax > div {
+  padding: 0 22px 16px;
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.plot-syntax p {
+  margin: 0 0 8px;
+}
+
+.plot-syntax p:last-child {
+  margin-bottom: 0;
+}
+
+.plot-syntax code {
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: "Cambria Math", "STIX Two Math", Georgia, serif;
+}
+
+.function-plotter-output {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(245px, 0.65fr);
+  border-top: 1px solid #dfe5ef;
+}
+
+.function-plotter-canvas {
+  min-width: 0;
+  padding: 16px 14px 14px;
+  border-right: 1px solid #dfe5ef;
+  background: #fbfdff;
+}
+
+.function-plotter-canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+}
+
+.function-plot-gridline {
+  stroke: #e8edf4;
+  stroke-width: 1;
+}
+
+.function-plot-axis {
+  stroke: #9eabc0;
+  stroke-width: 1.5;
+}
+
+.function-plot-tick,
+.function-plot-axis-label {
+  fill: #66748c;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.function-plot-axis-label {
+  fill: var(--ink);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.function-plot-curve {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3.2;
+  vector-effect: non-scaling-stroke;
+}
+
+.function-plot-curve--main {
+  stroke: var(--blue);
+}
+
+.function-plot-curve--derivative {
+  stroke: var(--violet);
+}
+
+.function-plot-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  padding: 8px 8px 0;
+  color: var(--ink-soft);
+  font-size: 0.74rem;
+  font-weight: 750;
+}
+
+.function-plot-legend span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.function-plot-legend [hidden] {
+  display: none;
+}
+
+.function-plotter-feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  background: #ffffff;
+}
+
+.plot-status,
+.derivative-check {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid #dfe5ef;
+  border-radius: 13px;
+  background: var(--paper);
+}
+
+.plot-status strong,
+.derivative-check strong {
+  color: var(--ink);
+  font-size: 0.78rem;
+}
+
+.plot-status span,
+.derivative-check span {
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.derivative-check.is-positive {
+  border-color: #b9dfd4;
+  background: var(--green-soft);
+}
+
+.derivative-check.is-positive strong {
+  color: var(--green);
+}
+
+.derivative-check.is-negative {
+  border-color: #efc6ce;
+  background: #fff1f3;
+}
+
+.derivative-check.is-negative strong {
+  color: #a52f43;
+}
+
+.derivative-check.is-neutral {
+  border-color: #eadfbf;
+  background: var(--amber-soft);
+}
+
+.plot-reading-tip {
+  margin: auto 0 0;
+  padding: 14px;
+  border-left: 3px solid var(--violet);
+  color: var(--ink-soft);
+  background: var(--violet-soft);
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+.plot-reading-tip strong {
+  color: var(--ink);
+}
+
+.plot-reading-tip math {
+  font-size: 0.9rem;
+}
+
 .turn-module-intro {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
@@ -5335,6 +5737,85 @@ math {
 
   .vector-operation-figure {
     padding: 21px 18px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .function-plotter-output {
+    grid-template-columns: 1fr;
+  }
+
+  .function-plotter-canvas {
+    border-right: 0;
+    border-bottom: 1px solid #dfe5ef;
+  }
+}
+
+@media (max-width: 760px) {
+  .function-plotter-inputs {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    padding: 18px 16px 10px;
+  }
+
+  .function-plotter-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 0 16px 13px;
+  }
+
+  .plot-range-fields {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+
+  .plot-range-fields label {
+    min-width: 0;
+  }
+
+  .plot-range-fields label math {
+    display: none;
+  }
+
+  .plot-range-fields input {
+    width: 100%;
+  }
+
+  .plot-submit {
+    width: 100%;
+  }
+
+  .plot-range-error {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .plot-presets {
+    padding: 14px 16px;
+  }
+
+  .plot-presets > span {
+    flex-basis: 100%;
+  }
+
+  .plot-syntax summary {
+    padding: 14px 16px;
+  }
+
+  .plot-syntax > div {
+    padding: 0 16px 15px;
+  }
+
+  .function-plotter-canvas {
+    padding: 8px 2px 13px;
+  }
+
+  .function-plotter-canvas svg {
+    min-height: 230px;
+  }
+
+  .function-plotter-feedback {
+    padding: 17px 16px;
   }
 }
 

@@ -467,6 +467,431 @@ if (chainRuleBuilder) {
   updateChainBuilder();
 }
 
+const functionPlotter = document.querySelector("#functionPlotter");
+
+if (functionPlotter) {
+  const functionInput = functionPlotter.querySelector("#plotFunctionInput");
+  const derivativeInput = functionPlotter.querySelector("#plotDerivativeInput");
+  const xMinInput = functionPlotter.querySelector("#plotXMin");
+  const xMaxInput = functionPlotter.querySelector("#plotXMax");
+  const functionError = functionPlotter.querySelector("#plotFunctionError");
+  const derivativeError = functionPlotter.querySelector("#plotDerivativeError");
+  const rangeError = functionPlotter.querySelector("#plotRangeError");
+  const status = functionPlotter.querySelector("#functionPlotStatus");
+  const derivativeCheck = functionPlotter.querySelector("#derivativeCheck");
+  const plotDescription = functionPlotter.querySelector("#functionPlotDescription");
+  const mainCurve = functionPlotter.querySelector("#functionPlotCurve");
+  const derivativeCurve = functionPlotter.querySelector("#derivativePlotCurve");
+  const derivativeLegend = functionPlotter.querySelector("#derivativePlotLegend");
+  const gridGroup = functionPlotter.querySelector("#functionPlotGrid");
+  const axesGroup = functionPlotter.querySelector("#functionPlotAxes");
+  const svgNamespace = "http://www.w3.org/2000/svg";
+  const bounds = { left: 64, right: 798, top: 20, bottom: 400 };
+
+  const presets = {
+    sine: { functionValue: "sin(x²)", derivativeValue: "2·x·cos(x²)", xMin: "−4", xMax: "4" },
+    power: { functionValue: "(x² + 1)³", derivativeValue: "6·x·(x² + 1)²", xMin: "−2", xMax: "2" },
+    exponential: { functionValue: "e^(0,5·x)", derivativeValue: "0,5·e^(0,5·x)", xMin: "−5", xMax: "5" },
+  };
+
+  const mathFunctions = {
+    sin: Math.sin,
+    cos: Math.cos,
+    tan: Math.tan,
+    ln: Math.log,
+    log: Math.log10,
+    sqrt: Math.sqrt,
+    abs: Math.abs,
+    exp: Math.exp,
+  };
+
+  function expressionError(message) {
+    const error = new Error(message);
+    error.name = "ExpressionError";
+    return error;
+  }
+
+  function normalizeExpression(source) {
+    if (source.length > 160) throw expressionError("Udtrykket er for langt. Del det op eller skriv en kortere form.");
+
+    let normalized = source
+      .trim()
+      .replace(/^(?:f\s*[′']?\s*\(\s*x\s*\)|y)\s*=/i, "")
+      .replace(/[−–—]/g, "-")
+      .replace(/[·×]/g, "*")
+      .replace(/÷/g, "/")
+      .replace(/√/g, "sqrt")
+      .replace(/π/g, "pi")
+      .replace(/(\d),(?=\d)/g, "$1.")
+      .replace(/\s+/g, "");
+
+    const superscriptDigits = { "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9", "⁻": "-" };
+    normalized = normalized.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g, (sequence) => {
+      const exponent = [...sequence].map((character) => superscriptDigits[character]).join("");
+      return `^(${exponent})`;
+    });
+
+    return normalized;
+  }
+
+  function tokenizeExpression(source) {
+    const tokens = [];
+    let index = 0;
+
+    while (index < source.length) {
+      const character = source[index];
+
+      if (/\d|\./.test(character)) {
+        const match = source.slice(index).match(/^(?:\d+(?:\.\d*)?|\.\d+)/);
+        if (!match) throw expressionError("Tallet er ikke skrevet i en genkendelig form.");
+        const value = Number(match[0]);
+        if (!Number.isFinite(value)) throw expressionError("Et af tallene er for stort.");
+        tokens.push({ type: "number", value });
+        index += match[0].length;
+        continue;
+      }
+
+      if (/[a-z]/i.test(character)) {
+        const match = source.slice(index).match(/^[a-z]+/i);
+        const name = match[0].toLowerCase();
+        if (name === "x") tokens.push({ type: "variable" });
+        else if (name === "e" || name === "pi") tokens.push({ type: "constant", value: name === "e" ? Math.E : Math.PI });
+        else if (mathFunctions[name]) tokens.push({ type: "function", value: name });
+        else throw expressionError(`“${match[0]}” er ikke et kendt navn. Brug fx sin, cos, ln eller sqrt.`);
+        index += match[0].length;
+        continue;
+      }
+
+      if ("+-*/^()".includes(character)) {
+        const tokenTypes = { "(": "leftParenthesis", ")": "rightParenthesis" };
+        tokens.push({ type: tokenTypes[character] || "operator", value: character });
+        index += 1;
+        continue;
+      }
+
+      throw expressionError(`Tegnet “${character}” kan ikke bruges her.`);
+    }
+
+    const withMultiplication = [];
+    tokens.forEach((token) => {
+      const previous = withMultiplication.at(-1);
+      const previousCanEnd = previous && ["number", "variable", "constant", "rightParenthesis"].includes(previous.type);
+      const currentCanStart = ["number", "variable", "constant", "function", "leftParenthesis"].includes(token.type);
+      if (previousCanEnd && currentCanStart) withMultiplication.push({ type: "operator", value: "*" });
+      withMultiplication.push(token);
+    });
+    withMultiplication.push({ type: "end" });
+    return withMultiplication;
+  }
+
+  function compileExpression(source) {
+    if (!source.trim()) throw expressionError("Skriv en funktion i feltet.");
+    const tokens = tokenizeExpression(normalizeExpression(source));
+    let position = 0;
+    const current = () => tokens[position];
+    const take = () => tokens[position++];
+
+    function parsePrimary() {
+      const token = take();
+      if (token.type === "number") return () => token.value;
+      if (token.type === "variable") return (x) => x;
+      if (token.type === "constant") return () => token.value;
+
+      if (token.type === "function") {
+        if (current().type !== "leftParenthesis") throw expressionError(`Skriv ${token.value} med parentes om argumentet.`);
+        take();
+        const argument = parseExpression();
+        if (current().type !== "rightParenthesis") throw expressionError("Der mangler en afsluttende parentes.");
+        take();
+        return (x) => mathFunctions[token.value](argument(x));
+      }
+
+      if (token.type === "leftParenthesis") {
+        const expression = parseExpression();
+        if (current().type !== "rightParenthesis") throw expressionError("Der mangler en afsluttende parentes.");
+        take();
+        return expression;
+      }
+
+      if (token.type === "end") throw expressionError("Udtrykket slutter for tidligt.");
+      throw expressionError("Her forventede jeg et tal, en variabel eller en parentes.");
+    }
+
+    function parsePower() {
+      const base = parsePrimary();
+      if (current().type === "operator" && current().value === "^") {
+        take();
+        const exponent = parseUnary();
+        return (x) => base(x) ** exponent(x);
+      }
+      return base;
+    }
+
+    function parseUnary() {
+      if (current().type === "operator" && (current().value === "+" || current().value === "-")) {
+        const operator = take().value;
+        const operand = parseUnary();
+        return operator === "-" ? (x) => -operand(x) : operand;
+      }
+      return parsePower();
+    }
+
+    function parseTerm() {
+      let left = parseUnary();
+      while (current().type === "operator" && (current().value === "*" || current().value === "/")) {
+        const operator = take().value;
+        const right = parseUnary();
+        const previous = left;
+        left = operator === "*" ? (x) => previous(x) * right(x) : (x) => previous(x) / right(x);
+      }
+      return left;
+    }
+
+    function parseExpression() {
+      let left = parseTerm();
+      while (current().type === "operator" && (current().value === "+" || current().value === "-")) {
+        const operator = take().value;
+        const right = parseTerm();
+        const previous = left;
+        left = operator === "+" ? (x) => previous(x) + right(x) : (x) => previous(x) - right(x);
+      }
+      return left;
+    }
+
+    const compiled = parseExpression();
+    if (current().type === "rightParenthesis") throw expressionError("Der er en afsluttende parentes for meget.");
+    if (current().type !== "end") throw expressionError("Udtrykket kan ikke læses færdigt. Kontrollér regnetegnene.");
+    return compiled;
+  }
+
+  function parseRangeValue(value) {
+    return Number(value.trim().replace(/[−–—]/g, "-").replace(",", "."));
+  }
+
+  function formatPlotNumber(value) {
+    const rounded = Math.abs(value) < 0.0000001 ? 0 : value;
+    return Number(rounded.toPrecision(4)).toLocaleString("da-DK", { maximumFractionDigits: 4 });
+  }
+
+  function setFieldError(input, element, message = "") {
+    element.textContent = message;
+    input.classList.toggle("has-error", Boolean(message));
+    input.setAttribute("aria-invalid", String(Boolean(message)));
+  }
+
+  function createSvgElement(name, attributes = {}, text = "") {
+    const element = document.createElementNS(svgNamespace, name);
+    Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+    if (text) element.textContent = text;
+    return element;
+  }
+
+  function percentile(sortedValues, proportion) {
+    if (!sortedValues.length) return 0;
+    return sortedValues[Math.min(sortedValues.length - 1, Math.floor((sortedValues.length - 1) * proportion))];
+  }
+
+  function makeCurvePath(fn, xMin, xMax, yMin, yMax) {
+    const samples = 720;
+    const width = bounds.right - bounds.left;
+    const height = bounds.bottom - bounds.top;
+    const xToPixel = (x) => bounds.left + ((x - xMin) / (xMax - xMin)) * width;
+    const yToPixel = (y) => bounds.bottom - ((y - yMin) / (yMax - yMin)) * height;
+    let path = "";
+    let drawing = false;
+    let previousY = null;
+
+    for (let index = 0; index <= samples; index += 1) {
+      const x = xMin + (index / samples) * (xMax - xMin);
+      const y = fn(x);
+      const pixelY = yToPixel(y);
+      const isVisible = Number.isFinite(y) && pixelY > bounds.top - height * 1.5 && pixelY < bounds.bottom + height * 1.5;
+      const jumped = previousY !== null && Math.abs(pixelY - previousY) > height * 0.72;
+      if (!isVisible || jumped) {
+        drawing = false;
+        previousY = isVisible ? pixelY : null;
+        continue;
+      }
+      path += `${drawing ? "L" : "M"}${xToPixel(x).toFixed(2)},${pixelY.toFixed(2)}`;
+      drawing = true;
+      previousY = pixelY;
+    }
+    return path;
+  }
+
+  function drawCoordinateSystem(xMin, xMax, yMin, yMax) {
+    gridGroup.replaceChildren();
+    axesGroup.replaceChildren();
+    const width = bounds.right - bounds.left;
+    const height = bounds.bottom - bounds.top;
+    const xToPixel = (x) => bounds.left + ((x - xMin) / (xMax - xMin)) * width;
+    const yToPixel = (y) => bounds.bottom - ((y - yMin) / (yMax - yMin)) * height;
+    const xAxisY = yMin <= 0 && yMax >= 0 ? yToPixel(0) : bounds.bottom;
+    const yAxisX = xMin <= 0 && xMax >= 0 ? xToPixel(0) : bounds.left;
+
+    for (let index = 0; index <= 8; index += 1) {
+      const value = xMin + (index / 8) * (xMax - xMin);
+      const x = xToPixel(value);
+      gridGroup.append(createSvgElement("line", { class: "function-plot-gridline", x1: x, y1: bounds.top, x2: x, y2: bounds.bottom }));
+      axesGroup.append(createSvgElement("text", { class: "function-plot-tick", x, y: bounds.bottom + 23, "text-anchor": "middle" }, formatPlotNumber(value)));
+    }
+
+    for (let index = 0; index <= 6; index += 1) {
+      const value = yMin + (index / 6) * (yMax - yMin);
+      const y = yToPixel(value);
+      gridGroup.append(createSvgElement("line", { class: "function-plot-gridline", x1: bounds.left, y1: y, x2: bounds.right, y2: y }));
+      axesGroup.append(createSvgElement("text", { class: "function-plot-tick", x: bounds.left - 10, y: y + 4, "text-anchor": "end" }, formatPlotNumber(value)));
+    }
+
+    axesGroup.append(createSvgElement("line", { class: "function-plot-axis", x1: bounds.left, y1: xAxisY, x2: bounds.right, y2: xAxisY }));
+    axesGroup.append(createSvgElement("line", { class: "function-plot-axis", x1: yAxisX, y1: bounds.top, x2: yAxisX, y2: bounds.bottom }));
+    axesGroup.append(createSvgElement("text", { class: "function-plot-axis-label", x: bounds.right - 8, y: xAxisY - 9 }, "x"));
+    axesGroup.append(createSvgElement("text", { class: "function-plot-axis-label", x: yAxisX + 10, y: bounds.top + 16 }, "y"));
+  }
+
+  function assessDerivative(fn, candidate, xMin, xMax) {
+    const errors = [];
+    const step = Math.max((xMax - xMin) * 0.00001, 0.000001);
+    for (let index = 1; index <= 19; index += 1) {
+      const x = xMin + (index / 20) * (xMax - xMin);
+      const left = fn(x - step);
+      const right = fn(x + step);
+      const candidateValue = candidate(x);
+      const numericalDerivative = (right - left) / (2 * step);
+      if (![left, right, candidateValue, numericalDerivative].every(Number.isFinite)) continue;
+      const scale = 1 + Math.abs(numericalDerivative) + Math.abs(candidateValue);
+      errors.push(Math.abs(numericalDerivative - candidateValue) / scale);
+    }
+    errors.sort((a, b) => a - b);
+    if (errors.length < 6) return { kind: "neutral", message: "Der er for få brugbare punkter til en sikker numerisk sammenligning i dette interval." };
+    const medianError = percentile(errors, 0.5);
+    if (medianError < 0.006) return { kind: "positive", message: "Den numeriske kontrol tyder tydeligt på, at den violette graf er den afledte af den blå." };
+    if (medianError < 0.04) return { kind: "neutral", message: "Graferne ligger forholdsvis tæt, men kontrollen er ikke entydig. Prøv også at kontrollere din differentiation i hånden." };
+    return { kind: "negative", message: "Graferne ser ikke ud til at passe som funktion og afledt. Kontrollér især faktoren fra den indre funktion." };
+  }
+
+  function renderPlot() {
+    setFieldError(functionInput, functionError);
+    setFieldError(derivativeInput, derivativeError);
+    rangeError.textContent = "";
+    status.textContent = "";
+    derivativeCheck.textContent = "";
+    derivativeCheck.className = "derivative-check";
+
+    let fn;
+    let derivative = null;
+    let hasError = false;
+    try {
+      fn = compileExpression(functionInput.value);
+    } catch (error) {
+      setFieldError(functionInput, functionError, error.message);
+      hasError = true;
+    }
+
+    if (derivativeInput.value.trim()) {
+      try {
+        derivative = compileExpression(derivativeInput.value);
+      } catch (error) {
+        setFieldError(derivativeInput, derivativeError, error.message);
+        hasError = true;
+      }
+    }
+
+    const xMin = parseRangeValue(xMinInput.value);
+    const xMax = parseRangeValue(xMaxInput.value);
+    if (!Number.isFinite(xMin) || !Number.isFinite(xMax)) {
+      rangeError.textContent = "Skriv to gyldige tal som interval.";
+      hasError = true;
+    } else if (xMin >= xMax) {
+      rangeError.textContent = "Den mindste x-værdi skal være mindre end den største.";
+      hasError = true;
+    } else if (Math.abs(xMin) > 1000000 || Math.abs(xMax) > 1000000 || xMax - xMin > 1000) {
+      rangeError.textContent = "Vælg et interval med en bredde på højst 1.000 og værdier mellem −1.000.000 og 1.000.000.";
+      hasError = true;
+    }
+
+    if (hasError) {
+      status.innerHTML = "<strong>Grafen blev ikke ændret.</strong><span>Ret det markerede felt, og prøv igen.</span>";
+      return;
+    }
+
+    const sampleVisibleValues = (curveFunction) => {
+      const values = [];
+      for (let index = 0; index <= 500; index += 1) {
+        const x = xMin + (index / 500) * (xMax - xMin);
+        const y = curveFunction(x);
+        if (Number.isFinite(y) && Math.abs(y) < 1000000000) values.push(y);
+      }
+      return values;
+    };
+    const functionValues = sampleVisibleValues(fn);
+    const derivativeValues = derivative ? sampleVisibleValues(derivative) : [];
+
+    if (!functionValues.length) {
+      setFieldError(functionInput, functionError, "Funktionen har ingen synlige, reelle værdier i det valgte interval.");
+      status.innerHTML = "<strong>Ingen graf at vise.</strong><span>Prøv et andet interval eller kontrollér funktionen.</span>";
+      return;
+    }
+
+    if (derivative && !derivativeValues.length) {
+      setFieldError(derivativeInput, derivativeError, "Den mulige afledte har ingen synlige, reelle værdier i det valgte interval.");
+      status.innerHTML = "<strong>Grafen blev ikke ændret.</strong><span>Prøv et andet interval eller kontrollér den mulige afledte.</span>";
+      return;
+    }
+
+    const visibleValues = [...functionValues, ...derivativeValues];
+    visibleValues.sort((a, b) => a - b);
+    let yMin = Math.min(0, percentile(visibleValues, 0.02));
+    let yMax = Math.max(0, percentile(visibleValues, 0.98));
+    if (Math.abs(yMax - yMin) < 0.000001) {
+      yMin -= 1;
+      yMax += 1;
+    } else {
+      const padding = (yMax - yMin) * 0.12;
+      yMin -= padding;
+      yMax += padding;
+    }
+
+    drawCoordinateSystem(xMin, xMax, yMin, yMax);
+    mainCurve.setAttribute("d", makeCurvePath(fn, xMin, xMax, yMin, yMax));
+    derivativeCurve.setAttribute("d", derivative ? makeCurvePath(derivative, xMin, xMax, yMin, yMax) : "");
+    derivativeLegend.hidden = !derivative;
+    plotDescription.textContent = derivative
+      ? "Et koordinatsystem med en blå funktionsgraf og en violet graf for den mulige afledte."
+      : "Et koordinatsystem med en blå funktionsgraf.";
+
+    const graphCount = derivative ? "To grafer" : "Én graf";
+    status.innerHTML = `<strong>${graphCount} tegnet.</strong><span>Interval: ${formatPlotNumber(xMin)} til ${formatPlotNumber(xMax)}. Den lodrette skala tilpasses automatisk.</span>`;
+
+    if (derivative) {
+      const result = assessDerivative(fn, derivative, xMin, xMax);
+      derivativeCheck.classList.add(`is-${result.kind}`);
+      derivativeCheck.innerHTML = `<strong>${result.kind === "positive" ? "Godt match" : result.kind === "negative" ? "Mulig fejl" : "Kontrollér videre"}</strong><span>${result.message}</span>`;
+    } else {
+      derivativeCheck.classList.add("is-neutral");
+      derivativeCheck.innerHTML = "<strong>Kun funktionen vises.</strong><span>Tilføj den afledte i det andet felt, hvis du vil sammenligne dem.</span>";
+    }
+  }
+
+  functionPlotter.addEventListener("submit", (event) => {
+    event.preventDefault();
+    renderPlot();
+  });
+
+  functionPlotter.querySelectorAll("[data-plot-preset]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const preset = presets[button.dataset.plotPreset];
+      functionInput.value = preset.functionValue;
+      derivativeInput.value = preset.derivativeValue;
+      xMinInput.value = preset.xMin;
+      xMaxInput.value = preset.xMax;
+      renderPlot();
+    });
+  });
+
+  renderPlot();
+}
+
 const turningTangentDemo = document.querySelector("#turningTangentDemo");
 
 if (turningTangentDemo) {

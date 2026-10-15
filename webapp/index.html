@@ -1757,6 +1757,7 @@
                 <button type="button" data-scroll-to="diff-kaede-eksempler">Eksempler</button>
                 <button type="button" data-scroll-to="diff-kaede-oevelser">Øvelser</button>
                 <button type="button" data-scroll-to="diff-kaede-sluttjek">Forståelsestjek</button>
+                <button type="button" data-scroll-to="diff-kaede-graf">Grafværksted</button>
               </nav>
             </section>
 
@@ -1862,6 +1863,73 @@
 
                 <article class="exercise-card choice-exercise" data-kind="choice" data-answer="tangent-line" data-progress-group="chain-test"><div class="exercise-number">06</div><div class="exercise-body"><span class="level-pill">Bro til Modul 4</span><p>Det er givet, at <math><mrow><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>7</mn></mrow></math> og <math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mn>2</mn><mo>)</mo><mo>=</mo><mn>5</mn></mrow></math>. Hvilken linje er tangenten?</p><div class="answer-choices"><button class="answer-choice" type="button" data-value="tangent-line"><math><mrow><mi>y</mi><mo>=</mo><mn>5</mn><mo>(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>+</mo><mn>7</mn></mrow></math></button><button class="answer-choice" type="button" data-value="wrong-line"><math><mrow><mi>y</mi><mo>=</mo><mn>7</mn><mo>(</mo><mi>x</mi><mo>−</mo><mn>5</mn><mo>)</mo><mo>+</mo><mn>2</mn></mrow></math></button></div><button class="check-answer check-choice" type="button">Tjek valg</button><div class="exercise-actions"><button class="hint-button" type="button" aria-expanded="false">Vis hint</button></div><p class="hint" hidden>Brug punkt-hældningsformen med punktet <math><mrow><mo>(</mo><mn>2</mn><mo>,</mo><mn>7</mn><mo>)</mo></mrow></math> og hældningen <math><mn>5</mn></math>.</p><template class="feedback-correct">Korrekt. Du er klar til at arbejde videre med tangenter og vendetangenter.</template><template class="feedback-incorrect">Du har byttet funktionsværdi, input og hældning rundt. Hældningen er den afledte værdi.</template><p class="answer-feedback" role="status"></p></div></article>
               </div>
+            </section>
+
+            <section class="lesson-section function-plotter-section" id="diff-kaede-graf" aria-labelledby="functionPlotterHeading">
+              <div class="section-heading function-plotter-heading">
+                <div><p class="eyebrow">Modul 3 · Frivilligt grafværksted</p><h2 id="functionPlotterHeading">Passer funktionen og den afledte sammen?</h2></div>
+                <p>Indtast en funktion og eventuelt dens afledte. Værkstedet tegner dem i samme koordinatsystem og laver en numerisk kontrol — men kontrollen er ikke et matematisk bevis.</p>
+              </div>
+
+              <form class="function-plotter" id="functionPlotter" novalidate>
+                <div class="function-plotter-inputs">
+                  <label class="function-expression-field" for="plotFunctionInput">
+                    <span><i class="plot-color-key plot-color-key--function" aria-hidden="true"></i><math aria-label="f af x"><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></span>
+                    <input id="plotFunctionInput" name="plot-function" type="text" value="sin(x²)" autocomplete="off" spellcheck="false" aria-describedby="plotFunctionError plotSyntaxHelp" />
+                    <small class="plot-field-error" id="plotFunctionError"></small>
+                  </label>
+                  <label class="function-expression-field" for="plotDerivativeInput">
+                    <span><i class="plot-color-key plot-color-key--derivative" aria-hidden="true"></i><math aria-label="f mærke af x"><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math><em>kan udelades</em></span>
+                    <input id="plotDerivativeInput" name="plot-derivative" type="text" value="2·x·cos(x²)" autocomplete="off" spellcheck="false" aria-describedby="plotDerivativeError plotSyntaxHelp" />
+                    <small class="plot-field-error" id="plotDerivativeError"></small>
+                  </label>
+                </div>
+
+                <div class="function-plotter-toolbar">
+                  <div class="plot-range-fields" aria-label="Vandret interval">
+                    <span>Vis fra</span>
+                    <label><math><msub><mi>x</mi><mtext>min</mtext></msub></math><input id="plotXMin" type="text" inputmode="decimal" value="−4" aria-label="Mindste x-værdi" /></label>
+                    <span>til</span>
+                    <label><math><msub><mi>x</mi><mtext>maks</mtext></msub></math><input id="plotXMax" type="text" inputmode="decimal" value="4" aria-label="Største x-værdi" /></label>
+                  </div>
+                  <button class="plot-submit" type="submit">Tegn grafer</button>
+                </div>
+                <p class="plot-range-error" id="plotRangeError"></p>
+
+                <div class="plot-presets" aria-label="Vælg et gennemregnet eksempel">
+                  <span>Prøv et eksempel:</span>
+                  <button type="button" data-plot-preset="sine"><math><mrow><mi mathvariant="normal">sin</mi><mo>(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>)</mo></mrow></math></button>
+                  <button type="button" data-plot-preset="power"><math><msup><mrow><mo>(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mn>3</mn></msup></math></button>
+                  <button type="button" data-plot-preset="exponential"><math><msup><mi>e</mi><mrow><mn>0,5</mn><mi>x</mi></mrow></msup></math></button>
+                </div>
+
+                <details class="plot-syntax" id="plotSyntaxHelp">
+                  <summary>Sådan skriver du en funktion</summary>
+                  <div>
+                    <p>Du kan bruge parenteser, potenser, <math><mi>π</mi></math>, <math><mi>e</mi></math> og funktionerne <math><mrow><mi mathvariant="normal">sin</mi><mo>,</mo><mspace width="0.3em"/><mi mathvariant="normal">cos</mi><mo>,</mo><mspace width="0.3em"/><mi mathvariant="normal">tan</mi><mo>,</mo><mspace width="0.3em"/><mi mathvariant="normal">ln</mi><mo>,</mo><mspace width="0.3em"/><mi mathvariant="normal">log</mi><mo>,</mo><mspace width="0.3em"/><msqrt><mi>x</mi></msqrt><mspace width="0.3em"/><mtext>og</mtext><mspace width="0.3em"/><mi mathvariant="normal">abs</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>.</p>
+                    <p>Skriv fx <code>3·x² + 2·x − 1</code>, <code>√(x + 2)</code> eller <code>ln(x)</code>. Du kan bruge dansk decimalkomma. Værkstedet accepterer kun kendte matematiske symboler og udfører aldrig indtastningen som programkode.</p>
+                  </div>
+                </details>
+
+                <div class="function-plotter-output" id="functionPlotterOutput">
+                  <div class="function-plotter-canvas">
+                    <svg id="functionPlotSvg" viewBox="0 0 820 440" role="img" aria-labelledby="functionPlotTitle functionPlotDescription">
+                      <title id="functionPlotTitle">Grafer for den indtastede funktion og dens mulige afledte</title>
+                      <desc id="functionPlotDescription">Et koordinatsystem med en blå funktionsgraf og en violet graf for den mulige afledte.</desc>
+                      <g id="functionPlotGrid" aria-hidden="true"></g>
+                      <g id="functionPlotAxes" aria-hidden="true"></g>
+                      <path id="functionPlotCurve" class="function-plot-curve function-plot-curve--main" d="" />
+                      <path id="derivativePlotCurve" class="function-plot-curve function-plot-curve--derivative" d="" />
+                    </svg>
+                    <div class="function-plot-legend" aria-hidden="true"><span><i class="plot-color-key plot-color-key--function"></i><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></span><span id="derivativePlotLegend"><i class="plot-color-key plot-color-key--derivative"></i><math><mrow><msup><mi>f</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></span></div>
+                  </div>
+                  <aside class="function-plotter-feedback" aria-live="polite">
+                    <div class="plot-status" id="functionPlotStatus"></div>
+                    <div class="derivative-check" id="derivativeCheck"></div>
+                    <p class="plot-reading-tip"><strong>Læs grafen:</strong> Når den violette graf ligger over <math><mi>x</mi></math>-aksen, er den blå graf voksende. Når den ligger under, er den blå graf aftagende.</p>
+                  </aside>
+                </div>
+              </form>
             </section>
 
             <section class="lesson-section summary-section chain-summary" aria-labelledby="chainSummaryHeading">
