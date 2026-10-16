@@ -13,7 +13,8 @@ Opgavesystemet er en separat del af den statiske app. Der er ingen backend, bygg
 | `webapp/tasks/math.js`              | MathML, escaping og sikker polynomiumsparser          |
 | `webapp/tasks/bank/index.js`        | **Integrationspunkt**, seed og instansiering          |
 | `webapp/tasks/bank/algebra.js`      | Ligninger, andengrad og sammensatte funktioner        |
-| `webapp/tasks/bank/calculus.js`     | Produktregel og optimering                            |
+| `webapp/tasks/bank/calculus.js`     | Oprindelig produktregel og haveoptimering             |
+| `webapp/tasks/bank/differentiation.js` | Komplet differentialregningsbank på tværs af fem moduler |
 | `webapp/tasks/bank/geometry.js`     | Vektorer, vinkler, linjer og cirkler                  |
 | `webapp/tasks/selection.js`         | Filtrering og balanceret sammensætning                |
 | `webapp/tasks/grading.js`           | Point, delpoint, egen vurdering og målrettet feedback |
@@ -223,6 +224,16 @@ Kør `cd webapp && npm test`. Testene validerer alle opgaver, verificerer automa
 Til browserforløbet bruges Playwright uden produktionsafhængighed: installer Playwright lokalt og dets browser, og kør `npm run test:browser`. Alternativt kan `PLAYWRIGHT_MODULE_PATH` pege på Playwrights `index.mjs`; `BROWSER_CHANNEL=chrome` bruger en allerede installeret Chrome. Testen starter og lukker sin egen lokale HTTP-server.
 
 Browsertesten dækker eksisterende sider og en eksisterende øvelse, prøvens skjulte metadata, svar ved navigation og genindlæsning, hints kun i træning, aflevering og genforsøg, delpoint, egen vurdering, repetition, MathML namespace, mobilbredde, tastaturfokus, blokeret localStorage og fravær af JavaScript-/konsolfejl. Screenshots gemmes i `/tmp/matematik-tasks-mobile.png` og `/tmp/matematik-tasks-desktop.png` til visuel kontrol.
+
+## Differentialregning, komplet opgavebank
+
+`tasks/bank/differentiation.js` supplerer de to oprindelige opgaver i `calculus.js` med 32 opgaver. Differentialregning har dermed 34 opgaver fordelt på `diff.1`–`diff.5`: seks om differentialkvotient og grundregler, syv om produkter, otte om sammensatte funktioner, seks om tangenter og vendepunkter samt syv om monotoni, ekstrema, optimering og CAS. Hele banken har 90 opgaver.
+
+Tretten af de nye opgaver er seedede skabeloner. De varierer blandt andet polynomier, sekant- og tangenthældninger, afledte produktværdier, sammensatte potenser, tangentlinjer, vendepunkter, fortegnsskemaer og rektangeloptimering. Hver generator gemmer sine realiserede tal i `parameters`.
+
+Læringsmålene i `catalog.js` skelner mellem struktur, beregning og fortolkning. Opgaveteksterne nævner ikke navnet på den regel, der skal vælges; metoden kommer først i hints og løsninger. Ensartede spørgsmål fra undervisningsmodulets starttjek, øvelser og sluttjek er samlet i én opgavetype eller en seedet familie frem for at blive kopieret som dubletter.
+
+`tests/differentiation.test.js` kontrollerer alle opgaver, mål, unikke tekster, MathML, point, delpoint, målrettet feedback og filtrering. For hver af de 13 generatorer gennemgås 1.000 seeds. Facit kontrolleres uafhængigt mod de oprindelige funktioner, produktberegninger, tangentbetingelser, fortegn, intervaller og optimeringsbetingelser. Den fælles browsertest gennemgår desuden differentialregning i trænings- og prøvetilstand på desktop og mobil.
 
 ## Integralregning, første arbejdsgang
 

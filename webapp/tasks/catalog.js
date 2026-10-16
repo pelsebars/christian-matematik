@@ -124,13 +124,93 @@ export const goals = {
     module: "comp.basic",
     text: "Sammensætte funktioner i den rigtige rækkefølge",
   },
+  "diff.quotient": {
+    module: "diff.1",
+    text: "Forbinde differenskvotient, sekant og tangenthældning",
+  },
+  "diff.rules": {
+    module: "diff.1",
+    text: "Differentiere grundfunktioner og summer sikkert",
+  },
+  "diff.value": {
+    module: "diff.1",
+    text: "Bestemme og skelne mellem funktionsværdi og afledt værdi",
+  },
+  "diff.interpret": {
+    module: "diff.1",
+    text: "Fortolke fortegn, tidspunkt og enhed for en væksthastighed",
+  },
+  "diff.product-structure": {
+    module: "diff.2",
+    text: "Genkende produkter og forklare reglens to bidrag",
+  },
   "diff.product": {
     module: "diff.2",
     text: "Differentiere et produkt og forenkle resultatet",
   },
+  "diff.product-value": {
+    module: "diff.2",
+    text: "Bestemme en afledt produktværdi ud fra faktorernes værdier",
+  },
+  "diff.product-model": {
+    module: "diff.2",
+    text: "Fortolke og kontrollere produktbaserede vækstmodeller",
+  },
+  "diff.chain-structure": {
+    module: "diff.3",
+    text: "Identificere indre og ydre funktion i en sammensætning",
+  },
+  "diff.chain": {
+    module: "diff.3",
+    text: "Differentiere sammensatte funktioner med alle faktorer",
+  },
+  "diff.chain-combine": {
+    module: "diff.3",
+    text: "Kombinere kædereglen med produktreglen",
+  },
+  "diff.chain-model": {
+    module: "diff.3",
+    text: "Fortolke afledte værdier i sammensatte modeller",
+  },
+  "diff.tangent": {
+    module: "diff.4",
+    text: "Bestemme tangentligning ud fra punkt og afledt værdi",
+  },
+  "diff.inflection": {
+    module: "diff.4",
+    text: "Bestemme og kontrollere vendepunkter med anden afledte",
+  },
+  "diff.parallel": {
+    module: "diff.4",
+    text: "Bestemme andre tangenter med samme hældning",
+  },
+  "diff.intersection": {
+    module: "diff.4",
+    text: "Bestemme yderligere skæringer mellem graf og tangent",
+  },
+  "diff.greatest-growth": {
+    module: "diff.4",
+    text: "Forbinde vendepunkt med størst væksthastighed i en model",
+  },
+  "diff.monotonicity": {
+    module: "diff.5",
+    text: "Bestemme monotoniforhold ud fra den afledtes fortegn",
+  },
+  "diff.extrema": {
+    module: "diff.5",
+    text: "Bestemme og klassificere lokale ekstrema",
+  },
+  "diff.global": {
+    module: "diff.5",
+    text: "Bestemme globale ekstrema på et lukket interval",
+  },
   "diff.optimize": {
     module: "diff.5",
     text: "Opstille en model og begrunde et globalt maksimum",
+  },
+  "diff.cas": {
+    module: "diff.5",
+    text: "Dokumentere CAS, afgrænse løsninger og fortolke resultatet",
   },
   "geo.vector": {
     module: "geo.1",

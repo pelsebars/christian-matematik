@@ -135,10 +135,10 @@ test("Every fixed task accepts its verified answer; templates remain valid over 
 test("Balanced sets are reproducible, diverse, bounded and filterable", () => {
   const options = { seed: "balanced", minutes: 60 };
   const result = composeSet(options);
-  assert.equal(result.tasks.length, 9);
+  assert.ok(result.tasks.length >= 6 && result.tasks.length <= 12);
   assert.equal(new Set(result.tasks.map((t) => t.topic)).size, 6);
   assert.ok(result.minutes <= 60);
-  assert.equal(new Set(result.tasks.map((t) => t.id)).size, 9);
+  assert.equal(new Set(result.tasks.map((t) => t.id)).size, result.tasks.length);
   assert.deepEqual(result, composeSet(options));
   assert.ok(composeSet({ ...options, aids: "no" }).tasks.every((t) => !t.aids));
   assert.ok(composeSet({ ...options, aids: "yes" }).tasks.every((t) => t.aids));

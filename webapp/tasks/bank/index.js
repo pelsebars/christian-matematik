@@ -8,9 +8,10 @@ import { integrationGraphTasks } from "./integration-graphs.js";
 import { integrationTasks } from "./integration.js";
 import { algebraTasks } from "./algebra.js";
 import { calculusTasks } from "./calculus.js";
+import { differentiationTasks } from "./differentiation.js";
 import { geometryTasks } from "./geometry.js";
 import { validateTask } from "../schema.js";
-export const bank = [...algebraTasks, ...calculusTasks, ...geometryTasks, ...integrationTasks, ...integrationGraphTasks, ...integrationDefiniteTasks, ...integrationAreaTasks, ...integrationRepetitionTasks, ...integrationSolidTasks, ...integrationSubstitutionTasks];
+export const bank = [...algebraTasks, ...calculusTasks, ...differentiationTasks, ...geometryTasks, ...integrationTasks, ...integrationGraphTasks, ...integrationDefiniteTasks, ...integrationAreaTasks, ...integrationRepetitionTasks, ...integrationSolidTasks, ...integrationSubstitutionTasks];
 if (new Set(bank.map((t) => t.id)).size !== bank.length)
   throw Error("Opgave-id skal være entydige i banken.");
 export function seededRandom(seed) {

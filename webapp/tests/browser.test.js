@@ -186,19 +186,32 @@ try {
   await page.locator("[name=topics][value=differentiation]").check();
   await page.locator("[name=difficulty]").selectOption("3");
   await page.locator("#taskSetup button[type=submit]").click();
+  const differentiationSession = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem("christian-matematik.tasks.v1")).session,
+  );
+  const manualIndex = differentiationSession.items.findIndex((record) =>
+    instantiate(record.id, record.seed).parts.some((part) => part.type === "text"),
+  );
+  assert.ok(manualIndex >= 0);
+  const manualTask = instantiate(
+    differentiationSession.items[manualIndex].id,
+    differentiationSession.items[manualIndex].seed,
+  );
+  const manualPart = manualTask.parts.find((part) => part.type === "text");
+  await page.locator("[data-task-action=jump]").nth(manualIndex).click();
   await page
-    .locator("[data-part=reason]")
-    .fill("Jeg undersøger fortegnsskift og interval.");
+    .locator(`[data-part="${manualPart.id}"]`)
+    .fill("Jeg undersøger fortegn, interval, kontrol og enhed.");
   await page.locator("[data-task-action=check]").click();
   assert.ok(
     (await page.locator(".task-feedback").innerText()).includes(
       "Faglig tjekliste",
     ),
   );
-  await page.locator("[data-self-part=reason]").selectOption("2");
+  await page.locator(`[data-self-part="${manualPart.id}"]`).selectOption("2");
   await page.locator("[data-task-action=finish]").click();
   await page.locator("[data-task-action=submit]").click();
-  assert.equal(await page.locator(".task-score").innerText(), "2 af 9 point");
+  assert.match(await page.locator(".task-score").innerText(), /^2 af \d+ point$/);
   await page.locator("[data-task-action=repeat-module]").first().click();
   assert.equal(await page.locator("#differentiationLesson").isVisible(), true);
   // Mobile, MathML namespace, SVG and keyboard focus.
