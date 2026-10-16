@@ -151,14 +151,13 @@ test("Balanced sets are reproducible, diverse, bounded and filterable", () => {
     composeSet({ ...options, onlyCompleted: true, completed: [] }).tasks.length,
     0,
   );
-  assert.deepEqual(
-    composeSet({
-      ...options,
-      onlyCompleted: true,
-      completed: ["eq.basic"],
-    }).tasks.map((t) => t.id),
-    ["eq.balance"],
-  );
+  const completedEquations = composeSet({
+    ...options,
+    onlyCompleted: true,
+    completed: ["eq.basic"],
+  }).tasks;
+  assert.equal(completedEquations.length, 10);
+  assert.ok(completedEquations.every((task) => task.module === "eq.basic"));
   assert.ok(composeSet({ ...options, difficulty: 3 }).tasks.every(t => t.difficulty === 3));
   assert.ok(composeSet({ ...options, minutes: 6 }).minutes <= 6);
   assert.equal(

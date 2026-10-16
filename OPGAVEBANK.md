@@ -12,7 +12,8 @@ Opgavesystemet er en separat del af den statiske app. Der er ingen backend, bygg
 | `webapp/tasks/schema.js`            | Formatversion og validering af opgaver                |
 | `webapp/tasks/math.js`              | MathML, escaping og sikker polynomiumsparser          |
 | `webapp/tasks/bank/index.js`        | **Integrationspunkt**, seed og instansiering          |
-| `webapp/tasks/bank/algebra.js`      | Ligninger, andengrad og sammensatte funktioner        |
+| `webapp/tasks/bank/algebra.js`      | Oprindelig ligning, andengrad og sammensatte funktioner |
+| `webapp/tasks/bank/equations.js`    | Komplet ligningsbank med seedede familier og fejlanalyse |
 | `webapp/tasks/bank/calculus.js`     | Oprindelig produktregel og haveoptimering             |
 | `webapp/tasks/bank/differentiation.js` | Komplet differentialregningsbank på tværs af fem moduler |
 | `webapp/tasks/bank/geometry.js`     | Vektorer, vinkler, linjer og cirkler                  |
@@ -25,7 +26,7 @@ Alle eksisterende hovedemner har teori, eksempler og interaktive øvelser og er 
 
 | Emne                     | Moduler                                                                                                             | Demonstrationsbank                                              |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| Ligninger                | `eq.basic`                                                                                                          | Seedet ligning                                                  |
+| Ligninger                | `eq.basic`                                                                                                          | 10 opgaver om balance, fortegn, parenteser, brøker og kontrol   |
 | Andengradsligninger      | `quad.basic`                                                                                                        | Antal reelle løsninger og de to løsninger                       |
 | Sammensatte funktioner   | `comp.basic`                                                                                                        | Sammensat forskrift                                             |
 | Differentialregning      | `diff.1` differentialkvotient, `diff.2` produktregel, `diff.3` kæderegel, `diff.4` vendetangent, `diff.5` opsamling | Produktregel og haveoptimering                                  |
@@ -219,7 +220,7 @@ export const tasks = [fixedExample];
 
 ## Test af nye opgaver
 
-Kør `cd webapp && npm test`. Testene validerer alle opgaver, verificerer automatisk facit, point og delpoint, prøver sikre og afviste udtryk og gennemgår 1.000 seeds til ligningsgeneratoren. Tilføj selvstændige faglige kontroller til nye generatorer: indsæt facit i den oprindelige ligning, kontrollér domæne, ikke-nul nævnere, entydighed, afrunding, geometri og samtlige viste regnetrin. Et facit sammenlignet med sig selv er ikke tilstrækkelig faglig kontrol.
+Kør `cd webapp && npm test`. Testene validerer alle opgaver, verificerer automatisk facit, point og delpoint, prøver sikre og afviste udtryk og gennemgår 1.000 seeds for hver seedet ligningsgenerator. Tilføj selvstændige faglige kontroller til nye generatorer: indsæt facit i den oprindelige ligning, kontrollér domæne, ikke-nul nævnere, entydighed, afrunding, geometri og samtlige viste regnetrin. Et facit sammenlignet med sig selv er ikke tilstrækkelig faglig kontrol.
 
 Til browserforløbet bruges Playwright uden produktionsafhængighed: installer Playwright lokalt og dets browser, og kør `npm run test:browser`. Alternativt kan `PLAYWRIGHT_MODULE_PATH` pege på Playwrights `index.mjs`; `BROWSER_CHANNEL=chrome` bruger en allerede installeret Chrome. Testen starter og lukker sin egen lokale HTTP-server.
 
@@ -227,7 +228,7 @@ Browsertesten dækker eksisterende sider og en eksisterende øvelse, prøvens sk
 
 ## Differentialregning, komplet opgavebank
 
-`tasks/bank/differentiation.js` supplerer de to oprindelige opgaver i `calculus.js` med 32 opgaver. Differentialregning har dermed 34 opgaver fordelt på `diff.1`–`diff.5`: seks om differentialkvotient og grundregler, syv om produkter, otte om sammensatte funktioner, seks om tangenter og vendepunkter samt syv om monotoni, ekstrema, optimering og CAS. Hele banken har 90 opgaver.
+`tasks/bank/differentiation.js` supplerer de to oprindelige opgaver i `calculus.js` med 32 opgaver. Differentialregning har dermed 34 opgaver fordelt på `diff.1`–`diff.5`: seks om differentialkvotient og grundregler, syv om produkter, otte om sammensatte funktioner, seks om tangenter og vendepunkter samt syv om monotoni, ekstrema, optimering og CAS. Efter den komplette ligningsintegration har hele banken 99 opgaver.
 
 Tretten af de nye opgaver er seedede skabeloner. De varierer blandt andet polynomier, sekant- og tangenthældninger, afledte produktværdier, sammensatte potenser, tangentlinjer, vendepunkter, fortegnsskemaer og rektangeloptimering. Hver generator gemmer sine realiserede tal i `parameters`.
 
@@ -286,3 +287,15 @@ Skiver og skiver med hul kan besvares med den præcise koefficient foran pi. En 
 `tasks/bank/integration-substitution.js` tilføjer syv opgaver i `int.6`, med `int.1` og `int.rep` som forudsætninger. Banken har nu 58 opgaver. Målene er `int.substitution`, `int.sub-factor`, `int.sub-power`, `int.sub-log`, `int.sub-domain`, `int.sub-trig`, `int.sub-check`, `int.sub-cas` og `int.sub-model`.
 
 Familier med eksponentialfunktion, logaritme og trigonometri stilles som valg med integrationskonstant, da den fælles parser er begrænset til polynomier. Den lineære potensopgave har en punktbetingelse, så ækvivalente polynomielle svar kan kontrolleres entydigt. Logaritmeopgaven kræver absolutværdi på alle definitionsintervaller. CAS-punktopgaven bruger en præcis konstant; løbermodellen adskiller fart fra stamfunktionsforskelle og efterfølgende tidsinterval. Forklaringer har egen vurdering, og prøvetekster har ingen hints eller metodeoverskrifter.
+
+## Ligninger, komplet opgavebank
+
+`tasks/bank/equations.js` supplerer den oprindelige `eq.balance` med ni opgaver. Modulet `eq.basic` har dermed 10 opgaver: inverse regnearter ved addition og multiplikation, ukendte led på begge sider, negative koefficienter, én og to parenteser, talbrøker, kontrol af et løsningsforslag og analyse af det første ugyldige regnetrin.
+
+Otte af de ni nye opgaver er seedede familier. De eksisterende opgaver fra undervisningsmodulet og `01. Ligninger.docx` er samlet efter matematisk struktur, så ensartede spørgsmål ikke ligger som dubletter. Familien med led på begge sider dækker blandt andet formerne fra `5x − 2 = 2x + 7`, `−x + 3 = −2x + 5` og `4x − 2 = x + 8`; parentesfamilierne dækker både én og to parenteser; brøkfamilien bevarer strukturen fra materialets opgave med nævnerne 3, 4 og 2.
+
+Generatorerne vælger først en kontrolleret løsning og beregner derefter de afhængige konstanter. Derfor er koefficienten foran den ukendte aldrig nul, parentesopgaverne har én entydig løsning, og brøkopgaven har et eksakt heltals- eller halvtalsfacit. Alle realiserede tal gemmes i `parameters`.
+
+Læringsmålene er `eq.balance`, `eq.inverse`, `eq.collect`, `eq.parentheses`, `eq.signs`, `eq.fractions`, `eq.check` og det eksisterende `eq.isolate`. Opgaveteksterne bruger neutrale formuleringer og nævner ikke løsningsmetoden. Hints går fra observation til konkret næste trin; løsningerne viser balancehandlinger og kontrol ved indsættelse. Kontrolopgaven har separate point for vurdering og korrekt værdi, så delvis faglig forståelse registreres uden minuspoint.
+
+`tests/equations.test.js` kontrollerer antal, mål, unikke tekster, MathML, point, delpoint, feedback og modulfiltrering. For hver af de ni seedede ligningsgeneratorer gennemgås 1.000 seeds med uafhængig indsættelse i de oprindelige ligninger, kontrol af entydighed, determinisme, facitbedømmelse og variation.

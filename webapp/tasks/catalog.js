@@ -116,6 +116,34 @@ export const goals = {
     module: "eq.basic",
     text: "Isolere den ukendte og kontrollere løsningen",
   },
+  "eq.balance": {
+    module: "eq.basic",
+    text: "Bevare ligheden ved at udføre samme handling på begge sider",
+  },
+  "eq.inverse": {
+    module: "eq.basic",
+    text: "Bruge modsatte regnearter til at frigøre den ukendte",
+  },
+  "eq.collect": {
+    module: "eq.basic",
+    text: "Samle ukendte led og konstantled med korrekte fortegn",
+  },
+  "eq.parentheses": {
+    module: "eq.basic",
+    text: "Gange korrekt ind i én eller flere parenteser",
+  },
+  "eq.signs": {
+    module: "eq.basic",
+    text: "Håndtere negative koefficienter og fortegn sikkert",
+  },
+  "eq.fractions": {
+    module: "eq.basic",
+    text: "Fjerne talnævnere uden at ændre ligheden",
+  },
+  "eq.check": {
+    module: "eq.basic",
+    text: "Kontrollere en foreslået eller beregnet løsning ved indsættelse",
+  },
   "quad.roots": {
     module: "quad.basic",
     text: "Bestemme diskriminant og alle reelle løsninger",
