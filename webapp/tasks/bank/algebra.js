@@ -102,41 +102,4 @@ export const algebraTasks = [
       },
     ],
   },
-  {
-    ...base,
-    id: "comp.compose",
-    topic: "composite",
-    module: "comp.basic",
-    goals: ["comp.order"],
-    difficulty: 2,
-    minutes: 4,
-    prompt: `<p>Der er givet ${math(`<mi>f</mi><mo>(</mo>${x}<mo>)</mo><mo>=</mo>${power(x, 2)}`)} og ${math(`<mi>g</mi><mo>(</mo>${x}<mo>)</mo><mo>=</mo>${n(2)}${x}<mo>+</mo>${n(1)}`)}. Find forskriften for ${math(`<mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo>${x}<mo>)</mo><mo>)</mo>`)}.</p>`,
-    parts: [
-      {
-        id: "expr",
-        label: "Den sammensatte forskrift",
-        type: "expression",
-        answer: "(2*x+1)^2",
-        points: 3,
-      },
-    ],
-    hints: [
-      "Resultatet fra den indre funktion bliver input til den ydre.",
-      `Erstat inputtet i den ydre funktion med hele ${math(`<mi>g</mi><mo>(</mo>${x}<mo>)</mo>`)}. Behold parentesen.`,
-    ],
-    solution: `<ol><li>Den indre funktion giver ${math(`${n(2)}${x}<mo>+</mo>${n(1)}`)}.</li><li>Den ydre kvadrerer hele inputtet: ${math(`${power(`${n(2)}${x}<mo>+</mo>${n(1)}`, 2)}`)}.</li><li>Udvidet bliver det ${math(`${n(4)}${power(x, 2)}<mo>+</mo>${n(4)}${x}<mo>+</mo>${n(1)}`)}. Begge former er korrekte.</li></ol>`,
-    errors: [
-      {
-        part: "expr",
-        answer: "2*x^2+1",
-        feedback:
-          "Du har byttet rækkefølgen. Brug først den indre funktion og kvadrér derefter hele resultatet.",
-      },
-      {
-        part: "expr",
-        feedback:
-          "Hele den indre forskrift skal sættes ind, inklusive konstantleddet.",
-      },
-    ],
-  },
 ];

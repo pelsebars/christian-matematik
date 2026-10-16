@@ -247,8 +247,13 @@ test("Fixed demonstrations agree with independent mathematical checks", () => {
   for (const root of q.parts[1].answer)
     assert.equal(root ** 2 - 5 * root + 6, 0);
   const comp = instantiate("comp.compose", "math");
+  const compositeParameters = comp.parameters;
   for (const x of [-3, 0, 2, 5])
-    assert.equal(value(comp.parts[0].answer, x), (2 * x + 1) ** 2);
+    assert.equal(
+      value(comp.parts[0].answer, x),
+      (compositeParameters.coefficient * x + compositeParameters.constant) ** 2 +
+        compositeParameters.outerConstant,
+    );
   const diff = instantiate("diff.product", "math");
   const p = polynomial("x*(x+3)"),
     derivative = p.slice(1).map((c, i) => c * (i + 1));
@@ -265,15 +270,29 @@ test("Fixed demonstrations agree with independent mathematical checks", () => {
   for (let i = 1; i < 100; i++)
     assert.ok(value(garden.parts[0].answer, i / 10) <= 50);
   const vector = instantiate("geo.walk", "math");
-  assert.deepEqual(vector.parts[0].answer, [4 - 1, 5 - 1]);
-  assert.equal(number(vector.parts[1].answer), Math.hypot(4 - 1, 5 - 1));
+  assert.deepEqual(vector.parts[0].answer, vector.parameters.delta);
   assert.equal(
-    instantiate("geo.angle", "math").parts[0].answer,
-    2 * -1 + 1 * 3 > 0 ? "acute" : "obtuse",
+    number(vector.parts[1].answer),
+    Math.hypot(...vector.parameters.delta),
   );
+  const angle = instantiate("geo.angle", "math");
   assert.equal(
-    number(instantiate("geo.distance", "math").parts[0].answer),
-    Math.abs(-10) / Math.hypot(3, 4),
+    angle.parts[0].answer,
+    angle.parameters.dot > 0
+      ? "acute"
+      : angle.parameters.dot < 0
+        ? "obtuse"
+        : "right",
+  );
+  const distance = instantiate("geo.distance", "math");
+  const distanceParameters = distance.parameters;
+  assert.equal(
+    number(distance.parts[0].answer),
+    Math.abs(
+      distanceParameters.a * distanceParameters.point[0] +
+        distanceParameters.b * distanceParameters.point[1] +
+        distanceParameters.c,
+    ) / distanceParameters.normalLength,
   );
   const circle = instantiate("geo.fountain", "math");
   assert.deepEqual(circle.parts[0].answer, [2, -1]);

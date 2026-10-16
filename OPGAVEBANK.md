@@ -12,11 +12,12 @@ Opgavesystemet er en separat del af den statiske app. Der er ingen backend, bygg
 | `webapp/tasks/schema.js`            | Formatversion og validering af opgaver                |
 | `webapp/tasks/math.js`              | MathML, escaping og sikker polynomiumsparser          |
 | `webapp/tasks/bank/index.js`        | **Integrationspunkt**, seed og instansiering          |
-| `webapp/tasks/bank/algebra.js`      | Oprindelig ligning, andengrad og sammensatte funktioner |
+| `webapp/tasks/bank/algebra.js`      | Oprindelig ligning og andengrad                         |
 | `webapp/tasks/bank/equations.js`    | Komplet ligningsbank med seedede familier og fejlanalyse |
+| `webapp/tasks/bank/composite.js`    | Komplet bank om funktioner og sammensætning             |
 | `webapp/tasks/bank/calculus.js`     | Oprindelig produktregel og haveoptimering             |
 | `webapp/tasks/bank/differentiation.js` | Komplet differentialregningsbank på tværs af fem moduler |
-| `webapp/tasks/bank/geometry.js`     | Vektorer, vinkler, linjer og cirkler                  |
+| `webapp/tasks/bank/geometry.js`     | Komplet bank til plangeometri og vektorer             |
 | `webapp/tasks/selection.js`         | Filtrering og balanceret sammensætning                |
 | `webapp/tasks/grading.js`           | Point, delpoint, egen vurdering og målrettet feedback |
 | `webapp/tasks/storage.js`           | Lokal lagring, formatkontrol og genoptagelse          |
@@ -28,9 +29,9 @@ Alle eksisterende hovedemner har teori, eksempler og interaktive øvelser og er 
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | Ligninger                | `eq.basic`                                                                                                          | 10 opgaver om balance, fortegn, parenteser, brøker og kontrol   |
 | Andengradsligninger      | `quad.basic`                                                                                                        | Antal reelle løsninger og de to løsninger                       |
-| Sammensatte funktioner   | `comp.basic`                                                                                                        | Sammensat forskrift                                             |
+| Sammensatte funktioner   | `comp.basic`                                                                                                        | 13 opgaver om notation, værdier, rækkefølge, domæne og modeller |
 | Differentialregning      | `diff.1` differentialkvotient, `diff.2` produktregel, `diff.3` kæderegel, `diff.4` vendetangent, `diff.5` opsamling | Produktregel og haveoptimering                                  |
-| Plangeometri og vektorer | `geo.1` vektorer, `geo.2` skalarprodukt, `geo.3` projektion/determinant, `geo.4` linjen, `geo.5` cirklen            | Vektor/længde med SVG, vinkelvalg, afstand, fontæne med tangent |
+| Plangeometri og vektorer | `geo.1` vektorer, `geo.2` skalarprodukt, `geo.3` projektion/determinant, `geo.4` linjen, `geo.5` cirklen            | 30 opgaver på tværs af alle fem moduler                         |
 
 Moduler uden demonstrationsopgaver er stadig registreret til fremtidige integrationer og som forudsætninger. De eksisterende undervisningsplaners mærkning af gennemførte moduler er ikke personlige resultater. Brugeren registrerer derfor selv sine gennemførte moduler i Opgaver.
 
@@ -299,3 +300,23 @@ Generatorerne vælger først en kontrolleret løsning og beregner derefter de af
 Læringsmålene er `eq.balance`, `eq.inverse`, `eq.collect`, `eq.parentheses`, `eq.signs`, `eq.fractions`, `eq.check` og det eksisterende `eq.isolate`. Opgaveteksterne bruger neutrale formuleringer og nævner ikke løsningsmetoden. Hints går fra observation til konkret næste trin; løsningerne viser balancehandlinger og kontrol ved indsættelse. Kontrolopgaven har separate point for vurdering og korrekt værdi, så delvis faglig forståelse registreres uden minuspoint.
 
 `tests/equations.test.js` kontrollerer antal, mål, unikke tekster, MathML, point, delpoint, feedback og modulfiltrering. For hver af de ni seedede ligningsgeneratorer gennemgås 1.000 seeds med uafhængig indsættelse i de oprindelige ligninger, kontrol af entydighed, determinisme, facitbedømmelse og variation.
+
+## Sammensatte funktioner, komplet opgavebank
+
+`tasks/bank/composite.js` samler undervisningsmodulets grundtjek og seks øvelser i 13 opgaver uden at kopiere ens strukturer som dubletter. Banken dækker funktionsnotation, indsættelse af positive og negative værdier, indre og ydre funktion, sammensatte funktionsværdier i begge rækkefølger, forskrifter, sammenligning af rækkefølger, definitionsbetingelser, ligninger, modeller med enheder, tre funktioner i kæde og fejlanalyse. Hele banken har dermed 111 opgaver.
+
+Ni opgaver er seedede familier. Generatorerne vælger kontrollerede tal, så kvadratrødder giver hele værdier, ligninger har to forskellige heltalsløsninger, domænegrænser er gyldige, og alle viste mellemregninger passer til varianten. Den tidligere `comp.compose` er bevaret som stabilt id, flyttet fra `algebra.js`, gjort seedet og hævet til version 2.
+
+Læringsmålene er `comp.notation`, `comp.value`, `comp.structure`, `comp.order`, `comp.formula`, `comp.compare`, `comp.domain`, `comp.equation` og `comp.model`. Prøveteksterne nævner ikke emnenavn eller løsningsmetode; metoden kommer først i hints og løsninger. Modelopgaven bruger egen vurdering af enhedsforklaringen, og ligningsopgaven giver delpoint for hver korrekt mellem- og slutværdi.
+
+`tests/composite.test.js` kontrollerer dækning, unikke opgaver, neutrale prøvetekster, MathML, hints, feedback, point, delpoint og modulforudsætninger. For hver af de ni generatorer gennemgås 1.000 seeds med uafhængig kontrol af funktionsværdier, rækkefølge, polynomielle forskrifter, domæne, ligningsløsninger, determinisme og variation.
+
+## Plangeometri og vektorer, komplet opgavebank
+
+`tasks/bank/geometry.js` samler modulernes eksisterende øvelsestyper i 30 opgaver uden at kopiere ens matematiske strukturer som dubletter. Banken fordeler sig med fem opgaver om vektorer, fem om skalarprodukt og vinkler, seks om projektion, tværvektor og determinant, syv om linjer og syv om cirkler. Hele banken har dermed 151 opgaver.
+
+Fireogtyve opgaver er seedede familier. Generatorerne vælger kontrollerede punkter, vektorer, pythagoræiske taltripler, linjer og cirkler, så facit er entydige, afstande og skæringer er eksakte, og alle viste mellemregninger passer til varianten. De oprindelige id'er `geo.walk`, `geo.angle`, `geo.distance` og `geo.fountain` er bevaret; de tre første er udvidet til seedede familier og har fået ny version.
+
+Læringsmålene dækker forskellen på punkt og vektor, vektorregning, længde, midtpunkt og retning; skalarprodukt, ortogonalitet og vinkelberegning; projektion, tværvektor, determinant, orientering og areal; linjeformer, retnings- og normalvektorer, skæringer, relationer og afstand; samt cirklens former, kvadratkomplettering, punktplacering, skæringer og tangenter. Prøveteksterne nævner ikke løsningsmetoden, hvor opgaven kan formuleres neutralt.
+
+`tests/geometry.test.js` kontrollerer antal, dækning, unikke opgaver, neutrale prøvetekster, MathML, hints, feedback, point, delpoint og modulforudsætninger. For hver af de 24 seedede familier gennemgås 1.000 seeds med uafhængig kontrol af vektorer, vinkler, projektioner, determinanter, linjer, afstande, cirkler, skæringer og tangenter samt determinisme og variation.

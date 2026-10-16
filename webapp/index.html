@@ -1030,6 +1030,72 @@
                 </div>
               </div>
 
+              <figure class="fish-metaphor" aria-labelledby="fishMetaphorHeading">
+                <figcaption>
+                  <div>
+                    <p class="eyebrow">Christians huskeregel</p>
+                    <h3 id="fishMetaphorHeading">Den lille fisk bliver spist først</h3>
+                  </div>
+                  <p>Forestil dig parenteserne som fisk, der spiser hinanden.</p>
+                </figcaption>
+
+                <div class="fish-story" aria-label="Den lille indre g-fisk spises af den større ydre f-fisk og bliver til den sammensatte funktion f af g af x">
+                  <div class="fish-stage fish-stage--inner">
+                    <div class="fish-illustration fish-illustration--small" aria-hidden="true">
+                      <svg viewBox="0 0 220 120" focusable="false">
+                        <path d="M54 60 12 26v68z" />
+                        <path d="M45 60c25-42 96-54 153 0-57 54-128 42-153 0Z" />
+                        <circle cx="166" cy="48" r="5" />
+                      </svg>
+                    </div>
+                    <span>Den lille · indre</span>
+                    <math display="block" aria-label="g af x"><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>
+                    <small>regnes først</small>
+                  </div>
+
+                  <div class="fish-story-arrow" aria-hidden="true">
+                    <span>bliver spist af</span>
+                    <b>→</b>
+                  </div>
+
+                  <div class="fish-stage fish-stage--outer">
+                    <div class="fish-illustration fish-illustration--medium" aria-hidden="true">
+                      <svg viewBox="0 0 220 120" focusable="false">
+                        <path d="M54 60 12 26v68z" />
+                        <path d="M45 60c25-42 96-54 153 0-57 54-128 42-153 0Z" />
+                        <circle cx="166" cy="48" r="5" />
+                      </svg>
+                    </div>
+                    <span>Den større · ydre</span>
+                    <math display="block" aria-label="f"><mi>f</mi></math>
+                    <small>bruges bagefter</small>
+                  </div>
+
+                  <div class="fish-story-arrow" aria-hidden="true">
+                    <span>giver</span>
+                    <b>→</b>
+                  </div>
+
+                  <div class="fish-stage fish-stage--result">
+                    <div class="fish-illustration fish-illustration--large" aria-hidden="true">
+                      <svg viewBox="0 0 220 120" focusable="false">
+                        <path d="M54 60 12 26v68z" />
+                        <path d="M45 60c25-42 96-54 153 0-57 54-128 42-153 0Z" />
+                        <circle cx="166" cy="48" r="5" />
+                      </svg>
+                    </div>
+                    <span>Den nye · sammensatte</span>
+                    <math display="block" aria-label="f af g af x"><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>
+                    <small>hele resultatet</small>
+                  </div>
+                </div>
+
+                <aside class="fish-precision-note">
+                  <strong>Vigtigt:</strong>
+                  <span>Fiskene viser rækkefølgen. Funktionerne lægges ikke sammen; outputtet fra <math><mi>g</mi></math> bliver input i <math><mi>f</mi></math>.</span>
+                </aside>
+              </figure>
+
               <div class="inside-out-card">
                 <div>
                   <span class="level-pill">Læs parenteserne</span>
@@ -1164,15 +1230,15 @@
                 <article class="exercise-card choice-exercise" data-kind="choice" data-answer="g" data-progress-group="composite-practice">
                   <div class="exercise-number">03</div>
                   <div class="exercise-body">
-                    <span class="level-pill">Indre eller ydre?</span>
-                    <p>Hvilken funktion er den indre i <math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>?</p>
+                    <span class="level-pill">Fiske-huskereglen</span>
+                    <p>Hvilken funktion er den lille, indre fisk i <math><mrow><mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>?</p>
                     <div class="answer-choices answer-choices--short" role="group" aria-label="Vælg den indre funktion">
                       <button type="button" class="answer-choice" data-value="f"><math><mi>f</mi></math></button>
                       <button type="button" class="answer-choice" data-value="g"><math><mi>g</mi></math></button>
                     </div>
                     <button class="check-answer check-choice" type="button">Tjek valg</button>
-                    <template class="feedback-correct">Korrekt. <math><mi>g</mi></math> står tættest på <math><mi>x</mi></math> og bruges først.</template>
-                    <template class="feedback-incorrect">Ikke helt. Læs indefra: Funktionen tættest på <math><mi>x</mi></math> bruges først.</template>
+                    <template class="feedback-correct">Korrekt. Den lille <math><mi>g</mi></math>-fisk står tættest på <math><mi>x</mi></math>, bliver “spist” først og leverer sit output til <math><mi>f</mi></math>.</template>
+                    <template class="feedback-incorrect">Ikke helt. Find den lille fisk tættest på <math><mi>x</mi></math>. Det er den indre funktion, som bruges først.</template>
                     <p class="answer-feedback" role="status"></p>
                   </div>
                 </article>

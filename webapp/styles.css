@@ -1596,6 +1596,162 @@ math {
   font-size: 0.76rem;
 }
 
+.fish-metaphor {
+  margin: 18px 0 0;
+  padding: clamp(22px, 4vw, 32px);
+  overflow: hidden;
+  border: 1px solid #cfc5f6;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(255, 255, 255, 0.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 88% 28%, rgba(255, 255, 255, 0.8) 0 5px, transparent 6px),
+    linear-gradient(145deg, #f8f6ff, #eef6ff);
+  background-size: 52px 52px, 74px 74px, auto;
+}
+
+.fish-metaphor figcaption {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(260px, 1.15fr);
+  align-items: end;
+  gap: 28px;
+  margin-bottom: 26px;
+}
+
+.fish-metaphor figcaption h3 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  letter-spacing: -0.025em;
+}
+
+.fish-metaphor figcaption > p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.fish-story {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.8fr) auto minmax(150px, 0.95fr) auto minmax(180px, 1.1fr);
+  align-items: center;
+  gap: 14px;
+}
+
+.fish-stage {
+  display: grid;
+  min-height: 225px;
+  align-content: center;
+  justify-items: center;
+  padding: 18px 14px;
+  border: 1px solid rgba(114, 87, 217, 0.18);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.82);
+  text-align: center;
+}
+
+.fish-stage > span {
+  margin-top: 10px;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 820;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.fish-stage math {
+  margin: 7px 0 5px;
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+}
+
+.fish-stage small {
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+}
+
+.fish-stage--inner {
+  color: var(--violet);
+}
+
+.fish-stage--outer {
+  color: var(--blue);
+}
+
+.fish-stage--result {
+  border-color: rgba(20, 125, 105, 0.25);
+  color: var(--green);
+  background: rgba(230, 246, 241, 0.86);
+}
+
+.fish-illustration {
+  display: grid;
+  height: 92px;
+  place-items: center;
+}
+
+.fish-illustration svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.fish-illustration path {
+  fill: currentColor;
+}
+
+.fish-illustration circle {
+  fill: #ffffff;
+  stroke: rgba(17, 27, 49, 0.35);
+  stroke-width: 2;
+}
+
+.fish-illustration--small {
+  width: 92px;
+}
+
+.fish-illustration--medium {
+  width: 122px;
+}
+
+.fish-illustration--large {
+  width: 154px;
+}
+
+.fish-story-arrow {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  color: #6f7890;
+}
+
+.fish-story-arrow span {
+  font-size: 0.68rem;
+  font-weight: 760;
+  white-space: nowrap;
+}
+
+.fish-story-arrow b {
+  color: var(--violet);
+  font-size: 1.65rem;
+}
+
+.fish-precision-note {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border-left: 4px solid var(--violet);
+  border-radius: 0 11px 11px 0;
+  color: #51476f;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.fish-precision-note math {
+  font-size: 1em;
+}
+
 .inside-out-card {
   display: grid;
   grid-template-columns: minmax(230px, 0.8fr) minmax(260px, 0.9fr) minmax(260px, 1fr);
@@ -5239,6 +5395,8 @@ math {
 
   .function-machine,
   .composition-pipeline,
+  .fish-metaphor figcaption,
+  .fish-story,
   .derivative-hero,
   .module-template,
   .secant-lab-header,
@@ -5264,6 +5422,14 @@ math {
   .composition-pipeline .machine-arrow {
     min-height: 22px;
     transform: rotate(90deg);
+  }
+
+  .fish-story-arrow b {
+    transform: rotate(90deg);
+  }
+
+  .fish-stage {
+    min-height: 190px;
   }
 
   .module-roadmap {
@@ -5524,6 +5690,12 @@ math {
     align-items: flex-start;
     flex-direction: column;
     gap: 4px;
+  }
+
+  .fish-precision-note {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
   }
 
   .answer-choices--short {
