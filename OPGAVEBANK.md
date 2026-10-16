@@ -320,3 +320,11 @@ Fireogtyve opgaver er seedede familier. Generatorerne vælger kontrollerede punk
 Læringsmålene dækker forskellen på punkt og vektor, vektorregning, længde, midtpunkt og retning; skalarprodukt, ortogonalitet og vinkelberegning; projektion, tværvektor, determinant, orientering og areal; linjeformer, retnings- og normalvektorer, skæringer, relationer og afstand; samt cirklens former, kvadratkomplettering, punktplacering, skæringer og tangenter. Prøveteksterne nævner ikke løsningsmetoden, hvor opgaven kan formuleres neutralt.
 
 `tests/geometry.test.js` kontrollerer antal, dækning, unikke opgaver, neutrale prøvetekster, MathML, hints, feedback, point, delpoint og modulforudsætninger. For hver af de 24 seedede familier gennemgås 1.000 seeds med uafhængig kontrol af vektorer, vinkler, projektioner, determinanter, linjer, afstande, cirkler, skæringer og tangenter samt determinisme og variation.
+
+## Integralregning, modul 7
+
+`tasks/bank/integration-definite-substitution.js` tilføjer syv opgaver i `int.7`. Hele banken har nu 158 opgaver. Målene er `int.new-bounds`, `int.def-substitution`, `int.orientation`, `int.def-domain`, `int.capstone-area`, `int.capstone-geometry`, `int.capstone-numeric`, `int.capstone-model` og `int.capstone-reason`.
+
+Fire håndregningsopgaver dækker nye grænser, eksponentialfunktion, logaritme med indre minimum og faldende cosinusgrænser. Tre større opgaver dækker parameterarealer, areal/rumfang/kurvelængde og transport med begyndelsesværdi. Præcise logaritme- og eksponentialresultater stilles som valg med MathML; tal og brøker bruger den sikre parser. Numeriske modeller afrundes til to decimaler og har absolutte tolerancer. Forklaringer har egen vurdering.
+
+Forudsætningerne er `int.3` og `int.6`, suppleret med `int.4` for parameter og `int.4`/`int.5` for geometri. Eksisterende opgaveversioner bevares. Prøvetilstand skjuler hints, mål og løsninger, og repetitionslinket åbner modul 7 direkte.

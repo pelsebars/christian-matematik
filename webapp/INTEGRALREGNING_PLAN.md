@@ -1,6 +1,6 @@
 # Integralregning – læringsmål og progression
 
-Modul 1–6 og den unummererede B-repetition 6–7 er implementeret. Modul 7 har struktur og mål, men intet færdigt undervisningsforløb endnu.
+Alle syv integralmoduler og den unummererede B-repetition 6–7 er implementeret.
 
 ## Læringsmålskort
 
@@ -35,7 +35,7 @@ Integralregning er hovedemne 06 i sidebaren og på startsiden. Oversigten `#inte
 
 Modul 1 har seks trin: Mål og starttjek, Teori, Eksempler, Øvelser, Forståelsestjek og Opsummering. Starttjek (fem spørgsmål), teori (fem dele), eksempler (seks), træning (syv opgaver) og forståelsestjek (fire spørgsmål) viser én del ad gangen. En trinmenu og delmenu samt Forrige/Næste giver fri navigation. En adresse som `#integration/1/teori/konstant` kan deles eller genåbnes direkte. Browserens Tilbage/Frem følger sideskiftene. `#integration/1` starter ved det første spørgsmål; svar og hints bevares under sideskift og genindlæsning.
 
-Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Planlagte moduler beholder deres stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 2–6 og B-repetitionen har samme trinopdeling. Modul 7 får den, når undervisningsindholdet implementeres.
+Eksisterende MathML, grafik, former, svar og event handlers genbruges ved at flytte deres DOM-elementer til de nye paneler. LocalStorage-format og opgaveversioner er uændrede. Repetitionslinks fra opgavebanken åbner nu den rigtige undervisningsgang i stedet for at rulle i en lang emneside. Alle moduler beholder stabile sektions-id, forudsætninger og træningsbeskrivelse. Modul 1–7 og B-repetitionen har samme trinopdeling med 28 korte adresser hver.
 
 ### Stamfunktion og det ubestemte integral
 
@@ -217,4 +217,18 @@ Seks eksempler, syv bankopgaver og fire sluttjek dækker potenser, eksponentialf
 
 Primær kilde er ark 6, eksempel 1, u1–u8 og opgaver med hjælpemidler 1 og 5. Word-OMML i eksempel 2 og 3 grupperer koefficient og variabel under samme eksponent; den indre afledte ville passe til en anden læsning. Disse tvetydige eksempler er derfor ikke kopieret til banken. Entydige u-opgaver bruges i stedet, og alle svar kontrolleres uafhængigt. Mål U1–U5, U7, K1, K3, K6–K7, A1 og A4 behandles.
 
-Svar, hints og kontroller gemmes under `christian-matematik.integration.substitution.v1`. Bankopgaver kræver `int.1` og `int.rep`. Polynomielle forskrifter graderes ved ækvivalens med en entydig punktbetingelse; eksponential-, logaritme- og trigonometriske familier er valg med MathML. Forklaringer har egen vurdering. Tests kontrollerer kæderegel, alle interaktive faktorer, logaritmer på positive og negative intervaller, punktbetingelse, løbermodel, alle mobiladresser, MathML, tastatur, historik, hints, lagring, prøvebank og repetitionslink. Næste side er planen for modul 7.
+Svar, hints og kontroller gemmes under `christian-matematik.integration.substitution.v1`. Bankopgaver kræver `int.1` og `int.rep`. Polynomielle forskrifter graderes ved ækvivalens med en entydig punktbetingelse; eksponential-, logaritme- og trigonometriske familier er valg med MathML. Forklaringer har egen vurdering. Tests kontrollerer kæderegel, alle interaktive faktorer, logaritmer på positive og negative intervaller, punktbetingelse, løbermodel, alle mobiladresser, MathML, tastatur, historik, hints, lagring, prøvebank og repetitionslink. Næste side er det åbne modul 7.
+
+## Modul 7 – substitution i bestemte integraler og samlet opsamling
+
+Åbent på `#integration/7` med seks trin og 28 korte adresser. Fem grundspørgsmål og mikroøvelser støtter grænseomregning, differential, rækkefølge, stamfunktionsforskelle, metodevalg og numerisk kontrol. Hovedreglen begrundes med kædereglen og hovedsætningen efter Pensum/Definitioner, sætninger og beviser.docx. To konsekvente veje vises: nye grænser i u eller tilbage-substitution med oprindelige x-grænser.
+
+Den interaktive figur sammenligner tre substitutionsformer med flytbare grænser, herunder omvendte og ens grænser. Kvadratet som indre funktion kan først falde og derefter stige; samme nye endegrænser giver korrekt fortegnet integral nul, men ikke geometrisk areal nul. Cosinus viser faldende u-grænser og minus fra differentialet. Domænekontrollen omfatter hele intervallet, og sluttjekket afviser fejlagtig endepunktsregning over en pol ved nul.
+
+Seks eksempler og syv bankopgaver dækker potens, eksponentialfunktion, logaritme, trigonometri, lige store parameterarealer, samlet geometri og transport. Kildearkets logaritmegraf bruges både til areal, rumfang og kurvelængde, med tre forskellige integrander og enheder. Trapezsummer ved N og fire N sammenlignes med en finere referenceberegning og symmetrikontrol. Den diskrete sum konkretiserer U6; stabil afrunding omtales som kontrol, ikke en universel fejlgaranti.
+
+Primær kilde er ark 7, eksempel 3, u1–u4 og u7–u9 samt opgaver med hjælpemidler 1–3 og 5. Tangentens arealdeling og u8 vises som foldbare kildeeksempler. Begyndelsespositionen 50 meter er en eksplicit pædagogisk tilføjelse til kildearkets transportmodel. CAS bruges til de sammensatte integraler, som kræver mere end simpel substitution. Mål U1–U7, K2–K7 og A1–A4 behandles; K1 genbruges ved stamfunktionskontrol.
+
+Svar og hints gemmes under `christian-matematik.integration.final.v1`. Bankopgaverne kræver `int.3` og `int.6`; parameteropgaven også `int.4`, og geometrien også `int.4` og `int.5`. Forklaringer har egen vurdering. Tests kontrollerer transformerede, omvendte og ens grænser, ikke-monoton indre funktion, fortegn/areal, uafhængige model- og geometriberegninger, numerisk tilnærmelse, alle mobiladresser, MathML, tastatur, lagring, browserhistorik, prøvetilstand og repetitionslink.
+
+Dette er sidste undervisningsgang: næste-knappen på sidste side fører til hele integraloversigten. Sluttjekket anbefaler videre blandet træning og egen vurdering af forklaringer, uden at fire korrekte spørgsmål udlægges som en fuld faglig certificering. Alle syv moduler og B-repetitionen er åbne.

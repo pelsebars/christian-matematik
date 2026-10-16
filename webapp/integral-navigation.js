@@ -1,3 +1,4 @@
+import { createIntegralFinalLesson } from './integral-final-lesson.js';
 import { createIntegralSubstitutionLesson } from './integral-substitution-lesson.js';
 import { createIntegralSolidsLesson } from './integral-solids-lesson.js';
 import { createIntegralRepetitionLesson } from './integral-repetition-lesson.js';
@@ -97,11 +98,13 @@ export function mountIntegralNavigation(root) {
   const solidsLesson = createIntegralSolidsLesson(lesson);
   get("int-modul-6").remove();
   const substitutionLesson = createIntegralSubstitutionLesson(lesson);
-  const lessons = new Map([["2", graphLesson], ["3", definiteLesson], ["4", areasLesson], ["repetition", repetitionLesson], ["5", solidsLesson], ["6", substitutionLesson]]);
+  get("int-modul-7").remove();
+  const finalLesson = createIntegralFinalLesson(lesson);
+  const lessons = new Map([["2", graphLesson], ["3", definiteLesson], ["4", areasLesson], ["repetition", repetitionLesson], ["5", solidsLesson], ["6", substitutionLesson], ["7", finalLesson]]);
   const panelGroups = new Map([["1", panels], ...[...lessons].map(([id,l]) => [id,l.panels])]);
   const choiceGroups = new Map([["1", choices], ...[...lessons].map(([id,l]) => [id,l.choices])]);
   const plans = new Map();
-  integralModules.slice(7).forEach(m => { const plan = get(m.section); plan.hidden = true; plans.set(moduleKey(m), plan); lesson.append(plan); });
+  integralModules.slice(8).forEach(m => { const plan = get(m.section); plan.hidden = true; plans.set(moduleKey(m), plan); lesson.append(plan); });
   const pager = element('nav', 'int-page-controls'); pager.setAttribute('aria-label', 'Forrige og næste del'); lesson.append(pager);
   root.querySelectorAll('#int-session .section-heading h2').forEach(h => { h.textContent = h.textContent.replace(/^\d+\. /, ''); });
   const sections = new Map([
@@ -118,7 +121,8 @@ export function mountIntegralNavigation(root) {
     ...repetitionLesson.sections,
     ...solidsLesson.sections,
     ...substitutionLesson.sections,
-    ...integralModules.slice(7).map(m => [m.section, integralRoute(moduleKey(m))]),
+    ...finalLesson.sections,
+    ...integralModules.slice(8).map(m => [m.section, integralRoute(moduleKey(m))]),
   ]);
   function render(focus = false) {
     const route = parseIntegralRoute(location.hash);
@@ -158,10 +162,12 @@ export function mountIntegralNavigation(root) {
     if (steps) {
       const pages = pagesForIntegralModule(route.module);
       const index = pages.indexOf(route.path);
-      const nextModule = moduleKey(integralModules[integralModules.indexOf(m) + 1]);
-      const nextLabel = nextModule === 'repetition' ? 'Åbn B-niveau-repetition →' : `${stepsForIntegralModule(nextModule) ? 'Åbn' : 'Se planen for'} undervisningsgang ${nextModule} →`;
+      const nextPlan = integralModules[integralModules.indexOf(m) + 1];
+      const nextModule = nextPlan ? moduleKey(nextPlan) : '';
+      const nextPath = nextPlan ? `integration/${nextModule}` : 'integration';
+      const nextLabel = !nextPlan ? 'Til hele forløbet →' : nextModule === 'repetition' ? 'Åbn B-niveau-repetition →' : `${stepsForIntegralModule(nextModule) ? 'Åbn' : 'Se planen for'} undervisningsgang ${nextModule} →`;
       pager.append(link(index > 0 ? pages[index - 1] : 'integration', '← Forrige', 'secondary-button'));
-      pager.append(link(index < pages.length - 1 ? pages[index + 1] : `integration/${nextModule}`, index < pages.length - 1 ? 'Næste →' : nextLabel, 'primary-button'));
+      pager.append(link(index < pages.length - 1 ? pages[index + 1] : nextPath, index < pages.length - 1 ? 'Næste →' : nextLabel, 'primary-button'));
     } else if (m) {
       const index = integralModules.indexOf(m);
       pager.append(link(integralRoute(moduleKey(integralModules[index - 1])), '← Forrige undervisningsgang', 'secondary-button'));
@@ -176,7 +182,7 @@ export function mountIntegralNavigation(root) {
     const path = sections.get(id) || 'integration';
     // Ground help should preserve the current start-question instead of resetting it.
     const route = parseIntegralRoute(location.hash);
-    const targetPath = (id === 'int-grundkort' || id === 'int2-grundkort' || id === 'int3-grundkort' || id === 'int4-grundkort' || id === 'rep-grundkort' || id === 'int5-grundkort' || id === 'int6-grundkort') && route?.step === 'start' && route.module === parseIntegralRoute(path)?.module ? route.path : path;
+    const targetPath = (id === 'int-grundkort' || id === 'int2-grundkort' || id === 'int3-grundkort' || id === 'int4-grundkort' || id === 'rep-grundkort' || id === 'int5-grundkort' || id === 'int6-grundkort' || id === 'int7-grundkort') && route?.step === 'start' && route.module === parseIntegralRoute(path)?.module ? route.path : path;
     window.showMathView(targetPath);
     render(true);
     const target = get(id);

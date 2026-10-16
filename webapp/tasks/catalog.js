@@ -64,6 +64,15 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "int.new-bounds": {module:"int.7",text:"Omsætte begge integrationsgrænser til den nye variabel"},
+  "int.def-substitution": {module:"int.7",text:"Beregne bestemte integraler med konsekvent variabelvalg"},
+  "int.orientation": {module:"int.7",text:"Bevare grænsernes rækkefølge og skelne mellem integral og areal"},
+  "int.def-domain": {module:"int.7",text:"Kontrollere hele intervallets domæne ved substitution"},
+  "int.capstone-area": {module:"int.7",text:"Opdele geometriske arealer og løse en parameterligning"},
+  "int.capstone-geometry": {module:"int.7",text:"Vælge integrand til areal, rumfang og kurvelængde"},
+  "int.capstone-numeric": {module:"int.7",text:"Sammenligne numeriske summer og kontrollere nøjagtighed"},
+  "int.capstone-model": {module:"int.7",text:"Fortolke hastighed, strækning og begyndelsesværdi med enheder"},
+  "int.capstone-reason": {module:"int.7",text:"Dokumentere metode, antagelser og kontrol i sammensatte problemer"},
   "int.substitution": {module:"int.6",text:"Vælge indre funktion og omskrive hele differentialet"},
   "int.sub-factor": {module:"int.6",text:"Bevare konstantfaktorer og fortegn fra den indre afledte"},
   "int.sub-power": {module:"int.6",text:"Integrere potenser i ny variabel og substituere tilbage"},

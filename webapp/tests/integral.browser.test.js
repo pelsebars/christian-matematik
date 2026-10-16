@@ -75,8 +75,8 @@ try {
  await page.locator('.int-goal-map > summary').click();
  for (const [id, path] of [['int-modul-7','7']]) {
   await page.locator(`#int-forloeb [data-int-jump="${id}"]`).click();
-  await page.waitForURL(`**/#integration/${path}`);
-  assert.match(await page.locator('#' + id).innerText(), /Planlagt/);
+  await page.waitForURL(`**/#integration/${path}/start/1`);
+  assert.ok(await page.locator('#int7-start').isVisible());
   assert.equal(await page.locator('#int-forloeb').isVisible(), false);
   assert.equal(await page.locator('#int-start').isVisible(), false);
   await page.locator('.int-breadcrumb a').click();
@@ -224,8 +224,9 @@ try {
  await page.locator('#int-konstant').waitFor({ state: 'visible' });
  await page.goto(url + '/#integration/1/unknown/<invalid>');
  await page.waitForURL('**/#integration/1/start/1');
- await page.goto(url + '/#integration/7'); await page.locator('#int-modul-7').waitFor({ state: 'visible' });
+ await page.goto(url + '/#integration/7'); await page.locator('#int7-start').waitFor({ state: 'visible' });
  assert.match(await page.title(), /Substitution/);
+ await go('integration/7/opsummering');
  await page.locator('.int-page-controls a').last().click(); await page.locator('#int-forloeb').waitFor({ state: 'visible' });
  await go('integration/1/teori/begreb');
  await page.locator('.int-step-menu [data-int-step=eksempler]').focus(); await page.keyboard.press('Enter');

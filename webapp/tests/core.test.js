@@ -352,7 +352,7 @@ test('Integral teaching-session routes normalize invalid links and keep every le
   assert.equal(parseIntegralRoute('#integration/1/oevelser/999').path, 'integration/1/oevelser/1');
   assert.equal(parseIntegralRoute('#integration/repetition').module, 'repetition');
   assert.equal(parseIntegralRoute('#integration/99').path, 'integration');
-  assert.equal(parseIntegralRoute('#integration/7/teori').path, 'integration/7');
+  assert.equal(parseIntegralRoute('#integration/7/teori').path, 'integration/7/teori/graenser');
   assert.equal(integralRoute('1', 'opsummering'), 'integration/1/opsummering');
   assert.equal(integralSteps.length, 6);
   assert.equal(integralPages.length, 28);
@@ -505,4 +505,17 @@ test('Module 6 substitution families satisfy independent chain-rule, domain and 
  const base=.4937,v=t=>12.42-.0944*t-12.42*base**t,S=t=>12.42*t-.0472*t*t-12.42*(base**t-1)/Math.log(base);assert.equal(S(0),0);for(const t of [0,1,2,4]){assert.ok(v(t)>=0);assert.ok(Math.abs(derivative(S,t)-v(t))<1e-8);}const runner=instantiate('int6.runner','a');assert.ok(Math.abs(v(3)-number(runner.parts[0].answer))<.01);assert.ok(Math.abs(S(2)-number(runner.parts[1].answer))<.01);assert.ok(Math.abs(S(4)-S(2)-number(runner.parts[2].answer))<.01);
  const u9=t=>(t**3+2)*Math.log(t**3+2)-(t**3+2);for(const t of [-1,0,1])assert.ok(Math.abs(derivative(u9,t)-3*t*t*Math.log(t**3+2))<1e-7);
  const incomplete=composeSet({seed:'sub',topics:['integration'],onlyCompleted:true,completed:['int.6'],minutes:180});assert.equal(incomplete.tasks.length,0);const ready=composeSet({seed:'sub',topics:['integration'],onlyCompleted:true,completed:['int.1','int.rep','int.6'],minutes:180});assert.ok(ready.tasks.some(t=>t.module==='int.6'));
+});
+
+test('Module 7 transformed bounds, orientation, capstone geometry and models agree with independent calculations',async()=>{
+ const {definiteSubstitutionCase,definiteSubstitutionMeasurements,trapezoidIntegral}=await import('../integral-final-lesson.js');const {simpsonIntegral}=await import('../integral-solids-lesson.js');const {pagesForIntegralModule,parseIntegralRoute}=await import('../integral-routes.js');
+ assert.equal(pagesForIntegralModule('7').length,28);for(const p of pagesForIntegralModule('7'))assert.equal(parseIntegralRoute('#'+p).path,p);
+ for(const type of ['power','log','trig']){const m=definiteSubstitutionCase(type);for(const [a,b]of type==='trig'?[[0,Math.PI/2],[Math.PI/2,Math.PI],[Math.PI,0],[1,1]]:[[-1,1],[0,1],[1,0],[2,2]]){const r=definiteSubstitutionMeasurements(m,a,b);assert.ok(Math.abs(simpsonIntegral(m.f,a,b)-r.value)<1e-9);assert.ok(r.area+1e-12>=Math.abs(r.value));assert.ok(Math.abs(definiteSubstitutionMeasurements(m,b,a).value+r.value)<1e-12);assert.equal(definiteSubstitutionMeasurements(m,b,a).area,r.area);}}
+ const power=definiteSubstitutionCase('power'),r=definiteSubstitutionMeasurements(power,-1,1);assert.equal(r.value,0);assert.ok(Math.abs(r.area-14/3)<1e-12);assert.ok(Math.abs(number(instantiate('int7.power','a').parts[1].answer)-7/3)<1e-12);
+ const log=t=>(2*t-1)/(t*t-t+4);assert.ok(Math.abs(simpsonIntegral(log,0,4)-Math.log(4))<1e-10);const geoLog=-simpsonIntegral(log,0,.5)+simpsonIntegral(log,.5,4);assert.ok(Math.abs(geoLog-Math.log(1024/225))<1e-10);
+ assert.equal(10**5-2**5,99968);assert.ok(Math.abs(simpsonIntegral(t=>5*Math.cos(t)*Math.sin(t)**4,0,Math.PI/2)-1)<1e-10);
+ const a=3,f=t=>(t-1)*(a-t);assert.ok(Math.abs(-simpsonIntegral(f,0,1)-4/3)<1e-12);assert.ok(Math.abs(simpsonIntegral(f,1,a)-4/3)<1e-12);
+ const g=t=>Math.log1p(t*t),df=t=>2*t/(1+t*t),areaExact=6*Math.log(10)-12+4*Math.atan(3),rows=[[g,1,areaExact],[t=>g(t)**2,Math.PI,34.46293252423299],[t=>Math.hypot(1,df(t)),1,7.639134479499738]];const geometry=instantiate('int7.geometry','a');for(const [i,[fun,factor,reference]]of rows.entries()){assert.ok(Math.abs(factor*simpsonIntegral(fun,-3,3)-reference)<1e-8);assert.ok(Math.abs(reference-number(geometry.parts[i].answer))<.01);assert.ok(Math.abs(factor*trapezoidIntegral(fun,-3,3,128)-reference)<Math.abs(factor*trapezoidIntegral(fun,-3,3,8)-reference));}
+ const v=t=>2*t+t*Math.exp(.32*t),distance=simpsonIntegral(v,0,10),F=t=>t*t+(t/.32-1/.32**2)*Math.exp(.32*t);assert.ok(Math.abs(distance-(F(10)-F(0)))<1e-8);const task=instantiate('int7.transport','a');for(const [i,result]of [distance,distance/10,50+distance].entries())assert.ok(Math.abs(result-number(task.parts[i].answer))<.01);
+ const incomplete=composeSet({seed:'int7',topics:['integration'],onlyCompleted:true,completed:['int.7'],minutes:180});assert.equal(incomplete.tasks.length,0);const ready=composeSet({seed:'int7',topics:['integration'],onlyCompleted:true,completed:['int.1','int.2','int.3','int.4','int.rep','int.5','int.6','int.7'],minutes:180});assert.ok(ready.tasks.some(t=>t.module==='int.7'));
 });
