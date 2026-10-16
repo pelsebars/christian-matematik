@@ -58,7 +58,7 @@ export function loadState(storage) {
       if (new Set(s.items.map((r) => r.id)).size !== s.items.length)
         throw Error("Gentagne opgaver");
       for (const ref of s.items) {
-        const t = instantiate(ref.id, s.seed);
+        const t = instantiate(ref.id, s.seed, ref.version);
         if (t.version !== ref.version)
           throw Error("En opgave har fået en ny version");
         for (const p of t.parts) {

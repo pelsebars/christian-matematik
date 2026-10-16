@@ -318,7 +318,8 @@ test('Integral module polynomials satisfy their independently specified derivati
   for(const [id,part,expected] of examples){
     const task=instantiate(id,'independent');
     const coefficients=polynomial(task.parts.find(p=>p.id===part).answer);
-    assert.deepEqual(differentiate(coefficients),expected);
+    const target=id==='int.sum'?[task.parameters.c,2*task.parameters.b,3*task.parameters.a]:expected;
+    assert.deepEqual(differentiate(coefficients),target);
   }
   const motion=instantiate('int.motion','independent');
   const p=polynomial(motion.parts[0].answer);
@@ -338,7 +339,7 @@ test('Integral targeted feedback distinguishes arithmetic, integration and initi
   assert.match(targetedFeedback(motion,motion.parts[0],'3*x^2+2*x'),/integrationsregel passer.*begyndelsespositionen/);
   assert.match(targetedFeedback(motion,motion.parts[1],'16'),/ændringen fra starten/);
   assert.equal(gradePart(motion.parts[0],'e^x').status,'review');
-  assert.equal(composeSet({seed:'int',topics:['integration'],minutes:90,onlyCompleted:true,completed:['int.1']}).tasks.length,7);
+  const selected=composeSet({seed:'int',topics:['integration'],minutes:90,onlyCompleted:true,completed:['int.1']}).tasks;assert.ok(selected.length>=7);assert.ok(selected.every(t=>t.module==='int.1'));
   assert.equal(composeSet({seed:'int',topics:['integration'],onlyCompleted:true,completed:['int.2']}).tasks.length,0);
 });
 
@@ -511,7 +512,7 @@ test('Module 7 transformed bounds, orientation, capstone geometry and models agr
  const {definiteSubstitutionCase,definiteSubstitutionMeasurements,trapezoidIntegral}=await import('../integral-final-lesson.js');const {simpsonIntegral}=await import('../integral-solids-lesson.js');const {pagesForIntegralModule,parseIntegralRoute}=await import('../integral-routes.js');
  assert.equal(pagesForIntegralModule('7').length,28);for(const p of pagesForIntegralModule('7'))assert.equal(parseIntegralRoute('#'+p).path,p);
  for(const type of ['power','log','trig']){const m=definiteSubstitutionCase(type);for(const [a,b]of type==='trig'?[[0,Math.PI/2],[Math.PI/2,Math.PI],[Math.PI,0],[1,1]]:[[-1,1],[0,1],[1,0],[2,2]]){const r=definiteSubstitutionMeasurements(m,a,b);assert.ok(Math.abs(simpsonIntegral(m.f,a,b)-r.value)<1e-9);assert.ok(r.area+1e-12>=Math.abs(r.value));assert.ok(Math.abs(definiteSubstitutionMeasurements(m,b,a).value+r.value)<1e-12);assert.equal(definiteSubstitutionMeasurements(m,b,a).area,r.area);}}
- const power=definiteSubstitutionCase('power'),r=definiteSubstitutionMeasurements(power,-1,1);assert.equal(r.value,0);assert.ok(Math.abs(r.area-14/3)<1e-12);assert.ok(Math.abs(number(instantiate('int7.power','a').parts[1].answer)-7/3)<1e-12);
+ const power=definiteSubstitutionCase('power'),r=definiteSubstitutionMeasurements(power,-1,1);assert.equal(r.value,0);assert.ok(Math.abs(r.area-14/3)<1e-12);const generatedPower=instantiate('int7.power','a'),params=generatedPower.parameters;assert.ok(Math.abs(number(generatedPower.parts[1].answer)-params.k*(params.last**(params.p+1)-params.b**(params.p+1))/(params.p+1))<1e-9);
  const log=t=>(2*t-1)/(t*t-t+4);assert.ok(Math.abs(simpsonIntegral(log,0,4)-Math.log(4))<1e-10);const geoLog=-simpsonIntegral(log,0,.5)+simpsonIntegral(log,.5,4);assert.ok(Math.abs(geoLog-Math.log(1024/225))<1e-10);
  assert.equal(10**5-2**5,99968);assert.ok(Math.abs(simpsonIntegral(t=>5*Math.cos(t)*Math.sin(t)**4,0,Math.PI/2)-1)<1e-10);
  const a=3,f=t=>(t-1)*(a-t);assert.ok(Math.abs(-simpsonIntegral(f,0,1)-4/3)<1e-12);assert.ok(Math.abs(simpsonIntegral(f,1,a)-4/3)<1e-12);

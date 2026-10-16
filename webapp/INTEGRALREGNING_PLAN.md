@@ -232,3 +232,12 @@ Primær kilde er ark 7, eksempel 3, u1–u4 og u7–u9 samt opgaver med hjælpem
 Svar og hints gemmes under `christian-matematik.integration.final.v1`. Bankopgaverne kræver `int.3` og `int.6`; parameteropgaven også `int.4`, og geometrien også `int.4` og `int.5`. Forklaringer har egen vurdering. Tests kontrollerer transformerede, omvendte og ens grænser, ikke-monoton indre funktion, fortegn/areal, uafhængige model- og geometriberegninger, numerisk tilnærmelse, alle mobiladresser, MathML, tastatur, lagring, browserhistorik, prøvetilstand og repetitionslink.
 
 Dette er sidste undervisningsgang: næste-knappen på sidste side fører til hele integraloversigten. Sluttjekket anbefaler videre blandet træning og egen vurdering af forklaringer, uden at fire korrekte spørgsmål udlægges som en fuld faglig certificering. Alle syv moduler og B-repetitionen er åbne.
+
+
+## Fælles opgavebank – samlet revision af alle syv moduler
+
+Den fælles bank er udvidet fra 49 til 91 integralopgaver: modul 1–7 har henholdsvis 13, 13, 14, 14, 16, 10 og 11. 46 er seedede familier. De syv selvstændige B-repetitionsopgaver er uændrede. Undervisningens faste eksempler, øvelser, adresser og lokale besvarelser bevares. Nye sæt bruger de udvidede bankversioner; allerede gemte integralsæt i version 1 genåbnes med oprindelige spørgsmål og facit.
+
+Kildegennemgangen omfatter alle syv ark og undervisningens læringsmål. Numerisk ens opgaver er samlet i kontrollerede familier; nye opgaver udfylder bl.a. logaritmer, rødder, vandret tangent uden ekstremum, fortegns- og domæneproblemer, tredobbelte afgrænsninger, berøringer, omkreds og sammensatte rotationsprofiler. Den detaljerede dækning, omplaceringer og faglige præciseringer findes i [INTEGRALREGNING_OPGAVEBANK.md](INTEGRALREGNING_OPGAVEBANK.md).
+
+Alle 46 generatorer kontrolleres med 1.000 seeds, herunder viste facit og distraktorer. Browsertesten gennemgår alle 91 bankopgaver, point, tekstforklaringer, hints, genindlæsning, mobil og prøvetilstand. Undervisningens eksisterende browsertests indgår fortsat i den samlede regression.

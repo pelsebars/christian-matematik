@@ -21,7 +21,7 @@ Servér mappen med en lokal webserver, og åbn `index.html` gennem serverens adr
 
 ## Fælles opgaver
 
-Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 158 gennemgåede opgaver fra alle seks hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og lokal lagring.
+Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 200 gennemgåede opgaver fra alle seks hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og lokal lagring. Integralmodul 1–7 har tilsammen 91 opgaver, heraf 46 seedede familier. Kildegennemgang og dækning er beskrevet i [INTEGRALREGNING_OPGAVEBANK.md](INTEGRALREGNING_OPGAVEBANK.md).
 
 Format, integrationspunkt og eksempler er beskrevet i [OPGAVEBANK.md](../OPGAVEBANK.md). Nye emnepakker tilføjes i `tasks/bank/` og registreres i `tasks/bank/index.js`.
 

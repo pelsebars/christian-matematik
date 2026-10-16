@@ -2,6 +2,8 @@
 
 Opgavesystemet er en separat del af den statiske app. Der er ingen backend, byggetrin eller ny produktionsafhængighed. Åbn appen gennem en HTTP-server; ES-moduler virker ikke pålideligt via `file://`.
 
+Banken har aktuelt **200 opgaver**, heraf **91 i integralmodul 1–7** og syv i B-repetitionen. Antal i de efterfølgende modulafsnit beskriver den historiske tilføjelse; den samlede integralrevision er dokumenteret i [webapp/INTEGRALREGNING_OPGAVEBANK.md](webapp/INTEGRALREGNING_OPGAVEBANK.md).
+
 ## Arkitektur og eksisterende indhold
 
 `webapp/app.js` styrer fortsat hovednavigation og eksisterende undervisning. Den nye side hedder `#tasks`. `window.showMathView` forbinder repetitionsknapper med det rigtige emne; modulets eksisterende sektion bruges som rullemål.
@@ -18,6 +20,8 @@ Opgavesystemet er en separat del af den statiske app. Der er ingen backend, bygg
 | `webapp/tasks/bank/calculus.js`     | Oprindelig produktregel og haveoptimering             |
 | `webapp/tasks/bank/differentiation.js` | Komplet differentialregningsbank på tværs af fem moduler |
 | `webapp/tasks/bank/geometry.js`     | Komplet bank til plangeometri og vektorer             |
+| `webapp/tasks/bank/integration-complete.js` | Samlet integralbank, neutrale versioner og seedede familier |
+| `webapp/tasks/bank/integration-sources.js` | Supplerende integralopgaver fra kilder og læringsmål |
 | `webapp/tasks/selection.js`         | Filtrering og balanceret sammensætning                |
 | `webapp/tasks/grading.js`           | Point, delpoint, egen vurdering og målrettet feedback |
 | `webapp/tasks/storage.js`           | Lokal lagring, formatkontrol og genoptagelse          |
@@ -170,7 +174,7 @@ Samme seed, bankversioner, valg og historik giver samme sæt. Slå historik fra 
 
 Tidtagning er valgfri i prøven og måler væguret, også ved genindlæsning eller når fanen er lukket. Den er vejledende og afleverer ikke automatisk. Aflevering kræver en særskilt bekræftelse, som viser helt ubesvarede og markerede opgaver. Træningssvar låses efter kontrol, så tidligere feedback og point hænger sammen; brug genforsøg for at svare igen.
 
-Hvis browseren blokerer lagring, eller kvoten er fuld, vises en besked. Ugyldige data eller inkompatible opgaveversioner åbnes ikke som om de var gyldige. Der vises en besked og tilbydes et nyt sæt. Gamle opgavesnapshots og versionsmigration er ikke implementeret; bump derfor kun version ved reelle faglige ændringer. Resultathistorikken er kortfattet; fuld besvarelse og løsninger bevares for den seneste session, indtil et nyt sæt startes.
+Hvis browseren blokerer lagring, eller kvoten er fuld, vises en besked. Ugyldige data eller inkompatible opgaveversioner åbnes ikke som om de var gyldige. Der vises en besked og tilbydes et nyt sæt. Der er ingen generel snapshotlagring eller versionsmigration. De oprindelige 49 faste integralopgaver i version 1 bevares dog som uforanderlige undervisningsopgaver: `instantiate(id, seed, version)` kan genåbne dem med præcis oprindelig tekst og facit. Lagring og UI sender den gemte version med. Nye sæt bruger den aktuelle bankversion. Ukendte versioner afvises fortsat. Bump kun version ved reelle faglige ændringer. Resultathistorikken er kortfattet; fuld besvarelse og løsninger bevares for den seneste session, indtil et nyt sæt startes.
 
 Prøvetilstanden skjuler oplysninger i brugerfladen, men er ikke en sikret eksamensplatform. Banken er statiske kildefiler i browseren.
 
@@ -239,7 +243,7 @@ Læringsmålene i `catalog.js` skelner mellem struktur, beregning og fortolkning
 
 ## Integralregning, første arbejdsgang
 
-Hovedemnet `integration` og `int.1`–`int.7` samt `int.rep` er registreret. `int.rep` er mellemstationen om B-niveau 6–7, ikke et nummereret integralmodul. Modul 1, 2 og 3 er åbne; de øvrige sektioner viser deres plan. Læringsmålskort og kildeafgrænsning findes i `webapp/INTEGRALREGNING_PLAN.md`.
+Hovedemnet `integration` og `int.1`–`int.7` samt `int.rep` er registreret. `int.rep` er mellemstationen om B-niveau 6–7, ikke et nummereret integralmodul. Alle syv moduler og B-repetitionen er åbne. Afsnittene nedenfor dokumenterer deres oprindelige integration; den samlede bankrevision står til sidst. Læringsmålskort og kildeafgrænsning findes i `webapp/INTEGRALREGNING_PLAN.md`.
 
 `webapp/tasks/bank/integration.js` tilføjer syv gennemgåede opgaver: kort stamfunktion/familie, ledvis integration, eksponentialfunktion, negativ potens, kontrol af et forkert forslag, en positionsmodel og en CAS-opgave. De har hints i niveauer, løsninger, typiske fejl og målrettet feedback. Alle prøvetekster er uden metodeoverskrift. Modeller og CAS-forklaringer kræver egen vurdering med tjekliste.
 
@@ -328,3 +332,14 @@ Læringsmålene dækker forskellen på punkt og vektor, vektorregning, længde, 
 Fire håndregningsopgaver dækker nye grænser, eksponentialfunktion, logaritme med indre minimum og faldende cosinusgrænser. Tre større opgaver dækker parameterarealer, areal/rumfang/kurvelængde og transport med begyndelsesværdi. Præcise logaritme- og eksponentialresultater stilles som valg med MathML; tal og brøker bruger den sikre parser. Numeriske modeller afrundes til to decimaler og har absolutte tolerancer. Forklaringer har egen vurdering.
 
 Forudsætningerne er `int.3` og `int.6`, suppleret med `int.4` for parameter og `int.4`/`int.5` for geometri. Eksisterende opgaveversioner bevares. Prøvetilstand skjuler hints, mål og løsninger, og repetitionslinket åbner modul 7 direkte.
+
+
+## Samlet opgavebankrevision af integralmodul 1–7
+
+Alle undervisningssider, eksisterende opgaver, eksempler og de syv kildeark er gennemgået. De 49 oprindelige id’er er bevaret, og 42 nye opgavetyper tilføjet. Integralbanken har 91 opgaver fordelt på 13, 13, 14, 14, 16, 10 og 11 i modul 1–7. 46 er seedede familier. B-repetitionens syv opgaver er uændrede. Tilsammen har hele banken 200 opgaver.
+
+`integration-complete.js` samler undervisningens oprindelige opgaver, bankens neutrale versioner og de nye kildeopgaver fra `integration-sources.js`. Undervisningssiderne bruger fortsat deres oprindelige opgaver. Ændrede banktekster/generatorer har højere version; de oprindelige faste version 1-opgaver kan fortsat bruges af gemte sæt. Hver opgave har læringsmål, forudsætninger, point, flere hints, målrettet feedback og gennemregnet løsning. Forklaringer bruger tjeklister og egen vurdering. Rødder som et uordnet sæt har delpoint.
+
+Ens regnetyper er samlet i familier; ukendte figurdata og tvetydige formler er erstattet med eksplicitte, kontrollerede betingelser. Kildekort, tilpasninger og faglige forbehold står i [INTEGRALREGNING_OPGAVEBANK.md](webapp/INTEGRALREGNING_OPGAVEBANK.md).
+
+`tests/integration-bank.test.js` kontrollerer alle mål, id’er, neutral tekst, versioner, point og feedback samt determinisme og facit for 1.000 seeds pr. generator. De viste MathML-facit differentieres med en separat testfortolker, og distraktorer kontrolleres for utilsigtet gyldighed; numeriske integraler kontrollerer areal-, rumfangs- og længdefacit. Testfortolkeren er kun testkode. Produktionsparseren er uændret. `tests/integration-bank.browser.test.js` afprøver alle 91 opgaver med svar, bedømmelse, hints, genindlæsning, mobil, prøvefortrolighed og genoptagelse af et gammelt version 1-sæt. Begge indgår i de normale testkommandoer.

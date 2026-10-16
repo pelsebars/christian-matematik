@@ -1,5 +1,6 @@
 // Run with Playwright installed, or PLAYWRIGHT_MODULE_PATH pointing to its index.mjs.
 import assert from "node:assert/strict";
+import {instantiate} from "../tasks/bank/index.js";
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -190,16 +191,23 @@ try {
  await page.locator('[name=onlyCompleted]').check();
  await page.locator('[name=mode]').selectOption('exam'); await page.locator('[name=minutes]').fill('90');
  await page.locator('#taskSetup button[type=submit]').click();
- assert.equal(await page.locator('[data-task-action=jump]').count(), 7);
+ assert.ok(await page.locator('[data-task-action=jump]').count() > 0);
  assert.equal(await page.locator('[data-task-action=hint]').count(), 0);
  assert.equal(await page.locator('.task-feedback').count(), 0);
  assert.ok(!(await page.locator('#tasksView').innerText()).includes('Læringsmål'));
  const session = await page.evaluate(() => JSON.parse(localStorage.getItem('christian-matematik.tasks.v1')).session);
- await page.locator('[data-task-action=jump]').nth(session.items.findIndex(t => t.id === 'int.polynomial')).click();
- await page.locator('[data-part=expr]').fill('x^3'); await page.reload();
- assert.equal(await page.locator('[data-part=expr]').inputValue(), 'x^3');
+ assert.ok(session.items.length <= 12);
+ const tasks = session.items.map(t => instantiate(t.id,session.seed,t.version));
+ assert.ok(tasks.every(t => t.module === 'int.1'));
+ assert.ok(tasks.reduce((sum,t) => sum+t.minutes,0) <= 90);
+ const expressionIndex = tasks.findIndex(t => t.parts.some(p => p.type === 'expression'));
+ assert.ok(expressionIndex >= 0);
+ const expressionPart = tasks[expressionIndex].parts.find(p => p.type === 'expression');
+ await page.locator('[data-task-action=jump]').nth(expressionIndex).click();
+ await page.locator(`[data-part="${expressionPart.id}"]`).fill('x^3'); await page.reload();
+ assert.equal(await page.locator(`[data-part="${expressionPart.id}"]`).inputValue(), 'x^3');
  await page.locator('[data-task-action=finish]').click(); await page.locator('[data-task-action=submit]').click();
- assert.equal(await page.locator('.task-feedback').count(), 7);
+ assert.equal(await page.locator('.task-feedback').count(), session.items.length);
  await page.locator('[data-task-action=repeat-module][data-module="int.1"]').first().click();
  await page.waitForURL('**/#integration/1/start/1');
  assert.ok(await page.locator('#int-start').isVisible());

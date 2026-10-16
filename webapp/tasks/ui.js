@@ -23,7 +23,7 @@ let state = loaded.state,
 const button = (text, action, extra = "") =>
   `<button type="button" class="task-button" data-task-action="${action}" ${extra}>${text}</button>`;
 const tasks = () =>
-  state.session.items.map((ref) => instantiate(ref.id, state.session.seed));
+  state.session.items.map((ref) => instantiate(ref.id, state.session.seed, ref.version));
 function persist() {
   if (!saveState(storage, state))
     warning =

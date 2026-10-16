@@ -64,6 +64,8 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "int.perimeter": {module:"int.5",text:"Beregne et lukket områdes omkreds af flere randkurver"},
+  "int.sub-area": {module:"int.6",text:"Bestemme parameter og integrationsgrænser i en blandet arealopgave"},
   "int.new-bounds": {module:"int.7",text:"Omsætte begge integrationsgrænser til den nye variabel"},
   "int.def-substitution": {module:"int.7",text:"Beregne bestemte integraler med konsekvent variabelvalg"},
   "int.orientation": {module:"int.7",text:"Bevare grænsernes rækkefølge og skelne mellem integral og areal"},
