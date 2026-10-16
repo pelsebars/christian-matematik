@@ -148,6 +148,38 @@ export const goals = {
     module: "quad.basic",
     text: "Bestemme diskriminant og alle reelle løsninger",
   },
+  "quad.foundation": {
+    module: "quad.basic",
+    text: "Bruge potenser, fortegn og kvadratrødder sikkert",
+  },
+  "quad.recognize": {
+    module: "quad.basic",
+    text: "Genkende et udsagn med højeste eksponent to",
+  },
+  "quad.standard": {
+    module: "quad.basic",
+    text: "Omskrive et udsagn med nul på højre side",
+  },
+  "quad.coefficients": {
+    module: "quad.basic",
+    text: "Aflæse a, b og c med fortegn og manglende led",
+  },
+  "quad.discriminant": {
+    module: "quad.basic",
+    text: "Beregne diskriminanten med korrekte parenteser og fortegn",
+  },
+  "quad.classify": {
+    module: "quad.basic",
+    text: "Afgøre antallet af reelle løsninger ud fra diskriminanten",
+  },
+  "quad.formula": {
+    module: "quad.basic",
+    text: "Anvende løsningsformlen og håndtere begge fortegn",
+  },
+  "quad.check": {
+    module: "quad.basic",
+    text: "Kontrollere foreslåede og beregnede løsninger ved indsættelse",
+  },
   "comp.order": {
     module: "comp.basic",
     text: "Sammensætte funktioner i den rigtige rækkefølge",

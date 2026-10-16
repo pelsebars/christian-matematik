@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/core.test.js tests/equations.test.js tests/differentiation.test.js",
+    "test": "node --test tests/core.test.js tests/equations.test.js tests/quadratic.test.js tests/differentiation.test.js",
     "test:browser": "node tests/browser.test.js && node tests/integral.browser.test.js && node tests/integral-graphs.browser.test.js && node tests/integral-definite.browser.test.js && node tests/integral-areas.browser.test.js && node tests/integral-repetition.browser.test.js && node tests/integral-solids.browser.test.js && node tests/integral-substitution.browser.test.js"
   }
 }

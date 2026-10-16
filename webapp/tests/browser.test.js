@@ -170,10 +170,36 @@ try {
   await page.locator("[data-task-action=new]").click();
   await page.locator("[name=topics][value=quadratic]").check();
   await page.locator("[name=useHistory]").uncheck();
+  await page.locator("[name=short]").fill("0");
+  await page.locator("[name=medium]").fill("20");
+  await page.locator("[name=complex]").fill("0");
+  await page.locator("[name=seed]").fill("browser-quadratic-partial");
   await page.locator("#taskSetup button[type=submit]").click();
-  await page.locator("[data-part=d]").fill("2");
-  await page.locator('[data-part=roots][data-component="0"]').fill("2");
-  await page.locator('[data-part=roots][data-component="1"]').fill("2");
+  const quadraticSession = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem("christian-matematik.tasks.v1")).session,
+  );
+  const twoRootsIndex = quadraticSession.items.findIndex(
+    (record) => record.id === "quad.two-roots",
+  );
+  assert.ok(twoRootsIndex >= 0);
+  const quadraticMaximum = quadraticSession.items.reduce(
+    (sum, record) =>
+      sum +
+      instantiate(record.id, record.seed).parts.reduce(
+        (taskSum, part) => taskSum + part.points,
+        0,
+      ),
+    0,
+  );
+  await page.locator("[data-task-action=jump]").nth(twoRootsIndex).click();
+  const focusedQuadratic = page.locator(".task-question");
+  await focusedQuadratic.locator("[data-part=d]").fill("2");
+  await focusedQuadratic
+    .locator('[data-part=roots][data-component="0"]')
+    .fill("2");
+  await focusedQuadratic
+    .locator('[data-part=roots][data-component="1"]')
+    .fill("2");
   await page.locator("[data-task-action=check]").click();
   assert.match(
     await page.locator(".task-feedback").innerText(),
@@ -181,7 +207,10 @@ try {
   );
   await page.locator("[data-task-action=finish]").click();
   await page.locator("[data-task-action=submit]").click();
-  assert.equal(await page.locator(".task-score").innerText(), "3 af 4 point");
+  assert.equal(
+    await page.locator(".task-score").innerText(),
+    `3 af ${quadraticMaximum} point`,
+  );
   await page.locator("[data-task-action=new]").click();
   await page.locator("[name=topics][value=differentiation]").check();
   await page.locator("[name=difficulty]").selectOption("3");
