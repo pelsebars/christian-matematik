@@ -4,7 +4,7 @@ Første lokale version af Christians matematikapp.
 
 ## Indhold
 
-- startside med seks emner;
+- startside med syv emner;
 - fast venstremenu på desktop og mobilmenu på små skærme;
 - emneoversigter;
 - komplette læringsforløb om lineære ligninger, løsning af andengradsligninger og sammensatte funktioner med teori, grundtjek, gennemregnede eksempler, hints og interaktive øvelser;
@@ -13,6 +13,7 @@ Første lokale version af Christians matematikapp.
 - et trinvist andengradsforløb baseret på opgavearket, inklusive standardform, koefficienter, diskriminant, løsningsformel, indsættelseskontrol og blandet sluttest;
 - side med formler og huskeregler;
 - integralregning med foldbart læringsmålskort, separate sider for syv undervisningsgange og B-repetition samt komplet modul 1–7 og B-repetition 6–7 med seks trin og én del ad gangen om stamfunktioner, grundregler, grafiske sammenhænge, punkt- og tangentbetingelser, bestemte integraler, fortegnet integral/geometrisk areal, arealer mellem grafer, regneregler, trapezmetoden, potensregneregler, rødder, omvendte funktioner, domæner, skiver med og uden hul, rumfangsmodeller, kurvelængde, substitution i ubestemte og bestemte integraler, afsluttende blandede opgaver, CAS og modeller;
+- differentialligninger med forløbsoversigt, læringsmålmatrix, seks modulruter, særskilt B-repetition 8–9 og afsluttende opsamling; komplet modul 1 med grundtjek, teori, eksempler, kurvefamilie, opgaver, hints, CAS og forståelsestjek; senere moduler er markeret planlagt;
 - matematisk notation med indbygget MathML.
 
 ## Lokal visning
@@ -21,8 +22,10 @@ Servér mappen med en lokal webserver, og åbn `index.html` gennem serverens adr
 
 ## Fælles opgaver
 
-Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 200 gennemgåede opgaver fra alle seks hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og lokal lagring. Integralmodul 1–7 har tilsammen 91 opgaver, heraf 46 seedede familier. Kildegennemgang og dækning er beskrevet i [INTEGRALREGNING_OPGAVEBANK.md](INTEGRALREGNING_OPGAVEBANK.md).
+Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 206 gennemgåede opgaver fra alle syv hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og lokal lagring. Integralmodul 1–7 har tilsammen 91 opgaver, heraf 46 seedede familier. Kildegennemgang og dækning er beskrevet i [INTEGRALREGNING_OPGAVEBANK.md](INTEGRALREGNING_OPGAVEBANK.md).
 
 Format, integrationspunkt og eksempler er beskrevet i [OPGAVEBANK.md](../OPGAVEBANK.md). Nye emnepakker tilføjes i `tasks/bank/` og registreres i `tasks/bank/index.js`.
 
 Kør `npm test` i denne mappe. `npm run test:browser` kræver Playwright som lokal testafhængighed; se opgavebankens dokumentation for alternative runtime-stier og Chrome.
+
+Differentialligningernes kilder, ruter, fremdriftskrav og tests er beskrevet i [DIFFERENTIALLIGNINGER_PLAN.md](DIFFERENTIALLIGNINGER_PLAN.md).

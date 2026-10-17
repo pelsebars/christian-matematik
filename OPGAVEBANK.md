@@ -2,7 +2,7 @@
 
 Opgavesystemet er en separat del af den statiske app. Der er ingen backend, byggetrin eller ny produktionsafhængighed. Åbn appen gennem en HTTP-server; ES-moduler virker ikke pålideligt via `file://`.
 
-Banken har aktuelt **200 opgaver**, heraf **91 i integralmodul 1–7** og syv i B-repetitionen. Antal i de efterfølgende modulafsnit beskriver den historiske tilføjelse; den samlede integralrevision er dokumenteret i [webapp/INTEGRALREGNING_OPGAVEBANK.md](webapp/INTEGRALREGNING_OPGAVEBANK.md).
+Banken har aktuelt **206 opgaver**, heraf **91 i integralmodul 1–7** og syv i B-repetitionen. Antal i de efterfølgende modulafsnit beskriver den historiske tilføjelse; den samlede integralrevision er dokumenteret i [webapp/INTEGRALREGNING_OPGAVEBANK.md](webapp/INTEGRALREGNING_OPGAVEBANK.md).
 
 ## Arkitektur og eksisterende indhold
 
@@ -343,3 +343,10 @@ Alle undervisningssider, eksisterende opgaver, eksempler og de syv kildeark er g
 Ens regnetyper er samlet i familier; ukendte figurdata og tvetydige formler er erstattet med eksplicitte, kontrollerede betingelser. Kildekort, tilpasninger og faglige forbehold står i [INTEGRALREGNING_OPGAVEBANK.md](webapp/INTEGRALREGNING_OPGAVEBANK.md).
 
 `tests/integration-bank.test.js` kontrollerer alle mål, id’er, neutral tekst, versioner, point og feedback samt determinisme og facit for 1.000 seeds pr. generator. De viste MathML-facit differentieres med en separat testfortolker, og distraktorer kontrolleres for utilsigtet gyldighed; numeriske integraler kontrollerer areal-, rumfangs- og længdefacit. Testfortolkeren er kun testkode. Produktionsparseren er uændret. `tests/integration-bank.browser.test.js` afprøver alle 91 opgaver med svar, bedømmelse, hints, genindlæsning, mobil, prøvefortrolighed og genoptagelse af et gammelt version 1-sæt. Begge indgår i de normale testkommandoer.
+
+
+## Differentialligninger · modul 1
+
+Seks nye opgaver i `webapp/tasks/bank/ode.js` er registreret under hovedemnet `differentialEquations`, modul `ode.1`, med målene `ode.notation`, `ode.check`, `ode.initial`, `ode.reason`, `ode.model` og `ode.cas`. De følger version 1-kontrakten med stigende sværhedsgrad, to hints, gennemregnede løsninger og målrettet fejlfeedback. Fem opgaver er uden hjælpemidler; én er med CAS. Eksponentialudtryk vises med MathML og kontrolleres som entydige valg, da polynomiumsparseren ikke understøtter dem.
+
+Undervisningsstatus og besvarelser følger integralmodulernes lokale format; bankens manuelle registrering af gennemførte moduler og prøvetilstand bevares. Se [plan og kildekort](webapp/DIFFERENTIALLIGNINGER_PLAN.md) for den fulde afgrænsning, læringsmålmatrix, statuskrav og verifikation. Senere moduler er planlagte og har endnu ingen bankopgaver.

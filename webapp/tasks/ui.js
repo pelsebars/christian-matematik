@@ -328,6 +328,10 @@ root.addEventListener("click", (event) => {
     s = state.session;
   if (action === "repeat-module") {
     const m = modules[b.dataset.module];
+    if (m.topic === "differentialEquations" && window.openOdeSection) {
+      window.openOdeSection(m.section);
+      return;
+    }
     if (m.topic === "integration" && window.openIntegralSection) {
       window.openIntegralSection(m.section);
       return;

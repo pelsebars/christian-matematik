@@ -1,0 +1,46 @@
+#odeLesson .lesson-section { margin-top:24px; }
+#odeLesson [data-lesson-warning]:not([hidden]) { padding:16px; border:1px solid #b77b28; background:#fff1e2; border-radius:12px; }
+#odeLesson .ode-figure { margin:24px 0; padding:20px; background:var(--surface); border:1px solid var(--line); border-radius:14px; }
+#odeLesson .ode-figure label,#odeLesson .ode-figure output { display:block; margin-bottom:12px; }
+#ode-constant { width:100%; }
+#ode-family-graph { display:block; width:100%; max-width:720px; margin:12px auto; }
+#odeLesson figcaption { color:var(--ink-soft); font-size:.9rem; line-height:1.6; }
+#odeLesson .int-table table { min-width:900px; }
+#odeLesson .int-table { max-width:100%; overflow-x:auto; }
+#odeLesson math { max-width:100%; overflow-x:auto; vertical-align:middle; }
+#odeLesson .example-card { margin:20px 0; }
+#odeLesson #ode-basics { scroll-margin-top:20px; }
+#odeLesson :focus-visible { outline:3px solid #206eab; outline-offset:4px; }
+
+.ode-breadcrumb { margin-bottom:20px; }
+.ode-step-menu { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:20px 0 16px; }
+.ode-step-menu a { display:flex; gap:8px; align-items:center; border:1px solid var(--line); border-radius:12px; padding:12px; color:var(--ink-soft); background:var(--surface); font-size:.86rem; font-weight:650; }
+.ode-step-menu a span { color:var(--blue); }
+.ode-step-menu a[aria-current] { background:var(--blue-soft); border-color:var(--blue); color:var(--ink); }
+.ode-page-controls { display:flex; justify-content:space-between; align-items:center; gap:16px; margin:28px 0; border-top:1px solid var(--line); padding-top:20px; }
+#odeLesson .module-roadmap { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); padding:0; }
+#odeLesson .module-card { min-width:0; grid-column:auto; }
+#odeLesson .module-card:nth-child(4) { grid-column:1/-1; border-left:4px solid #087f8c; }
+#odeLesson .module-card-top span { width:auto; height:auto; min-height:34px; padding:8px 12px; border-radius:8px; }
+#odeLesson .int-exercises { grid-template-columns:1fr; }
+#odeLesson .example-card { padding:24px; }
+#odeLesson details { border:1px solid var(--line); border-radius:10px; padding:14px; margin:12px 0; }
+#odeLesson summary { cursor:pointer; font-weight:600; }
+#odeLesson details[open] summary { margin-bottom:14px; }
+#odeLesson li { margin:10px 0; line-height:1.7; }
+#odeLesson p { line-height:1.7; }
+#odeLesson h2 { margin-bottom:18px; }
+#odeLesson a { text-decoration:none; }
+#odeLesson .primary-button,#odeLesson .secondary-button { padding:11px 16px; border:1px solid var(--blue); border-radius:11px; font:inherit; font-size:.86rem; font-weight:700; cursor:pointer; }
+#odeLesson .primary-button { color:white; background:var(--blue); }
+#odeLesson .secondary-button { color:var(--blue); background:var(--blue-soft); }
+#odeLesson button:disabled { opacity:.6; cursor:default; }
+@media(max-width:700px){
+ #odeLesson .module-roadmap { grid-template-columns:1fr; }
+ #odeLesson .module-card:nth-child(4) { grid-column:auto; }
+ .ode-step-menu { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .ode-step-menu a { padding:10px; font-size:.8rem; }
+ .ode-page-controls { flex-wrap:wrap; }
+ .ode-page-controls a { flex:1; }
+ #odeLesson .example-card { padding:18px; }
+}

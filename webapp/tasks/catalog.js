@@ -1,5 +1,6 @@
 import { integralModules } from "../integral-plan.js";
 export const topics = {
+  differentialEquations: "Differentialligninger",
   integration: "Integralregning",
   equations: "Løsning af ligninger",
   quadratic: "Andengradsligninger",
@@ -8,6 +9,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "ode.1": {topic:"differentialEquations",name:"Hvad er en differentialligning?",section:"ode-module-1"},
   ...Object.fromEntries(integralModules.map(m => [m.id, {topic:"integration", name:m.title, section:m.section}])),
   "eq.basic": { topic: "equations", name: "Ligninger", section: "teori" },
   "quad.basic": {
@@ -64,6 +66,12 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "ode.notation": {module:"ode.1",text:"Forstå en ukendt funktion og læse afledt notation"},
+  "ode.check": {module:"ode.1",text:"Kontrollere en løsning ved differentiation og indsættelse på et interval"},
+  "ode.initial": {module:"ode.1",text:"Skelne familie fra partikulær løsning og anvende begyndelsesbetingelser"},
+  "ode.reason": {module:"ode.1",text:"Begrunde kontrol og skelne identitet fra lighed i ét punkt"},
+  "ode.model": {module:"ode.1",text:"Opstille en model fra tekst med variable, ændringshastighed og enheder"},
+  "ode.cas": {module:"ode.1",text:"Dokumentere CAS-kontrol, interval og begyndelsesbetingelse"},
   "int.perimeter": {module:"int.5",text:"Beregne et lukket områdes omkreds af flere randkurver"},
   "int.sub-area": {module:"int.6",text:"Bestemme parameter og integrationsgrænser i en blandet arealopgave"},
   "int.new-bounds": {module:"int.7",text:"Omsætte begge integrationsgrænser til den nye variabel"},
