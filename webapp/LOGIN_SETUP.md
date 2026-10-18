@@ -5,7 +5,7 @@ https://christian-matematik-webapp.vercel.app
 
 ## Arkitektur
 
-- Vercel serverer `dist/` og API-funktionen `api/[...path].js`.
+- Vercel serverer `dist/` og API-ruterne under `api/`.
 - Railway kører PostgreSQL. Browseren modtager aldrig databaseadgang eller loginhemmeligheden.
 - Better Auth kører i vores egen serverkode: brugernavn/adgangskode, scrypt-hashes, HttpOnly-sessioncookies, udløb, CSRF/origin-kontrol og databasebaseret begrænsning af loginforsøg.
 - Better Auth kræver et internt email-felt. Serveren afleder en adresse under det reserverede `users.invalid` fra brugernavnet. Der indsamles ikke mailadresser og sendes ingen mails.

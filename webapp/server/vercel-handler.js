@@ -1,5 +1,5 @@
-import { createServices } from '../server/auth.js';
-import { createRouter } from '../server/router.js';
+import { createServices } from './auth.js';
+import { createRouter } from './router.js';
 let router;
 export default async function handler(req, res) {
   try {
