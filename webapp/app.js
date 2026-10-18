@@ -1355,7 +1355,7 @@ function parseAnswer(value) {
     return denominator === 0 ? Number.NaN : numerator / denominator;
   }
 
-  return Number(normalized);
+  return normalized === "" ? Number.NaN : Number(normalized);
 }
 
 function updateExerciseProgress(group) {
@@ -1536,6 +1536,7 @@ function checkExercise(card) {
     isCorrect = Math.abs(answer - expected) <= tolerance;
   }
 
+  window.dispatchEvent(new CustomEvent("exercise-checked", { detail: { card, correct: isCorrect } }));
   if (isCorrect) {
     card.dataset.solved = "true";
     card.classList.add("is-correct");

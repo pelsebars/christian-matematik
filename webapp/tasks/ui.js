@@ -1,3 +1,4 @@
+import { accountStorage, markCorrect } from '../account/store.js';
 import { topics, modules, goals } from "./catalog.js";
 import { bank, instantiate } from "./bank/index.js";
 import { composeSet } from "./selection.js";
@@ -7,7 +8,7 @@ import { loadState, saveState } from "./storage.js";
 const root = document.querySelector("#tasksView");
 let storage;
 try {
-  storage = window.localStorage;
+  storage = accountStorage;
 } catch {
   storage = {
     getItem: () => null,
@@ -29,10 +30,10 @@ function persist() {
     warning =
       "Browseren kan ikke gemme arbejdet lokalt. Hold siden åben, til du er færdig.";
   const status = root.querySelector("#taskSave");
-  if (status) status.textContent = warning || "Gemt på denne enhed.";
+  if (status) status.textContent = warning || "Se gemmestatus i sidemenuen.";
 }
 const header = () =>
-  `<header class="page-intro"><p class="eyebrow">Dit arbejdsrum</p><h1>Opgaver</h1><p class="page-lead">Prøv selv, vælg din vej, og brug løsningerne til at finde næste skridt.</p></header><p id="taskSave" class="task-save" role="status">${esc(warning || "Dit arbejde gemmes på denne enhed.")}</p>`;
+  `<header class="page-intro"><p class="eyebrow">Dit arbejdsrum</p><h1>Opgaver</h1><p class="page-lead">Prøv selv, vælg din vej, og brug løsningerne til at finde næste skridt.</p></header><p id="taskSave" class="task-save" role="status">${esc(warning || "Dit arbejde gemmes på din konto. Se gemmestatus i sidemenuen.")}</p>`;
 function render(focus = false) {
   const s = state.session;
   root.innerHTML =
@@ -385,6 +386,13 @@ root.addEventListener("click", (event) => {
     confirmSubmit = false;
   }
   persist();
+  if (action === "check" || action === "submit") {
+    for (const task of action === "check" ? [t] : list) {
+      if (gradeTask(task, s.answers[task.id], {}).every(part => part.status === "correct")) {
+        markCorrect("christian-matematik.tasks.v1", { id: `bank:${task.id}:v${task.version}`, topic: task.topic, module: modules[task.module]?.name || task.module, label: task.title || task.id, route: 'tasks' });
+      }
+    }
+  }
   render(["next", "previous", "jump", "submit"].includes(action));
   if (action === "check")
     root

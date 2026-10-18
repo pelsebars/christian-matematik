@@ -48,7 +48,7 @@ import {instantiate} from '../tasks/bank/index.js';
 const errors=[];
 const fixture=(items,seed,mode='training')=>({schema:1,completed:['int.1','int.2','int.3','int.4','int.rep','int.5','int.6','int.7'],history:[],session:{mode,status:'active',seed,items,index:0,answers:{},checked:{},hints:{},marked:{},self:{},startedAt:Date.now(),timer:false,minutes:180,requested:items.length}});
 try {
- const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});await page.goto(url+'/#tasks');await page.locator('#taskSetup').waitFor();
+ const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});await page.goto(url+'/?preview=1#tasks');await page.locator('#taskSetup').waitFor();
  for(let module=1;module<=7;module++){
   const seed='integral-bank-browser-'+module,list=integrationBankTasks.map(s=>instantiate(s.id,seed)).filter(t=>t.module===`int.${module}`),state=fixture(list.map(t=>({id:t.id,version:t.version})),seed);
   await page.evaluate(v=>localStorage.setItem('christian-matematik.tasks.v1',JSON.stringify(v)),state);await page.reload();await page.locator('.task-question').waitFor();

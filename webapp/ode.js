@@ -26,7 +26,7 @@ function navigate(focus=false){
  subject.classList.toggle('is-integral-session',!overview);subject.classList.toggle('is-integral-overview',overview);
  const title=overview?'Differentialligninger':`${odeLabel(odeModules.find(m=>m.id===route.module))}: ${odeModules.find(m=>m.id===route.module).title}`;
  document.querySelector('#subjectTitle').textContent=title;
- document.querySelector('#subjectDescription').textContent=overview?'Forstå ændringshastighed, kontrollér løsninger og byg modeller ét modul ad gangen.':one?'Læs, regn og kontrollér ét trin ad gangen. Dine svar og hints gemmes på denne enhed.':'Planlagt undervisningsgang · teori, opgaver og kontroller er endnu ikke implementeret.';
+ document.querySelector('#subjectDescription').textContent=overview?'Forstå ændringshastighed, kontrollér løsninger og byg modeller ét modul ad gangen.':one?'Læs, regn og kontrollér ét trin ad gangen. Dine svar og hints gemmes på din konto.':'Planlagt undervisningsgang · teori, opgaver og kontroller er endnu ikke implementeret.';
  document.querySelector('#subjectFormula').hidden=!overview;
  document.title=`${title} · Christians matematik`;
  root.querySelectorAll('[data-ode-step]').forEach(panel=>panel.hidden=panel.dataset.odeStep!==route.step);

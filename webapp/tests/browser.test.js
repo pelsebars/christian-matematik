@@ -54,7 +54,7 @@ try {
   page.on("console", (m) => {
     if (m.type() === "error") errors.push(m.text());
   });
-  await page.goto(url);
+  await page.goto(url + "/?preview=1");
   await page.locator("#tasksView form").waitFor({ state: "attached" });
   // Existing pages and one existing exercise remain interactive.
   for (const view of [
@@ -316,7 +316,7 @@ try {
   );
   const bp = await blocked.newPage();
   bp.on("pageerror", (e) => errors.push(e.message));
-  await bp.goto(url + "/#tasks");
+  await bp.goto(url + "/?preview=1#tasks");
   await bp.locator("#taskSetup button[type=submit]").click();
   assert.match(await bp.locator("#taskSave").innerText(), /kan ikke gemme/);
   assert.deepEqual(errors, []);

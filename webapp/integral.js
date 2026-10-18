@@ -1,3 +1,4 @@
+import { accountStorage, markCorrect, lessonCompletion } from './account/store.js';
 import { renderExercises as cards } from './integral-exercises.js';
 import { mountIntegralNavigation } from './integral-navigation.js';
 import {integralModules, integralGoals} from './integral-plan.js';
@@ -65,7 +66,7 @@ let state={};
 const warning=root.querySelector('#int-storage-warning');
 function warn(message){warning.hidden=false;warning.textContent=message;}
 try{
- const raw=localStorage.getItem(key);
+ const raw=accountStorage.getItem(key);
  if(raw){
   const saved=JSON.parse(raw);
   if(saved.version!==1||!saved.cards||typeof saved.cards!=='object') throw Error('format');
@@ -78,7 +79,7 @@ try{
   }
  }
 }catch{warn('Tidligere moduldata kunne ikke læses, eller lagring er blokeret. Du kan stadig arbejde videre her.');}
-function save(){try{localStorage.setItem(key,JSON.stringify({version:1,cards:state}));}catch{warn('Browseren kan ikke gemme dine modulsvar. De bevares kun, mens denne side er åben.');}}
+function save(){try{accountStorage.setItem(key,JSON.stringify({version:1,cards:state}));}catch{warn('Browseren kan ikke gemme dine modulsvar. De bevares kun, mens denne side er åben.');}}
 function complete(task){const d=state[task.id];return d?.checked&&task.parts.every(p=>gradePart(p,d.answers[p.id]).status==='correct');}
 function progress(){
  const count=tasks=>tasks.filter(complete).length;
@@ -107,7 +108,7 @@ for(const task of all){
   for(const p of task.parts)d.answers[p.id]=form.elements.namedItem(p.id).value;
   d.checked=false;display();progress();save();
  });
- form.addEventListener('submit',e=>{e.preventDefault();d.checked=true;display();progress();save();});
+ form.addEventListener('submit',e=>{e.preventDefault();d.checked=true;display();progress();save();if(complete(task))markCorrect(key,lessonCompletion(key,task));});
  el.querySelector('[data-int-hint]').addEventListener('click',()=>{d.hints=Math.min(task.hints.length,d.hints+1);display();save();});
  el.querySelector('[data-int-retry]').addEventListener('click',()=>{d.answers={};d.checked=false;d.hints=0;el.querySelector('details').open=false;display();progress();save();form.elements[0].focus();});
  display();

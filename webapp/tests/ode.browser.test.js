@@ -67,7 +67,7 @@ try {
   }
   await card(t.id).locator('button[type=submit]').click();
  };
- await page.goto(url+'/#differentialEquations/1');
+ await page.goto(url+'/?preview=1#differentialEquations/1');
  await page.locator('#ode-module-one').waitFor({state:'visible'});
  assert.equal(await page.evaluate(()=>location.hash),'#differentialEquations/1/start');
  assert.equal(await page.locator('[data-ode-status="1"]').textContent(),'Ikke begyndt');
@@ -103,11 +103,11 @@ try {
  await go('differentialEquations/1/start');
  await page.locator('#ode-session .ode-step-menu a').nth(1).focus();
  await page.keyboard.press('Enter');
- await page.waitForURL('**/#differentialEquations/1/teori');
+ await page.waitForURL('**/*#differentialEquations/1/teori');
  await page.waitForFunction(()=>document.activeElement.id==='subjectTitle');
  await page.locator('#ode-session .ode-page-controls a').first().click();
- await page.waitForURL('**/#differentialEquations/1/start');
- await page.goBack();await page.waitForURL('**/#differentialEquations/1/teori');
+ await page.waitForURL('**/*#differentialEquations/1/start');
+ await page.goBack();await page.waitForURL('**/*#differentialEquations/1/teori');
  for(let i=0;i<odePages.length;i++){
   await go(odePages[i]);
   assert.equal(await page.locator('[data-ode-step]:visible').count(),1);
@@ -120,7 +120,7 @@ try {
   assert.match(await page.locator('#ode-planned').innerText(),/Planlagt · ikke implementeret/);
   assert.equal(await page.locator('[data-ode-step]:visible').count(),0);
   await page.locator('#ode-session .ode-breadcrumb a').click();
-  await page.waitForURL('**/#differentialEquations');
+  await page.waitForURL('**/*#differentialEquations');
  }
  assert.equal(await page.locator('#ode-overview .module-card').count(),8);
  await page.locator('#ode-overview details > summary').click();
@@ -152,7 +152,7 @@ try {
  await context.close();
  const mobile=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
  const phone=await mobile.newPage();phone.on('pageerror',e=>errors.push(e.message));
- await phone.goto(url+'/#differentialEquations/1/teori');
+ await phone.goto(url+'/?preview=1#differentialEquations/1/teori');
  await phone.locator('#ode-family-graph').waitFor({state:'visible'});
  assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  await phone.screenshot({path:'/tmp/matematik-ode-mobile.png',fullPage:true});
@@ -163,10 +163,10 @@ try {
  await mobile.close();
  // Malformed storage and storage failure produce a visible warning, not a broken app.
  const bad=await browser.newContext();await bad.addInitScript(key=>localStorage.setItem(key,'broken'),ODE_STORAGE_KEY);
- const badPage=await bad.newPage();await badPage.goto(url+'/#differentialEquations/1');
+ const badPage=await bad.newPage();await badPage.goto(url+'/?preview=1#differentialEquations/1');
  await badPage.locator('#odeLesson [data-lesson-warning]').waitFor({state:'visible'});await bad.close();
  const blocked=await browser.newContext();await blocked.addInitScript(()=>{Storage.prototype.setItem=function(){throw Error('blocked');};});
- const blockedPage=await blocked.newPage();await blockedPage.goto(url+'/#differentialEquations/1/start');
+ const blockedPage=await blocked.newPage();await blockedPage.goto(url+'/?preview=1#differentialEquations/1/start');
  await blockedPage.locator('[data-int-card="ode.pre.function"] input').fill('7');
  await blockedPage.locator('#odeLesson [data-lesson-warning]').waitFor({state:'visible'});await blocked.close();
  assert.deepEqual(errors,[]);

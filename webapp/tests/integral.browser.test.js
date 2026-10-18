@@ -64,7 +64,7 @@ try {
  };
  const card = id => page.locator(`[data-int-card="${id}"]`);
  const openCard = id => go('integration/1/' + routes[id]);
- await page.goto(url + '/#integration');
+ await page.goto(url + '/?preview=1#integration');
  await page.locator('#int-forloeb').waitFor({ state: 'visible' });
  assert.equal(await page.locator('#int-start').isVisible(), false);
  assert.equal(await page.locator('#int-maal').isVisible(), false);
@@ -76,7 +76,7 @@ try {
  await page.locator('.int-goal-map > summary').click();
  for (const [id, path] of [['int-modul-7','7']]) {
   await page.locator(`#int-forloeb [data-int-jump="${id}"]`).click();
-  await page.waitForURL(`**/#integration/${path}/start/1`);
+  await page.waitForURL(`**/*#integration/${path}/start/1`);
   assert.ok(await page.locator('#int7-start').isVisible());
   assert.equal(await page.locator('#int-forloeb').isVisible(), false);
   assert.equal(await page.locator('#int-start').isVisible(), false);
@@ -84,7 +84,7 @@ try {
   await page.locator('#int-forloeb').waitFor({ state: 'visible' });
  }
  await page.locator('#int-forloeb [data-int-jump="int-modul-1"]').click();
- await page.waitForURL('**/#integration/1/start/1');
+ await page.waitForURL('**/*#integration/1/start/1');
  assert.ok(await page.locator('#int-modul-1').isVisible());
  await openCard('int.pre.fraction');
  await card('int.pre.fraction').locator('input').fill('3');
@@ -209,7 +209,7 @@ try {
  await page.locator('[data-task-action=finish]').click(); await page.locator('[data-task-action=submit]').click();
  assert.equal(await page.locator('.task-feedback').count(), session.items.length);
  await page.locator('[data-task-action=repeat-module][data-module="int.1"]').first().click();
- await page.waitForURL('**/#integration/1/start/1');
+ await page.waitForURL('**/*#integration/1/start/1');
  assert.ok(await page.locator('#int-start').isVisible());
  assert.equal(await page.locator('#int-forloeb').isVisible(), false);
  // Visit all small pages on a phone: exactly one part is visible, no clipped MathML.
@@ -228,28 +228,28 @@ try {
  await go('integration/1/oevelser/1'); await page.screenshot({ path: '/tmp/matematik-integral-session-mobile.png' });
  await page.locator('.int-breadcrumb a').click(); await page.screenshot({ path: '/tmp/matematik-integral-overview-mobile.png' });
  // Direct URLs, normalization, planned sessions and keyboard navigation.
- await page.goto(url + '/#integration/1/teori/konstant');
+ await page.goto(url + '/?preview=1#integration/1/teori/konstant');
  await page.locator('#int-konstant').waitFor({ state: 'visible' });
- await page.goto(url + '/#integration/1/unknown/<invalid>');
- await page.waitForURL('**/#integration/1/start/1');
- await page.goto(url + '/#integration/7'); await page.locator('#int7-start').waitFor({ state: 'visible' });
+ await page.goto(url + '/?preview=1#integration/1/unknown/<invalid>');
+ await page.waitForURL('**/*#integration/1/start/1');
+ await page.goto(url + '/?preview=1#integration/7'); await page.locator('#int7-start').waitFor({ state: 'visible' });
  assert.match(await page.title(), /Substitution/);
  await go('integration/7/opsummering');
  await page.locator('.int-page-controls a').last().click(); await page.locator('#int-forloeb').waitFor({ state: 'visible' });
  await go('integration/1/teori/begreb');
  await page.locator('.int-step-menu [data-int-step=eksempler]').focus(); await page.keyboard.press('Enter');
- await page.waitForURL('**/#integration/1/eksempler/1');
+ await page.waitForURL('**/*#integration/1/eksempler/1');
  // Blocked/corrupt storage does not prevent navigating or answering.
  const blocked = await browser.newContext();
  await blocked.addInitScript(() => Object.defineProperty(window, 'localStorage', { get() { throw Error('blocked'); } }));
  const bp = await blocked.newPage(); bp.on('pageerror', e => errors.push(e.message));
- await bp.goto(url + '/#integration/1/start/3'); await bp.locator('#int-storage-warning').waitFor();
+ await bp.goto(url + '/?preview=1#integration/1/start/3'); await bp.locator('#int-storage-warning').waitFor();
  assert.match(await bp.locator('#int-storage-warning').innerText(), /lagring er blokeret/);
  await bp.locator('[data-int-card="int.pre.fraction"] input').fill('2');
  assert.match(await bp.locator('#int-storage-warning').innerText(), /kan ikke gemme/);
  const corrupt = await browser.newContext(); await corrupt.addInitScript(() => localStorage.setItem('christian-matematik.integration.v1', '{"version":99}'));
  const cp = await corrupt.newPage(); cp.on('pageerror', e => errors.push(e.message));
- await cp.goto(url + '/#integration'); await cp.locator('#int-storage-warning').waitFor();
+ await cp.goto(url + '/?preview=1#integration'); await cp.locator('#int-storage-warning').waitFor();
  assert.deepEqual(errors, []);
  console.log('Integral browser tests passed: separate sessions, all small pages, browser history, direct links, all exercises, hints, persisted state, exam repetition, mobile, MathML, keyboard, blocked/corrupt storage; no console errors.');
 } finally { await browser.close(); await new Promise(done => server.close(done)); }

@@ -18,11 +18,15 @@ Første lokale version af Christians matematikapp.
 
 ## Lokal visning
 
-Servér mappen med en lokal webserver, og åbn `index.html` gennem serverens adresse.
+Loginversionen bruger Vercel Functions og PostgreSQL på Railway. Se [LOGIN_SETUP.md](LOGIN_SETUP.md) for opsætning, migrering, test og nulstilling af adgangskoder.
+
+Kør `npm ci` og `npm run demo` for at afprøve hele appen med en midlertidig lokal database. Ved almindelig udvikling: konfigurér `.env`, kør `npm run db:migrate` og `npm run dev`.
+
+En ren statisk webserver kan kun vise landing pagen; undervisningen kan afprøves lokalt med `?preview=1`, uden login og uden serversynkronisering.
 
 ## Fælles opgaver
 
-Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 206 gennemgåede opgaver fra alle syv hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og lokal lagring. Integralmodul 1–7 har tilsammen 91 opgaver, heraf 46 seedede familier. Kildegennemgang og dækning er beskrevet i [INTEGRALREGNING_OPGAVEBANK.md](INTEGRALREGNING_OPGAVEBANK.md).
+Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 206 gennemgåede opgaver fra alle syv hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og personlig lagring. Integralmodul 1–7 har tilsammen 91 opgaver, heraf 46 seedede familier. Kildegennemgang og dækning er beskrevet i [INTEGRALREGNING_OPGAVEBANK.md](INTEGRALREGNING_OPGAVEBANK.md).
 
 Format, integrationspunkt og eksempler er beskrevet i [OPGAVEBANK.md](../OPGAVEBANK.md). Nye emnepakker tilføjes i `tasks/bank/` og registreres i `tasks/bank/index.js`.
 

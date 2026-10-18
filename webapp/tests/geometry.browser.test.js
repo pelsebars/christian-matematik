@@ -28,7 +28,7 @@ try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
-  await page.goto(`${url}/#tasks`);
+  await page.goto(`${url}/?preview=1#tasks`);
   await page.locator("#taskSetup").waitFor();
   await page.locator("[name=topics][value=planeGeometry]").check();
   await page.locator("[name=minutes]").fill("180");

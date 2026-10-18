@@ -1,3 +1,4 @@
+import { accountStorage, markCorrect, lessonCompletion } from './account/store.js';
 import { escapeHTML, expressionMath } from './tasks/math.js';
 import { gradePart, targetedFeedback } from './tasks/grading.js';
 export function renderExercise(task,number){
@@ -11,7 +12,7 @@ export function bindLessonExercises(root, tasks, key, onProgress, helpId) {
  const warning = root.querySelector('[data-lesson-warning]');
  const warn = message => { warning.hidden = false; warning.textContent = message; };
  try {
-  const raw = localStorage.getItem(key);
+  const raw = accountStorage.getItem(key);
   if (raw) {
    const saved = JSON.parse(raw);
    if (saved.version !== 1 || !saved.cards || typeof saved.cards !== 'object') throw Error('format');
@@ -23,7 +24,7 @@ export function bindLessonExercises(root, tasks, key, onProgress, helpId) {
    }
   }
  } catch { warn('Tidligere modulsvar kunne ikke læses, eller lagring er blokeret. Du kan stadig arbejde videre.'); }
- const save = () => { try { localStorage.setItem(key, JSON.stringify({ version: 1, cards: state })); } catch { warn('Browseren kan ikke gemme dine modulsvar. Hold siden åben for at bevare arbejdet.'); } };
+ const save = () => { try { accountStorage.setItem(key, JSON.stringify({ version: 1, cards: state })); } catch { warn('Browseren kan ikke gemme dine modulsvar. Hold siden åben for at bevare arbejdet.'); } };
  const complete = t => state[t.id]?.checked && t.parts.every(p => gradePart(p, state[t.id].answers[p.id]).status === 'correct');
  for (const t of tasks) {
   const el = root.querySelector(`[data-int-card="${t.id}"]`), form = el.querySelector('form');
@@ -48,7 +49,7 @@ export function bindLessonExercises(root, tasks, key, onProgress, helpId) {
    const b = el.querySelector('[data-int-hint]'); b.disabled = d.hints >= t.hints.length; b.textContent = b.disabled ? 'Alle hints er vist' : 'Vis næste hint';
   }
   form.addEventListener('input', () => { for (const p of t.parts) d.answers[p.id] = form.elements.namedItem(p.id).value; d.checked = false; display(); onProgress(complete); save(); });
-  form.addEventListener('submit', e => { e.preventDefault(); d.checked = true; display(); onProgress(complete); save(); });
+  form.addEventListener('submit', e => { e.preventDefault(); d.checked = true; display(); onProgress(complete); save(); if(complete(t))markCorrect(key,lessonCompletion(key,t)); });
   el.querySelector('[data-int-hint]').addEventListener('click', () => { d.hints = Math.min(t.hints.length, d.hints + 1); display(); save(); });
   el.querySelector('[data-int-retry]').addEventListener('click', () => { d.answers = {}; d.checked = false; d.hints = 0; el.querySelector('details').open = false; display(); onProgress(complete); save(); form.elements[0].focus(); });
   display();

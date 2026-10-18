@@ -1,0 +1,106 @@
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright';
+import { instantiate } from '../tasks/bank/index.js';
+import { fixture } from './account-fixture.js';
+import '../scripts/build.js';
+const f = await fixture();
+const browser = await chromium.launch({ headless: true, channel: process.env.BROWSER_CHANNEL || 'chrome' });
+const errors = [];
+const password = 'test-adgangskode-med-flere-ord';
+async function enter(page, username, signup = false) {
+  await page.goto(f.origin);
+  await page.locator('#accountLanding').waitFor();
+  if (signup) await page.locator('.auth-tabs [data-auth-mode=signup]').click();
+  await page.locator('#accountUsername').fill(username);
+  await page.locator('#accountPassword').fill(password);
+  if (signup) await page.locator('#repeatPassword').fill(password);
+  await page.locator('#accountSubmit').click();
+  await page.locator('.personal-overview').waitFor();
+}
+async function saved(page) { assert.equal(await page.evaluate(async () => (await import('/account/store.js')).flush()), true); }
+try {
+  const contextA = await browser.newContext({ viewport: {width:1440,height:1000} });
+  const a = await contextA.newPage(); a.on('pageerror', error => errors.push(error.message));
+  await a.goto(f.origin); await a.screenshot({path:'/tmp/math-login-desktop.png',fullPage:true});
+  assert.equal(await a.locator('.app-shell').isVisible(), false);
+  // Guest local work must not become the next account's work.
+  await a.evaluate(() => localStorage.setItem('christian-matematik.lessons.v1','{"exercise-1-v1":{"correct":true}}'));
+  await enter(a,'elev_a',true);
+  assert.equal(await a.locator('.personal-summary > strong').textContent(),'0');
+  await a.locator('.nav-item[data-view=equations]').click();
+  const card = a.locator('#equationLesson .exercise-card').first();
+  await card.locator('input').fill(await card.getAttribute('data-answer'));
+  await card.locator('.check-answer').click(); await saved(a);
+  await a.reload(); await a.locator('#accountLogout').waitFor();
+  await a.locator('#equationLesson .exercise-card.is-correct').first().waitFor();
+  await a.goto(f.origin+'/#integration/1/start/1');
+  const int = a.locator('[data-int-card="int.pre.function"]');
+  await int.locator('input').fill('7'); await int.locator('button[type=submit]').click(); await saved(a);
+  await a.goto(f.origin+'/#integration/2/start/1');
+  const int2 = a.locator('[data-int-card="int2.pre.function"]');
+  await int2.locator('input').fill('4'); await int2.locator('button[type=submit]').click(); await saved(a);
+  await a.goto(f.origin+'/#differentialEquations/1/start');
+  const ode = a.locator('[data-int-card="ode.pre.function"]');
+  await ode.locator('input').fill('7'); await ode.locator('button[type=submit]').click(); await saved(a);
+  await a.locator('.nav-item[data-view=tasks]').click();
+  await a.locator('[name=topics][value=equations]').check();
+  await a.locator('[name=minutes]').fill('30');
+  await a.locator('[name=short]').fill('3'); await a.locator('[name=medium]').fill('0'); await a.locator('[name=complex]').fill('0');
+  await a.locator('#taskSetup button[type=submit]').click();
+  const session = await a.evaluate(async () => JSON.parse((await import('/account/store.js')).accountStorage.getItem('christian-matematik.tasks.v1')).session);
+  const task = instantiate(session.items[0].id, session.seed);
+  for (const part of task.parts) {
+    const field = a.locator(`.task-question [data-part="${part.id}"]`);
+    if (part.type === 'choice') await a.locator(`.task-question [data-part="${part.id}"][value="${part.answer}"]`).check();
+    else if (['tuple','set'].includes(part.type)) for (let i=0;i<part.answer.length;i++) await field.nth(i).fill(String(part.answer[i]));
+    else await field.fill(String(part.answer));
+  }
+  await a.locator('[data-task-action=check]').click(); await saved(a);
+  await a.locator('.nav-item[data-view=home]').click(); await saved(a);
+  assert.equal(await a.locator('.personal-summary > strong').textContent(),'5');
+  await a.screenshot({path:'/tmp/math-dashboard-desktop.png',fullPage:true});
+  // A separate device can recover answers and permanent completion records.
+  const device = await browser.newContext(); const other = await device.newPage(); await enter(other,'elev_a');
+  assert.equal(await other.locator('.personal-summary > strong').textContent(),'5');
+  await other.locator('.nav-item[data-view=equations]').click();
+  assert.equal(await other.locator('#equationLesson .exercise-card').first().getAttribute('data-solved'),'true');
+  await saved(other); await device.close();
+  await a.locator('#accountLogout').click(); await a.locator('#accountLanding').waitFor();
+  await enter(a,'elev_b',true);
+  assert.equal(await a.locator('.personal-summary > strong').textContent(),'0');
+  await a.locator('.nav-item[data-view=equations]').click();
+  assert.equal(await a.locator('#equationLesson .exercise-card').first().getAttribute('data-solved'),null);
+  assert.equal(await a.locator('#equationLesson .exercise-card input').first().inputValue(),'');
+  // A failed save remains queued, is visible, and is sent after reconnection.
+  await a.route('**/api/learning', route => route.request().method()==='PUT' ? route.abort() : route.continue());
+  const bcard = a.locator('#equationLesson .exercise-card').first();
+  await bcard.locator('input').fill(await bcard.getAttribute('data-answer')); await bcard.locator('.check-answer').click();
+  assert.equal(await a.evaluate(async () => (await import('/account/store.js')).flush()),false);
+  assert.match(await a.locator('#accountSync').textContent(),/ikke synkroniseret/);
+  await a.unroute('**/api/learning'); await saved(a);
+  await a.reload(); await a.locator('#equationLesson .exercise-card.is-correct').waitFor();
+  // Responsive landing form and workspace remain usable.
+  const mobile = await browser.newContext({viewport:{width:390,height:844},isMobile:true}); const phone=await mobile.newPage();
+  await phone.goto(f.origin); await phone.screenshot({path:'/tmp/math-login-mobile.png',fullPage:true});
+  assert.equal(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  await enter(phone,'elev_b'); assert.equal(await phone.locator('.personal-summary > strong').textContent(),'1');
+  assert.equal(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  // An old tab cannot silently overwrite newer answers; export/reopen resolves it.
+  await phone.goto(f.origin+'/#equations');
+  await phone.locator('#equationLesson .exercise-card input').first().waitFor();
+  const acard = a.locator('#equationLesson .exercise-card').first();
+  await acard.locator('input').fill('123'); await saved(a);
+  await phone.locator('#equationLesson .exercise-card input').first().fill('456');
+  assert.equal(await phone.evaluate(async () => (await import('/account/store.js')).flush()),false);
+  assert.match(await phone.locator('#accountSync').textContent(),/anden fane|versionskonflikt/);
+  await phone.locator('#menuButton').click();
+  const download = phone.waitForEvent('download');
+  await phone.locator('#accountBackup').click(); await download;
+  phone.once('dialog', dialog => dialog.accept());
+  await phone.locator('#accountResolve').click();
+  await phone.waitForFunction(() => document.querySelector('#equationLesson .exercise-card input')?.value === '123');
+  await phone.locator('#equationLesson .exercise-card input').first().waitFor();
+  assert.equal(await phone.locator('#equationLesson .exercise-card input').first().inputValue(),'123');
+  assert.deepEqual(errors,[]);
+  console.log('Account browser tests passed: landing, signup, all lesson adapters, reload, second device, account switching, offline recovery, desktop and mobile.');
+} finally { await browser.close(); await f.close(); }

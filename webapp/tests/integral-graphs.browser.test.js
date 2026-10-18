@@ -57,9 +57,9 @@ try {
   ...Object.fromEntries(integrationGraphTasks.map((t,i)=>[t.id,`oevelser/${i+1}`])),
  };
  const card=id=>page.locator(`[data-int-card="${id}"]`),openCard=id=>go('integration/2/'+routes[id]);
- await page.goto(url+'/#integration');await page.locator('#int-forloeb').waitFor({state:'visible'});
+ await page.goto(url+'/?preview=1#integration');await page.locator('#int-forloeb').waitFor({state:'visible'});
  assert.equal(await page.locator('#int-forloeb .module-card').nth(1).locator('strong').textContent(),'Åbent');
- await page.locator('#int-forloeb [data-int-jump="int-modul-2"]').click();await page.waitForURL('**/#integration/2/start/1');
+ await page.locator('#int-forloeb [data-int-jump="int-modul-2"]').click();await page.waitForURL('**/*#integration/2/start/1');
  assert.ok(await page.locator('#int-modul-2').isVisible());
  assert.equal(await page.locator('#int-start').isVisible(),false);
  assert.equal(await page.locator('#int2-lesson [data-int-card]').count(),21);
@@ -137,11 +137,11 @@ try {
  assert.ok(session.items.some(t=>t.id.startsWith('int2.')));assert.equal(await page.locator('[data-task-action=hint]').count(),0);assert.equal(await page.locator('.task-feedback').count(),0);
  for(let i=0;i<session.items.length;i++){await page.locator('[data-task-action=jump]').nth(i).click();const text=await page.locator('.task-question').innerText();assert.ok(!text.includes('Læringsmål'));assert.ok(!text.includes('Hint 1'));}
  await page.locator('[data-task-action=finish]').click();await page.locator('[data-task-action=submit]').click();
- await page.locator('[data-task-action=repeat-module][data-module="int.2"]').first().click();await page.waitForURL('**/#integration/2/start/1');assert.ok(await page.locator('#int2-start').isVisible());
+ await page.locator('[data-task-action=repeat-module][data-module="int.2"]').first().click();await page.waitForURL('**/*#integration/2/start/1');assert.ok(await page.locator('#int2-start').isVisible());
  // Corrupt and blocked module 2 storage remain usable.
  const blocked=await browser.newContext();await blocked.addInitScript(()=>Object.defineProperty(window,'localStorage',{get(){throw Error('blocked');}}));
- const bp=await blocked.newPage();bp.on('pageerror',e=>errors.push(e.message));await bp.goto(url+'/#integration/2/start/1');await bp.locator('#int2-storage-warning').waitFor();await bp.locator('[data-int-card="int2.pre.function"] input').fill('4');assert.match(await bp.locator('#int2-storage-warning').innerText(),/kan ikke gemme/);
+ const bp=await blocked.newPage();bp.on('pageerror',e=>errors.push(e.message));await bp.goto(url+'/?preview=1#integration/2/start/1');await bp.locator('#int2-storage-warning').waitFor();await bp.locator('[data-int-card="int2.pre.function"] input').fill('4');assert.match(await bp.locator('#int2-storage-warning').innerText(),/kan ikke gemme/);
  const corrupt=await browser.newContext();await corrupt.addInitScript(()=>localStorage.setItem('christian-matematik.integration.graphs.v1','{"version":99}'));
- const cp=await corrupt.newPage();cp.on('pageerror',e=>errors.push(e.message));await cp.goto(url+'/#integration/2');await cp.locator('#int2-storage-warning').waitFor();
+ const cp=await corrupt.newPage();cp.on('pageerror',e=>errors.push(e.message));await cp.goto(url+'/?preview=1#integration/2');await cp.locator('#int2-storage-warning').waitFor();
  assert.deepEqual(errors,[]);console.log('Integral module 2 browser tests passed: all parts, point/tangent/graph feedback, graph controls, signs, hints, local storage, browser history, mobile, MathML, bank exams and repetition; no console errors.');
 }finally{await browser.close();await new Promise(done=>server.close(done));}
