@@ -1,0 +1,75 @@
+#normalLesson .lesson-section { margin-top:24px; }
+#normalLesson [data-lesson-warning]:not([hidden]) { padding:16px; border:1px solid #b77b28; background:#fff1e2; border-radius:12px; }
+#normalLesson .normal-figure { margin:24px 0; padding:20px; background:var(--surface); border:1px solid var(--line); border-radius:14px; }
+#normalLesson .normal-figure label,#normalLesson .normal-figure output { display:block; margin-bottom:12px; }
+#normal-constant { width:100%; }
+#normal-family-graph { display:block; width:100%; max-width:720px; margin:12px auto; }
+#normalLesson figcaption { color:var(--ink-soft); font-size:.9rem; line-height:1.6; }
+#normalLesson .int-table table { min-width:900px; }
+#normalLesson .int-table { max-width:100%; overflow-x:auto; }
+#normalLesson math { max-width:100%; overflow-x:auto; vertical-align:middle; }
+#normalLesson .example-card { margin:20px 0; }
+#normalLesson #normal-basics { scroll-margin-top:20px; }
+#normalLesson :focus-visible { outline:3px solid #206eab; outline-offset:4px; }
+
+.normal-breadcrumb { margin-bottom:20px; }
+.normal-step-menu { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:20px 0 16px; }
+.normal-step-menu a { display:flex; gap:8px; align-items:center; border:1px solid var(--line); border-radius:12px; padding:12px; color:var(--ink-soft); background:var(--surface); font-size:.86rem; font-weight:650; }
+.normal-step-menu a span { color:var(--blue); }
+.normal-step-menu a[aria-current] { background:var(--blue-soft); border-color:var(--blue); color:var(--ink); }
+.normal-page-controls { display:flex; justify-content:space-between; align-items:center; gap:16px; margin:28px 0; border-top:1px solid var(--line); padding-top:20px; }
+#normalLesson .module-roadmap { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); padding:0; }
+#normalLesson .module-card { min-width:0; grid-column:auto; }
+#normalLesson .module-card:nth-child(4) { grid-column:1/-1; border-left:4px solid #087f8c; }
+#normalLesson .module-card-top span { width:auto; height:auto; min-height:34px; padding:8px 12px; border-radius:8px; }
+#normalLesson .int-exercises { grid-template-columns:1fr; }
+#normalLesson .example-card { padding:24px; }
+#normalLesson details { border:1px solid var(--line); border-radius:10px; padding:14px; margin:12px 0; }
+#normalLesson summary { cursor:pointer; font-weight:600; }
+#normalLesson details[open] summary { margin-bottom:14px; }
+#normalLesson li { margin:10px 0; line-height:1.7; }
+#normalLesson p { line-height:1.7; }
+#normalLesson h2 { margin-bottom:18px; }
+#normalLesson a { text-decoration:none; }
+#normalLesson .primary-button,#normalLesson .secondary-button { padding:11px 16px; border:1px solid var(--blue); border-radius:11px; font:inherit; font-size:.86rem; font-weight:700; cursor:pointer; }
+#normalLesson .primary-button { color:white; background:var(--blue); }
+#normalLesson .secondary-button { color:var(--blue); background:var(--blue-soft); }
+#normalLesson button:disabled { opacity:.6; cursor:default; }
+@media(max-width:700px){
+ #normalLesson .module-roadmap { grid-template-columns:1fr; }
+ #normalLesson .module-card:nth-child(4) { grid-column:auto; }
+ .normal-step-menu { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .normal-step-menu a { padding:10px; font-size:.8rem; }
+ .normal-page-controls { flex-wrap:wrap; }
+ .normal-page-controls a { flex:1; }
+ #normalLesson .example-card { padding:18px; }
+}
+
+#normalLesson .normal-lab,#normalLesson .normal-concepts { margin:22px 0; padding:18px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+#normalLesson .normal-svg,#normalLesson .normal-concepts svg { width:100%; height:auto; display:block; margin:16px auto; max-width:740px; }
+#normalLesson svg text { font-family:inherit; font-size:12px; fill:var(--ink); }
+#normalLesson .normal-controls { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+#normalLesson .normal-controls label { display:grid; gap:8px; font-weight:600; }
+#normalLesson .normal-controls input { width:100%; }
+#normalLesson .normal-controls output { font-variant-numeric:tabular-nums; color:var(--blue); }
+#normalLesson .normal-symbols { display:grid; grid-template-columns:minmax(80px,auto) minmax(0,1fr); gap:16px; margin:24px 0; }
+#normalLesson .normal-symbols dt { overflow-x:auto; max-width:100%; }
+#normalLesson .normal-symbols dd { margin:0; line-height:1.7; }
+#normalLesson .normal-important { background:#e8f4f1; border-left:4px solid #087d69; padding:18px; border-radius:10px; margin:22px 0; }
+#normalLesson .normal-important h3 { color:#145e51; }
+#normalLesson .normal-inverse { display:grid; gap:14px; max-width:540px; }
+#normalLesson .normal-inverse label { display:grid; gap:7px; }
+#normalLesson input:not([type=range]),#normalLesson select,#normalLesson textarea { width:100%; min-width:0; padding:12px; border:1px solid var(--line); border-radius:8px; font:inherit; background:var(--surface); color:var(--ink); }
+#normalLesson .normal-inverse output { line-height:1.7; }
+#normalLesson .normal-step-menu { grid-template-columns:repeat(4,minmax(0,1fr)); }
+#normalLesson [data-normal-error]:not(:empty) { color:#943c25; border-left:3px solid #943c25; padding-left:12px; }
+#normalLesson .int-options math { overflow-x:auto; }
+@media(max-width:700px){
+ #normalLesson .normal-step-menu { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ #normalLesson .normal-controls { grid-template-columns:1fr; }
+ #normalLesson .normal-symbols { grid-template-columns:1fr; gap:8px; }
+ #normalLesson .normal-symbols dd { margin-bottom:12px; }
+ #normalLesson .normal-lab { padding:12px; }
+}
+
+#normalLesson svg[hidden] { display:none; }

@@ -1,4 +1,5 @@
 const subjects = {
+  normalDistribution: { kicker: "08 · A-niveau", title: "Normalfordeling", description: "Fra målinger til sandsynligheder og statistisk analyse.", understand: "Forstå modeller, tæthed, areal og usikkerhed ét trin ad gangen.", formula: `<math><mrow><mi>X</mi><mo>∼</mo><mi>N</mi><mo>(</mo><mi>μ</mi><mo>;</mo><mi>σ</mi><mo>)</mo></mrow></math>` },
   differentialEquations: { kicker: "07 · A-niveau", title: "Differentialligninger", description: "Fra ændringshastighed til funktioner og modeller.", understand: "Find en funktion, hvis afledte opfylder en given sammenhæng.", formula: `<math><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math>` },
   integration: { kicker: "06 · A-niveau", title: "Integralregning", description: "Fra stamfunktioner til areal, rumfang og substitution. Byg forståelsen ét modul ad gangen.", understand: "Find en funktion ud fra dens afledte, og kontrollér dit resultat ved at differentiere.", formula: `<math display="block"><mrow><msup><mi>F</mi><mo>′</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>` },
   equations: {
@@ -107,8 +108,9 @@ function closeMenu() {
 function showView(view, shouldFocus = true) {
   const requestedPath = view;
   if (view.startsWith("integration/")) view = "integration";
+  if (view.startsWith("normalDistribution/")) view = "normalDistribution";
   if (view.startsWith("differentialEquations/")) view = "differentialEquations";
-  document.querySelector("[data-page=subject] .learning-steps").hidden = view === "integration" || view === "differentialEquations";
+  document.querySelector("[data-page=subject] .learning-steps").hidden = view === "integration" || view === "differentialEquations" || view === "normalDistribution";
   document.querySelector("#subjectFormula").hidden = false;
   document.title = "Christians matematik";
   subjectView.classList.remove("is-integral-session", "is-integral-overview");
@@ -132,13 +134,14 @@ function showView(view, shouldFocus = true) {
   differentiationLesson.hidden = view !== "differentiation";
   planeGeometryLesson.hidden = view !== "planeGeometry";
   document.querySelector("#integralLesson").hidden = view !== "integration";
+  document.querySelector("#normalLesson").hidden = view !== "normalDistribution";
   document.querySelector("#odeLesson").hidden = view !== "differentialEquations";
   subjectPlaceholder.hidden =
     view === "equations" ||
     view === "quadratic" ||
     view === "composite" ||
     view === "differentiation" ||
-    view === "planeGeometry" || view === "integration" || view === "differentialEquations";
+    view === "planeGeometry" || view === "integration" || view === "differentialEquations" || view === "normalDistribution";
 
   setActiveNavigation(view);
   const hash = view === "home" ? "" : requestedPath;
@@ -146,7 +149,7 @@ function showView(view, shouldFocus = true) {
   closeMenu();
   window.dispatchEvent(new CustomEvent("mathviewchange", { detail: { view, focus: shouldFocus } }));
 
-  if (shouldFocus && view !== "integration" && view !== "differentialEquations") {
+  if (shouldFocus && view !== "integration" && view !== "differentialEquations" && view !== "normalDistribution") {
     window.scrollTo({ top: 0, behavior: "smooth" });
     mainContent.focus({ preventScroll: true });
   }
@@ -1589,12 +1592,12 @@ document.addEventListener("keydown", (event) => {
 
 window.addEventListener("hashchange", () => {
   const requestedView = window.location.hash.slice(1) || "home";
-  const validView = requestedView === "formulas" || requestedView === "tasks" || (subjects[requestedView] || requestedView.startsWith("integration/") || requestedView.startsWith("differentialEquations/")) ? requestedView : "home";
-  showView(validView, validView === "integration" || validView.startsWith("integration/") || validView === "differentialEquations" || validView.startsWith("differentialEquations/"));
+  const validView = requestedView === "formulas" || requestedView === "tasks" || (subjects[requestedView] || requestedView.startsWith("integration/") || requestedView.startsWith("differentialEquations/") || requestedView.startsWith("normalDistribution/")) ? requestedView : "home";
+  showView(validView, validView === "integration" || validView.startsWith("integration/") || validView === "differentialEquations" || validView.startsWith("differentialEquations/") || validView === "normalDistribution" || validView.startsWith("normalDistribution/"));
 });
 
 const initialView = window.location.hash.slice(1) || "home";
-showView(initialView === "formulas" || initialView === "tasks" || (subjects[initialView] || initialView.startsWith("integration/") || initialView.startsWith("differentialEquations/")) ? initialView : "home", false);
+showView(initialView === "formulas" || initialView === "tasks" || (subjects[initialView] || initialView.startsWith("integration/") || initialView.startsWith("differentialEquations/") || initialView.startsWith("normalDistribution/")) ? initialView : "home", false);
 
 // Shared navigation hook for targeted repetition from the task bank.
 window.showMathView = showView;

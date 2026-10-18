@@ -13,13 +13,14 @@
     <script src="./account/boot.js" type="module"></script>
     <link rel="stylesheet" href="./account/account.css" />
     <link rel="stylesheet" href="./ode.css" />
+    <link rel="stylesheet" href="./normal.css" />
     <link rel="stylesheet" href="./integral.css" />
     <link rel="stylesheet" href="./tasks/tasks.css" />
   </head>
   <body>
     <main id="accountLanding" class="account-landing">
       <header class="landing-header"><a href="/" class="landing-brand"><span class="brand-mark" aria-hidden="true">f′</span><span>Matematik<span class="landing-subtitle">Fra fundament til A-niveau</span></span></a><button type="button" class="secondary-button" data-auth-mode="signup">Opret bruger</button></header>
-      <div class="landing-grid"><section class="landing-story"><p class="eyebrow">Dit eget matematikforløb</p><h1>Forstå det.<br>Øv dig.<br><span>Se dine fremskridt.</span></h1><p class="landing-lead">Et roligt sted at lære matematik. Små forklaringer, gennemregnede eksempler og opgaver, der hjælper dig videre — ét trin ad gangen.</p><div class="landing-benefits"><p><span>01</span> Find forklaringen, der giver mening</p><p><span>02</span> Regn selv med hjælp undervejs</p><p><span>03</span> Fortsæt, hvor du slap</p></div><div class="landing-subjects"><span>Ligninger</span><span>Funktioner</span><span>Differentialregning</span><span>Vektorer</span><span>Integralregning</span><span>Differentialligninger</span></div></section>
+      <div class="landing-grid"><section class="landing-story"><p class="eyebrow">Dit eget matematikforløb</p><h1>Forstå det.<br>Øv dig.<br><span>Se dine fremskridt.</span></h1><p class="landing-lead">Et roligt sted at lære matematik. Små forklaringer, gennemregnede eksempler og opgaver, der hjælper dig videre — ét trin ad gangen.</p><div class="landing-benefits"><p><span>01</span> Find forklaringen, der giver mening</p><p><span>02</span> Regn selv med hjælp undervejs</p><p><span>03</span> Fortsæt, hvor du slap</p></div><div class="landing-subjects"><span>Ligninger</span><span>Funktioner</span><span>Differentialregning</span><span>Vektorer</span><span>Integralregning</span><span>Differentialligninger</span><span>Normalfordeling</span></div></section>
       <section class="account-card" aria-labelledby="accountHeading"><div class="auth-tabs"><button type="button" data-auth-mode="login" aria-pressed="true">Log ind</button><button type="button" data-auth-mode="signup" aria-pressed="false">Opret bruger</button></div><h2 id="accountHeading">Velkommen tilbage</h2><p>Dine opgaver. Dit tempo. Dine fremskridt.</p><form id="accountForm"><label for="accountUsername">Brugernavn</label><input id="accountUsername" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="3" maxlength="30" pattern="[A-Za-z0-9_]{3,30}" required aria-describedby="usernameHint"><small id="usernameHint">3–30 tegn: a–z, tal eller understregning.</small><label for="accountPassword">Adgangskode</label><input id="accountPassword" name="password" type="password" autocomplete="current-password" maxlength="128" required><small id="signupHint" hidden>Vælg mindst 12 tegn, gerne flere ord.</small><label id="repeatPasswordLabel" hidden>Gentag adgangskode<input id="repeatPassword" name="repeatPassword" type="password" autocomplete="new-password" maxlength="128"></label><button id="accountSubmit" type="submit" class="primary-button">Log ind</button><p id="accountMessage" role="status" aria-live="polite"></p></form><details class="login-help"><summary>Glemt adgangskoden?</summary><p>Kontakt den, der administrerer matematikappen, og oplys dit brugernavn. Administratoren kan hjælpe dig med en ny adgangskode.</p></details><p class="account-privacy">Ingen e-mail nødvendig. Vi gemmer dit brugernavn og dine besvarelser, så du kan fortsætte på en anden enhed.</p></section></div>
       <footer class="landing-footer">Matematik bliver lettere at forstå, når du tager ét trin ad gangen.</footer>
     </main>
@@ -67,6 +68,7 @@
 
           <button class="nav-item" type="button" data-view="integration"><span class="nav-number" aria-hidden="true">06</span><span>Integralregning</span></button>
           <button class="nav-item" type="button" data-view="differentialEquations"><span class="nav-number" aria-hidden="true">07</span><span>Differentialligninger</span></button>
+          <button class="nav-item" type="button" data-view="normalDistribution"><span class="nav-number" aria-hidden="true">08</span><span>Normalfordeling</span></button>
           <div class="nav-divider" aria-hidden="true"></div>
 
           <button class="nav-item" type="button" data-view="tasks">
@@ -203,6 +205,7 @@
             </button>
             <button class="topic-card topic-card--cyan" type="button" data-view="integration"><span class="card-index">06 · Integralregning</span><span class="formula-preview"><math display="block"><mrow><mo>∫</mo><mn>2</mn><mi>x</mi><mspace width="0.2em"/><mi mathvariant="normal">d</mi><mi>x</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>C</mi></mrow></math></span><span class="card-title">Integralregning</span><span class="card-description">Syv moduler og en mellemstation. Begynd med stamfunktioner og kontrol ved differentiation.</span><span class="card-action">Åbn emnet</span></button>
             <button class="topic-card topic-card--green" type="button" data-view="differentialEquations"><span class="card-index">07 · Differentialligninger</span><span class="formula-preview"><math><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math></span><span class="card-title">Differentialligninger</span><span class="card-description">Fra ændringshastighed til løsningskurve. Modul 1 er åbent; resten af forløbet er planlagt.</span><span class="card-action">Åbn forløbet</span></button>
+            <button class="topic-card topic-card--cyan" type="button" data-view="normalDistribution"><span class="card-index">08 · Normalfordeling</span><span class="formula-preview"><math><mrow><mi>X</mi><mo>∼</mo><mi>N</mi><mo>(</mo><mi>μ</mi><mo>;</mo><mi>σ</mi><mo>)</mo></mrow></math></span><span class="card-title">Normalfordeling</span><span class="card-description">Fra målinger til sandsynligheder og statistisk analyse. Modul 1 er åbent; resten af forløbet er planlagt.</span><span class="card-action">Åbn forløbet</span></button>
           </div>
 
           <section class="path-panel" aria-labelledby="pathHeading">
@@ -259,6 +262,7 @@
 
           <div class="lesson-content" id="integralLesson" hidden></div>
           <div class="lesson-content" id="odeLesson" hidden></div>
+          <div class="lesson-content" id="normalLesson" hidden></div>
 
           <div class="lesson-content" id="equationLesson" hidden>
             <nav class="lesson-nav" aria-label="Indhold i Ligninger">

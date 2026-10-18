@@ -1,3 +1,4 @@
+import { normalTasks } from "./normal.js";
 import { odeTasks } from "./ode.js";
 import { integrationBankTasks, integrationLessonTasks } from './integration-complete.js';
 import { integrationRepetitionTasks } from './integration-repetition.js';
@@ -10,7 +11,7 @@ import { calculusTasks } from "./calculus.js";
 import { differentiationTasks } from "./differentiation.js";
 import { geometryTasks } from "./geometry.js";
 import { validateTask } from "../schema.js";
-export const bank = [...odeTasks, ...algebraTasks, ...equationTasks, ...quadraticTasks, ...compositeTasks, ...calculusTasks, ...differentiationTasks, ...geometryTasks, ...integrationBankTasks, ...integrationRepetitionTasks];
+export const bank = [...normalTasks, ...odeTasks, ...algebraTasks, ...equationTasks, ...quadraticTasks, ...compositeTasks, ...calculusTasks, ...differentiationTasks, ...geometryTasks, ...integrationBankTasks, ...integrationRepetitionTasks];
 if (new Set(bank.map((t) => t.id)).size !== bank.length)
   throw Error("Opgave-id skal være entydige i banken.");
 export function seededRandom(seed) {

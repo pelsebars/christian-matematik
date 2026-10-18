@@ -1,0 +1,37 @@
+import { math,n,mi,op,mu,sigma,X,P,fn,distribution,leftEvent,rightEvent,betweenEvent,frac,power } from './normal-math.js';
+import { choice,part } from './tasks/bank/normal.js';
+const q=(id,prompt,type,answer,help,options)=>({id,aids:false,prompt:`<p>${prompt}</p>`,parts:[part('answer','Dit svar',type,answer,options)],hints:[help,'Se eksemplet og grundhjælpen. Prøv derefter en gang til.'],solution:`<p>${help}</p><p>Facit: ${type==='choice'?options.find(o=>o.id===answer).label:math(n(String(answer).replace('.',',')))}.</p>`,errors:[{part:'answer',feedback:help.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ')}]});
+export const normalPre=[
+ q('norm.pre.percent','Skriv 25 % som decimaltal.','number','0.25','Procent betyder pr. hundrede. Divider 25 med 100.'),
+ q('norm.pre.interval',`Hvilket tal ligger i ${math(n(2)+op('≤')+mi('x')+op('≤')+n(5))}?`,'choice','three','Begge grænser skal være opfyldt på samme tid.',[choice('three','3'),choice('six','6'),choice('one','1')]),
+ q('norm.pre.function',`Hvis ${math(fn('g')+op('=')+n(2)+mi('x')+op('+')+n(1))}, hvad er ${math(fn('g',n(3)))}?`,'number','7','Sæt tre på variablens plads, gang med to og læg én til. En graf viser sådanne input og output som punkter.'),
+ q('norm.pre.area','Et rektangel har bredde 2 og højde 0,2. Hvad er arealet?','number','0.4','Areal er bredde gange højde. En højde alene er ikke et areal.'),
+ q('norm.pre.power',`Beregn ${math(power(n('0,1'),2))}.`,'number','0.01','Anden potens er tallet ganget med sig selv. En tiendedel gange en tiendedel er en hundrededel.'),
+ q('norm.pre.root',`Beregn ${math('<msqrt>'+n('0,04')+'</msqrt>')}.`,'number','0.2','Kvadratroden er det ikke-negative tal, hvis kvadrat er tallet under roden. To tiendedele i anden giver fire hundrededele.'),
+ q('norm.pre.mean','Tre målinger er 1, 2 og 3. Hvad er gennemsnittet?','number','2','Læg alle målinger sammen og divider med antallet af målinger.'),
+ q('norm.pre.probability','En hændelse har sandsynlighed 0,3. Hvad er sandsynligheden for, at den ikke sker?','number','0.7','Hændelsen og dens modsætning dækker alle muligheder. Deres sandsynligheder summerer til én.'),
+ q('norm.pre.equation',`Løs ${math(mi('k')+op('+')+n('0,2')+op('=')+n('0,7'))}.`,'number','0.5','Træk samme tal fra på begge sider af ligningen.'),
+ q('norm.pre.tool','Du skal finde andelen under en given grænse med et statistikværktøj. Hvilket område vælger du?','choice','left','Under en grænse er området til venstre. Parametre og grænser skal bruge samme enhed.',[choice('left','Areal til venstre for grænsen.'),choice('height','Kun kurvens højde ved grænsen.')]),
+];
+export const normalMini=[
+ q('norm.mini.variable','En pose er endnu ikke udvalgt og vejet. Er dens kommende vægt allerede en observation?','choice','no','Før målingen beskriver en stokastisk variabel mulige værdier. Først den registrerede vægt er en observation.',[choice('no','Nej, observationen kommer efter målingen.'),choice('yes','Ja, alle mulige vægte er allerede målte observationer.')]),
+ q('norm.mini.parameters',`I ${math(distribution(n(5),n('0,1')))}: hvad er spredningen i kg?`,'number','0.1','I materialet er første parameter middelværdi og anden parameter spredning. Spredningen er allerede angivet.'),
+ q('norm.mini.population','Du måler 20 kartoner fra en dags produktion. Hvad kaldes de 20 kartoner?','choice','sample','Stikprøven er den udtagne del. Populationen er alle de kartoner, du ønsker at udtale dig om.',[choice('sample','En stikprøve.'),choice('all','Hele populationen er altid netop de 20 kartoner.')]),
+ q('norm.mini.density','Du vil finde sandsynligheden for vægt mellem to grænser. Hvad skal bruges fra tæthedskurven?','choice','area','Sandsynlighed er areal under tæthedskurven mellem grænserne, ikke højden ved en af dem.',[choice('area','Arealet mellem grænserne.'),choice('height','Højden ved den øverste grænse.')]),
+ q('norm.mini.point','Hvad er sandsynligheden for præcis 1 liter i en kontinuert normalmodel?','number','0','Et enkelt punkt har bredde nul og dermed areal nul. En afrundet måling dækker derimod et interval.'),
+ q('norm.mini.symmetry',`En normalfordelt variabel har middelværdi 100 og ${math(P(betweenEvent(n(100),n(130)))+op('=')+n('0,2'))}. Find ${math(P(leftEvent(n(70))))}.`,'number','0.3','70 og 130 ligger lige langt fra 100. Fjern arealet to tiendedele fra venstre halvdel.'),
+ q('norm.mini.cdf',`Du får ${math(fn('F',n(8))+op('=')+n('0,7'))}. Find ${math(P(rightEvent(n(8))))}.`,'number','0.3','Fordelingsfunktionen giver venstre areal. Resten til højre er én minus syv tiendedele.'),
+ q('norm.mini.between',`Du får ${math(fn('F',n(4))+op('=')+n('0,2'))} og ${math(fn('F',n(9))+op('=')+n('0,8'))}. Find ${math(P(betweenEvent(n(4),n(9))))}.`,'number','0.6','Træk det nedre opsamlede areal fra det øvre: otte tiendedele minus to tiendedele.'),
+ q('norm.mini.quantile','I en normalmodel er middelværdien 10. Hvor ligger grænsen, som 30 % af værdierne ligger under?','choice','below','Ved middelværdien ligger 50 % til venstre. For 30 % må grænsen flyttes til venstre.',[choice('below','Under 10.'),choice('above','Over 10.')]),
+ q('norm.mini.independent','Hver af to uafhængige kartoner har sandsynlighed 0,5 for mindst én liter. Hvad er sandsynligheden for, at begge har mindst én liter?','number','0.25','Ved uafhængighed ganges sandsynlighederne: en halv gange en halv.'),
+];
+normalMini[0].parts.push(part('kind','Rumfanget i én karton er …','choice','continuous',[choice('continuous','Kontinuert: modellen tillader alle værdier i et interval.'),choice('count','Diskret: modellen tillader kun hele antal kartoner.')]));
+normalMini[0].errors.push({part:'kind',feedback:'Skeln mellem at måle en mængde og at tælle et antal. Rumfang er en kontinuert mængde; antal kartoner er diskret.'});
+normalMini[0].solution+='<p>Rumfanget modelleres kontinuert, fordi der kan ligge nye mulige værdier mellem to givne værdier. Antal kartoner kan derimod kun være hele tal.</p>';
+export const normalFinal=[
+ q('norm.final.height','Tæthedskurvens højde er 2 pr. liter. Er sandsynligheden for præcis denne mængde derfor 2?','choice','no','En højde er tæthed pr. liter. En sandsynlighed findes som et areal og kan aldrig overstige én.',[choice('no','Nej. Højden er tæthed; en enkeltværdi har sandsynlighed nul.'),choice('yes','Ja, tæthed og sandsynlighed er samme tal.')]),
+ q('norm.final.right',`Hvis ${math(fn('F',n(12))+op('=')+n('0,8'))}, hvad er ${math(P(X+op('&gt;')+n(12)))}?`,'number','0.2','Fordelingsfunktionen opsamler venstre areal. Træk det fra én for at finde højre hale.'),
+ q('norm.final.middle',`Hvis ${math(fn('F',n(2))+op('=')+n('0,1'))} og ${math(fn('F',n(6))+op('=')+n('0,7'))}, hvad er ${math(P(betweenEvent(n(2),n(6))))}?`,'number','0.6','Mellemområdet findes ved at trække nedre opsamlede areal fra øvre opsamlede areal.'),
+ q('norm.final.parameter',`Hvad betyder den anden parameter i ${math(distribution(n(1),n('0,02')))}?`,'choice','sd','Materialets anden parameter er spredningen i samme enhed som variablen. Variansen er spredningens kvadrat.',[choice('sd','Spredningen er 0,02.'),choice('variance','Variansen er 0,02.')]),
+ q('norm.final.model','En model giver sandsynligheden 0,3 for under en grænse. Skal præcis 30 af de næste 100 observationer ligge under grænsen?','choice','no','Sandsynligheden giver en forventet andel i modellen. En faktisk stikprøve varierer.',[choice('no','Nej, det faktiske antal kan variere.'),choice('yes','Ja, det følger præcist af sandsynligheden.')]),
+];

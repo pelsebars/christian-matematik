@@ -90,9 +90,10 @@ globalThis.window?.addEventListener('online', flush);
 globalThis.window?.addEventListener('beforeunload', event => { if (pending.size) { event.preventDefault(); event.returnValue = ''; } });
 export function lessonCompletion(key, task) {
   const ode = key.includes('ode') || key.includes('differential');
+  const normal = key.startsWith('christian-matematik.normal.');
   const names = { graphs: '2', definite: '3', areas: '4', repetition: 'repetition', solids: '5', substitution: '6', final: '7' };
-  const module = ode ? '1' : names[key.split('.')[2]] || '1';
-  const topic = ode ? 'differentialEquations' : 'integration';
+  const module = ode || normal ? '1' : names[key.split('.')[2]] || '1';
+  const topic = normal ? 'normalDistribution' : ode ? 'differentialEquations' : 'integration';
   const labelNode = document.createElement('div'); labelNode.innerHTML = task.prompt;
   const label = labelNode.textContent.replace(/\s+/g, ' ').trim().slice(0, 170) || task.id;
   const route = location.hash.slice(1).startsWith(topic + '/' + module + '/') ? location.hash.slice(1) : `${topic}/${module}/oevelser`;

@@ -1,5 +1,6 @@
 import { integralModules } from "../integral-plan.js";
 export const topics = {
+  normalDistribution: "Normalfordeling",
   differentialEquations: "Differentialligninger",
   integration: "Integralregning",
   equations: "Løsning af ligninger",
@@ -9,6 +10,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "norm.1": {topic:"normalDistribution",name:"Tæthedsfunktionen og fordelingsfunktionen",section:"normal-module-1"},
   "ode.1": {topic:"differentialEquations",name:"Hvad er en differentialligning?",section:"ode-module-1"},
   ...Object.fromEntries(integralModules.map(m => [m.id, {topic:"integration", name:m.title, section:m.section}])),
   "eq.basic": { topic: "equations", name: "Ligninger", section: "teori" },
@@ -66,6 +68,15 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "norm.model": {module:"norm.1",text:"Skelne observation og stokastisk variabel og fortolke en sandsynlighedsmodel"},
+  "norm.parameters": {module:"norm.1",text:"Læse middelværdi og spredning og forbinde dem med klokkens form"},
+  "norm.density": {module:"norm.1",text:"Skelne tæthed fra sandsynlighed og begrunde sandsynlighed nul for enkeltværdier"},
+  "norm.area": {module:"norm.1",text:"Vælge og beregne venstre hale, højre hale og mellemområde"},
+  "norm.cdf": {module:"norm.1",text:"Aflæse og bruge opsamlede sandsynligheder fra fordelingsfunktionen"},
+  "norm.quantile": {module:"norm.1",text:"Finde en grænse ud fra en oplyst sandsynlighed og kontrollere den"},
+  "norm.reason": {module:"norm.1",text:"Begrunde symmetri, uafhængighed, metodevalg og modelbegrænsninger"},
+  "norm.tools": {module:"norm.1",text:"Dokumentere model, parametre, område, værktøjsoutput og konklusion"},
+  "norm.data": {module:"norm.1",text:"Skelne optalt stikprøveandel fra modellens sandsynlighed"},
   "ode.notation": {module:"ode.1",text:"Forstå en ukendt funktion og læse afledt notation"},
   "ode.check": {module:"ode.1",text:"Kontrollere en løsning ved differentiation og indsættelse på et interval"},
   "ode.initial": {module:"ode.1",text:"Skelne familie fra partikulær løsning og anvende begyndelsesbetingelser"},

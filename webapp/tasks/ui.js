@@ -329,6 +329,10 @@ root.addEventListener("click", (event) => {
     s = state.session;
   if (action === "repeat-module") {
     const m = modules[b.dataset.module];
+    if (m.topic === "normalDistribution" && window.openNormalSection) {
+      window.openNormalSection(m.section);
+      return;
+    }
     if (m.topic === "differentialEquations" && window.openOdeSection) {
       window.openOdeSection(m.section);
       return;
