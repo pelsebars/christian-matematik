@@ -1,6 +1,6 @@
 # Login og personlige fremskridt
 
-Appen er forberedt til den eksisterende Vercel-adresse:
+Produktionsadressen er:
 https://christian-matematik-webapp.vercel.app
 
 ## Arkitektur
@@ -21,6 +21,8 @@ https://christian-matematik-webapp.vercel.app
 3. I Vercel-projektet skal Root Directory være `webapp` ved deployment fra Git-repoet. Framework er Other, build-kommando er `npm run build`, og output er `dist` (defineret i `vercel.json`). En tidligere manuel override af den tomme build-kommando/output `.` skal fjernes eller opdateres. Brug Node 22 eller nyere, som Vercel understøtter.
 4. Tilføj servermiljøvariablerne i Vercel:
    - `DATABASE_URL`: Railways offentlige Postgres-forbindelse.
+   - `DATABASE_CA_CERT`: Railway-databasens offentlige CA-certifikat (`/certs/root.crt` på Postgres-volumen). Hentes via autentificeret Railway-adgang; aldrig den private nøgle. Indsæt hele PEM-certifikatet som en miljøvariabel.
+   - `DATABASE_TLS_NAME`: `postgres.railway.internal` for den nuværende Railway-databases certifikat. Certifikatkæde og navn verificeres også gennem den offentlige TCP-proxy. Opdatér CA-certifikatet ved certifikatudskiftning.
    - `BETTER_AUTH_URL`: `https://christian-matematik-webapp.vercel.app`
    - `BETTER_AUTH_SECRET`: en tilfældig hemmelighed på mindst 32 tegn. Generér fx med `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`.
 5. Kopiér `.env.example` til en lokal `.env` og indsæt de samme værdier dér. Filen ignoreres af Git. Del aldrig forbindelsesstrenge eller hemmeligheder i chat eller commits.
