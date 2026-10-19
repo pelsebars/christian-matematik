@@ -10,6 +10,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "norm.4": {topic:"normalDistribution",name:"Normalfordelingsplot",section:"normal-module-4"},
   "norm.repetition": {topic:"normalDistribution",name:"B-repetition 10–11: Kvadratsætninger og to ligninger",section:"normal-module-repetition"},
   "norm.3": {topic:"normalDistribution",name:"Beregning af middelværdi og spredning",section:"normal-module-3"},
   "norm.2": {topic:"normalDistribution",name:"Standardnormalfordelingen",section:"normal-module-2"},
@@ -71,6 +72,21 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "norm4.data": {module:"norm.4",text:"Skelne observationer, stikprøve, population og givne datakilder"},
+  "norm4.sort": {module:"norm.4",text:"Sortere uden at ændre værdier, antal eller gentagelser"},
+  "norm4.position": {module:"norm.4",text:"Forstå rangposition og teoretisk normalfraktil"},
+  "norm4.axes": {module:"norm.4",text:"Læse akser og skelne fraktil fra sandsynlighed og måling"},
+  "norm4.read": {module:"norm.4",text:"Aflæse modelcentrum og spredning med korrekt akseretning"},
+  "norm4.estimate": {module:"norm.4",text:"Beregne stikprøvegennemsnit og stikprøvespredning"},
+  "norm4.variance": {module:"norm.4",text:"Skelne varians, stikprøvespredning og spredningsdefinitioner"},
+  "norm4.judge": {module:"norm.4",text:"Vurdere retlinjet forløb og systematiske afvigelser"},
+  "norm4.outlier": {module:"norm.4",text:"Undersøge yderpunkter og modelrelaterede udfaldsgrænser"},
+  "norm4.probability": {module:"norm.4",text:"Bruge en rimelig estimeret normalmodel til en ny måling"},
+  "norm4.empirical": {module:"norm.4",text:"Skelne stikprøveandel fra modelsandsynlighed"},
+  "norm4.reason": {module:"norm.4",text:"Begrunde modelvalg og faglige forbehold"},
+  "norm4.tools": {module:"norm.4",text:"Dokumentere data, rangregel, akser, estimater og konklusion"},
+  "norm4.limits": {module:"norm.4",text:"Undgå at forveksle et plot med bevis eller repræsentativitet"},
+
   "b1011.recognize": {module:"norm.repetition",text:"Genkende de tre kvadratsætninger og deres forskellige mønstre"},
   "b1011.expand": {module:"norm.repetition",text:"Udvide hele parenteser og samle alle blandede produkter"},
   "b1011.sign": {module:"norm.repetition",text:"Regne korrekt med fortegn, koefficienter og parenteser"},

@@ -1,10 +1,10 @@
-# Normalfordeling og statistisk analyse · modul 1–3 og B10–11
+# Normalfordeling og statistisk analyse · modul 1–4 og B10–11
 
 ## Kilder og afgrænsning
 
 Læst før implementering: `Pensum/Læseplan.pdf` (især side 2–3), `Pensum/Undervisningsbeskrivelse.pdf` (side 5), alle fem Word-ark under `Pensum/5. Normalfordeling`, alle otte medfølgende Excel-filer samt appens navigation, integralforløb, differentialligningsforløb, opgavekontrakt og kontolagring. Word-tekst, matematik i Office Math og indlejrede figurer indgår i kildekontrollen. Originalerne er kun læst. Data er transskriberet i `normal-data.js` med kildefil, ark, kolonnenavne og alle numeriske rækker.
 
-Modul 1–3 og B10–11 er implementeret. Modul 4–5 og opsamlingen er eksplicit planlagte. B-repetitionen ligger mellem modul 3 og 4 og tæller som den sjette undervisningsgang, uden et normalmodulnummer. Opsamlingen er en separat afsluttende side og er ikke en syvende undervisningsgang.
+Modul 1–4 og B10–11 er implementeret. Modul 5 og opsamlingen er eksplicit planlagte. B-repetitionen ligger mellem modul 3 og 4 og tæller som den sjette undervisningsgang, uden et normalmodulnummer. Opsamlingen er en separat afsluttende side og er ikke en syvende undervisningsgang.
 
 ## Notationskontrol og kildefund
 
@@ -40,7 +40,7 @@ Appens differentialligningsforløb har kun en **planlagt** B8–9-side om logari
 
 ## Navigation og progression
 
-Ruter følger appens eksisterende hash-navigation: `#normalDistribution` er oversigten; `#normalDistribution/1` kanoniseres til `#normalDistribution/1/start`; øvrige sider er `/2`, `/3`, `/repetition`, `/4`, `/5` og `/opsamling`. Modul 1 har otte direkte adresserbare trin: start, model, taethed, fordeling, vaerktoej, oevelser, sluttjek og opsummering. Alle trin har forrige/næste og adgang til oversigten. Sidste trin i Modul 1 fører til Modul 2. Første trin i Modul 2 kan gå tilbage til sidste trin i Modul 1; sidste trin går til Modul 3/start. Modul 3 har ni trin, og sidste trin går videre til den særskilte B-repetition med 11 trin. Browserens tilbage/frem virker. Modul 4–5 udvikles i senere beskeder.
+Ruter følger appens eksisterende hash-navigation: `#normalDistribution` er oversigten; `#normalDistribution/1` kanoniseres til `#normalDistribution/1/start`; øvrige sider er `/2`, `/3`, `/repetition`, `/4`, `/5` og `/opsamling`. Modul 1 har otte direkte adresserbare trin: start, model, taethed, fordeling, vaerktoej, oevelser, sluttjek og opsummering. Alle trin har forrige/næste og adgang til oversigten. Sidste trin i Modul 1 fører til Modul 2. Første trin i Modul 2 kan gå tilbage til sidste trin i Modul 1; sidste trin går til Modul 3/start. Modul 3 har ni trin, og sidste trin går videre til den særskilte B-repetition med 11 trin. Browserens tilbage/frem virker. Modul 5 udvikles i en senere besked.
 
 Status baseres på svar: Modul 1 har 10 mikroøvelser + 12 opgaver + 5 slutspørgsmål = 27 obligatoriske kontroller. Modul 2 har 11 mikroøvelser + 15 opgaver + 6 slutspørgsmål = 32 obligatoriske kontroller. Modul 3 har 12 mikroøvelser + 16 opgaver + 7 slutspørgsmål = 35 obligatoriske kontroller. Starttjekkets 10 spørgsmål i Modul 1 og 8 spørgsmål i hvert af Modul 2–3 er diagnostiske. Åbning af siden gennemfører intet. Ændring af et korrekt svar ophæver dets aktive kontrol og eventuel gennemført modulstatus, som i de andre nye moduler. Personligt historikoverblik bevarer tidligere korrekte løsninger efter det fælles system.
 
@@ -60,27 +60,27 @@ U1–U7 og K1–K6 følger samtlige relevante mål og kernestofpunkter på under
 
 | Læringsmål | Introduceres | Øves | Kontrolleres | Hjælpemidler | Datasæt/eksempel |
 | --- | --- | --- | --- | --- | --- |
-| U1 · Statistiske og sandsynlighedsteoretiske modeller til beskrivelse af data | 1: model og måling | 1: mælk, øl, data; 2: fiskefoder; 3: fosfor, kaffe og olie; 4–5 (planlagt) | 1–3: modelopgaver og sluttjek; 4–5 og opsamling (planlagt) | Begge | Mælk; Gulerødder |
-| U2 · Værktøjsprogrammer, symbolbehandling og problemløsning | 1: normalberegning og fraktil | 1–3: værktøjsopgaver; B10–11: algebraisk kontrol; 4–5 (planlagt) | 1–3 og B10–11: tal og valg kontrolleres; egne værktøjsnoter vurderes med tjekliste | Med | Øl, mælk; senere alle otte regneark |
-| U3 · Matematiske ræsonnementer og beviser | 1: symmetri og enkeltværdi | 1: areal og komplement; 2: skala og grænser; 3: symmetri og kontrol; B10–11: identiteter og ligninger | 1–3 og B10–11: sluttjek og ræsonnementsopgaver; 4–5 (planlagt) | Begge | Arket: eksempel 3 og u4; egne korte begrundelser |
-| U4 · Matematikanvendelse | 1: enheder og modelantagelser | 1–3: tekst og data; B10–11: areal, priser og antal; 4–5 (planlagt) | 1–3 og B10–11: teksttunge opgaver; opsamling (planlagt) | Begge | Fyldemaskiner, gulerødder; korn og Unibrew |
-| U5 · Fagets metoder og identitet | 1: model kontra observation | 1–3: metodevalg og modelbegrænsninger; B10–11: identitet, ligning og kontrol | 1–3 og B10–11: metodeopgaver; 4–5 (planlagt) | Begge | Modelandel kontra målt andel |
+| U1 · Statistiske og sandsynlighedsteoretiske modeller til beskrivelse af data | 1: model og måling | 1: mælk, øl, data; 2: fiskefoder; 3: fosfor, kaffe og olie; 4: fire datavurderinger; 5 (planlagt) | 1–4: modelopgaver og sluttjek; 5 og opsamling (planlagt) | Begge | Mælk; Gulerødder |
+| U2 · Værktøjsprogrammer, symbolbehandling og problemløsning | 1: normalberegning og fraktil | 1–4: værktøjsopgaver; B10–11: algebraisk kontrol; 5 (planlagt) | 1–4 og B10–11: tal og valg kontrolleres; egne værktøjsnoter vurderes med tjekliste | Med | Øl, mælk; senere alle otte regneark |
+| U3 · Matematiske ræsonnementer og beviser | 1: symmetri og enkeltværdi | 1: areal og komplement; 2: skala og grænser; 3: symmetri og kontrol; 4: vurdering kontra bevis; B10–11: identiteter og ligninger | 1–4 og B10–11: sluttjek og ræsonnementsopgaver; 5 (planlagt) | Begge | Arket: eksempel 3 og u4; egne korte begrundelser |
+| U4 · Matematikanvendelse | 1: enheder og modelantagelser | 1–4: tekst og data; B10–11: areal, priser og antal; 5 (planlagt) | 1–4 og B10–11: teksttunge opgaver; opsamling (planlagt) | Begge | Fyldemaskiner, gulerødder; korn og Unibrew |
+| U5 · Fagets metoder og identitet | 1: model kontra observation | 1–4: metodevalg og modelbegrænsninger; B10–11: identitet, ligning og kontrol | 1–4 og B10–11: metodeopgaver; 5 (planlagt) | Begge | Modelandel kontra målt andel |
 | U6 · Begreber og metoder fra diskret matematik | Tidligere B8–9 (kun planlagt); 1: uafhængige gentagelser | 1: alle 20 kartoner; B8–9 (planlagt) | 1: sandsynlighedsprodukt; kombinatorik/binomial kræver særskilt udvikling | Begge | Mælk: ark 1, eksempel 4 med hjælpemidler |
-| U7 · Mindstekrav og grundlæggende færdigheder | 1: diagnostik og grundhjælp | Alle moduler; B10–11 | 1–3: mikroøvelser og sluttjek; B10–11: to separate start- og sluttjek; senere (planlagt) | Uden | Procent, funktioner, areal og ligninger |
+| U7 · Mindstekrav og grundlæggende færdigheder | 1: diagnostik og grundhjælp | Alle moduler; B10–11 | 1–4: mikroøvelser og sluttjek; B10–11: to separate start- og sluttjek; senere (planlagt) | Uden | Procent, funktioner, areal og ligninger |
 | K1 · Kombinatorik | B8–9 skal udbygges; endnu ikke dækket | Planlagt binomialrepetition, uden dobbeltundervisning her | Planlagt separat kontrol; ingen fuld dækning endnu | Begge | Antal placeringer af succeser i gentagne forsøg |
 | K2 · Stokastisk variabel | 1: før og efter måling | 1: mikroøvelse og bank | 1: sluttjek | Uden | En tilfældigt valgt mælkekarton |
 | K3 · Binomialfordeling | B8–9 findes kun som plan; 1: kort begrebsbro | 1: alle 20 som særtilfælde; fuldt forløb i B8–9 (planlagt) | 1: uafhængighed; binomialberegning kontrolleres senere | Begge | Antal kartoner over en grænse kontra rumfang |
-| K4 · Normalfordeling | 1: klokkeform og parametre | 1–4 | 1–3: begreb, areal, standardisering og parametre; senere (planlagt) | Begge | Gødning, mælk og øl |
-| K5 · Opgaver uden hjælpemidler | 1: symmetri og notation | 1–5 og B10–11 | 1–3 og B10–11: slutspørgsmål; senere (planlagt) | Uden | Ark 1: eksempel 3 og u4 |
-| K6 · CAS og statistikværktøjer | 1: model, input, output og konklusion | 1–3: beregning/fraktil og parametre; 4–5 (planlagt) | 1–3: talfelter; dokumentation ved egen vurdering | Med | Arket angiver ikke et bestemt program eller kommandonavn |
+| K4 · Normalfordeling | 1: klokkeform og parametre | 1–4 | 1–4: begreb, areal, standardisering, parametre og modelvurdering; senere (planlagt) | Begge | Gødning, mælk og øl |
+| K5 · Opgaver uden hjælpemidler | 1: symmetri og notation | 1–5 og B10–11 | 1–4 og B10–11: slutspørgsmål; senere (planlagt) | Uden | Ark 1: eksempel 3 og u4 |
+| K6 · CAS og statistikværktøjer | 1: model, input, output og konklusion | 1–3: beregning/fraktil og parametre; 4: rangregel, plot og estimater; 5 (planlagt) | 1–4: talfelter og metodevalg; dokumentation ved egen vurdering | Med | Arket angiver ikke et bestemt program eller kommandonavn |
 | A1 · Tæthed, sandsynlighed og enkeltværdi | 1: tæthed og areal | 1: graf og mikroøvelser | 1: density-opgave og sluttjek | Begge | Gødning: tæthed kan overstige én |
 | A2 · Fordelingsfunktion, haler, interval og fraktil | 1: opsamlet areal | 1: graf, aflæsning, regning og invers; 3: parameterbetingelser og intervalgrænse | 1: cdf-, tails- og quantile-opgaver; 3: halevalg og intervalgrænse | Begge | Arket: eksempler med og uden hjælpemidler |
-| A3 · Middelværdi og spredning; ens notation | 1: placering og bredde | 1–4; 3: ukendte parametre | 1: graf/parameter; 3: parameteropgaver og sluttjek; 4 (planlagt) | Begge | Anden parameter er spredning; Rumfang bruger stikprøvespredning |
+| A3 · Middelværdi og spredning; ens notation | 1: placering og bredde | 1–4; 3: ukendte parametre | 1: graf/parameter; 3: parameteropgaver; 4: dataestimater, definition og sluttjek | Begge | Anden parameter er spredning; Rumfang bruger stikprøvespredning |
 | A4 · Standardisering og oprindelig skala | 2: graf, skalaændring og to regneretninger | 2: mikroøvelser, sammenligning og data; 3: parameterligninger | 2–3: mikroøvelser, bank og sluttjek; opsamling (planlagt) | Begge | Fiskefoder og flødeboller |
-| A5 · Normale og exceptionelle udfald | 2: centrale arealer og materialets grænser | 2: intervaller, figurer og grænsetilfælde; 3: tungmetal; 4–5 (planlagt) | 2: mikroøvelser, bank og sluttjek; 3: tungmetal; 4–5 (planlagt) | Begge | Ark 2–5; følg materialets grænsekonvention |
+| A5 · Normale og exceptionelle udfald | 2: centrale arealer og materialets grænser | 2: intervaller, figurer og grænsetilfælde; 3: tungmetal; 4: gulerodsudfald og systematiske afvigelser; 5 (planlagt) | 2: mikroøvelser, bank og sluttjek; 3: tungmetal; 4: gulerodsudfald og systematiske afvigelser; 5 (planlagt) | Begge | Ark 2–5; følg materialets grænsekonvention |
 | A6 · Parameterbestemmelse og kontrol af muligheder | 3: kendte og ukendte, areal og tæthed | 3: én/to parametre, kontrol og to tæthedsløsninger; B10–11 støtter algebra | 3: 12 mikroøvelser, 16 bankopgaver og 7 slutspørgsmål; opsamling (planlagt) | Begge | Olie, te, kaffe; tæthedsbetingelse med to løsninger |
-| A7 · Data, population, stikprøve og estimat | 1: begrebsskel; 4: beregninger | 1: Gulerødder; 3: givne modelplaceringer; 4: alle fire datasæt | 1 og 3: data-/modelopgave; 4 (planlagt) | Begge | 400, 100, 40 og 200 målinger |
-| A8 · Normalfordelingsplot og forsigtig modelvurdering | 4 | 4: ret linje, krumning og outliers | 4 og opsamling (planlagt) | Aflæsning uden; egne plot med | Gulerødder, Rumfang og begge Højde-ark |
+| A7 · Data, population, stikprøve og estimat | 1: begrebsskel; 4: beregninger | 1: Gulerødder; 3: givne modelplaceringer; 4: alle fire datasæt | 1 og 3: data-/modelopgave; 4: beregning, modelandel og stikprøvekonklusion | Begge | 400, 100, 40 og 200 målinger |
+| A8 · Normalfordelingsplot og forsigtig modelvurdering | 4: rang, fraktil og graf | 4: fire datasæt, ret linje, krumning og yderpunkter | 4: 12 mikroøvelser, 16 bankopgaver og 7 slutkort; opsamling (planlagt) | Aflæsning uden; egne plot med | Gulerødder, Rumfang og begge Højde-ark |
 | A9 · Regression, residualer og residualspredning | 5 før intervalberegning | 5: også normalplot af residualer | 5 (planlagt) | Begge | 56 kornår; 100 blomsterpar; 18 Phillipsår; 106 Unibrew-par |
 | A10 · Stikprøvevariation, hældningsestimat og konfidensinterval | 5 | 5: fortolkning, nul og antagelser | 5 og opsamling (planlagt) | Med; fortolkning uden | Blomster, Phillipsdata og Unibrew |
 | A11 · Omformede regressionsmodeller | 5 efter lineær grundidé | 5: reciprok respons og kvadreret respons | 5 (planlagt) | Med | Ark 5: eksempel 2 og opgave 4 |
@@ -204,7 +204,7 @@ B11 begynder med et fælles par og to linjer. Substitution forklares som erstatn
 
 ### Navigation og to uafhængige gennemførelsesveje
 
-De 11 trin er `#normalDistribution/repetition/start`, `/kvadrater`, `/fortegn`, `/faktorisering`, `/loesningspar`, `/substitution`, `/elimination`, `/metode`, `/oevelser`, `/sluttjek` og `/opsummering`. `/repetition` og ukendte trin kanoniseres til `/repetition/start`. Første trin går tilbage til Modul 3/opsummering, og sidste trin går til den planlagte Modul 4-side. Tilbage fra Modul 4 går nu til repetitionens sidste trin. Forrige/næste, browserhistorik, tastaturfokus og forløbsoversigt følger den fælles router. Navigation og fremdrift bruger betegnelsen B-repetition 10–11, aldrig »Modul repetition«.
+De 11 trin er `#normalDistribution/repetition/start`, `/kvadrater`, `/fortegn`, `/faktorisering`, `/loesningspar`, `/substitution`, `/elimination`, `/metode`, `/oevelser`, `/sluttjek` og `/opsummering`. `/repetition` og ukendte trin kanoniseres til `/repetition/start`. Første trin går tilbage til Modul 3/opsummering, og sidste trin går til Modul 4/start. Tilbage fra Modul 4/start går til repetitionens sidste trin. Forrige/næste, browserhistorik, tastaturfokus og forløbsoversigt følger den fælles router. Navigation og fremdrift bruger betegnelsen B-repetition 10–11, aldrig »Modul repetition«.
 
 | Spor | Starttjek | Træning | Sluttjek | Gennemført |
 | --- | ---: | ---: | ---: | --- |
@@ -254,3 +254,74 @@ Alle opgaver er egne tilføjelser til læseplanens B10–11-emner. Kvitterings- 
 `tests/normal-algebra.browser.test.js` afprøver alle 43 kort og 16 bankopgaver, regne-/fortegns-/begrebsfeedback, grundhjælp, hints, fuld træningsvej og genvej uden træningssvar, separate delstatusser, genindlæsning, noter, gamle Modul 1–3-svar, fire gennemførte af seks undervisningsgange, alle 11 trin, krydsnavigation, historik, tastatur, begge figurer, MathML, mobil, defekt/blokeret lagring samt prøvefortrolighed og genåbning fra prøveresultatet. Kontobrowsertesten er udvidet med repetitionens historiketiket, rute, separate noter, begge delstatusser, anden enhed og isolation mellem brugere.
 
 Afsluttet validering: alle 71 faglige/enhedstests, konto-/servertesten, 16 browserforløb og den udvidede kontobrowsertest består. Alle 265 bankopgaver er instansieret og valideret. Fire undervisningsganges uafhængige status, gamle svar og de seks undervisningsgange er kontrolleret. Figurer på desktop og ved 390-pixel mobilbredde er gennemset. Browserforløbene rapporterer ingen JavaScript- eller konsolfejl. Produktionsbuild og `git diff --check` består.
+
+
+## Modul 4 · normalfordelingsplot
+
+Ark 4 er genlæst med tekst, Office Math og de fire afgørende figurer: eksempel 1 har linjen z lig måling minus 10, divideret med 4; qq-eksemplet viser centrum 24 og spredning 3; kommunefiguren viser systematisk krumning; u1 angiver centrum 24,7 og spredning 4,4 med ingen exceptionelle synlige udfald. Alle fire regnearks måleceller er sammenlignet enkeltvis med `normal-data.js`: 400 gulerodsvægte, 100 rumfang, 40 højder og 200 klubhøjder. Værdier, rækkefølge, gentagelser og oprindelige filer er bevaret.
+
+### Pædagogik, notation og digital metode
+
+Modulet følger A7–A8 og de relevante U/K-mål. Forløbet går fra konkrete observationer og stikprøve til sorteret rang, teoretisk normalfraktil, graf, akseaflæsning, forsigtig modelvurdering, estimation og eventuel efterfølgende modelberegning. Nye symboler forklares enkeltvis: antal n, rang i, sorteret observation, rangposition, teoretisk normalfraktil, almindelig observation, stikprøvegennemsnit x-streg, stikprøvespredning s, varians og summetegn. Gennemregnede eksempler og mikroøvelser følger de centrale begreber. »Det vigtigste at forstå« skelner især form, estimater, model, data og bevis.
+
+Kildens akseretning følges: **måling vandret og teoretisk normalfraktil lodret**. Centrum aflæses ved fraktil nul, og spredningen er den vandrette afstand til fraktil én. Linjens hældning er derfor den reciprokke spredning. Appen kan bytte akserne; så er hældningen spredningen. Normalfraktilen kan være negativ og er hverken sandsynlighed eller tæthed. Den teoretiske rangfraktil er ikke automatisk lig den standardiserede observation med estimerede parametre.
+
+Appens digitale plot bruger de eksplicit valgte positioner `(rang − 0,5) / antal`. Fraktilen findes med appens eksisterende omvendte standardnormalberegning. Gentagelser beholdes med hver deres rang. Rangposition er en plotkonvention og er ikke automatisk en empirisk optælling. Dette valg er dokumenteret som type 5 i [R’s officielle kvantildokumentation](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html); kildematerialet foreskriver hverken denne rangregel eller brug af R. [NIST’s metodebeskrivelse](https://www.itl.nist.gov/div898/handbook/eda/section3/normprpl.htm) understøtter brugen af omtrent retlinjet forløb som grafisk modelvurdering.
+
+Referencelinjen konstrueres fra stikprøvegennemsnit og stikprøvespredning, med nævner antallet minus én. Den er ikke påstået at være et programs regressionslinje gennem plotpunkterne. Programmer kan vælge andre rangregler, referenceberegninger og akser. Appens plot er derfor en erklæret, reproducerbar metode, ikke en påstand om identisk gengivelse af et bestemt programs skærmbillede. De grafiske aflæsningsfigurer og kommunefiguren er skematiske genoptegninger; deres illustrative punkter behandles ikke som oprindelige rådata.
+
+### Datakontrol og fortolkning
+
+| Datasæt | Antal | Gennemsnit | Stikprøvespredning | Spredning med nævner n | Faglig pointe |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Gulerødder, g | 400 | 400,432 | 9,481107768 | 9,469248967 | Overvejende retlinjet; to lave målinger kræver undersøgelse |
+| Rumfang, liter | 100 | 0,98492 | 0,055520254 | 0,055241955 | Omtrent retlinjet; ny karton over én liter: cirka 0,392959959 |
+| Højder, cm | 40 | 183,17 | 7,790796674 | 7,692795331 | Normaltilnærmelse rimelig for data, ikke et bevis om alle personer |
+| Klubhøjder, cm | 200 | 175,08605 | 5,546013544 | 5,532131135 | Systematisk bøjet mønster; fravælg én samlet normalmodel |
+
+Gulerødder: 121 af 400 er under 396 g, altså målt andel 0,3025. Den foreløbige normalmodel giver cirka 0,320086859. De to størrelser må ikke forveksles. De oprindelige målinger 1 og 201 (371,2 og 371,5 g) ligger strengt mere end tre estimerede spredninger under centrum. De slettes ikke automatisk, og materialets omtrentlige normaltilnærmelse beholdes som en vurdering med forbehold. Omvendt har klubhøjderne ingen målinger uden for tre estimerede spredninger, men deres systematiske forløb er stadig et argument mod én normalmodel. Plottet alene fastlægger ikke årsagen til mønstret.
+
+Normalintervallet inkluderer to spredninger på hver side. Exceptionelle udfald kræver strengt mere end tre; præcis tre er stadig ikke exceptionelt. Ved modelkontrol fra data er grænserne betinget af stikprøvens estimater. Variansen har kvadreret enhed, mens gennemsnit og spredning har observationernes oprindelige enhed. Et pænt plot beviser hverken normalfordeling, uafhængighed, sikre parametre eller repræsentativitet.
+
+### Ruter, filer og progression
+
+De ti trin er `#normalDistribution/4/start`, `/data`, `/plot`, `/aflaesning`, `/vurdering`, `/estimation`, `/vaerktoej`, `/oevelser`, `/sluttjek` og `/opsummering`. `/4` og ukendte trin kanoniseres til `/4/start`. Første trin går tilbage til B10–11/opsummering; sidste trin går til den planlagte Modul 5-side. Forløbet har fortsat seks undervisningsgange plus en særskilt opsamling.
+
+- `normal-plot-math.js`: stabile gennemsnits-/spredningsberegninger, rangpositioner, sortering med originalt målingsnummer, teoretiske normalfraktiler, modelrelateret udfaldsklasse, akseaflæsning og efterfølgende modelberegning.
+- `normal-plot-figures.js`: alle datapunkter i begge akseretninger, erklæret referencelinje, komplette databilag og neutrale skematiske aflæsningsfigurer til både undervisning og bank.
+- `normal-plot-graphs.js`: synkroniserede kildevælgere, hele datatabeller, stigende/original rækkefølge, rangmarkering, begge akseretninger, yderpunktsmarkering, estimater og tekstlig vurdering. Figurer er responsive, har tekstalternativer og kan betjenes med tastatur.
+- `normal-plot-content.js`, `normal-plot-exercises.js` og `normal-plot-lesson.js`: fælles teori-, øvelses-, feedback-, note- og progressionskomponenter.
+- `tasks/bank/normal-plots.js`: 16 version 1-opgaver i `norm.4` med Modul 1 og 2 som forudsætninger; B10–11 er ikke en kunstig obligatorisk forudsætning for datafortolkning.
+
+Der er 43 kort: 8 diagnostiske, 12 mikroøvelser, 16 bankopgaver og 7 slutkort. De sidste 35 skal være korrekt kontrolleret for »Gennemført«. Figurvalg og sidebesøg gennemfører intet. En ændret korrekt besvarelse ophæver den aktive kontrol. Egne begrundelser og digitale undersøgelser vurderes med tjeklister. Svar, kontrolflag og hinttrin bruger `christian-matematik.normal.plots.v1`; noter bruger `christian-matematik.normal.plot-notes.v1`. Kontoens eksisterende synkronisering og historik registrerer Modul 4 med en `/4/…`-rute. Tidligere modulnøgler og opgaveversioner er bevaret.
+
+### Kilde- og opgavekort
+
+| Bank-id | Dækning | Kilde/tilpasning |
+| --- | --- | --- |
+| norm4.sample | Stikprøve, population og begrænsning | Begrebsbro til de fire regneark |
+| norm4.rank | Stigende sortering, gentagelser og rangposition | Lille eget øvesæt |
+| norm4.axes | Negativ normalfraktil er ikke sandsynlighed | Kildens akseretning |
+| norm4.read-line | Centrum/spredning og normalinterval | Ark 4, eksempel 1 uden hjælpemidler |
+| norm4.read-qq | Aflæsning og exceptionelt yderpunkt | Ark 4, qq-eksemplet |
+| norm4.u1 | Parametre og ingen exceptionelle viste udfald | Ark 4, u1 og facit |
+| norm4.pattern | Forsigtig konklusion ud fra omtrent ret linje | Fælles grundidé |
+| norm4.carrots | 400 målinger, gennemsnit og stikprøvespredning | Gulerødder, alle celler fra Ark1 |
+| norm4.volume | Modelvurdering, estimater og ny karton | Ark 4 opgave 1, alle 100 rumfang |
+| norm4.height40 | Rimelig tilnærmelse og populationsforbehold | Ark 4 opgave 2, alle 40 højder |
+| norm4.height200 | Systematisk afvigelse trods ingen exceptionelle | Ark 4 opgave 3, alle 200 klubhøjder |
+| norm4.sample-sd | Nævner, varians, kvadratrod og spredning | Eget enkelt øvesæt |
+| norm4.model-p | Modelandel kontra optalt andel | Gulerødder og grænsen 396 g |
+| norm4.outlier | Exceptionel måling, undersøgelse og begrundet håndtering | Gulerødder, Ark1 A2 |
+| norm4.workflow | Efterprøvbart digitalt metodevalg | Dokumentation uden opfundne programkrav |
+| norm4.municipal | Systematisk krumning og uhensigtsmæssig normalmodel | Ark 4, kommunefiguren uden rådataberegning |
+
+Alle nødvendige rådata står i bankopgavernes databilag, også i prøvetilstand. Hints, løsninger og målmetadata skjules indtil aflevering efter det fælles system. Aflæsningsfigurerne har ikke teorihints i deres neutrale banktekster. Opgaverne kræver både metode, fortolkning og tal og er ikke blot kontrol af værktøjsindtastning.
+
+### Verifikation af Modul 4
+
+De nye faglige tests kontrollerer alle fire datasæts nøgletal mod uafhængige Python-/regnearksberegninger, alle rangnumre og oprindelige målingsnumre, bevaring af gentagelser, fraktiler mod uafhængige referenceværdier, valg af nævner, begge akseretninger, alle punkter i figurerne, kildefacit, modelberegninger, grænsekonvention, afrunding, mål, kontrakt, feedback, ruter, forudsætninger og gamle opgaveversioner.
+
+Browserforløbet tester alle 43 kort og 16 bankopgaver, komplette databilag, de fire datasæt, synkroniserede vælgere, begge akser, sortering og oprindelig rækkefølge, tastatur, valgte rangpunkter, yderpunktsmarkering, estimater, målrettet feedback, hints, grundhjælp, noter, genindlæsning, ophævet korrektstatus, tidligere undervisningsganges uafhængige status, fem gennemførte af seks undervisningsgange, alle ti trin, forrige/næste og browserhistorik, MathML, mobil, defekt/blokeret lagring og prøve/repetition. Kontobrowsertesten dækker Modul 4-svar, historikkens modul/rute, noter, anden enhed og isolation mellem brugere.
+
+Afsluttet validering: alle 79 faglige/enhedstests, konto-/servertesten, 17 browserforløb og den udvidede kontobrowsertest består. Alle 281 bankopgaver er instansieret og valideret. Alle oprindelige måleceller er sammenlignet med afskriften. Desktop- og 390-pixel mobilfigurer og datatabeller er gennemset. Browserforløbene rapporterer ingen JavaScript- eller konsolfejl. Produktionsbuild og `git diff --check` består. Lokale filindlæsningsfejl (ETIMEDOUT ved afhængighedslæsning) blev afgrænset ved genkørsel med samme appfiler i en midlertidig mappe og samme låste afhængigheder installeret offline; der er ingen ændring af projektets afhængigheder.

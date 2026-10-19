@@ -70,9 +70,9 @@ test('new contract, goals, grading, specific error feedback and old task version
  for(const task of bank.filter(t=>!t.id.startsWith('b1011.'))){const saved=instantiate(task.id,'old-set');assert.deepEqual(instantiate(task.id,'old-set',saved.version),saved);}
 });
 test('unumbered repetition routes and independent module filter retain the six-session structure',()=>{
- assert.deepEqual(normalImplemented,['1','2','3','repetition']);assert.equal(algebraSteps.length,11);
+ assert.deepEqual(normalImplemented,['1','2','3','repetition','4']);assert.equal(algebraSteps.length,11);
  for(const module of normalImplemented)for(const path of pagesForNormalModule(module))assert.equal(parseNormalRoute('#'+path).path,path);
- assert.equal(parseNormalRoute('#normalDistribution/repetition').path,'normalDistribution/repetition/start');assert.equal(parseNormalRoute('#normalDistribution/repetition/bad').step,'start');assert.equal(parseNormalRoute('#normalDistribution/4').step,'');
+ assert.equal(parseNormalRoute('#normalDistribution/repetition').path,'normalDistribution/repetition/start');assert.equal(parseNormalRoute('#normalDistribution/repetition/bad').step,'start');assert.equal(parseNormalRoute('#normalDistribution/5').step,'');
  const config={topics:['normalDistribution'],minutes:500,distribution:{short:50,medium:50,complex:50},onlyCompleted:true};
- assert.equal(composeSet({...config,completed:['norm.repetition']}).tasks.length,16);assert.equal(composeSet({...config,completed:['norm.1','norm.2','norm.3']}).tasks.length,43);assert.equal(composeSet({...config,completed:['norm.1','norm.2','norm.3','norm.repetition']}).tasks.length,59);assert.equal(composeSet({...config,onlyCompleted:false}).tasks.length,59);
+ assert.equal(composeSet({...config,completed:['norm.repetition']}).tasks.length,16);assert.equal(composeSet({...config,completed:['norm.1','norm.2','norm.3']}).tasks.length,43);assert.equal(composeSet({...config,completed:['norm.1','norm.2','norm.3','norm.repetition']}).tasks.length,59);assert.equal(composeSet({...config,onlyCompleted:false}).tasks.length,75);
 });

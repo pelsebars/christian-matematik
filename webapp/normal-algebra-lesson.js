@@ -19,7 +19,7 @@ export function createAlgebraLesson(host,onStatus){
   }
   host.querySelector('[data-algebra-summary]').replaceChildren(...tracks.map(t=>{const p=document.createElement('p');p.dataset.algebraTrackStatus=t.id;p.textContent=`${t.label}: ${t.status}. Starttjek ${t.preCount}/${t.pre.length}; træning ${t.practiceCount}/${t.practice.length}; sluttjek ${t.finalCount}/${t.final.length}.`;return p;}));
   const started=tracks.some(t=>t.status!=='Ikke begyndt'),status=count===2?'Gennemført':started?'I gang':'Ikke begyndt';
-  host.querySelector('[data-algebra-next]').textContent=count===2?'Begge spor er gennemført. Gennemgå dine forklaringer og kontroller. Næste undervisningsgang er Modul 4 om normalfordelingsplot, som endnu er planlagt.':`Fortsæt med ${tracks.filter(t=>!t.mastered).map(t=>t.label).join(' og ')}. Et gennemført spor kan springes over.`;
+  host.querySelector('[data-algebra-next]').textContent=count===2?'Begge spor er gennemført. Gennemgå dine forklaringer og kontroller. Næste undervisningsgang er Modul 4 om normalfordelingsplot, som nu er åbent.':`Fortsæt med ${tracks.filter(t=>!t.mastered).map(t=>t.label).join(' og ')}. Et gennemført spor kan springes over.`;
   onStatus(status,count,2);
  },'algebra-basics');
  host.addEventListener('click',event=>{

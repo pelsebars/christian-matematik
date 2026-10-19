@@ -70,6 +70,13 @@ try {
   assert.equal(algebraRecord.topic,'normalDistribution'); assert.equal(algebraRecord.module,'B-repetition 10–11'); assert.equal(algebraRecord.route,'normalDistribution/repetition/start');
   await a.evaluate(()=>window.showMathView('normalDistribution/repetition/oevelser'));
   await a.locator('#algebra-notes').fill('Begge spor og begge ligninger følger min konto.'); await saved(a);
+  await a.goto(f.origin+'/#normalDistribution/4/start');
+  const plots = a.locator('[data-int-card="norm4.pre.mean"]');
+  await plots.locator('input').fill('4'); await plots.locator('button[type=submit]').click();
+  const plotRecord = await a.evaluate(async () => (await import('/account/store.js')).completions().find(c=>c.id.includes('norm4.pre.mean')));
+  assert.equal(plotRecord.topic,'normalDistribution'); assert.equal(plotRecord.module,'Modul 4'); assert.equal(plotRecord.route,'normalDistribution/4/start');
+  await a.evaluate(()=>window.showMathView('normalDistribution/4/oevelser'));
+  await a.locator('#plot-notes').fill('Mine datakilder, rangregel og forsigtige plotkonklusion.'); await saved(a);
   await a.locator('.nav-item[data-view=tasks]').click();
   await a.locator('[name=topics][value=equations]').check();
   await a.locator('[name=minutes]').fill('30');
@@ -85,11 +92,11 @@ try {
   }
   await a.locator('[data-task-action=check]').click(); await saved(a);
   await a.locator('.nav-item[data-view=home]').click(); await saved(a);
-  assert.equal(await a.locator('.personal-summary > strong').textContent(),'9');
+  assert.equal(await a.locator('.personal-summary > strong').textContent(),'10');
   await a.screenshot({path:'/tmp/math-dashboard-desktop.png',fullPage:true});
   // A separate device can recover answers and permanent completion records.
   const device = await browser.newContext(); const other = await device.newPage(); await enter(other,'elev_a');
-  assert.equal(await other.locator('.personal-summary > strong').textContent(),'9');
+  assert.equal(await other.locator('.personal-summary > strong').textContent(),'10');
   await other.locator('.nav-item[data-view=equations]').click();
   assert.equal(await other.locator('#equationLesson .exercise-card').first().getAttribute('data-solved'),'true');
   await other.goto(f.origin+'/#normalDistribution/1/start');
@@ -118,6 +125,12 @@ try {
   assert.match(await other.locator('[data-algebra-track-status=system]').textContent(),/Ikke begyndt/);
   await other.evaluate(()=>window.showMathView('normalDistribution/repetition/oevelser'));
   assert.match(await other.locator('#algebra-notes').inputValue(),/følger min konto/);
+  await other.goto(f.origin+'/#normalDistribution/4/start');
+  await other.locator('[data-int-card="norm4.pre.mean"].is-correct').waitFor();
+  assert.equal(await other.locator('[data-int-card="norm4.pre.mean"] input').inputValue(),'4');
+  assert.equal(await other.locator('[data-normal-status="4"]').textContent(),'I gang');
+  await other.evaluate(()=>window.showMathView('normalDistribution/4/oevelser'));
+  assert.match(await other.locator('#plot-notes').inputValue(),/forsigtige plotkonklusion/);
   await saved(other); await device.close();
   await a.locator('#accountLogout').click(); await a.locator('#accountLanding').waitFor();
   await enter(a,'elev_b',true);
@@ -148,6 +161,12 @@ try {
   assert.equal(await a.locator('[data-normal-status=repetition]').textContent(),'Ikke begyndt');
   await a.evaluate(()=>window.showMathView('normalDistribution/repetition/oevelser'));
   assert.equal(await a.locator('#algebra-notes').inputValue(),'');
+  await a.locator('.nav-item[data-view=equations]').click();
+  await a.evaluate(()=>window.showMathView('normalDistribution/4/start'));
+  assert.equal(await a.locator('[data-int-card="norm4.pre.mean"] input').inputValue(),'');
+  assert.equal(await a.locator('[data-normal-status="4"]').textContent(),'Ikke begyndt');
+  await a.evaluate(()=>window.showMathView('normalDistribution/4/oevelser'));
+  assert.equal(await a.locator('#plot-notes').inputValue(),'');
   await a.locator('.nav-item[data-view=equations]').click();
   // A failed save remains queued, is visible, and is sent after reconnection.
   await a.route('**/api/learning', route => route.request().method()==='PUT' ? route.abort() : route.continue());

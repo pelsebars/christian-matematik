@@ -83,3 +83,12 @@
 #normalLesson #algebra-basics,#normalLesson [id^="algebra-final-"] { scroll-margin-top:20px; }
 #normalLesson #normal-repetition table { border-collapse:collapse; margin:16px 0; width:100%; }
 #normalLesson #normal-repetition th,#normalLesson #normal-repetition td { padding:8px; border-bottom:1px solid var(--line); text-align:left; }
+
+#normalLesson #plot-basics { scroll-margin-top:20px; }
+.normal-data-scroll { max-width:100%; max-height:360px; overflow:auto; margin:16px 0; border:1px solid var(--line); border-radius:8px; }
+.normal-data-scroll table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+.normal-data-scroll th,.normal-data-scroll td { padding:8px 12px; border-bottom:1px solid var(--line); text-align:left; }
+.normal-data-scroll th { position:sticky; top:0; background:var(--surface); }
+#normalLesson #plot-data label:has(input[type=checkbox]),#normalLesson #plot-lab label:has(input[type=checkbox]) { display:flex; align-items:flex-start; gap:10px; margin:16px 0; }
+#normalLesson #plot-data input[type=checkbox],#normalLesson #plot-lab input[type=checkbox] { width:20px; height:20px; flex-shrink:0; margin-top:4px; }
+#normalLesson #plot-lab svg { width:100%; height:auto; display:block; margin:18px 0; }

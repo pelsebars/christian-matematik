@@ -402,3 +402,14 @@ De 14 mål har præfikset `b1011.`: `recognize`, `expand`, `sign`, `factor`, `ch
 Undervisningen har to separate starttjek og sluttjek samt 43 kort i alt. B10 kræver sine fire slutkort og enten fire startkort eller alle 12 træningskort. B11 kræver sine fem slutkort og enten fire startkort eller alle 14 træningskort. Den fagligt begrundede genvej kræver således kontrollerede svar. Et spor kan gennemføres uafhængigt af det andet; hele undervisningsgangen kræver begge. Noter og egen begrundelse vurderes med tjekliste. Konto- og historikadapteren bruger B-repetition 10–11 og separate normal/algebra-nøgler, adskilt fra integralforløbets repetition.
 
 Kildegrundlag, alle opgaver, ruter og progression er beskrevet i `webapp/NORMALFORDELING_PLAN.md`. Læseplanen angiver de to emner den 6. november; der findes ikke et særskilt lokalt B10–11-ark. De nye faglige tests kontrollerer identiteter, valg, fortegn, systemer, figurdata og gennemførelseslogik. Browserforløbet tester alle kort og bankopgaver, begge spor og veje, feedback, lagring, figurer, prøve/repetition, navigation, MathML, tastatur og mobil. Kontotesten dækker synkronisering mellem enheder og isolation mellem brugere.
+
+
+## Normalfordeling · Modul 4
+
+`tasks/bank/normal-plots.js` tilføjer 16 version 1-opgaver i `norm.4` med `norm.1` og `norm.2` som forudsætninger. Hele banken har 281 opgaver; Normalfordelingsforløbet har 75. Alle gamle id'er og versioner bevares. De 14 mål med præfikset `norm4.` er `data`, `sort`, `position`, `axes`, `read`, `estimate`, `variance`, `judge`, `outlier`, `probability`, `empirical`, `reason`, `tools` og `limits`.
+
+Korte begrebs- og aflæsningsopgaver leder til fire faktiske datasæt, fuld estimation, teksttung modelvurdering og sammenligning mellem modelsandsynlighed og målt andel. Alle data er med i opgavebilagene: 400 gulerodsvægte, 100 rumfang, 40 personhøjder og 200 klubhøjder. Gentagelser og yderpunkter bevares. Bankens komplette databilag er også tilgængelige i prøvetilstand; hints, løsning og målmetadata er skjult indtil aflevering.
+
+Kildens akseretning følges, og de skematiske aflæsningsfigurer skelnes fra plot beregnet på rådata. Appens rangregel og referencelinje er eksplicitte valg. Opgaverne skelner mellem teoretisk rangfraktil, standardiseret måling, spredning og varians, estimat og parameter, modelvurdering og bevis samt optælling og modelberegning. Klubhøjdernes systematiske afvigelser må ikke godkendes alene, fordi ingen målinger ligger uden for tre estimerede spredninger. Gulerøddernes to lave yderpunkter slettes ikke automatisk.
+
+Modul 4 har 43 kort med 35 obligatoriske kontroller: 12 mikroøvelser, 16 bankopgaver og 7 slutkort. Otte startkort er diagnostiske. Den eksisterende grader, hints, MathML, kontolagring, historik og prøve/repetition genbruges. Egne plotundersøgelser og konklusioner vurderes med tjeklister og separate kontonoter. Se `webapp/NORMALFORDELING_PLAN.md` for alle ruter, kildekort, data, valg og tests.

@@ -85,8 +85,8 @@ test('new bank and lessons cover all module-3 goals and preserve version-1 tasks
 test('selection filters prerequisites and all nine direct steps integrate with the earlier modules',()=>{
  const config={topics:['normalDistribution'],minutes:500,distribution:{short:50,medium:50,complex:50},onlyCompleted:true};
  assert.equal(composeSet({...config,completed:['norm.3']}).tasks.length,0);assert.equal(composeSet({...config,completed:['norm.1','norm.3']}).tasks.length,12);
- assert.equal(composeSet({...config,completed:['norm.1','norm.2']}).tasks.length,27);assert.equal(composeSet({...config,completed:['norm.1','norm.2','norm.3']}).tasks.length,43);assert.equal(composeSet({...config,onlyCompleted:false}).tasks.length,59);
- assert.deepEqual(normalImplemented,['1','2','3','repetition']);assert.equal(parameterSteps.length,9);assert.equal(pagesForNormalModule('3').length,9);
+ assert.equal(composeSet({...config,completed:['norm.1','norm.2']}).tasks.length,27);assert.equal(composeSet({...config,completed:['norm.1','norm.2','norm.3']}).tasks.length,43);assert.equal(composeSet({...config,onlyCompleted:false}).tasks.length,75);
+ assert.deepEqual(normalImplemented,['1','2','3','repetition','4']);assert.equal(parameterSteps.length,9);assert.equal(pagesForNormalModule('3').length,9);
  for(const module of normalImplemented)for(const path of pagesForNormalModule(module))assert.equal(parseNormalRoute('#'+path).path,path);
- assert.equal(parseNormalRoute('#normalDistribution/3').path,'normalDistribution/3/start');assert.equal(parseNormalRoute('#normalDistribution/3/bad').path,'normalDistribution/3/start');for(const module of ['4','5']){assert.equal(parseNormalRoute('#normalDistribution/'+module).step,'');assert.deepEqual(pagesForNormalModule(module),[]);}
+ assert.equal(parseNormalRoute('#normalDistribution/3').path,'normalDistribution/3/start');assert.equal(parseNormalRoute('#normalDistribution/3/bad').path,'normalDistribution/3/start');for(const module of ['5']){assert.equal(parseNormalRoute('#normalDistribution/'+module).step,'');assert.deepEqual(pagesForNormalModule(module),[]);}
 });
