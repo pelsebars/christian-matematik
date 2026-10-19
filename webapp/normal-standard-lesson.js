@@ -16,7 +16,7 @@ export function createStandardLesson(host,onStatus){
   const status=count===standardRequired.length?'Gennemført':attempted?'I gang':'Ikke begyndt';
   host.querySelector('[data-standard-pre-status]').textContent=`${standardPre.filter(complete).length} af ${standardPre.length} grundspørgsmål er korrekt kontrolleret. Brug grundhjælpen ved de konkrete spørgsmål.`;
   host.querySelector('[data-standard-final-status]').textContent=`${standardFinal.filter(complete).length} af ${standardFinal.length} forståelsesspørgsmål er korrekte.`;
-  host.querySelector('[data-standard-next]').textContent=status==='Gennemført'?'De obligatoriske kontroller er gennemført. Gennemgå også din egen forklaring og værktøjsdokumentation. Modul 3 om ukendte modelparametre er næste trin og er endnu planlagt.':`${count} af ${standardRequired.length} obligatoriske øvelser er korrekt kontrolleret. Øv de ubesvarede opgaver og brug feedbacken til at skelne regnefejl fra begrebsfejl.`;
+  host.querySelector('[data-standard-next]').textContent=status==='Gennemført'?'De obligatoriske kontroller er gennemført. Gennemgå også din egen forklaring og værktøjsdokumentation. Modul 3 om ukendte modelparametre er næste trin og er åbent.':`${count} af ${standardRequired.length} obligatoriske øvelser er korrekt kontrolleret. Øv de ubesvarede opgaver og brug feedbacken til at skelne regnefejl fra begrebsfejl.`;
   onStatus(status,count,standardRequired.length);
  },'standard-basics');
  host.addEventListener('click',event=>{

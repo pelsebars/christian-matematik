@@ -76,3 +76,6 @@
 
 #normalLesson .normal-presets { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0; }
 #normalLesson #standard-basics { scroll-margin-top:20px; }
+
+#normalLesson #parameter-basics { scroll-margin-top:20px; }
+#normalLesson [data-parameter-error]:not(:empty) { color:#943c25; }

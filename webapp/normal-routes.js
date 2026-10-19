@@ -1,8 +1,9 @@
 import { normalModules } from './normal-plan.js';
 export const normalSteps=[['start','Mål og forudsætninger'],['model','Fra måling til model'],['taethed','Tæthed og areal'],['fordeling','Fordelingsfunktionen'],['vaerktoej','Beregn og find en grænse'],['oevelser','Opgaver'],['sluttjek','Forståelsestjek'],['opsummering','Opsummering']];
 export const standardSteps=[['start','Mål og forudsætninger'],['standard','Mål i spredninger'],['tilbage','Tilbage og sammenligning'],['udfald','Normale og exceptionelle'],['sandsynlighed','Sandsynligheder'],['oevelser','Opgaver'],['sluttjek','Forståelsestjek'],['opsummering','Opsummering']];
-export const normalImplemented=['1','2'];
-export const stepsForNormalModule=module=>({'1':normalSteps,'2':standardSteps}[module]||[]);
+export const parameterSteps=[['start','Mål og forudsætninger'],['oplysninger','Kendte og ukendte'],['spredning','Find spredningen'],['middelvaerdi','Find middelværdien'],['begge','Find begge parametre'],['taethed','En tæthedsbetingelse'],['oevelser','Opgaver'],['sluttjek','Forståelsestjek'],['opsummering','Opsummering']];
+export const normalImplemented=['1','2','3'];
+export const stepsForNormalModule=module=>({'1':normalSteps,'2':standardSteps,'3':parameterSteps}[module]||[]);
 export const normalRoute=(module='',step='')=>['normalDistribution',module,step].filter(Boolean).join('/');
 export const pagesForNormalModule=module=>stepsForNormalModule(module).map(([step])=>normalRoute(module,step));
 export function parseNormalRoute(hash){

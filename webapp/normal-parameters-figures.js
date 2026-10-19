@@ -1,0 +1,7 @@
+import { cdf,fmt } from './normal-math.js';
+export function parameterCdfFigure(mean=8,sd=3){
+ const min=mean-3*sd,max=mean+3*sd,px=x=>55+(x-min)/(max-min)*510,py=p=>220-p*180;
+ const points=Array.from({length:241},(_,i)=>{const x=min+(max-min)*i/240;return [x,cdf(x,mean,sd)];});
+ const path=points.map(([x,p],i)=>`${i?'L':'M'}${px(x).toFixed(3)},${py(p).toFixed(3)}`).join(' ');
+ return `<figure class="normal-concepts task-figure"><svg viewBox="0 0 620 275" role="img" aria-label="Fordelingsfunktion: ved ${mean} er det opsamlede areal 0,5; ved ${mean+sd} er det cirka 0,8413"><title>Fordelingsfunktion med to aflæsninger</title><desc>De markerede punkter har koordinater ${mean} og 0,5 samt ${mean+sd} og cirka 0,8413. Den lodrette akse viser opsamlet sandsynlighed, ikke tæthed.</desc><path d="M55 30V220H580" fill="none" stroke="currentColor"/>${[0,.5,1].map(p=>`<text x="48" y="${py(p)+4}" text-anchor="end">${fmt(p,1)}</text>`).join('')}<path d="${path}" fill="none" stroke="#176489" stroke-width="3"/>${[mean,mean+sd].map(x=>`<path d="M${px(x)} 220V${py(cdf(x,mean,sd))}H55" fill="none" stroke="#8b512a" stroke-dasharray="4 4"/><circle cx="${px(x)}" cy="${py(cdf(x,mean,sd))}" r="4" fill="#8b512a"/><text x="${px(x)}" y="243" text-anchor="middle">${fmt(x,0)}</text>`).join('')}<text x="55" y="17">Opsamlet sandsynlighed</text><text x="470" y="267">Måleværdi</text></svg><figcaption>Ved ${mean}: 0,5 til venstre. Ved ${mean+sd}: cirka 0,8413 til venstre. Tabellen fra Modul 2 forbinder cirka 0,8413 med én spredning over centrum.</figcaption></figure>`;
+}

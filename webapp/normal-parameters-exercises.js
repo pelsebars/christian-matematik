@@ -1,0 +1,37 @@
+import {math,n,mi,op,mu,sigma,X,frac,fn,distribution} from './normal-math.js';
+import { choice } from './tasks/bank/normal.js';
+import { standardPart as part } from './tasks/bank/normal-standard.js';
+const q=(id,prompt,type,answer,help,options)=>({id,aids:false,prompt:`<p>${prompt}</p>`,parts:[part('answer','Dit svar',type,answer,options)],hints:[help,'Se det gennemregnede eksempel og den relevante grundhjælp, og prøv igen.'],solution:`<p>${help}</p><p>Facit: ${type==='choice'?options.find(o=>o.id===answer).label:math(Number(answer)<0?op('−')+n(String(Math.abs(Number(answer))).replace('.',',')):n(String(answer).replace('.',',')))}.</p>`,errors:[{part:'answer',feedback:help.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ')}]});
+export const parameterPre=[
+ q('norm3.pre.sign',`Beregn ${math(n(2)+op('−')+n(5))}.`,'number','-3','Fortegn: et mindre tal minus et større giver en negativ forskel.'),
+ q('norm3.pre.fraction',`Beregn ${math(frac(n(-3),op('−')+n('1,5')))}.`,'number','2','Regning: negativt divideret med negativt er positivt. Tre divideret med halvanden er to.'),
+ q('norm3.pre.tail','Et højre haleareal er 0,3. Hvad er venstre areal ved samme grænse?','number','0.7','Halevalg: venstre og højre areal summerer til én. Træk 0,3 fra én.'),
+ q('norm3.pre.percent','Skriv 10 % som decimaltal.','number','0.1','Procentregning: procent betyder pr. hundrede. Divider ti med hundrede.'),
+ q('norm3.pre.equation',`Løs ${math(n(12)+op('=')+mu+op('+')+n(2))}.`,'number','10','Ligningsregning: træk to fra begge sider for at isolere den ukendte middelværdi.'),
+ q('norm3.pre.parameter',`Hvad er spredningen i ${math(distribution(n(10),n(3)))}?`,'number','3','Notation: anden parameter er spredningen, ikke variansen.'),
+ q('norm3.pre.cdf','Hvilken oplysning fortæller, at der ligger 10 % til venstre for grænsen 2?','choice','cdf','Begreber: stort F er opsamlet sandsynlighed; lille f er en tæthedshøjde.',[choice('cdf',math(fn('F',n(2))+op('=')+n('0,1'))),choice('density',math(fn('f',n(2))+op('=')+n('0,1')))]),
+ q('norm3.pre.square',`Beregn ${math('<msup><mrow><mo>(</mo>'+n(-2)+'<mo>)</mo></mrow><mn>2</mn></msup>')}.`,'number','4','Potenser: minus to ganget med minus to giver plus fire. Kvadrering skjuler fortegnet på afstanden.'),
+];
+export const parameterMini=[
+ q('norm3.mini.information','Begge modelparametre er ukendte. Du får kun én oplysning om et venstre areal væk fra centrum. Kan du generelt bestemme begge parametre entydigt?','choice','no','Én sådan betingelse forbinder middelværdi og spredning. Flere kombinationer kan passe; der kræves en ekstra uafhængig oplysning.',[choice('no','Nej, der mangler en ekstra uafhængig oplysning.'),choice('yes','Ja, enhver enkelt sandsynlighed bestemmer altid begge parametre.')]),
+ q('norm3.mini.median',`Du ved ${math(fn('F',n(8))+op('=')+n('0,5'))} for en normalfordeling. Hvad er middelværdien?`,'number','8','Middelværdien deler den symmetriske normalfordeling i to lige store arealer.'),
+ q('norm3.mini.tail','Ti procent ligger over en grænse. Hvilket venstre areal bruges til at finde standardfraktilen?','number','0.9','Områdevalg: træk højre hale 0,10 fra én, før du finder en venstre standardfraktil.'),
+ q('norm3.mini.sd','Grænsen er 12, middelværdien er 10, og grænsen ligger én spredning over centrum. Hvad er spredningen?','number','2','Afstanden fra centrum er to. Da det er én spredning, er spredningen to.'),
+ q('norm3.mini.consistency','Middelværdien er 5. Kan kun 10 % af en normalmodels værdier ligge under 6?','choice','no','Grænsen 6 ligger over centrum, så mere end halvdelen må ligge under. En negativ spredning er ikke en løsning.',[choice('no','Nej, oplysningerne er modstridende.'),choice('yes','Ja, ved en negativ spredning.')]),
+ q('norm3.mini.mean','Spredningen er 2. Grænsen 12 ligger én spredning over centrum. Hvad er middelværdien?','number','10','Træk én spredning, altså to, fra grænsen 12.'),
+ q('norm3.mini.symmetry','En normalmodel har lige store ydre haler ved 245 og 255. Hvad er middelværdien?','number','250','Ved lige store haler ligger centrum midt mellem grænserne. Læg dem sammen og divider med to.'),
+ q('norm3.mini.both','To grænser ligger 20 enheder fra hinanden og 0,5 spredninger fra hinanden. Hvor stor er én spredning?','number','40','Afstanden på tallinjen divideres med afstanden i spredninger: tyve divideret med en halv.'),
+ q('norm3.mini.check','Du har bestemt begge parametre fra to oplyste arealer. Hvad skal kontrolleres?','choice','both','Beregn begge oprindelige sandsynligheder i den fundne model og kontrollér, at spredningen er positiv.',[choice('both','Begge arealer og en positiv spredning.'),choice('one','Kun det ene areal; det andet er altid automatisk kontrolleret.')]),
+ q('norm3.mini.density',`Hvad beskriver ${math(fn('f',n(1))+op('=')+n('0,05'))}?`,'choice','height','Lille f er tæthed. Betingelsen angiver kurvens højde ved én og er ikke et sandsynlighedsareal.',[choice('height','En tæthedshøjde ved måleværdien 1.'),choice('cdf','Et venstre sandsynlighedsareal på 5 %.')]),
+ q('norm3.mini.mirror','En kendt spredning og en tæthed ved måleværdien 1 giver en afstand på 4,2 mellem måleværdi og centrum. Det ene centrum er minus 3,2. Hvad er det andet?','number','5.2','Det andet centrum ligger 4,2 på den anden side af måleværdien 1. Læg 4,2 til én.'),
+ q('norm3.mini.tools','Hvilken dokumentation gør en parameterberegning efterprøvbar?','choice','all','Gem den oprindelige modelbetingelse, ligningen, værktøjets input og output, enhed og en kontrol i den oprindelige model.',[choice('all','Betingelser, ligning, input/output, enheder og kontrol.'),choice('graph','Et billede af en klokke uden parametre eller kontrol.')]),
+];
+export const parameterFinal=[
+ q('norm3.final.tail','20 % ligger over en grænse. Hvilket venstre areal bruges?','number','0.8','Træk højre hale på 0,20 fra én.'),
+ q('norm3.final.sd','Middelværdien er 10, og grænsen 14 ligger to spredninger over centrum. Bestem spredningen.','number','2','Afstanden er fire, som svarer til to spredninger. Divider fire med to.'),
+ q('norm3.final.mean','Spredningen er 3, og grænsen 13 ligger én spredning over centrum. Bestem middelværdien.','number','10','Træk én spredning på tre fra grænsen 13.'),
+ q('norm3.final.both','To grænser er 12 enheder fra hinanden. Deres standardiserede placeringer er tre spredninger fra hinanden. Hvad er modellens spredning?','number','4','Divider afstanden i oprindelige enheder med afstanden i antal spredninger.'),
+ q('norm3.final.positive','Et værktøj giver en negativ spredning fra dine ligninger. Kan svaret accepteres som normalmodel?','choice','no','Nej. Kontrollér halevalg, fortegn og de oprindelige betingelser. Spredningen skal være positiv.',[choice('no','Nej, spredning skal være positiv.'),choice('yes','Ja, negativ spredning betyder blot en smal fordeling.')]),
+ q('norm3.final.density','Med kendt spredning og en oplyst positiv tæthed under kurvens maksimale højde: hvor mange middelværdier kan passe?','number','2','To centre i samme afstand på hver side af måleværdien kan give samme tæthed. Ved maksimalhøjden falder de sammen til ét.'),
+ q('norm3.final.median',`Middelværdien er 5, og ${math(fn('F',n(5))+op('=')+n('0,5'))}. Bestemmer det spredningen entydigt?`,'choice','no','Arealet ved centrum er en halv uanset bredden. Den samme oplysning om centrum giver ikke en ny betingelse.',[choice('no','Nej, alle positive spredninger passer.'),choice('yes','Ja, spredningen må være 0,5.')]),
+];

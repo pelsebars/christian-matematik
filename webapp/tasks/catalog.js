@@ -10,6 +10,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "norm.3": {topic:"normalDistribution",name:"Beregning af middelværdi og spredning",section:"normal-module-3"},
   "norm.2": {topic:"normalDistribution",name:"Standardnormalfordelingen",section:"normal-module-2"},
   "norm.1": {topic:"normalDistribution",name:"Tæthedsfunktionen og fordelingsfunktionen",section:"normal-module-1"},
   "ode.1": {topic:"differentialEquations",name:"Hvad er en differentialligning?",section:"ode-module-1"},
@@ -69,6 +70,18 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "norm3.information": {module:"norm.3",text:"Skelne kendte og ukendte parametre og vurdere entydighed"},
+  "norm3.translate": {module:"norm.3",text:"Omsætte haler og mellemområder til korrekte venstre arealer"},
+  "norm3.equation": {module:"norm.3",text:"Opstille og isolere parameterligninger med standardfraktiler"},
+  "norm3.graph": {module:"norm.3",text:"Aflæse middelværdi og spredning fra fordelingsfunktionens punkter"},
+  "norm3.sd": {module:"norm.3",text:"Bestemme positiv spredning ved kendt middelværdi og en passende betingelse"},
+  "norm3.mean": {module:"norm.3",text:"Bestemme middelværdi ved kendt spredning og en arealbetingelse"},
+  "norm3.both": {module:"norm.3",text:"Bestemme begge parametre med symmetri eller to grænseligninger"},
+  "norm3.check": {module:"norm.3",text:"Kontrollere alle oprindelige betingelser, enheder og positiv spredning"},
+  "norm3.density": {module:"norm.3",text:"Skelne tæthedsbetingelse fra areal og finde alle mulige middelværdier"},
+  "norm3.reason": {module:"norm.3",text:"Begrunde metodevalg, symmetri, modelkrav og antallet af løsninger"},
+  "norm3.tools": {module:"norm.3",text:"Dokumentere fraktiler, ligninger, CAS-input/output og fremadrettet kontrol"},
+  "norm3.data": {module:"norm.3",text:"Bestemme en modelparameter fra en faktisk måling og givne modeloplysninger"},
   "norm2.scale": {module:"norm.2",text:"Forklare standardisering som ny måleenhed og centrum nul, spredning én"},
   "norm2.z": {module:"norm.2",text:"Beregne en standardiseret værdi med fortegn"},
   "norm2.interpret": {module:"norm.2",text:"Fortolke antal spredninger uden at forveksle med en sandsynlighed"},
