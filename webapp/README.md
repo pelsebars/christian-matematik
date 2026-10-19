@@ -26,7 +26,7 @@ En ren statisk webserver kan kun vise landing pagen; undervisningen kan afprøve
 
 ## Fælles opgaver
 
-Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 218 gennemgåede opgaver fra alle otte hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og personlig lagring. Integralmodul 1–7 har tilsammen 91 opgaver, heraf 46 seedede familier. Kildegennemgang og dækning er beskrevet i [INTEGRALREGNING_OPGAVEBANK.md](INTEGRALREGNING_OPGAVEBANK.md).
+Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 233 gennemgåede opgaver fra alle otte hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og personlig lagring. Integralmodul 1–7 har tilsammen 91 opgaver, heraf 46 seedede familier. Kildegennemgang og dækning er beskrevet i [INTEGRALREGNING_OPGAVEBANK.md](INTEGRALREGNING_OPGAVEBANK.md).
 
 Format, integrationspunkt og eksempler er beskrevet i [OPGAVEBANK.md](../OPGAVEBANK.md). Nye emnepakker tilføjes i `tasks/bank/` og registreres i `tasks/bank/index.js`.
 
@@ -35,4 +35,4 @@ Kør `npm test` i denne mappe. `npm run test:browser` kræver Playwright som lok
 Differentialligningernes kilder, ruter, fremdriftskrav og tests er beskrevet i [DIFFERENTIALLIGNINGER_PLAN.md](DIFFERENTIALLIGNINGER_PLAN.md).
 
 
-Normalfordeling har forløbsoversigt, en læringsmålmatrix med 26 mål, fem modulruter, B-repetition 10–11 mellem modul 3 og 4 samt en særskilt opsamling. Modul 1 er komplet med otte korte undervisningstrin, 37 øvelseskort, interaktive tætheds- og fordelingsgrafer, fraktilberegning, 12 fælles bankopgaver og personlig lagring. De øvrige sider er planlagte. Se [NORMALFORDELING_PLAN.md](NORMALFORDELING_PLAN.md) for kildekontrol, notation, de otte regneark og progression. `npm run test:normal` kører de nye faglige og browserbaserede tests.
+Normalfordeling har forløbsoversigt, en læringsmålmatrix med 26 mål, fem modulruter, B-repetition 10–11 mellem modul 3 og 4 samt en særskilt opsamling. Modul 1 og 2 er komplette med hver otte korte undervisningstrin, henholdsvis 37 og 40 øvelseskort, interaktive figurer, fraktilberegning, i alt 27 fælles bankopgaver og separat personlig lagring. Modul 2 viser standardisering som skift af måleenhed, regning tilbage, relative placeringer, normale/exceptionelle udfald og de samme arealer på to skalaer. Modul 3–5, B-repetition og opsamlingen er planlagte. Se [NORMALFORDELING_PLAN.md](NORMALFORDELING_PLAN.md) for kildekontrol, notation, de otte regneark og progression. `npm run test:normal` kører de nye faglige og browserbaserede tests.

@@ -51,7 +51,7 @@ test('bank, independent answers, diagnostics and feedback follow shared contract
  const egg=get('model');near(Number(egg.parts[0].answer),cdf(55,62,6));near(Number(egg.parts[1].answer),intervalProbability(55,70,62,6));near(Number(egg.parts[2].answer),survival(70,62,6));
  assert.match(targetedFeedback(get('milk'),get('milk').parts[0],'2,28'),/Procentregning/);assert.match(targetedFeedback(get('cdf'),get('cdf').parts[0],'0,15'),/Områdevalg/);
  assert.equal(gradePart(get('independent').parts[0],'1/1048576').status,'correct');
- assert.equal(composeSet({topics:['normalDistribution'],minutes:200,distribution:{short:20,medium:20,complex:20}}).tasks.length,12);
+ assert.equal(composeSet({topics:['normalDistribution'],onlyCompleted:true,completed:['norm.1'],minutes:200,distribution:{short:20,medium:20,complex:20}}).tasks.length,12);
  assert.equal(composeSet({topics:['normalDistribution'],onlyCompleted:true,completed:[]}).tasks.length,0);
 });
 test('six teaching sessions, separate recap, direct routes and source-linked goal matrix',()=>{

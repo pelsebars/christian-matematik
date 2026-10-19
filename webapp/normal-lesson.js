@@ -1,5 +1,5 @@
 import { bindLessonExercises } from './integral-exercises.js';
-import { accountStorage } from './account/store.js';
+import { bindNormalNotes } from './normal-lesson-support.js';
 import { normalContent } from './normal-content.js';
 import { normalPre,normalMini,normalFinal } from './normal-exercises.js';
 import { normalTasks } from './tasks/bank/normal.js';
@@ -16,7 +16,7 @@ export function createNormalLesson(host,onStatus){
   const status=count===normalRequired.length?'Gennemført':attempted?'I gang':'Ikke begyndt';
   host.querySelector('[data-normal-pre-status]').textContent=`${normalPre.filter(complete).length} af ${normalPre.length} grundspørgsmål er kontrolleret korrekt.`;
   host.querySelector('[data-normal-final-status]').textContent=`${normalFinal.filter(complete).length} af ${normalFinal.length} forståelsesspørgsmål er korrekte.`;
-  host.querySelector('[data-normal-next]').textContent=status==='Gennemført'?'De obligatoriske kontroller er gennemført. Gennemgå også din egen forklaring og værktøjsdokumentation. Næste modul er planlagt.':`${count} af ${normalRequired.length} obligatoriske øvelser er korrekt kontrolleret. Fortsæt med ubesvarede opgaver, eller gentag det trin, der driller.`;
+  host.querySelector('[data-normal-next]').textContent=status==='Gennemført'?'De obligatoriske kontroller er gennemført. Gennemgå også din egen forklaring og værktøjsdokumentation. Modul 2 om standardnormalfordelingen er næste trin og er åbent.':`${count} af ${normalRequired.length} obligatoriske øvelser er korrekt kontrolleret. Fortsæt med ubesvarede opgaver, eller gentag det trin, der driller.`;
   onStatus(status,count,normalRequired.length);
  },'normal-basics');
  host.addEventListener('click',e=>{
@@ -26,9 +26,6 @@ export function createNormalLesson(host,onStatus){
   window.showMathView('normalDistribution/1/start');
   const basics=host.querySelector('#normal-basics');basics.querySelector(`[data-basic="${map[suffix]||'probability'}"]`).open=true;basics.scrollIntoView({block:'start'});basics.focus({preventScroll:true});
  });
- const notes=host.querySelector('#normal-notes'),warning=host.querySelector('[data-lesson-warning]');
- const warn=()=>{warning.hidden=false;warning.textContent='Værktøjsnoterne kunne ikke gemmes. Hold siden åben for at bevare dem.';};
- try{notes.value=JSON.parse(accountStorage.getItem(NOTES_KEY)||'{}').text||'';}catch{warn();}
- notes.addEventListener('input',()=>{try{accountStorage.setItem(NOTES_KEY,JSON.stringify({text:notes.value}));}catch{warn();}});
+ bindNormalNotes(host,'normal-notes',NOTES_KEY);
  bindNormalGraphs(host);
 }

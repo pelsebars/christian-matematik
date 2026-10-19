@@ -49,6 +49,13 @@ try {
   assert.equal(normalRecord.topic,'normalDistribution'); assert.equal(normalRecord.module,'Modul 1'); assert.equal(normalRecord.route,'normalDistribution/1/start');
   await a.evaluate(()=>window.showMathView('normalDistribution/1/oevelser'));
   await a.locator('#normal-notes').fill('Mine normalnoter følger min konto.'); await saved(a);
+  await a.goto(f.origin+'/#normalDistribution/2/start');
+  const standard = a.locator('[data-int-card="norm2.pre.decimal"]');
+  await standard.locator('input').fill('-0,05'); await standard.locator('button[type=submit]').click();
+  const standardRecord = await a.evaluate(async () => (await import('/account/store.js')).completions().find(c=>c.id.includes('norm2.pre.decimal')));
+  assert.equal(standardRecord.topic,'normalDistribution'); assert.equal(standardRecord.module,'Modul 2'); assert.equal(standardRecord.route,'normalDistribution/2/start');
+  await a.evaluate(()=>window.showMathView('normalDistribution/2/oevelser'));
+  await a.locator('#standard-notes').fill('Standardmodellens noter holdes adskilt fra modul 1.'); await saved(a);
   await a.locator('.nav-item[data-view=tasks]').click();
   await a.locator('[name=topics][value=equations]').check();
   await a.locator('[name=minutes]').fill('30');
@@ -64,11 +71,11 @@ try {
   }
   await a.locator('[data-task-action=check]').click(); await saved(a);
   await a.locator('.nav-item[data-view=home]').click(); await saved(a);
-  assert.equal(await a.locator('.personal-summary > strong').textContent(),'6');
+  assert.equal(await a.locator('.personal-summary > strong').textContent(),'7');
   await a.screenshot({path:'/tmp/math-dashboard-desktop.png',fullPage:true});
   // A separate device can recover answers and permanent completion records.
   const device = await browser.newContext(); const other = await device.newPage(); await enter(other,'elev_a');
-  assert.equal(await other.locator('.personal-summary > strong').textContent(),'6');
+  assert.equal(await other.locator('.personal-summary > strong').textContent(),'7');
   await other.locator('.nav-item[data-view=equations]').click();
   assert.equal(await other.locator('#equationLesson .exercise-card').first().getAttribute('data-solved'),'true');
   await other.goto(f.origin+'/#normalDistribution/1/start');
@@ -76,6 +83,13 @@ try {
   assert.equal(await other.locator('[data-int-card="norm.pre.percent"] input').inputValue(),'0,25');
   await other.evaluate(()=>window.showMathView('normalDistribution/1/oevelser'));
   assert.match(await other.locator('#normal-notes').inputValue(),/følger min konto/);
+  await other.goto(f.origin+'/#normalDistribution/2/start');
+  await other.locator('[data-int-card="norm2.pre.decimal"].is-correct').waitFor();
+  assert.equal(await other.locator('[data-int-card="norm2.pre.decimal"] input').inputValue(),'-0,05');
+  assert.equal(await other.locator('[data-normal-status="1"]').textContent(),'I gang');
+  assert.equal(await other.locator('[data-normal-status="2"]').textContent(),'I gang');
+  await other.evaluate(()=>window.showMathView('normalDistribution/2/oevelser'));
+  assert.match(await other.locator('#standard-notes').inputValue(),/holdes adskilt/);
   await saved(other); await device.close();
   await a.locator('#accountLogout').click(); await a.locator('#accountLanding').waitFor();
   await enter(a,'elev_b',true);
@@ -88,6 +102,12 @@ try {
   assert.equal(await a.locator('[data-normal-status="1"]').textContent(),'Ikke begyndt');
   await a.evaluate(()=>window.showMathView('normalDistribution/1/oevelser'));
   assert.equal(await a.locator('#normal-notes').inputValue(),'');
+  await a.locator('.nav-item[data-view=equations]').click();
+  await a.evaluate(()=>window.showMathView('normalDistribution/2/start'));
+  assert.equal(await a.locator('[data-int-card="norm2.pre.decimal"] input').inputValue(),'');
+  assert.equal(await a.locator('[data-normal-status="2"]').textContent(),'Ikke begyndt');
+  await a.evaluate(()=>window.showMathView('normalDistribution/2/oevelser'));
+  assert.equal(await a.locator('#standard-notes').inputValue(),'');
   await a.locator('.nav-item[data-view=equations]').click();
   // A failed save remains queued, is visible, and is sent after reconnection.
   await a.route('**/api/learning', route => route.request().method()==='PUT' ? route.abort() : route.continue());

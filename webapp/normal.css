@@ -73,3 +73,6 @@
 }
 
 #normalLesson svg[hidden] { display:none; }
+
+#normalLesson .normal-presets { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0; }
+#normalLesson #standard-basics { scroll-margin-top:20px; }

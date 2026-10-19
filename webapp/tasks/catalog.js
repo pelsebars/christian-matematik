@@ -10,6 +10,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "norm.2": {topic:"normalDistribution",name:"Standardnormalfordelingen",section:"normal-module-2"},
   "norm.1": {topic:"normalDistribution",name:"Tæthedsfunktionen og fordelingsfunktionen",section:"normal-module-1"},
   "ode.1": {topic:"differentialEquations",name:"Hvad er en differentialligning?",section:"ode-module-1"},
   ...Object.fromEntries(integralModules.map(m => [m.id, {topic:"integration", name:m.title, section:m.section}])),
@@ -68,6 +69,19 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "norm2.scale": {module:"norm.2",text:"Forklare standardisering som ny måleenhed og centrum nul, spredning én"},
+  "norm2.z": {module:"norm.2",text:"Beregne en standardiseret værdi med fortegn"},
+  "norm2.interpret": {module:"norm.2",text:"Fortolke antal spredninger uden at forveksle med en sandsynlighed"},
+  "norm2.reverse": {module:"norm.2",text:"Gå fra standardiseret placering eller fraktil til oprindelig skala"},
+  "norm2.compare": {module:"norm.2",text:"Sammenligne observationers relative placering i forskellige modeller"},
+  "norm2.ranges": {module:"norm.2",text:"Bestemme normale og exceptionelle udfald efter materialets konvention"},
+  "norm2.boundaries": {module:"norm.2",text:"Skelne mellem højst to, præcis tre og mere end tre spredninger"},
+  "norm2.coverage": {module:"norm.2",text:"Bruge centrale arealer ved én, to og tre spredninger og symmetri"},
+  "norm2.graph": {module:"norm.2",text:"Aflæse centrum og spredning fra en kurve med kendt centralt areal"},
+  "norm2.probability": {module:"norm.2",text:"Bevare område og sandsynlighed ved standardisering af begge grænser"},
+  "norm2.reason": {module:"norm.2",text:"Begrunde metodevalg, grænser, modelantagelser og forsigtige konklusioner"},
+  "norm2.tools": {module:"norm.2",text:"Dokumentere oprindelige og standardiserede grænser samt værktøjskontrol"},
+  "norm2.data": {module:"norm.2",text:"Standardisere en faktisk måling uden at påstå bevis for normalfordeling"},
   "norm.model": {module:"norm.1",text:"Skelne observation og stokastisk variabel og fortolke en sandsynlighedsmodel"},
   "norm.parameters": {module:"norm.1",text:"Læse middelværdi og spredning og forbinde dem med klokkens form"},
   "norm.density": {module:"norm.1",text:"Skelne tæthed fra sandsynlighed og begrunde sandsynlighed nul for enkeltværdier"},
