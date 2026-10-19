@@ -92,12 +92,12 @@ export function lessonCompletion(key, task) {
   const ode = key.includes('ode') || key.includes('differential');
   const normal = key.startsWith('christian-matematik.normal.');
   const names = { graphs: '2', definite: '3', areas: '4', repetition: 'repetition', solids: '5', substitution: '6', final: '7' };
-  const module = normal ? ({ introduction:'1', standard:'2', parameters:'3' }[key.split('.')[2]] || '1') : ode ? '1' : names[key.split('.')[2]] || '1';
+  const module = normal ? ({ introduction:'1', standard:'2', parameters:'3', algebra:'repetition' }[key.split('.')[2]] || '1') : ode ? '1' : names[key.split('.')[2]] || '1';
   const topic = normal ? 'normalDistribution' : ode ? 'differentialEquations' : 'integration';
   const labelNode = document.createElement('div'); labelNode.innerHTML = task.prompt;
   const label = labelNode.textContent.replace(/\s+/g, ' ').trim().slice(0, 170) || task.id;
   const route = location.hash.slice(1).startsWith(topic + '/' + module + '/') ? location.hash.slice(1) : `${topic}/${module}/oevelser`;
-  return { id: `lesson:${key}:${task.id}:v${task.version || 1}`, topic, module: module === 'repetition' ? 'B-repetition' : `Modul ${module}`, label, route };
+  return { id: `lesson:${key}:${task.id}:v${task.version || 1}`, topic, module: module === 'repetition' ? (normal?'B-repetition 10–11':'B-repetition') : `Modul ${module}`, label, route };
 }
 
 export function exportDraft() {

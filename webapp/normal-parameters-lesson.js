@@ -16,7 +16,7 @@ export function createParameterLesson(host,onStatus){
   const status=count===parameterRequired.length?'Gennemført':attempted?'I gang':'Ikke begyndt';
   host.querySelector('[data-parameter-pre-status]').textContent=`${parameterPre.filter(complete).length} af ${parameterPre.length} grundspørgsmål er korrekt kontrolleret.`;
   host.querySelector('[data-parameter-final-status]').textContent=`${parameterFinal.filter(complete).length} af ${parameterFinal.length} forståelsesspørgsmål er korrekte.`;
-  host.querySelector('[data-parameter-next]').textContent=status==='Gennemført'?'De obligatoriske kontroller er gennemført. Gennemgå også dine forklaringer og din værktøjsdokumentation. Næste undervisningsgang er den særskilte B-repetition 10–11, som endnu er planlagt.':`${count} af ${parameterRequired.length} obligatoriske øvelser er korrekt kontrolleret. Brug feedbacken til at vælge mellem grundregning, områdevalg og modelkontrol.`;
+  host.querySelector('[data-parameter-next]').textContent=status==='Gennemført'?'De obligatoriske kontroller er gennemført. Gennemgå også dine forklaringer og din værktøjsdokumentation. Næste undervisningsgang er den særskilte B-repetition 10–11, som nu er åben.':`${count} af ${parameterRequired.length} obligatoriske øvelser er korrekt kontrolleret. Brug feedbacken til at vælge mellem grundregning, områdevalg og modelkontrol.`;
   onStatus(status,count,parameterRequired.length);
  },'parameter-basics');
  host.addEventListener('click',event=>{

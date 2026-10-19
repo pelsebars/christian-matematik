@@ -79,3 +79,7 @@
 
 #normalLesson #parameter-basics { scroll-margin-top:20px; }
 #normalLesson [data-parameter-error]:not(:empty) { color:#943c25; }
+
+#normalLesson #algebra-basics,#normalLesson [id^="algebra-final-"] { scroll-margin-top:20px; }
+#normalLesson #normal-repetition table { border-collapse:collapse; margin:16px 0; width:100%; }
+#normalLesson #normal-repetition th,#normalLesson #normal-repetition td { padding:8px; border-bottom:1px solid var(--line); text-align:left; }

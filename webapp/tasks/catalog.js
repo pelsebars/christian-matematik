@@ -10,6 +10,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "norm.repetition": {topic:"normalDistribution",name:"B-repetition 10–11: Kvadratsætninger og to ligninger",section:"normal-module-repetition"},
   "norm.3": {topic:"normalDistribution",name:"Beregning af middelværdi og spredning",section:"normal-module-3"},
   "norm.2": {topic:"normalDistribution",name:"Standardnormalfordelingen",section:"normal-module-2"},
   "norm.1": {topic:"normalDistribution",name:"Tæthedsfunktionen og fordelingsfunktionen",section:"normal-module-1"},
@@ -70,6 +71,21 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "b1011.recognize": {module:"norm.repetition",text:"Genkende de tre kvadratsætninger og deres forskellige mønstre"},
+  "b1011.expand": {module:"norm.repetition",text:"Udvide hele parenteser og samle alle blandede produkter"},
+  "b1011.sign": {module:"norm.repetition",text:"Regne korrekt med fortegn, koefficienter og parenteser"},
+  "b1011.factor": {module:"norm.repetition",text:"Faktorisere og kontrollere ved udvidelse"},
+  "b1011.check": {module:"norm.repetition",text:"Skelne generel identitet fra en kontrol med enkelte tal"},
+  "b1011.pair": {module:"norm.repetition",text:"Forstå et fælles ordnet løsningspar"},
+  "b1011.substitute": {module:"norm.repetition",text:"Isolere en ukendt og indsætte hele udtrykket"},
+  "b1011.eliminate": {module:"norm.repetition",text:"Eliminere ved kombination og skalering af hele ligninger"},
+  "b1011.method": {module:"norm.repetition",text:"Vælge og begrunde en gyldig løsningsmetode"},
+  "b1011.verify": {module:"norm.repetition",text:"Kontrollere samme par i begge oprindelige ligninger"},
+  "b1011.solutions": {module:"norm.repetition",text:"Skelne mellem én, ingen og uendeligt mange løsninger"},
+  "b1011.model": {module:"norm.repetition",text:"Opstille to ligninger fra tekst eller tabel og fortolke enheder"},
+  "b1011.apply": {module:"norm.repetition",text:"Anvende algebra i areal-, pris- og antalmodeller"},
+  "b1011.bridge": {module:"norm.repetition",text:"Forbinde ligningssystemer til kontrol af modelparametre"},
+
   "norm3.information": {module:"norm.3",text:"Skelne kendte og ukendte parametre og vurdere entydighed"},
   "norm3.translate": {module:"norm.3",text:"Omsætte haler og mellemområder til korrekte venstre arealer"},
   "norm3.equation": {module:"norm.3",text:"Opstille og isolere parameterligninger med standardfraktiler"},
