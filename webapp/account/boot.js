@@ -74,6 +74,7 @@ if (!user && !preview) {
   // Initial state must be loaded before any lesson binds its forms.
   await new Promise((resolve, reject) => { const script = document.createElement('script'); script.src = './app.js'; script.onload = resolve; script.onerror = reject; document.head.append(script); });
   await import('../tasks/ui.js'); await import('../integral.js'); await import('../ode.js'); await import('../normal.js');
+  await import('../sidebar.js');
   await import('./legacy.js');
   const dashboard = document.createElement('section'); dashboard.className = 'personal-overview';
   document.querySelector('[data-page="home"]').prepend(dashboard);

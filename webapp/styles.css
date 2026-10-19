@@ -115,6 +115,9 @@ h2 {
     radial-gradient(circle at 14% 8%, rgba(68, 118, 220, 0.2), transparent 27%),
     var(--navy);
   box-shadow: 12px 0 40px rgba(14, 25, 48, 0.12);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 162, 202, 0.4) transparent;
 }
 
 .brand,
@@ -205,6 +208,109 @@ h2 {
   color: #ffffff;
   background: var(--navy-light);
   box-shadow: inset 3px 0 #4d91ff;
+}
+
+.nav-group {
+  display: grid;
+}
+
+.nav-group-row {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+}
+
+.nav-group-row .nav-item {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.nav-expand {
+  display: grid;
+  width: 36px;
+  flex: 0 0 36px;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #8ba2ca;
+  background: transparent;
+  cursor: pointer;
+  transition: 160ms ease;
+}
+
+.nav-expand:hover,
+.nav-expand:focus-visible,
+.nav-group.is-current .nav-expand {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-expand:focus-visible,
+.nav-submenu :is(a, button):focus-visible {
+  outline: 2px solid #8cb7ff;
+  outline-offset: 2px;
+}
+
+.nav-chevron {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 160ms ease;
+}
+
+.nav-expand[aria-expanded="true"] .nav-chevron {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.nav-submenu {
+  display: grid;
+  gap: 2px;
+  margin: 3px 8px 8px 37px;
+  padding: 4px 0 4px 11px;
+  border-left: 1px solid rgba(139, 162, 202, 0.25);
+}
+
+.nav-submenu[hidden] {
+  display: none;
+}
+
+.nav-submenu :is(a, button) {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 4px;
+  align-items: start;
+  width: 100%;
+  padding: 7px 5px;
+  border: 0;
+  border-radius: 7px;
+  color: #aebbd1;
+  background: transparent;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 590;
+  line-height: 1.3;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-submenu :is(a, button):hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.nav-submenu :is(a, button)[aria-current="page"] {
+  color: #ffffff;
+  background: rgba(77, 145, 255, 0.14);
+}
+
+.nav-submenu :is(a, button) > span {
+  color: #7896c7;
+  font-size: 0.68rem;
+  font-weight: 780;
+  letter-spacing: 0.02em;
 }
 
 .nav-number,

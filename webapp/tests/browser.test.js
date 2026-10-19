@@ -56,6 +56,26 @@ try {
   });
   await page.goto(url + "/?preview=1");
   await page.locator("#tasksView form").waitFor({ state: "attached" });
+  await page.locator('html[data-sidebar-navigation="ready"]').waitFor();
+  // Sidebar module groups work as an accordion and link to both legacy
+  // scroll sections and routed teaching sessions.
+  assert.equal(await page.locator('.nav-group').count(), 5);
+  assert.equal(await page.locator('.nav-submenu:visible').count(), 0);
+  await page.locator('[data-nav-group="planeGeometry"] .nav-expand').click();
+  assert.equal(await page.locator('#nav-modules-planeGeometry').isVisible(), true);
+  assert.equal(await page.locator('[data-nav-group="planeGeometry"] .nav-expand').getAttribute('aria-expanded'), 'true');
+  await page.locator('[data-nav-group="integration"] .nav-expand').click();
+  assert.equal(await page.locator('#nav-modules-planeGeometry').isVisible(), false);
+  assert.equal(await page.locator('#nav-modules-integration').isVisible(), true);
+  await page.locator('#nav-modules-integration a').first().click();
+  await page.waitForFunction(() => location.hash === '#integration/1/start/1');
+  await page.waitForFunction(() => document.querySelector('#nav-modules-integration a')?.getAttribute('aria-current') === 'page');
+  assert.equal(await page.locator('#nav-modules-integration a').first().getAttribute('aria-current'), 'page');
+  await page.locator('[data-nav-group="planeGeometry"] .nav-expand').click();
+  await page.locator('#nav-modules-planeGeometry [data-sidebar-scroll="linje-starttjek"]').click();
+  assert.equal(await page.locator('#planeGeometryLesson').isVisible(), true);
+  await page.waitForFunction(() => document.querySelector('#nav-modules-planeGeometry [data-sidebar-scroll="linje-starttjek"]')?.getAttribute('aria-current') === 'page');
+  assert.equal(await page.locator('#nav-modules-planeGeometry [data-sidebar-scroll="linje-starttjek"]').getAttribute('aria-current'), 'page');
   // Existing pages and one existing exercise remain interactive.
   for (const view of [
     "equations",
@@ -245,6 +265,14 @@ try {
   assert.equal(await page.locator("#differentiationLesson").isVisible(), true);
   // Mobile, MathML namespace, SVG and keyboard focus.
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator("#menuButton").click();
+  await page.locator('[data-nav-group="planeGeometry"] .nav-expand').click();
+  await page.locator('#nav-modules-planeGeometry [data-sidebar-scroll="vektor-starttjek"]').click();
+  assert.equal(await page.locator("#planeGeometryLesson").isVisible(), true);
+  assert.equal(
+    await page.locator("#menuButton").getAttribute("aria-expanded"),
+    "false",
+  );
   await page.locator("#menuButton").click();
   await page.locator(".nav-item[data-view=tasks]").click();
   assert.equal(

@@ -57,18 +57,104 @@
             <span class="nav-number" aria-hidden="true">03</span>
             <span>Sammensatte funktioner</span>
           </button>
-          <button class="nav-item" type="button" data-view="differentiation">
-            <span class="nav-number" aria-hidden="true">04</span>
-            <span>Differentialregning</span>
-          </button>
-          <button class="nav-item" type="button" data-view="planeGeometry">
-            <span class="nav-number" aria-hidden="true">05</span>
-            <span>Plangeometri og vektorer</span>
-          </button>
+          <div class="nav-group" data-nav-group="differentiation">
+            <div class="nav-group-row">
+              <button class="nav-item" type="button" data-view="differentiation">
+                <span class="nav-number" aria-hidden="true">04</span>
+                <span>Differentialregning</span>
+              </button>
+              <button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-differentiation">
+                <span class="sr-only">Vis moduler i Differentialregning</span>
+                <span class="nav-chevron" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="nav-submenu" id="nav-modules-differentiation" hidden>
+              <button type="button" data-sidebar-view="differentiation" data-sidebar-scroll="diff-starttjek"><span>M1</span>Differentialkvotient</button>
+              <button type="button" data-sidebar-view="differentiation" data-sidebar-scroll="diff-produktregel"><span>M2</span>Produktreglen</button>
+              <button type="button" data-sidebar-view="differentiation" data-sidebar-scroll="diff-kaederegel"><span>M3</span>Kædereglen</button>
+              <button type="button" data-sidebar-view="differentiation" data-sidebar-scroll="diff-vendetangent"><span>M4</span>Vendetangent</button>
+              <button type="button" data-sidebar-view="differentiation" data-sidebar-scroll="diff-opsamling"><span>+</span>Opsamling</button>
+            </div>
+          </div>
 
-          <button class="nav-item" type="button" data-view="integration"><span class="nav-number" aria-hidden="true">06</span><span>Integralregning</span></button>
-          <button class="nav-item" type="button" data-view="differentialEquations"><span class="nav-number" aria-hidden="true">07</span><span>Differentialligninger</span></button>
-          <button class="nav-item" type="button" data-view="normalDistribution"><span class="nav-number" aria-hidden="true">08</span><span>Normalfordeling</span></button>
+          <div class="nav-group" data-nav-group="planeGeometry">
+            <div class="nav-group-row">
+              <button class="nav-item" type="button" data-view="planeGeometry">
+                <span class="nav-number" aria-hidden="true">05</span>
+                <span>Plangeometri og vektorer</span>
+              </button>
+              <button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-planeGeometry">
+                <span class="sr-only">Vis moduler i Plangeometri og vektorer</span>
+                <span class="nav-chevron" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="nav-submenu" id="nav-modules-planeGeometry" hidden>
+              <button type="button" data-sidebar-view="planeGeometry" data-sidebar-scroll="vektor-starttjek"><span>M1</span>Vektorer</button>
+              <button type="button" data-sidebar-view="planeGeometry" data-sidebar-scroll="skalar-starttjek"><span>M2</span>Skalarprodukt</button>
+              <button type="button" data-sidebar-view="planeGeometry" data-sidebar-scroll="projektion-starttjek"><span>M3</span>Projektion og determinant</button>
+              <button type="button" data-sidebar-view="planeGeometry" data-sidebar-scroll="linje-starttjek"><span>M4</span>Linjen</button>
+              <button type="button" data-sidebar-view="planeGeometry" data-sidebar-scroll="cirkel-starttjek"><span>M5</span>Cirklen</button>
+            </div>
+          </div>
+
+          <div class="nav-group" data-nav-group="integration">
+            <div class="nav-group-row">
+              <button class="nav-item" type="button" data-view="integration"><span class="nav-number" aria-hidden="true">06</span><span>Integralregning</span></button>
+              <button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-integration">
+                <span class="sr-only">Vis moduler i Integralregning</span>
+                <span class="nav-chevron" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="nav-submenu" id="nav-modules-integration" hidden>
+              <a href="#integration/1/start/1"><span>M1</span>Stamfunktion</a>
+              <a href="#integration/2/start/1"><span>M2</span>Grafen for en stamfunktion</a>
+              <a href="#integration/3/start/1"><span>M3</span>Bestemt integral</a>
+              <a href="#integration/4/start/1"><span>M4</span>Arealberegninger</a>
+              <a href="#integration/repetition/start/1"><span>Rep.</span>Potenser og inverse funktioner</a>
+              <a href="#integration/5/start/1"><span>M5</span>Rumfang og kurvelængde</a>
+              <a href="#integration/6/start/1"><span>M6</span>Ubestemt substitution</a>
+              <a href="#integration/7/start/1"><span>M7</span>Bestemt substitution</a>
+            </div>
+          </div>
+
+          <div class="nav-group" data-nav-group="differentialEquations">
+            <div class="nav-group-row">
+              <button class="nav-item" type="button" data-view="differentialEquations"><span class="nav-number" aria-hidden="true">07</span><span>Differentialligninger</span></button>
+              <button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-differentialEquations">
+                <span class="sr-only">Vis moduler i Differentialligninger</span>
+                <span class="nav-chevron" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="nav-submenu" id="nav-modules-differentialEquations" hidden>
+              <a href="#differentialEquations/1/start"><span>M1</span>Hvad er en differentialligning?</a>
+              <a href="#differentialEquations/2"><span>M2</span>Proportional vækst</a>
+              <a href="#differentialEquations/3"><span>M3</span>Tangent og linjeelement</a>
+              <a href="#differentialEquations/repetition"><span>Rep.</span>Logaritmer og binomial</a>
+              <a href="#differentialEquations/4"><span>M4</span>Hældningsfelt</a>
+              <a href="#differentialEquations/5"><span>M5</span>Forskudt vækst</a>
+              <a href="#differentialEquations/6"><span>M6</span>Logistisk vækst</a>
+              <a href="#differentialEquations/opsamling"><span>+</span>Opsamling</a>
+            </div>
+          </div>
+
+          <div class="nav-group" data-nav-group="normalDistribution">
+            <div class="nav-group-row">
+              <button class="nav-item" type="button" data-view="normalDistribution"><span class="nav-number" aria-hidden="true">08</span><span>Normalfordeling</span></button>
+              <button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-normalDistribution">
+                <span class="sr-only">Vis moduler i Normalfordeling</span>
+                <span class="nav-chevron" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="nav-submenu" id="nav-modules-normalDistribution" hidden>
+              <a href="#normalDistribution/1/start"><span>M1</span>Tæthed og fordeling</a>
+              <a href="#normalDistribution/2/start"><span>M2</span>Standardnormalfordeling</a>
+              <a href="#normalDistribution/3/start"><span>M3</span>Middelværdi og spredning</a>
+              <a href="#normalDistribution/repetition/start"><span>Rep.</span>Kvadratsætninger og ligninger</a>
+              <a href="#normalDistribution/4/start"><span>M4</span>Normalfordelingsplot</a>
+              <a href="#normalDistribution/5"><span>M5</span>Regression og hældning</a>
+              <a href="#normalDistribution/opsamling"><span>+</span>Opsamling</a>
+            </div>
+          </div>
           <div class="nav-divider" aria-hidden="true"></div>
 
           <button class="nav-item" type="button" data-view="tasks">
