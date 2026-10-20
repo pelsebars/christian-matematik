@@ -11,6 +11,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "vf.2": {topic:"vectorFunctions",name:"Hastighed, acceleration og tangenter",section:"vector-module-2"},
   "vf.1": {topic:"vectorFunctions",name:"Banekurver og skæringspunkter",section:"vector-module-1"},
   "norm.4": {topic:"normalDistribution",name:"Normalfordelingsplot",section:"normal-module-4"},
   "norm.repetition": {topic:"normalDistribution",name:"B-repetition 10–11: Kvadratsætninger og to ligninger",section:"normal-module-repetition"},
@@ -74,6 +75,21 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "vf2.differentiate": {module:"vf.2",text:"Differentiere koordinatvis med potens-, produkt-, kæde- og trigonometriske regler"},
+  "vf2.velocity": {module:"vf.2",text:"Beregne og fortolke hastighedsvektoren i et punkt"},
+  "vf2.speed": {module:"vf.2",text:"Skelne mellem hastighedsvektor og ikke-negativ fart"},
+  "vf2.acceleration": {module:"vf.2",text:"Beregne og fortolke acceleration, også ved konstant fart"},
+  "vf2.units": {module:"vf.2",text:"Anvende korrekte enheder og omregne fart"},
+  "vf2.tangent": {module:"vf.2",text:"Bestemme tangentpunkt, retningsvektor og tangentligning"},
+  "vf2.axes": {module:"vf.2",text:"Bestemme vandrette og lodrette tangenter med kontrol af ikke-nul vektor"},
+  "vf2.angle": {module:"vf.2",text:"Skelne mellem vektorvinkel og mindste linjevinkel"},
+  "vf2.double": {module:"vf.2",text:"Bestemme begge hastigheder og tangenter i et dobbeltpunkt"},
+  "vf2.height": {module:"vf.2",text:"Begrunde maksimal højde med interval, kandidater og randpunkter"},
+  "vf2.model": {module:"vf.2",text:"Fortolke bevægelsesmodeller og deres gyldighedsinterval"},
+  "vf2.collision": {module:"vf.2",text:"Skelne mellem baneskæring og samtidig kollision i en model"},
+  "vf2.cas": {module:"vf.2",text:"Dokumentere og kontrollere CAS-differentiation og problemløsning"},
+  "vf2.method": {module:"vf.2",text:"Vurdere metodebetingelser, nulvektor og nødvendige kontroller"},
+
   "vf.concept": {module:"vf.1",text:"Skelne mellem parameter, punkt, stedvektor og banekurve"},
   "vf.position": {module:"vf.1",text:"Beregne positionen ved en bestemt parameter"},
   "vf.point": {module:"vf.1",text:"Kontrollere begge koordinater ved samme tilladte parameter"},

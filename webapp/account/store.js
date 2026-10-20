@@ -93,7 +93,7 @@ export function lessonCompletion(key, task) {
   const vector = key.startsWith('christian-matematik.vector.');
   const normal = key.startsWith('christian-matematik.normal.');
   const names = { graphs: '2', definite: '3', areas: '4', repetition: 'repetition', solids: '5', substitution: '6', final: '7' };
-  const module = vector ? '1' : normal ? ({ introduction:'1', standard:'2', parameters:'3', algebra:'repetition', plots:'4' }[key.split('.')[2]] || '1') : ode ? '1' : names[key.split('.')[2]] || '1';
+  const module = vector ? ({ introduction:'1', dynamics:'2' }[key.split('.')[2]] || '1') : normal ? ({ introduction:'1', standard:'2', parameters:'3', algebra:'repetition', plots:'4' }[key.split('.')[2]] || '1') : ode ? '1' : names[key.split('.')[2]] || '1';
   const topic = vector ? 'vectorFunctions' : normal ? 'normalDistribution' : ode ? 'differentialEquations' : 'integration';
   const labelNode = document.createElement('div'); labelNode.innerHTML = task.prompt;
   const label = labelNode.textContent.replace(/\s+/g, ' ').trim().slice(0, 170) || task.id;

@@ -16,7 +16,7 @@ export function createVectorLesson(host,onStatus){
   const status=count===vectorRequired.length?'Gennemført':attempted?'I gang':'Ikke begyndt';
   host.querySelector('[data-vector-pre-status]').textContent=`${vectorPre.filter(complete).length} af ${vectorPre.length} grundspørgsmål er korrekt kontrolleret.`;
   host.querySelector('[data-vector-final-status]').textContent=`${vectorFinal.filter(complete).length} af ${vectorFinal.length} sluttjek er korrekt kontrolleret.`;
-  host.querySelector('[data-vector-next]').textContent=status==='Gennemført'?'De obligatoriske kontroller i Modul 1 er gennemført. Genbesøg opgaverne i blandet træning senere. Modul 2 er planlagt.':`${count} af ${vectorRequired.length} obligatoriske øvelser er korrekt kontrolleret. Genbesøg de trin, der mangler.`;
+  host.querySelector('[data-vector-next]').textContent=status==='Gennemført'?'De obligatoriske kontroller i Modul 1 er gennemført. Genbesøg opgaverne i blandet træning senere. Modul 2 er næste trin og er åbent.':`${count} af ${vectorRequired.length} obligatoriske øvelser er korrekt kontrolleret. Genbesøg de trin, der mangler.`;
   onStatus(status,count,vectorRequired.length);
  },'vector-basics');
  host.addEventListener('click',event=>{

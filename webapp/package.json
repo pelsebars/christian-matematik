@@ -3,17 +3,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/core.test.js tests/equations.test.js tests/quadratic.test.js tests/composite.test.js tests/differentiation.test.js tests/geometry.test.js tests/integration-bank.test.js tests/ode.test.js tests/normal.test.js tests/normal-standard.test.js tests/normal-parameters.test.js tests/normal-algebra.test.js tests/normal-plots.test.js tests/vector.test.js",
-    "test:browser": "node tests/browser.test.js && node tests/geometry.browser.test.js && node tests/integral.browser.test.js && node tests/integral-graphs.browser.test.js && node tests/integral-definite.browser.test.js && node tests/integral-areas.browser.test.js && node tests/integral-repetition.browser.test.js && node tests/integral-solids.browser.test.js && node tests/integral-substitution.browser.test.js && node tests/integral-final.browser.test.js && node tests/integration-bank.browser.test.js && node tests/ode.browser.test.js && node tests/normal.browser.test.js && node tests/normal-standard.browser.test.js && node tests/normal-parameters.browser.test.js && node tests/normal-algebra.browser.test.js && node tests/normal-plots.browser.test.js && node tests/vector.browser.test.js",
+    "test": "node --test tests/core.test.js tests/equations.test.js tests/quadratic.test.js tests/composite.test.js tests/differentiation.test.js tests/geometry.test.js tests/integration-bank.test.js tests/ode.test.js tests/normal.test.js tests/normal-standard.test.js tests/normal-parameters.test.js tests/normal-algebra.test.js tests/normal-plots.test.js tests/vector.test.js tests/vector-dynamics.test.js",
+    "test:browser": "node tests/browser.test.js && node tests/geometry.browser.test.js && node tests/integral.browser.test.js && node tests/integral-graphs.browser.test.js && node tests/integral-definite.browser.test.js && node tests/integral-areas.browser.test.js && node tests/integral-repetition.browser.test.js && node tests/integral-solids.browser.test.js && node tests/integral-substitution.browser.test.js && node tests/integral-final.browser.test.js && node tests/integration-bank.browser.test.js && node tests/ode.browser.test.js && node tests/normal.browser.test.js && node tests/normal-standard.browser.test.js && node tests/normal-parameters.browser.test.js && node tests/normal-algebra.browser.test.js && node tests/normal-plots.browser.test.js && node tests/vector.browser.test.js && node tests/vector-dynamics.browser.test.js",
     "build": "node scripts/build.js",
     "dev": "node --env-file-if-exists=.env scripts/dev.js",
     "db:migrate": "node --env-file-if-exists=.env scripts/migrate.js",
     "user:reset": "node --env-file-if-exists=.env scripts/reset-password.js",
     "test:accounts": "node --test tests/accounts.test.js",
-    "test:accounts:browser": "node tests/accounts.browser.test.js && node tests/vector.accounts.browser.test.js",
+    "test:accounts:browser": "node tests/accounts.browser.test.js && node tests/vector.accounts.browser.test.js && node tests/vector-dynamics.accounts.browser.test.js",
     "demo": "node scripts/demo.js",
     "test:normal": "node --test tests/normal.test.js tests/normal-standard.test.js tests/normal-parameters.test.js tests/normal-algebra.test.js tests/normal-plots.test.js && node tests/normal.browser.test.js && node tests/normal-standard.browser.test.js && node tests/normal-parameters.browser.test.js && node tests/normal-algebra.browser.test.js && node tests/normal-plots.browser.test.js",
-    "test:vector": "node --test tests/vector.test.js && node tests/vector.browser.test.js && node tests/vector.accounts.browser.test.js"
+    "test:vector": "node --test tests/vector.test.js && node tests/vector.browser.test.js && node tests/vector.accounts.browser.test.js && node --test tests/vector-dynamics.test.js && node tests/vector-dynamics.browser.test.js && node tests/vector-dynamics.accounts.browser.test.js"
   },
   "dependencies": {
     "better-auth": "^1.7.10",

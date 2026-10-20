@@ -49,3 +49,15 @@
  #vectorLesson .example-card { padding:18px; }
  .vector-function-lab { padding:12px; }
 }
+
+#dynamics-basics { scroll-margin-top:20px; }
+.vector-dynamics-lab { margin:22px 0; padding:18px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+.vector-dynamics-lab svg { display:block; width:100%; height:auto; max-width:760px; margin:16px auto; }
+.vector-dynamics-lab svg text { fill:var(--ink); stroke:none; font:12px system-ui; }
+.vector-dynamics-lab label,.vector-dynamics-lab output { display:block; margin:14px 0; }
+.vector-dynamics-lab figcaption { color:var(--ink-soft); font-size:.9rem; line-height:1.7; }
+#dynamics-time { width:100%; }
+#vectorLesson .dynamics-toggle { display:flex; align-items:flex-start; gap:10px; }
+#vectorLesson .dynamics-toggle input { flex:0 0 20px; width:20px; height:20px; margin-top:4px; }
+#vectorLesson [data-dynamics-warning]:not(:empty) { border-left:3px solid #ae5926; padding:12px; background:#fff3e8; border-radius:8px; }
+@media(max-width:700px){ .vector-dynamics-lab { padding:12px; } }
