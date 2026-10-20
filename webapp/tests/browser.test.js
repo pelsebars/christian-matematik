@@ -59,7 +59,7 @@ try {
   await page.locator('html[data-sidebar-navigation="ready"]').waitFor();
   // Sidebar module groups work as an accordion and link to both legacy
   // scroll sections and routed teaching sessions.
-  assert.equal(await page.locator('.nav-group').count(), 5);
+  assert.equal(await page.locator('.nav-group').count(), 6);
   assert.equal(await page.locator('.nav-submenu:visible').count(), 0);
   await page.locator('[data-nav-group="planeGeometry"] .nav-expand').click();
   assert.equal(await page.locator('#nav-modules-planeGeometry').isVisible(), true);

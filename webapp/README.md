@@ -4,7 +4,7 @@ Første lokale version af Christians matematikapp.
 
 ## Indhold
 
-- startside med otte emner;
+- startside med ni emner;
 - fast venstremenu på desktop og mobilmenu på små skærme;
 - emneoversigter;
 - komplette læringsforløb om lineære ligninger, løsning af andengradsligninger og sammensatte funktioner med teori, grundtjek, gennemregnede eksempler, hints og interaktive øvelser;
@@ -26,7 +26,7 @@ En ren statisk webserver kan kun vise landing pagen; undervisningen kan afprøve
 
 ## Fælles opgaver
 
-Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 281 gennemgåede opgaver fra alle otte hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og personlig lagring. Integralmodul 1–7 har tilsammen 91 opgaver, heraf 46 seedede familier. Kildegennemgang og dækning er beskrevet i [INTEGRALREGNING_OPGAVEBANK.md](INTEGRALREGNING_OPGAVEBANK.md).
+Navigationens **Opgaver** åbner blandet træning og prøvesæt. Den separate bank har 297 gennemgåede opgaver fra alle ni hovedemner, MathML, seedet variation, delpoint, egen vurdering af forklaringer og personlig lagring. Integralmodul 1–7 har tilsammen 91 opgaver, heraf 46 seedede familier. Kildegennemgang og dækning er beskrevet i [INTEGRALREGNING_OPGAVEBANK.md](INTEGRALREGNING_OPGAVEBANK.md).
 
 Format, integrationspunkt og eksempler er beskrevet i [OPGAVEBANK.md](../OPGAVEBANK.md). Nye emnepakker tilføjes i `tasks/bank/` og registreres i `tasks/bank/index.js`.
 
@@ -35,4 +35,6 @@ Kør `npm test` i denne mappe. `npm run test:browser` kræver Playwright som lok
 Differentialligningernes kilder, ruter, fremdriftskrav og tests er beskrevet i [DIFFERENTIALLIGNINGER_PLAN.md](DIFFERENTIALLIGNINGER_PLAN.md).
 
 
-Normalfordeling har fem modulruter, B-repetition 10–11 mellem modul 3 og 4, en læringsmålmatrix med 26 mål og en særskilt opsamling. Modul 1–4 og B-repetition 10–11 er komplette. Modul 4 har 10 trin, 43 øvelseskort og 16 nye bankopgaver med alle nødvendige data. De fire originale regneark (400/100/40/200 målinger) kan undersøges i tabeller og normalplot med begge akseretninger, rangmarkering og stikprøveestimater. Teorien skelner mellem rangfraktil og standardiseret måling, mellem yderpunkt og systematisk afvigelse samt mellem modelandel og optalt andel. Forløbet har i alt 75 fælles bankopgaver; hele banken har 281. Modul 5 og opsamlingen er planlagte. Hver undervisningsgang har separat kontolagring af svar, hints, noter og progression. Se [NORMALFORDELING_PLAN.md](NORMALFORDELING_PLAN.md) for kilder, data, rangregel og test. `npm run test:normal` kører de fem færdige undervisningsganges faglige og browserbaserede tests.
+Normalfordeling har fem modulruter, B-repetition 10–11 mellem modul 3 og 4, en læringsmålmatrix med 26 mål og en særskilt opsamling. Modul 1–4 og B-repetition 10–11 er komplette. Modul 4 har 10 trin, 43 øvelseskort og 16 nye bankopgaver med alle nødvendige data. De fire originale regneark (400/100/40/200 målinger) kan undersøges i tabeller og normalplot med begge akseretninger, rangmarkering og stikprøveestimater. Teorien skelner mellem rangfraktil og standardiseret måling, mellem yderpunkt og systematisk afvigelse samt mellem modelandel og optalt andel. Forløbet har i alt 75 fælles bankopgaver; hele banken har 297. Modul 5 og opsamlingen er planlagte. Hver undervisningsgang har separat kontolagring af svar, hints, noter og progression. Se [NORMALFORDELING_PLAN.md](NORMALFORDELING_PLAN.md) for kilder, data, rangregel og test. `npm run test:normal` kører de fem færdige undervisningsganges faglige og browserbaserede tests.
+
+Vektorfunktioner er hovedemne 09 med tre modulruter, særskilt B-repetition 12–13 mellem Modul 2 og 3 og en opsamling. Kun Modul 1 er implementeret: 11 trin, 37 kort, 16 nye bankopgaver, kurvelaboratorium og personlig lagring af svar, hints, noter og kontrolleret fremdrift. Øvrige undervisningsgange er planlagte. Se [VEKTORFUNKTIONER_PLAN.md](VEKTORFUNKTIONER_PLAN.md) for kilder, Office Math-kontrol, 32 mål og ruter. `BROWSER_CHANNEL=chrome npm run test:vector` kører det nye emnes faglige tests, browsertests og isolerede kontotests.

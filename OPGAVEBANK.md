@@ -413,3 +413,8 @@ Korte begrebs- og aflæsningsopgaver leder til fire faktiske datasæt, fuld esti
 Kildens akseretning følges, og de skematiske aflæsningsfigurer skelnes fra plot beregnet på rådata. Appens rangregel og referencelinje er eksplicitte valg. Opgaverne skelner mellem teoretisk rangfraktil, standardiseret måling, spredning og varians, estimat og parameter, modelvurdering og bevis samt optælling og modelberegning. Klubhøjdernes systematiske afvigelser må ikke godkendes alene, fordi ingen målinger ligger uden for tre estimerede spredninger. Gulerøddernes to lave yderpunkter slettes ikke automatisk.
 
 Modul 4 har 43 kort med 35 obligatoriske kontroller: 12 mikroøvelser, 16 bankopgaver og 7 slutkort. Otte startkort er diagnostiske. Den eksisterende grader, hints, MathML, kontolagring, historik og prøve/repetition genbruges. Egne plotundersøgelser og konklusioner vurderes med tjeklister og separate kontonoter. Se `webapp/NORMALFORDELING_PLAN.md` for alle ruter, kildekort, data, valg og tests.
+
+
+## Vektorfunktioner · Modul 1
+
+Hovedemne `vectorFunctions`, modul `vf.1`, pakke `tasks/bank/vector.js`: 16 faste version 1-opgaver med verificerede svar om parameter/position, punktkontrol, begge akser, modelkonstant, baneskæring/kollision, dobbeltpunkt, eliminering/domæne, cirkler og omløb, tennis, fodbold og CAS-kontrol. Opgaverne følger eksisterende schema og har delspørgsmål med delpoint, tre graduerede hints og specifik feedback. De kan bruges i træning og prøve, og Gentag modul linker til `#vectorFunctions/1/start`. Eksisterende id’er og versioner er uændrede. Samlet bank: 297 opgaver. Modul 2, B-repetition 12–13 og Modul 3 er kun planlagte og leverer endnu ingen bankopgaver. Se `webapp/VEKTORFUNKTIONER_PLAN.md` og `webapp/tests/vector.test.js`.

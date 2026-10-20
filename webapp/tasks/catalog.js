@@ -1,5 +1,6 @@
 import { integralModules } from "../integral-plan.js";
 export const topics = {
+  vectorFunctions: "Vektorfunktioner",
   normalDistribution: "Normalfordeling",
   differentialEquations: "Differentialligninger",
   integration: "Integralregning",
@@ -10,6 +11,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "vf.1": {topic:"vectorFunctions",name:"Banekurver og skæringspunkter",section:"vector-module-1"},
   "norm.4": {topic:"normalDistribution",name:"Normalfordelingsplot",section:"normal-module-4"},
   "norm.repetition": {topic:"normalDistribution",name:"B-repetition 10–11: Kvadratsætninger og to ligninger",section:"normal-module-repetition"},
   "norm.3": {topic:"normalDistribution",name:"Beregning af middelværdi og spredning",section:"normal-module-3"},
@@ -72,6 +74,19 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "vf.concept": {module:"vf.1",text:"Skelne mellem parameter, punkt, stedvektor og banekurve"},
+  "vf.position": {module:"vf.1",text:"Beregne positionen ved en bestemt parameter"},
+  "vf.point": {module:"vf.1",text:"Kontrollere begge koordinater ved samme tilladte parameter"},
+  "vf.axes": {module:"vf.1",text:"Bestemme alle relevante skæringer med akserne"},
+  "vf.crossing": {module:"vf.1",text:"Bestemme og kontrollere fælles punkter for to baner"},
+  "vf.collision": {module:"vf.1",text:"Skelne mellem baneskæring og samtidig kollision"},
+  "vf.double": {module:"vf.1",text:"Bestemme dobbeltpunkt og forskellige parameterværdier"},
+  "vf.elimination": {module:"vf.1",text:"Eliminere parameteren og bevare domæne og gren"},
+  "vf.circle": {module:"vf.1",text:"Bestemme og opstille cirkler og fortolke gennemløb"},
+  "vf.model": {module:"vf.1",text:"Løse bevægelsesmodeller med interval og enheder"},
+  "vf.cas": {module:"vf.1",text:"Dokumentere og kontrollere CAS-resultater"},
+  "vf.method": {module:"vf.1",text:"Begrunde metodevalg og skelne grafisk kontrol fra præcis beregning"},
+
   "norm4.data": {module:"norm.4",text:"Skelne observationer, stikprøve, population og givne datakilder"},
   "norm4.sort": {module:"norm.4",text:"Sortere uden at ændre værdier, antal eller gentagelser"},
   "norm4.position": {module:"norm.4",text:"Forstå rangposition og teoretisk normalfraktil"},

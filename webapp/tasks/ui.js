@@ -329,6 +329,10 @@ root.addEventListener("click", (event) => {
     s = state.session;
   if (action === "repeat-module") {
     const m = modules[b.dataset.module];
+    if (m.topic === "vectorFunctions" && window.openVectorSection) {
+      window.openVectorSection(m.section);
+      return;
+    }
     if (m.topic === "normalDistribution" && window.openNormalSection) {
       window.openNormalSection(m.section);
       return;

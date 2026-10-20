@@ -1,0 +1,51 @@
+#vectorLesson .lesson-section { margin-top:24px; }
+#vectorLesson p,#vectorLesson li { line-height:1.75; }
+#vectorLesson li { margin:10px 0; }
+#vectorLesson h2 { margin-bottom:18px; }
+#vectorLesson details { border:1px solid var(--line); border-radius:10px; padding:14px; margin:14px 0; }
+#vectorLesson summary { cursor:pointer; font-weight:650; }
+#vectorLesson details[open] summary { margin-bottom:14px; }
+#vectorLesson .module-roadmap { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); padding:0; }
+#vectorLesson .module-card { min-width:0; grid-column:auto; }
+#vectorLesson .vector-repetition { grid-column:1/-1; border-left:4px solid #087f8c; }
+#vectorLesson .module-card-top span { width:auto; height:auto; min-height:34px; padding:8px 12px; border-radius:8px; }
+#vectorLesson a { text-decoration:none; }
+#vectorLesson math { max-width:100%; overflow-x:auto; vertical-align:middle; }
+#vectorLesson .int-exercises { grid-template-columns:1fr; }
+#vectorLesson .example-card { margin:20px 0; padding:24px; }
+#vectorLesson .int-table { max-width:100%; overflow-x:auto; }
+#vectorLesson table { border-collapse:collapse; width:100%; }
+#vectorLesson th,#vectorLesson td { padding:12px; border-bottom:1px solid var(--line); text-align:left; }
+#vectorLesson .vector-goal-map table { min-width:1000px; }
+#vectorLesson [data-lesson-warning]:not([hidden]) { padding:16px; border:1px solid #b77b28; background:#fff1e2; border-radius:12px; }
+#vectorLesson :focus-visible { outline:3px solid #206eab; outline-offset:4px; }
+#vector-basics { scroll-margin-top:20px; }
+.vector-breadcrumb { margin-bottom:20px; }
+.vector-step-menu { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:20px 0; }
+.vector-step-menu a { display:flex; align-items:center; gap:8px; padding:12px; border:1px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink-soft); font-size:.86rem; font-weight:650; }
+.vector-step-menu a span { color:var(--blue); }
+.vector-step-menu a[aria-current] { background:var(--blue-soft); border-color:var(--blue); color:var(--ink); }
+.vector-page-controls { display:flex; justify-content:space-between; gap:16px; border-top:1px solid var(--line); margin:28px 0; padding-top:20px; }
+.vector-important { background:#e8f4f1; border-left:4px solid #087d69; border-radius:10px; padding:18px; margin:22px 0; }
+.vector-important h3 { color:#145e51; }
+#vectorLesson input:not([type=range]),#vectorLesson select,#vectorLesson textarea { width:100%; min-width:0; padding:12px; border:1px solid var(--line); border-radius:8px; font:inherit; background:var(--surface); color:var(--ink); }
+#vectorLesson .primary-button,#vectorLesson .secondary-button { padding:11px 16px; border:1px solid var(--blue); border-radius:11px; font:inherit; font-size:.86rem; font-weight:700; cursor:pointer; }
+#vectorLesson .primary-button { color:white; background:var(--blue); }
+#vectorLesson .secondary-button { color:var(--blue); background:var(--blue-soft); }
+#vectorLesson button:disabled { opacity:.6; cursor:default; }
+.vector-function-lab { margin:22px 0; padding:18px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+.vector-function-lab svg { width:100%; height:auto; display:block; margin:16px auto; max-width:740px; }
+.vector-function-lab svg text { fill:var(--ink); stroke:none; font:12px system-ui; }
+.vector-function-lab label,.vector-function-lab output { display:block; margin:14px 0; }
+#vector-time { width:100%; }
+.vector-function-lab figcaption { font-size:.9rem; color:var(--ink-soft); line-height:1.7; }
+@media(max-width:700px){
+ #vectorLesson .module-roadmap { grid-template-columns:1fr; }
+ #vectorLesson .vector-repetition { grid-column:auto; }
+ .vector-step-menu { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .vector-step-menu a { padding:10px; font-size:.8rem; }
+ .vector-page-controls { flex-wrap:wrap; }
+ .vector-page-controls a { flex:1; }
+ #vectorLesson .example-card { padding:18px; }
+ .vector-function-lab { padding:12px; }
+}

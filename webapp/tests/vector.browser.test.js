@@ -1,0 +1,67 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {createServer} from 'node:http';
+import {readFile} from 'node:fs/promises';
+import {extname,resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {vectorLessonTasks,VECTOR_STORAGE_KEY} from '../vector-lesson.js';
+import {vectorTaskStep} from '../vector-exercises.js';
+import {vectorTasks} from '../tasks/bank/vector.js';
+import {vectorPages} from '../vector-routes.js';
+import {vectorGoals} from '../vector-plan.js';
+const dir=resolve(fileURLToPath(new URL('..',import.meta.url)));
+const server=createServer(async(req,res)=>{try{const path=decodeURIComponent(req.url.split('?')[0]),p=resolve(dir,'.'+(path==='/'?'/index.html':path));if(!p.startsWith(dir+'/'))throw Error();res.setHeader('Content-Type',{'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml'}[extname(p)]||'text/plain');res.end(await readFile(p));}catch{res.statusCode=404;res.end('Not found');}});
+await new Promise(done=>server.listen(0,'127.0.0.1',done));
+const url=`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL||'chrome'});
+const errors=[];
+const fixture=(task,mode='training')=>({schema:1,completed:[],history:[],session:{mode,status:'active',seed:'vector-bank',items:[{id:task.id,version:task.version}],index:0,answers:{},checked:{},hints:{},marked:{},self:{},startedAt:Date.now(),timer:false,minutes:30,requested:1}});
+try{
+ const ctx=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),page=await ctx.newPage();page.setDefaultTimeout(12000);
+ page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+ const go=async path=>{await page.evaluate(path=>window.showMathView(path),path);await page.waitForFunction(path=>location.hash==='#'+path,path);};
+ const card=id=>page.locator(`[data-int-card="${id}"]`);
+ const answer=async(t,wrong=false)=>{await go('vectorFunctions/1/'+vectorTaskStep(t));for(const p of t.parts){let el=card(t.id).locator(`[name="${p.id}"]`);if(p.type==='choice')await el.selectOption(wrong?p.options.find(o=>o.id!==p.answer).id:p.answer);else await el.fill(wrong?'999':p.answer);}await card(t.id).locator('button[type=submit]').click();};
+ await page.goto(url+'/?preview=1#vectorFunctions/1');await page.locator('#vector-module-one').waitFor({state:'visible'});
+ assert.equal(await page.evaluate(()=>location.hash),'#vectorFunctions/1/start');assert.equal(await page.locator('[data-vector-status="1"]').textContent(),'Ikke begyndt');assert.equal(await page.locator('#normalLesson').isVisible(),false);
+ assert.equal(await page.locator('#vector-module-one [data-int-card]').count(),37);
+ // Visits never produce mastery. Each diagnostic opens its exact missing prerequisite.
+ for(const t of vectorLessonTasks.filter(t=>t.id.includes('.pre.'))){await answer(t,true);await card(t.id).locator('[data-int-jump]').click();const basic=t.id.split('.').at(-1);assert.ok(await page.locator(`#vector-basics [data-basic="${basic}"]`).getAttribute('open')!==null);assert.equal(await page.evaluate(()=>document.activeElement.id),'vector-basics');}
+ await card('vf1.pre.power').locator('[data-int-hint]').click();await page.reload();await page.locator('#vector-module-one').waitFor({state:'visible'});assert.equal(await card('vf1.pre.power').locator('input').inputValue(),'999');assert.equal(await card('vf1.pre.power').locator('.int-hints p').count(),1);assert.equal(await page.locator('[data-vector-status="1"]').textContent(),'I gang');
+ await go('vectorFunctions/1/oevelser');await card('vf1.false-point').locator('select').selectOption('yes');await card('vf1.false-point').locator('input').fill('-1');await card('vf1.false-point').locator('button[type=submit]').click();assert.match(await card('vf1.false-point').locator('[data-feedback=on]').innerText(),/forskellige parametre/);assert.match(await card('vf1.false-point').locator('[data-feedback=x]').innerText(),/Fortegn/);
+ // Every real lesson field is answered and checked through the UI.
+ for(const t of vectorLessonTasks){await answer(t);assert.ok(await card(t.id).evaluate(el=>el.classList.contains('is-correct')),t.id);}
+ assert.equal(await page.locator('[data-vector-status="1"]').textContent(),'Gennemført');await page.reload();await page.locator('#vector-module-one').waitFor({state:'visible'});assert.equal(await page.locator('[data-vector-status="1"]').textContent(),'Gennemført');
+ await go('vectorFunctions/1/oevelser');await card('vf1.position').locator('[name=x]').fill('5 ');assert.equal(await page.locator('[data-vector-status="1"]').textContent(),'I gang');await page.reload();await page.locator('#vector-module-one').waitFor();assert.equal(await page.locator('[data-vector-status="1"]').textContent(),'I gang');await answer(vectorTasks[0]);
+ await go('vectorFunctions/1/modeller');await page.locator('#vector-notes').fill('Model, interval, CAS-indtastning, output, kontrol og konklusion.');await page.reload();await page.locator('#vector-notes').waitFor({state:'visible'});assert.match(await page.locator('#vector-notes').inputValue(),/konklusion/);
+ // Graph keyboard operation, equal scaling, actual coordinates and tabular alternative.
+ await go('vectorFunctions/1/parameter');const before=await page.locator('[data-vector-dot]').getAttribute('cx');await page.locator('#vector-time').focus();await page.keyboard.press('ArrowRight');assert.notEqual(await page.locator('[data-vector-dot]').getAttribute('cx'),before);
+ for(const curve of ['loop','circle','parabola']){await page.locator('#vector-curve').selectOption(curve);assert.equal(await page.locator('.vector-function-lab svg[role=img]').count(),1);assert.ok((await page.locator('[data-vector-path]').getAttribute('d')).length>1000);assert.equal(await page.locator('[data-vector-table] tr').count(),curve==='loop'?4:5);}
+ await page.locator('#vector-curve').selectOption('loop');await page.locator('#vector-time').fill('-1');const p1=await page.locator('[data-vector-dot]').evaluate(el=>[el.getAttribute('cx'),el.getAttribute('cy')]);await page.locator('#vector-time').fill('2');assert.deepEqual(await page.locator('[data-vector-dot]').evaluate(el=>[el.getAttribute('cx'),el.getAttribute('cy')]),p1);
+ // Structural MathML, labels, SVG names, unique IDs and no raw mathematical source.
+ const problems=await page.locator('#vectorLesson math').evaluateAll(nodes=>nodes.flatMap(m=>[...(m.namespaceURI!=='http://www.w3.org/1998/Math/MathML'?['namespace']:[]),...[...m.querySelectorAll('mfrac,msup,msub,mover')].filter(e=>e.children.length!==2).map(e=>e.outerHTML)]));assert.deepEqual(problems,[]);
+ assert.equal(await page.locator('#vectorLesson math mtable').count()>20,true);assert.equal(await page.locator('#vectorLesson math mfrac').count()>0,true);
+ assert.deepEqual(await page.locator('#vectorLesson input,#vectorLesson select,#vectorLesson textarea').evaluateAll(els=>els.filter(e=>!e.labels?.length).map(e=>e.id)),[]);
+ assert.deepEqual(await page.evaluate(()=>{const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);return ids.filter((id,i)=>ids.indexOf(id)!==i);}),[]);
+ for(const path of vectorPages){await go(path);assert.equal(await page.locator('[data-vector-step]:visible').count(),1);assert.equal(await page.locator('.vector-step-menu [aria-current=step]').count(),1);assert.doesNotMatch(await page.locator('#vectorLesson').innerText(),/sqrt\(|\^\d|\d\/\d|r'\(t\)|\\frac|\\begin/);}
+ await go('vectorFunctions/1/start');await page.locator('.vector-step-menu a').nth(1).focus();await page.keyboard.press('Enter');await page.waitForURL('**/*#vectorFunctions/1/parameter');await page.waitForFunction(()=>document.activeElement.id==='subjectTitle');await page.goBack();await page.waitForURL('**/*#vectorFunctions/1/start');await page.goForward();await page.waitForURL('**/*#vectorFunctions/1/parameter');
+ for(const path of ['2/start','repetition/start','3/start','opsamling']){await go('vectorFunctions/'+path);assert.match(await page.locator('#vector-planned').innerText(),/Planlagt · ikke implementeret/);assert.equal(await page.locator('[data-int-card]:visible').count(),0);await page.reload();await page.locator('#vector-planned').waitFor({state:'visible'});}
+ await go('vectorFunctions');assert.equal(await page.locator('#vector-overview .module-card').count(),5);await page.locator('.vector-goal-map summary').click();assert.equal(await page.locator('#vector-overview tbody tr').count(),vectorGoals.length);assert.match(await page.locator('[data-vector-overall]').innerText(),/1 af 4/);
+ await go('normalDistribution/1/start');assert.equal(await page.locator('#vectorLesson').isVisible(),false);assert.equal(await page.locator('#normal-module-one').isVisible(),true);
+ for(const path of ['equations','quadratic','composite','differentiation','planeGeometry','integration/1/start/1','differentialEquations/1/start','formulas','tasks']){await go(path);assert.equal(await page.locator('#vectorLesson').isVisible(),false);}
+ // Native bank selection includes the topic; all tasks work in training, exam withholds help.
+ await go('tasks');assert.equal(await page.locator('[name=topics][value=vectorFunctions]').count(),1);
+ for(const task of vectorTasks){await page.evaluate(s=>localStorage.setItem('christian-matematik.tasks.v1',JSON.stringify(s)),fixture(task));await page.reload();await page.locator('.task-question').waitFor();for(const p of task.parts){if(p.type==='choice')await page.locator(`.task-question [data-part="${p.id}"][value="${p.answer}"]`).check();else await page.locator(`.task-question [data-part="${p.id}"]`).fill(p.answer);}await page.locator('[data-task-action=check]').click();assert.match(await page.locator('.task-feedback').innerText(),/Det passer/);assert.doesNotMatch(await page.locator('.task-feedback').innerText(),/Se løsningen og find det trin/);}
+ await page.evaluate(s=>localStorage.setItem('christian-matematik.tasks.v1',JSON.stringify(s)),fixture(vectorTasks[0],'exam'));await page.reload();await page.locator('.task-question').waitFor();assert.equal(await page.locator('.task-feedback,[data-task-action=hint]').count(),0);assert.doesNotMatch(await page.locator('.task-question').innerText(),/Læringsmål|Gennemregnet løsning/);await page.locator('[data-task-action=finish]').click();await page.locator('[data-task-action=submit]').click();await page.locator('[data-task-action=repeat-module][data-module="vf.1"]').first().click();await page.waitForURL('**/*#vectorFunctions/1/start');
+ await go('vectorFunctions/1/parameter');await page.screenshot({path:'/tmp/matematik-vector-desktop.png',fullPage:true});await ctx.close();
+ const mobile=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'}),phone=await mobile.newPage();phone.on('pageerror',e=>errors.push(e.message));phone.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+ await phone.goto(url+'/?preview=1#vectorFunctions');await phone.locator('#vector-overview').waitFor({state:'visible'});
+ for(const path of [...vectorPages,'vectorFunctions','vectorFunctions/2/start','vectorFunctions/repetition/start','vectorFunctions/3/start','vectorFunctions/opsamling']){await phone.evaluate(path=>window.showMathView(path),path);assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),path);}
+ await phone.locator('#menuButton').click();assert.equal(await phone.locator('#nav-modules-vectorFunctions').isVisible(),true);await phone.locator('#nav-modules-vectorFunctions a').first().click();assert.equal(await phone.locator('#menuButton').getAttribute('aria-expanded'),'false');assert.equal(await phone.locator('#nav-modules-vectorFunctions a').first().getAttribute('aria-current'),'page');
+ await phone.evaluate(()=>window.showMathView('vectorFunctions/1/parameter'));await phone.screenshot({path:'/tmp/matematik-vector-mobile.png',fullPage:true});
+ for(const task of vectorTasks){await phone.evaluate(s=>{localStorage.setItem('christian-matematik.tasks.v1',JSON.stringify(s));window.showMathView('tasks');},fixture(task));await phone.reload();await phone.locator('.task-question').waitFor();assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),task.id+' bank mobile');assert.doesNotMatch(await phone.locator('.task-question').innerText(),/sqrt\(|\^\d|\\frac/);}
+ await mobile.close();
+ const bad=await browser.newContext();await bad.addInitScript(key=>localStorage.setItem(key,'broken'),VECTOR_STORAGE_KEY);const bp=await bad.newPage();await bp.goto(url+'/?preview=1#vectorFunctions/1/start');await bp.locator('#vector-module-one [data-lesson-warning]').waitFor({state:'visible'});await bad.close();
+ const blocked=await browser.newContext();await blocked.addInitScript(()=>{Storage.prototype.setItem=function(){throw Error('blocked');};});const b=await blocked.newPage();await b.goto(url+'/?preview=1#vectorFunctions/1/start');await b.locator('[data-int-card="vf1.pre.function"] input').fill('7');await b.locator('#vector-module-one [data-lesson-warning]').waitFor({state:'visible'});await blocked.close();
+ assert.deepEqual(errors,[]);console.log('Vector browser passed: all 37 lesson cards, 16 bank tasks, training/exam, diagnostics, targeted feedback, mastery rollback, notes/reload, direct/history routes, planned pages, keyboard, MathML, labels, mobile 390 and no console errors.');
+}finally{await browser.close();server.close();}

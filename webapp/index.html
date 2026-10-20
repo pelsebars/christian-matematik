@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./account/account.css" />
     <link rel="stylesheet" href="./ode.css" />
     <link rel="stylesheet" href="./normal.css" />
+    <link rel="stylesheet" href="./vector.css" />
     <link rel="stylesheet" href="./integral.css" />
     <link rel="stylesheet" href="./tasks/tasks.css" />
   </head>
@@ -155,6 +156,19 @@
               <a href="#normalDistribution/opsamling"><span>+</span>Opsamling</a>
             </div>
           </div>
+          <div class="nav-group" data-nav-group="vectorFunctions">
+            <div class="nav-group-row">
+              <button class="nav-item" type="button" data-view="vectorFunctions"><span class="nav-number" aria-hidden="true">09</span><span>Vektorfunktioner</span></button>
+              <button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-vectorFunctions"><span class="sr-only">Vis moduler i Vektorfunktioner</span><span class="nav-chevron" aria-hidden="true"></span></button>
+            </div>
+            <div class="nav-submenu" id="nav-modules-vectorFunctions" hidden>
+              <a href="#vectorFunctions/1/start"><span>M1</span>Banekurver og skæringspunkter</a>
+              <a href="#vectorFunctions/2/start"><span>M2</span>Hastighed, acceleration og tangenter</a>
+              <a href="#vectorFunctions/repetition/start"><span>Rep.</span>Monotoniforhold og optimering</a>
+              <a href="#vectorFunctions/3/start"><span>M3</span>Areal og kurvelængde</a>
+              <a href="#vectorFunctions/opsamling"><span>+</span>Opsamling</a>
+            </div>
+          </div>
           <div class="nav-divider" aria-hidden="true"></div>
 
           <button class="nav-item" type="button" data-view="tasks">
@@ -292,6 +306,7 @@
             <button class="topic-card topic-card--cyan" type="button" data-view="integration"><span class="card-index">06 · Integralregning</span><span class="formula-preview"><math display="block"><mrow><mo>∫</mo><mn>2</mn><mi>x</mi><mspace width="0.2em"/><mi mathvariant="normal">d</mi><mi>x</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>C</mi></mrow></math></span><span class="card-title">Integralregning</span><span class="card-description">Syv moduler og en mellemstation. Begynd med stamfunktioner og kontrol ved differentiation.</span><span class="card-action">Åbn emnet</span></button>
             <button class="topic-card topic-card--green" type="button" data-view="differentialEquations"><span class="card-index">07 · Differentialligninger</span><span class="formula-preview"><math><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math></span><span class="card-title">Differentialligninger</span><span class="card-description">Fra ændringshastighed til løsningskurve. Modul 1 er åbent; resten af forløbet er planlagt.</span><span class="card-action">Åbn forløbet</span></button>
             <button class="topic-card topic-card--cyan" type="button" data-view="normalDistribution"><span class="card-index">08 · Normalfordeling</span><span class="formula-preview"><math><mrow><mi>X</mi><mo>∼</mo><mi>N</mi><mo>(</mo><mi>μ</mi><mo>;</mo><mi>σ</mi><mo>)</mo></mrow></math></span><span class="card-title">Normalfordeling</span><span class="card-description">Fra målinger til sandsynligheder og statistisk analyse. Modul 1–4 og B-repetition 10–11 er åbne; resten af forløbet er planlagt.</span><span class="card-action">Åbn forløbet</span></button>
+            <button class="topic-card topic-card--blue" type="button" data-view="vectorFunctions"><span class="card-index">09 · Vektorfunktioner</span><span class="formula-preview"><math><mrow><mover><mi>r</mi><mo>→</mo></mover><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mo>(</mo><mtable><mtr><mtd><mi>x</mi><mo>(</mo><mi>t</mi><mo>)</mo></mtd></mtr><mtr><mtd><mi>y</mi><mo>(</mo><mi>t</mi><mo>)</mo></mtd></mtr></mtable><mo>)</mo></mrow></math></span><span class="card-title">Vektorfunktioner</span><span class="card-description">Modul 1 er åbent. Beregn positioner og undersøg skæringer og dobbeltpunkter.</span><span class="card-action">Åbn forløbet</span></button>
           </div>
 
           <section class="path-panel" aria-labelledby="pathHeading">
@@ -349,6 +364,7 @@
           <div class="lesson-content" id="integralLesson" hidden></div>
           <div class="lesson-content" id="odeLesson" hidden></div>
           <div class="lesson-content" id="normalLesson" hidden></div>
+          <div class="lesson-content" id="vectorLesson" hidden></div>
 
           <div class="lesson-content" id="equationLesson" hidden>
             <nav class="lesson-nav" aria-label="Indhold i Ligninger">
