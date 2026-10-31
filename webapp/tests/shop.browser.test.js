@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright';
+import { fixture } from './account-fixture.js';
+import '../scripts/build.js';
+const f=await fixture();
+const browser=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL||'chrome'});
+const password='shop-browser-password-123';const errors=[];
+async function login(page,username,signup=false){await page.goto(f.origin);await page.locator('#accountLanding').waitFor();if(signup)await page.locator('[data-auth-mode=signup]').first().click();await page.locator('#accountUsername').fill(username);await page.locator('#accountPassword').fill(password);if(signup)await page.locator('#repeatPassword').fill(password);await page.locator('#accountSubmit').click();await page.locator('.personal-overview').waitFor();}
+async function shop(page){await page.locator('[data-view=shop]').click();await page.locator('[data-preview-skin=military]').waitFor();await page.waitForFunction(()=>!document.querySelector('.shop-message')?.textContent.includes('Henter'));}
+async function purchase(page,id){await page.locator(`[data-buy="${id}"]`).click();await page.locator('[data-confirm-buy]').click();await page.waitForFunction(()=>!document.querySelector('.shop-dialog').open);await page.locator('[data-filter=mine][aria-pressed=true]').waitFor();}
+async function filter(page,id){await page.locator(`[data-filter=${id}]`).click();}
+try{
+ const page=await browser.newPage({viewport:{width:1440,height:1100}});page.on('pageerror',e=>errors.push(e.message));
+ await login(page,'skin_tester',true);
+ const {rows}=await f.pool.query('SELECT id FROM "user" WHERE username=$1',['skin_tester']);
+ await f.pool.query(`INSERT INTO learning_completion(user_id,exercise_id,topic,module,label,route) SELECT $1,'qa-'||n::text,'equations','1','Testopgave','equations' FROM generate_series(1,400) n`,[rows[0].id]);
+ await page.reload();await page.locator('.personal-overview').waitFor();await shop(page);
+ const car=page.locator('.shop-reward-card').filter({has:page.locator('[data-buy="lamborghini-huracan"]')});
+ assert.match(await car.locator('.shop-price').textContent(),/9\.600\.000 point/);
+ assert.equal(await car.locator('[data-buy]').isDisabled(),true);
+ assert.match(await car.locator('.reward-progress span').textContent(),/400 \/ 9\.600\.000 point/);
+ await page.waitForFunction(()=>{const img=document.querySelector('img[src="./shop-lamborghini.jpg"]');img?.scrollIntoView();return img?.complete&&img.naturalWidth>0;});
+ await page.evaluate(()=>window.scrollTo(0,0));
+ await page.screenshot({path:'/tmp/math-shop-desktop.png',fullPage:true});
+ await page.locator('[data-preview-skin=matrix]').click();await page.locator('.shop-dialog[open] .skin-mini--matrix').waitFor();await page.locator('.shop-dialog [data-close]').first().click();
+ await purchase(page,'matrix');assert.equal(await page.locator('#rewardPoints').textContent(),'360');
+ await page.locator('[data-activate=matrix]').click();await page.waitForFunction(()=>document.documentElement.dataset.skin==='matrix');
+ await page.locator('[data-view=equations]').first().click();await page.screenshot({path:'/tmp/math-matrix-desktop.png',fullPage:false});
+ await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.skin==='matrix');await shop(page);
+ await page.locator('[data-preview-skin=military]').click();await page.locator('.shop-dialog[open] .skin-mini--military').waitFor();await page.locator('.shop-dialog [data-close]').first().click();
+ await purchase(page,'military');assert.equal(await page.locator('#rewardPoints').textContent(),'320');
+ await page.locator('[data-activate=military]').click();await page.waitForFunction(()=>document.documentElement.dataset.skin==='military');
+ await page.locator('[data-view=equations]').first().click();
+ const card=page.locator('#equationLesson .exercise-card').first();await card.locator('input').fill(await card.getAttribute('data-answer'));await card.locator('.check-answer').click();await page.evaluate(async()=>await (await import('/account/store.js')).flush());
+ await page.screenshot({path:'/tmp/math-military-desktop.png',fullPage:false});
+ await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.skin==='military');await page.locator('#equationLesson .exercise-card.is-correct').first().waitFor();
+ await shop(page);await filter(page,'skins');await purchase(page,'terminal');await page.locator('[data-activate=terminal]').click();await page.waitForFunction(()=>document.documentElement.dataset.skin==='terminal');
+ await page.locator('[data-view=equations]').first().click();await page.screenshot({path:'/tmp/math-terminal-desktop.png',fullPage:false});
+ await shop(page);await filter(page,'skins');await purchase(page,'machine');await page.locator('[data-activate=machine]').click();await page.waitForFunction(()=>document.documentElement.dataset.skin==='machine');
+ await page.locator('[data-view=equations]').first().click();await page.screenshot({path:'/tmp/math-machine-desktop.png',fullPage:false});
+ await shop(page);await filter(page,'rewards');
+ await page.locator('[data-buy="frozen-pizza"]').click();
+ assert.equal(await page.locator('#shopDialogTitle').textContent(),'En frysepizza');
+ assert.match(await page.locator('.dialog-reward-image').getAttribute('src'),/shop-pizza/);
+ assert.match(await page.locator('.voucher-explanation').textContent(),/frysepizza/);
+ await page.locator('[data-confirm-buy]').click();await page.waitForFunction(()=>!document.querySelector('.shop-dialog').open);
+ assert.equal(await page.locator('#rewardPoints').textContent(),'181');
+ assert.match(await page.locator('.shop-voucher h3').textContent(),/frysepizza/);
+ await filter(page,'rewards');await purchase(page,'aaben-beer');
+ assert.equal(await page.locator('#rewardPoints').textContent(),'31');await page.locator('[data-redeem]').first().click();await page.locator('[data-confirm-redeem]').click();await page.locator('.shop-voucher.is-used').waitFor();
+ await page.locator('[data-activate=default]').click();await page.waitForFunction(()=>document.documentElement.dataset.skin==='default');
+ await page.setViewportSize({width:390,height:844});await filter(page,'all');await page.screenshot({path:'/tmp/math-shop-mobile.png',fullPage:true});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ await filter(page,'mine');await page.locator('[data-activate=military]').click();await page.waitForFunction(()=>document.documentElement.dataset.skin==='military');await page.evaluate(()=>window.showMathView('equations'));await page.screenshot({path:'/tmp/math-military-mobile.png',fullPage:false});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ const device=await browser.newContext();const other=await device.newPage();await login(other,'skin_tester');assert.equal(await other.locator('html').getAttribute('data-skin'),'military');assert.equal(await other.locator('#rewardPoints').textContent(),'31');await shop(other);await filter(other,'mine');assert.equal(await other.locator('.shop-voucher.is-used').count(),1);
+ const stranger=await browser.newPage();await login(stranger,'other_skin_user',true);assert.equal(await stranger.locator('html').getAttribute('data-skin'),'default');assert.equal(await stranger.locator('#rewardPoints').textContent(),'0');
+ await shop(stranger);await filter(stranger,'mine');assert.equal(await stranger.locator('.shop-skin-card').count(),0);assert.equal(await stranger.locator('.shop-voucher').count(),0);
+ assert.deepEqual(errors,[]);console.log('Shop browser passed: previews, purchases, four skins, saved math, reload, vouchers, mobile and account isolation.');
+}finally{await browser.close();await f.close();}

@@ -1,0 +1,12 @@
+// Prices and product IDs are shared by the interface and the authoritative API.
+export const shopCatalog = Object.freeze([
+  { id: 'military', kind: 'skin', name: 'Military', price: 40, description: 'Olivengrøn. Rolig. Klar til indsats.', tagline: 'Fokus i felten', badge: 'FELTHÅNDBOG' },
+  { id: 'terminal', kind: 'skin', name: 'Terminal', price: 40, description: 'Ren kode. Rent fokus.', tagline: 'Tilbage til terminalen', badge: 'SYSTEM ONLINE' },
+  { id: 'machine', kind: 'skin', name: 'Machine', price: 60, description: 'Stål, mørke og røde detaljer.', tagline: 'Præcision uden kompromis', badge: 'MACHINE MODE' },
+  { id: 'matrix', kind: 'skin', name: 'The Matrix', price: 40, description: 'Sort. Grønt. Ind i koden.', tagline: 'Se mønstret bag tallene', badge: 'FOLLOW THE NUMBERS' },
+  { id: 'frozen-pizza', kind: 'reward', name: 'En frysepizza', price: 40, description: 'Fra regnestykker til ost og sprød bund.', tagline: 'En velfortjent pizzapause', image: './shop-pizza.jpg', imageAlt: 'En gylden pizza med smeltet ost på et køkkenbord', voucherExplanation: 'Du får en personlig voucher i Mine køb. Aftal din frysepizza med Jacob, og markér først voucheren som brugt, når du har fået din belønning.' },
+  { id: 'aaben-beer', kind: 'reward', name: 'En øl hos ÅBEN', price: 150, description: 'En velfortjent pause efter indsatsen.', tagline: 'Noget at spare op til', image: './shop-beer.jpg', imageAlt: 'Et glas gylden øl på en hyggelig bar', voucherExplanation: 'Du får en personlig voucher i Mine køb. Aftal øllen med Jacob, og markér først voucheren som brugt, når I bruger den sammen. Den er ikke et gavekort udstedt af ÅBEN.' },
+  // Approx. 0.50 DKK/point (pizza ~20 DKK, beer ~75 DKK); Huracán new-price reference ~4.8m DKK.
+  { id: 'lamborghini-huracan', kind: 'reward', name: 'En Lamborghini Huracán', price: 9600000, description: 'Fra regnestykker til italiensk V10. Den helt store drøm.', tagline: 'Den ultimative opsparing', image: './shop-lamborghini.jpg', imageAlt: 'En limegrøn Lamborghini Huracán i gyldent eftermiddagslys', voucherExplanation: 'Du får en personlig voucher i Mine køb. Aftal din Lamborghini med Jacob, og markér først voucheren som brugt, når du har fået din belønning.' },
+]);
+export const skinIds = ['default', ...shopCatalog.filter(item => item.kind === 'skin').map(item => item.id)];

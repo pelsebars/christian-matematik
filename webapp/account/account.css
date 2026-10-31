@@ -12,20 +12,20 @@
 .landing-benefits span { display: grid; place-items: center; width: 30px; height: 30px; background: var(--blue-soft); border-radius: 9px; color: var(--blue); font-size: 12px; font-weight: 700; }
 .landing-subjects { display: flex; flex-wrap: wrap; gap: 8px; }
 .landing-subjects span { padding: 7px 10px; border: 1px solid var(--line); background: #ffffff99; border-radius: 20px; font-size: 12px; color: var(--ink-soft); }
-.account-card { background: white; border: 1px solid var(--line); border-radius: 24px; padding: 32px; box-shadow: var(--shadow); }
+.account-card { background: var(--skin-surface, white); border: 1px solid var(--line); border-radius: 24px; padding: 32px; box-shadow: var(--shadow); }
 .account-card h2 { font-size: 26px; margin: 28px 0 10px; }
 .account-card > p { color: var(--ink-soft); line-height: 1.6; }
 .auth-tabs { display: flex; gap: 6px; padding: 5px; background: var(--paper); border-radius: 12px; }
 .auth-tabs button { flex: 1; border: 0; border-radius: 9px; padding: 11px; background: transparent; cursor: pointer; }
-.auth-tabs [aria-pressed=true] { background: white; box-shadow: 0 2px 6px #16223a15; font-weight: 700; }
+.auth-tabs [aria-pressed=true] { background: var(--skin-surface, white); box-shadow: 0 2px 6px #16223a15; font-weight: 700; }
 .account-card form { display: grid; gap: 12px; margin-top: 24px; }
 .account-card label { font-size: 14px; font-weight: 650; display: grid; gap: 8px; }
-.account-card input { width: 100%; border: 1px solid #bdc8d9; border-radius: 9px; background: white; padding: 12px; min-height: 46px; }
+.account-card input { width: 100%; border: 1px solid #bdc8d9; border-radius: 9px; background: var(--skin-surface, white); padding: 12px; min-height: 46px; }
 .account-card input:focus-visible { outline: 3px solid var(--blue-soft); border-color: var(--blue); }
 .account-card small { color: var(--ink-soft); font-size: 12px; }
 .account-card .primary-button { margin-top: 10px; justify-content: center; }
 #accountMessage:empty, #passwordMessage:empty { display: none; }
-#accountMessage, #passwordMessage { font-size: 14px; color: #913a12; line-height: 1.5; }
+#accountMessage, #passwordMessage { font-size: 14px; color: var(--skin-text, #913a12); line-height: 1.5; }
 .login-help { border-top: 1px solid var(--line); padding-top: 20px; margin-top: 24px; font-size: 14px; }
 .login-help summary { cursor: pointer; }
 .login-help p { line-height: 1.6; }
@@ -35,11 +35,14 @@
 .account-bar > div { display: flex; gap: 12px; margin-top: 10px; }
 .account-bar button { cursor: pointer; background: transparent; color: #d7e2f4; border: 1px solid #ffffff40; padding: 6px 10px; border-radius: 6px; }
 #accountSync { overflow-wrap: anywhere; }
-.personal-overview { margin-bottom: 40px; padding: 28px; background: white; border: 1px solid var(--line); border-radius: 20px; }
-.personal-overview h1 { margin: 10px 0; }
+.personal-overview { margin-bottom: 40px; padding: 28px; background: var(--skin-surface, white); border: 1px solid var(--line); border-radius: 20px; }
+.personal-overview h1 { margin: 10px 0; word-spacing: .12em; }
 .personal-summary { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 28px 0; }
 .personal-summary > strong { font-size: 40px; color: var(--blue); }
 .personal-summary > a { margin-left: auto; }
+.personal-rewards { margin: 0 0 24px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--blue-soft); }
+.personal-rewards > strong { font-size: 32px; color: var(--blue); margin-right: 10px; }
+.personal-rewards p { margin: 8px 0 0; font-size: 13px; line-height: 1.6; color: var(--ink-soft); }
 .personal-topics { display: grid; gap: 10px; }
 .personal-topics details { border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
 .personal-topics summary { cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
@@ -65,6 +68,6 @@
 }
 .account-landing .primary-button:hover, .personal-overview .primary-button:hover { background: #1759c1; }
 .account-landing .primary-button:disabled { opacity: .65; cursor: wait; }
-.account-landing .secondary-button { padding: 10px 18px; min-height: 42px; border: 1px solid var(--line); border-radius: 9px; background: white; font-size: 14px; font-weight: 600; cursor: pointer; }
+.account-landing .secondary-button { padding: 10px 18px; min-height: 42px; border: 1px solid var(--line); border-radius: 9px; background: var(--skin-surface, white); font-size: 14px; font-weight: 600; cursor: pointer; }
 .sidebar { overflow-y: auto; overscroll-behavior: contain; }
 .sidebar > * { flex-shrink: 0; }

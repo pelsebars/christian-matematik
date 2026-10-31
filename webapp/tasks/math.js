@@ -142,6 +142,13 @@ export function equivalent(a, b, tolerance = 1e-9) {
       tolerance * Math.max(1, Math.abs(q[i] || 0)),
   ).every(Boolean);
 }
+// Plain numbers already read clearly in the answer field. Keep formatted
+// previews for fractions, powers and expressions where notation adds value.
+export function answerPreviewMath(input) {
+  if (/^[+−-]?(?:\d+(?:[.,]\d*)?|[.,]\d+)$/.test(String(input).trim())) return '';
+  return expressionMath(input);
+}
+
 export function expressionMath(input) {
   // Render supported input as MathML; never place input HTML in the DOM.
   try {

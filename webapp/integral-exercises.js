@@ -1,5 +1,6 @@
+import { bindTutor, taskContext } from './tutor.js';
 import { accountStorage, markCorrect, lessonCompletion } from './account/store.js';
-import { escapeHTML, expressionMath } from './tasks/math.js';
+import { escapeHTML, answerPreviewMath } from './tasks/math.js';
 import { gradePart, targetedFeedback } from './tasks/grading.js';
 export function renderExercise(task,number){
  return `<article class="integral-exercise" data-int-card="${task.id}"><p class="eyebrow">${number} · ${task.aids?'Med hjælpemidler':'Uden hjælpemidler'}</p>${task.prompt}${task.figure || ''}<form>${task.parts.map(p=>`<div class="int-part"><label for="${task.id}-${p.id}">${p.label}</label>${p.type==='choice'?`<select id="${task.id}-${p.id}" name="${p.id}"><option value="">Vælg et svar</option>${p.options.map(o=>`<option value="${o.id}">${escapeHTML(o.label.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim())}</option>`).join('')}</select><div class="int-options" aria-label="Svarmuligheder">${p.options.map(o=>`<p><strong></strong><span>${o.label}</span></p>`).join('')}</div>`:p.type==='text'?`<textarea id="${task.id}-${p.id}" name="${p.id}" rows="3"></textarea>`:`<input id="${task.id}-${p.id}" name="${p.id}" autocomplete="off" ${p.type==='number'?'inputmode="decimal"':''}><div class="int-preview" data-preview="${p.id}" aria-live="polite"></div>`}<div data-feedback="${p.id}" role="status"></div></div>`).join('')}<button type="submit" class="primary-button">Kontrollér svar</button></form><div class="int-actions"><button type="button" class="secondary-button" data-int-hint>Vis næste hint</button><button type="button" class="text-button" data-int-retry>Prøv igen</button></div><div class="int-hints" aria-live="polite"></div><details class="int-solution"><summary>Se gennemregnet løsning</summary>${task.solution}${task.parts.filter(p=>p.type==='text').map(p=>`<p><strong>Egen vurdering af ${p.label.toLowerCase()}</strong></p><ul>${p.checklist.map(c=>`<li>${c}</li>`).join('')}</ul><p>Forklaringer vurderes ikke automatisk. Brug tjeklisten til at finde dit næste øvepunkt.</p>`).join('')}</details></article>`;
@@ -29,6 +30,7 @@ export function bindLessonExercises(root, tasks, key, onProgress, helpId) {
  for (const t of tasks) {
   const el = root.querySelector(`[data-int-card="${t.id}"]`), form = el.querySelector('form');
   const d = state[t.id] ??= { answers: {}, checked: false, hints: 0 };
+  bindTutor(el, `${key}:${t.id}:v${t.version || 1}`, () => taskContext(t, d.answers, d.hints));
   t.parts.filter(p => p.type === 'choice').forEach(p => {
    const sel = form.elements.namedItem(p.id); p.options.forEach((o, i) => { sel.options[i + 1].textContent = `Mulighed ${i + 1}`; });
    sel.nextElementSibling.querySelectorAll('p strong').forEach((label, i) => { label.textContent = `${i + 1}. `; });
@@ -36,7 +38,7 @@ export function bindLessonExercises(root, tasks, key, onProgress, helpId) {
   function display() {
    for (const p of t.parts) {
     const v = d.answers[p.id] ?? ''; form.elements.namedItem(p.id).value = v;
-    const preview = el.querySelector(`[data-preview="${p.id}"]`); if (preview) preview.innerHTML = expressionMath(v);
+    const preview = el.querySelector(`[data-preview="${p.id}"]`); if (preview) preview.innerHTML = answerPreviewMath(v);
     const feedback = el.querySelector(`[data-feedback="${p.id}"]`); feedback.replaceChildren();
     if (d.checked) {
      const r = gradePart(p, v); feedback.textContent = r.status === 'incorrect' ? targetedFeedback(t, p, v) : r.message;

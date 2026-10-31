@@ -1,9 +1,21 @@
+import { skinIds } from '../shop-catalog.js';
 // Only authenticated server data is used to initialise a user's workspace.
 // Old, unscoped localStorage belongs to no identifiable user and is never imported.
 const inBrowser = typeof window !== 'undefined';
 export const preview = inBrowser && ['localhost', '127.0.0.1'].includes(location.hostname) && new URLSearchParams(location.search).get('preview') === '1';
 export let user = null;
 export let startupError = '';
+// Spendable balance confirmed by the server, after purchases.
+export let rewardPoints = 0;
+export let activeSkin = 'default';
+export function applyShopState(data) {
+  if (Number.isFinite(data.rewardPoints)) rewardPoints = data.rewardPoints;
+  if (skinIds.includes(data.activeSkin)) activeSkin = data.activeSkin;
+  if (inBrowser) {
+    document.documentElement.dataset.skin = activeSkin;
+    window.dispatchEvent(new Event('account-progress'));
+  }
+}
 const values = new Map(), revisions = new Map(), pending = new Map(), solved = new Map();
 let timer, inFlight = null, blocked = false;
 export const completions = () => [...solved.values()];
@@ -16,6 +28,7 @@ export const ready = (async () => {
     if (!response.ok) throw Error('Login og lagring er ikke tilgængeligt lige nu. Prøv igen om lidt.');
     const data = await response.json();
     user = data.user;
+    applyShopState(data);
     for (const row of data.states) { values.set(row.namespace, JSON.stringify(row.value)); revisions.set(row.namespace, row.revision); }
     for (const row of data.completions) solved.set(row.id, row);
     // Unsynced work is scoped to the verified user and this browser tab.
@@ -71,7 +84,10 @@ export async function flush() {
           const data = await response.json();
           throw Error(data.message || 'Kunne ikke gemme.');
         }
-        const { revision } = await response.json(); revisions.set(namespace, revision);
+        const data = await response.json();
+        const { revision } = data; revisions.set(namespace, revision);
+        rewardPoints = data.rewardPoints ?? rewardPoints;
+        window.dispatchEvent(new Event('account-progress'));
         const latest = pending.get(namespace);
         if (latest === entry && latest.value === sent.value && latest.completions.length === sent.completions.length) pending.delete(namespace);
         else {

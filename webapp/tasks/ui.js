@@ -1,9 +1,11 @@
+import { bindTutor, taskContext, closeTutor } from '../tutor.js';
+import { bankSessionReward, formatRewardPoints } from './rewards.js';
 import { accountStorage, markCorrect } from '../account/store.js';
 import { topics, modules, goals } from "./catalog.js";
 import { bank, instantiate } from "./bank/index.js";
 import { composeSet } from "./selection.js";
 import { gradeTask, targetedFeedback, blank } from "./grading.js";
-import { escapeHTML as esc, expressionMath } from "./math.js";
+import { escapeHTML as esc, answerPreviewMath } from "./math.js";
 import { loadState, saveState } from "./storage.js";
 const root = document.querySelector("#tasksView");
 let storage;
@@ -35,9 +37,14 @@ function persist() {
 const header = () =>
   `<header class="page-intro"><p class="eyebrow">Dit arbejdsrum</p><h1>Opgaver</h1><p class="page-lead">Prøv selv, vælg din vej, og brug løsningerne til at finde næste skridt.</p></header><p id="taskSave" class="task-save" role="status">${esc(warning || "Dit arbejde gemmes på din konto. Se gemmestatus i sidemenuen.")}</p>`;
 function render(focus = false) {
+  closeTutor();
   const s = state.session;
   root.innerHTML =
     header() + (s ? (s.status === "submitted" ? results() : work()) : setup());
+  if (s && s.status === "active" && s.mode === "training") {
+    const task = tasks()[s.index];
+    bindTutor(root.querySelector(".task-question"), `bank:${task.id}:v${task.version}:${s.seed}`, () => taskContext(task, s.answers[task.id] || {}, s.hints[task.id] || 0));
+  }
   if (focus) {
     const heading = root.querySelector("#taskHeading");
     heading?.focus();
@@ -110,7 +117,7 @@ function field(part, answer, locked) {
     return `<div class="task-components">${part.components.map((label, i) => `<label>${esc(label)}<input type="text" inputmode="text" autocomplete="off" data-part="${part.id}" data-component="${i}" value="${esc(answer?.[i] || "")}" ${disabled}></label>`).join("")}</div>`;
   if (part.type === "text")
     return `<textarea aria-label="${esc(part.label)}" data-part="${part.id}" rows="5" maxlength="6000" ${disabled}>${esc(answer || "")}</textarea>`;
-  return `<input type="text" aria-label="${esc(part.label)}" data-part="${part.id}" autocomplete="off" maxlength="200" value="${esc(answer || "")}" ${disabled}><div class="task-preview" data-preview="${part.id}" aria-live="polite">${expressionMath(answer || "")}</div>`;
+  return `<input type="text" aria-label="${esc(part.label)}" data-part="${part.id}" autocomplete="off" maxlength="200" value="${esc(answer || "")}" ${disabled}><div class="task-preview" data-preview="${part.id}" aria-live="polite">${answerPreviewMath(answer || "")}</div>`;
 }
 function work() {
   const s = state.session,
@@ -119,6 +126,7 @@ function work() {
     locked = s.mode === "training" && s.checked[t.id];
   const done = Object.values(s.checked).filter(Boolean).length;
   return `<section class="task-panel task-session"><div class="task-topline"><h2 id="taskHeading" tabindex="-1">${s.mode === "exam" ? "Prøvesæt" : "Blandet træning"} · Opgave ${s.index + 1} af ${list.length}</h2>${s.timer && s.mode === "exam" ? '<p id="taskTimer" role="timer" aria-label="Forløbet tid"></p>' : ""}</div><p>${s.minutes} minutters forventet arbejdstid · Seed: ${esc(s.seed)}${s.mode === "training" ? ` · ${done} besvarede` : ""}</p>
+ <p class="task-reward-note">I trænings- og prøvesæt giver hvert automatisk bedømt resultatpoint ét butikspoint. Et nyt sæt tæller igen — også med opgaver, du har løst før.</p>
  ${s.requested > list.length ? `<p class="hint">Banken og dine filtre gav ${list.length} af de ${s.requested} ønskede opgaver. Sættet er tilpasset uden gentagelser.</p>` : ""}
  <nav class="task-numbers" aria-label="Opgaver i sættet">${list.map((q, i) => `<button class="task-button ${s.index === i ? "is-active" : ""}" type="button" data-task-action="jump" data-index="${i}" ${s.index === i ? 'aria-current="step"' : ""} aria-label="Opgave ${i + 1}${s.marked[q.id] ? ", markeret til senere" : ""}${hasAnswer(q) ? ", har svar" : ""}">${i + 1}${s.marked[q.id] ? " ★" : ""}${hasAnswer(q) ? " •" : ""}</button>`).join("")}</nav>
  <article class="task-question"><div class="task-topline"><p>${t.aids ? "Hjælpemidler tilladt" : "Uden hjælpemidler"} · ${t.parts.reduce((a, p) => a + p.points, 0)} point</p>${button(s.marked[t.id] ? "★ Markeret til senere" : "Markér til senere", "mark", `aria-pressed="${Boolean(s.marked[t.id])}"`)}</div>${t.prompt}${t.figure || ""}
@@ -189,7 +197,7 @@ function results() {
     ),
   );
   const repeat = [...new Set(weak.map((t) => t.module))];
-  return `<section class="task-panel"><h2 id="taskHeading" tabindex="-1">Dit resultat og næste skridt</h2><p class="task-score">${r.points} af ${r.max} point</p>${r.pending ? `<p>${r.pending} point afventer egen vurdering. Disse svar tæller endnu ikke som forkerte.</p>` : ""}${r.self ? `<p>${r.self} mulige point er vurderet af dig selv. De øvrige er bedømt automatisk.</p>` : ""}<p>Brug resultatet til at vælge, hvad du vil arbejde med næste gang. Ét usikkert trin kan øves særskilt.</p><p>${list.filter((t) => !hasAnswer(t)).length} helt ubesvarede opgaver · ${list.filter((t) => s.marked[t.id]).length} markeret til senere · ${list.flatMap((t) => gradeTask(t, s.answers[t.id], s.self[t.id])).filter((g) => g.status === "unanswered").length} ubesvarede delspørgsmål.</p><p>Seed: ${esc(s.seed)}${s.timer ? ` · Forløbet tid: ${Math.floor((s.endedAt - s.startedAt) / 60000)} minutter` : ""}</p>
+  return `<section class="task-panel"><h2 id="taskHeading" tabindex="-1">Dit resultat og næste skridt</h2><p class="task-score">${r.points} af ${r.max} point</p>${r.pending ? `<p>${r.pending} point afventer egen vurdering. Disse svar tæller endnu ikke som forkerte.</p>` : ""}${r.self ? `<p>${r.self} mulige point er vurderet af dig selv. De øvrige er bedømt automatisk.</p>` : ""}<p class="task-reward-note">Sættet giver ${formatRewardPoints(bankSessionReward(s)?.points || 0)} butikspoint, når svarene er gemt. Egne vurderinger giver ikke butikspoint.</p><p>Brug resultatet til at vælge, hvad du vil arbejde med næste gang. Ét usikkert trin kan øves særskilt.</p><p>${list.filter((t) => !hasAnswer(t)).length} helt ubesvarede opgaver · ${list.filter((t) => s.marked[t.id]).length} markeret til senere · ${list.flatMap((t) => gradeTask(t, s.answers[t.id], s.self[t.id])).filter((g) => g.status === "unanswered").length} ubesvarede delspørgsmål.</p><p>Seed: ${esc(s.seed)}${s.timer ? ` · Forløbet tid: ${Math.floor((s.endedAt - s.startedAt) / 60000)} minutter` : ""}</p>
  <h3>Fordelt på hovedemner</h3>${aggregate(list, "topic")}<h3>Fordelt på læringsmål</h3>${aggregate(list, "goal")}<p>En opgave kan knyttes til flere læringsmål. Pointene kan derfor optræde under flere mål.</p>
  ${repeat.length ? `<h3>Forslag til repetition</h3><div class="task-actions">${repeat.map((id) => button(esc(modules[id].name), "repeat-module", `data-module="${id}"`)).join("")}</div>` : ""}
  <div class="task-actions">${weak.length ? button("Prøv fejlbesvarede og uafklarede opgaver igen", "retry") : ""}${button("Vælg et nyt sæt", "new")}</div></section>
@@ -208,6 +216,7 @@ function start(list, options) {
     marked: {},
     self: {},
     startedAt: Date.now(),
+    rewardId: crypto.randomUUID(),
     timer: options.mode === "exam" && options.timer,
     minutes: options.minutes,
     requested: options.requested,
@@ -222,6 +231,7 @@ function record() {
     r = totals(list);
   const entry = {
     id: s.startedAt,
+    rewardId: s.rewardId,
     date: s.endedAt,
     mode: s.mode,
     ...r,
@@ -276,7 +286,7 @@ root.addEventListener("input", (event) => {
     s.answers[t.id][part][Number(input.dataset.component)] = input.value;
   } else s.answers[t.id][part] = input.value;
   const preview = root.querySelector(`[data-preview="${part}"]`);
-  if (preview) preview.innerHTML = expressionMath(input.value);
+  if (preview) preview.innerHTML = answerPreviewMath(input.value);
   persist();
   root.querySelectorAll('[data-task-action="jump"]').forEach((b, i) => {
     const q = tasks()[i];

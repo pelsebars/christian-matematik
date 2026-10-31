@@ -11,6 +11,7 @@ https://christian-matematik-webapp.vercel.app
 - Better Auth kræver et internt email-felt. Serveren afleder en adresse under det reserverede `users.invalid` fra brugernavnet. Der indsamles ikke mailadresser og sendes ingen mails.
 - `learning_state` indeholder brugerens svar, hints og aktuelle opgavesæt pr. lagringsområde. Revisioner stopper samtidige overskrivninger.
 - `learning_completion` registrerer første korrekte løsning pr. bruger og versioneret opgave. En opgavefamilie i banken tæller én gang, uanset hvor mange seeds der øves.
+- `learning_completion.points_awarded` gemmer undervisningens butikspoint pr. løsning: 1 første gang, 0 ved gentagelser. Nye opgavebank-løsninger registreres med 0 her, fordi deres point tildeles pr. sæt i `bank_set_reward`. Optjente point er summen af undervisningspoint og sættenes automatiske point; trænings- og prøvesæts resultatpoint ændres ikke. Beløbet accepteres ikke fra browseren. Den genkørbare migrering giver også eksisterende løsninger 1 point hver. Kør `npm run db:migrate` før deployment af denne version. Saldoen vises i Mit overblik efter synkronisering; lokal forhåndsvisning optjener ikke butikspoint. Butikken trækker køb fra saldoen uden at ændre løsninger eller optjente point.
 - Alle læsninger og skrivninger afgrænses på serveren til den bruger, sessionen tilhører. Et indsendt bruger-ID har ingen virkning.
 - Eksisterende lokale svar kopieres ikke automatisk til en konto. De gamle browserdata slettes heller ikke.
 
@@ -67,3 +68,29 @@ Svarkontrol sker fortsat i browserens eksisterende matematikmotor. Registreringe
 En versionskonflikt stopper gemning frem for at overskrive andet arbejde. Brug **Hent kladde**, før du lukker en berørt fane. Kladdefilen indeholder personlige besvarelser og kan bruges ved manuel gendannelse; den importeres ikke automatisk. Hvis en gemt kladde er ældre end serverversionen ved genåbning, åbnes serverversionen, mens den gamle kladde bevares til eksport. Brug først **Hent kladde** til at bevare lokale ændringer som fil. **Åbn gemt version** åbner derefter serverens version og rydder den forældede lokale kø, efter brugerens bekræftelse i appen.
 
 Opgave-ID'erne i HTML er nu eksplicitte. Bevar dem ved flytning/omformulering af samme opgave, og øg versionen ved en faglig ændring, der skal kræve en ny besvarelse. Nye moduler skal bruge `accountStorage` og kalde `markCorrect` efter automatisk korrekt svarkontrol.
+
+## Butik og skins
+
+Butikken findes via **Butik** i menuen eller `#shop`. Military, Terminal og The Matrix koster 40 point, Machine 60 point, en frysepizza 40 point, en personlig ÅBEN-voucher 150 point og en Lamborghini Huracán 9.600.000 point. Bilprisen bruger cirka 0,50 kr. pr. point (pizza anslået til 20 kr., øl til 75 kr.) og en registreret nypris på cirka 4,8 mio. kr. ([prisreference](https://www.nummerplade.net/nummerplade/lambo.html)). Produkter og priser er defineret i `shop-catalog.js`; API'et bruger altid serverens pris. Det oprindelige skin er gratis og kan altid genaktiveres under Mine køb. Skins købes én gang pr. konto, mens vouchers kan købes flere gange.
+
+`shop_purchase` gemmer hvert køb med pris og et idempotent købsnummer. En lås på brugerens række serialiserer køb fra flere faner/enheder, så saldoen ikke kan bruges to gange. `shop_profile` gemmer aktivt skin. Begge tabeller er brugerafgrænsede og slettes med kontoen. Genindsendelse af samme købsnummer trækker ikke flere point. Et voucherforbrug opdaterer kun den købte voucher og trækker ikke point igen.
+
+`GET /api/shop` henter butik og saldo; `POST` køber; `PUT` aktiverer et ejet skin eller markerer egen voucher brugt. Muterende kald kræver session og samme origin som øvrig kontolagring. Voucherens fysiske belønning aftales med Jacob; den er ikke et gavekort eller en automatisk bestilling hos ÅBEN.
+
+Temaerne består af CSS, fælles farvevariabler og en lille SVG-baggrund. MathML og bedømmelse ændres ikke. Originale farver bruges som fallback, og videnskabelige figurer beholder en lys plotflade i mørke skins. De genererede belønningsbilleder ligger lokalt som `shop-beer.jpg`, `shop-pizza.jpg` og `shop-lamborghini.jpg` og kræver ingen ekstern billedtjeneste. Forhåndsvisninger er bygget i HTML/CSS.
+
+Lamborghini-billedet er genereret med den indbyggede imagegen og gemt som JPEG. Prompt:
+
+> Create a polished photorealistic editorial product photograph for a Danish reward shop. A lime green Lamborghini Huracán sports coupe, front three-quarter view, parked on an understated concrete forecourt beside modern Scandinavian architecture. Warm golden late afternoon light, tasteful aspirational mood, subtle softly blurred background. Entire car visible with generous margins on all sides for cropping to a landscape 3:2 card, car centered, realistically accurate wheels and proportions. No people, no text, no price, no watermark, no graphic overlays. Landscape composition.
+
+Kør `npm run test:shop` for API- og browsertest af saldo, samtidige køb, genforsøg, ejerskab, temaskift, vouchers, mobil og brugeradskillelse. Kør `npm run db:migrate` før deployment af shop-versionen. Test bruger midlertidig database, ikke Railway.
+
+### Point fra opgavebankens sæt
+
+Trænings- og prøvesæt giver alle automatisk bedømte resultatpoint som butikspoint, inklusive delpoint og tidligere løste opgaver. Et nyt sæt giver point igen. Under træning optjenes point efter Tjek besvarelse; i prøvesæt ved aflevering. Afslutning, genindlæsning, genforsøg på lagring og gentagne API-kald krediterer ikke samme sæt igen. Fritekst og egen vurdering giver ingen butikspoint.
+
+Serveren rekonstruerer opgaverne ud fra seed og version og bruger den fælles grader. Den accepterer ikke browserens pointtotal. `bank_set_reward` gemmer højeste automatiske score pr. konto/sæt med en fast opgavedefinition. Nye sæt får et UUID; eksisterende sæt bruger deres starttid. `bank_reward_legacy` modregner gamle bankpoint i det tilhørende sæts score, så den gamle ene point ikke lægges oven i den nye fulde score. Eksisterende point reduceres ikke.
+
+Ved opgradering: kør først `npm run db:migrate`, deploy derefter og kør `node --env-file-if-exists=.env scripts/backfill-bank-rewards.js`. Scriptet efterregulerer aktuelt gemt sæt og op til 30 afsluttede sæt i den centralt gemte historik. Det aktuelle sæt beregnes fra svarene; historik uden svar begrænses af opgavernes maksimum og fratrækkes egen vurdering konservativt. Det kan genkøres uden ekstra point og ændrer ikke besvarelser eller køb. Ældre sæt uden gemt historik kan ikke rekonstrueres.
+
+`npm run test:bank-rewards` dækker bl.a. gentagelser, delpoint, skriftlige delopgaver, prøvesæt, konflikter, gamle point og scenariet 21/25 med 7 oprindelige butikspoint.

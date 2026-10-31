@@ -1,10 +1,11 @@
+import { bindTutor, taskContext } from './tutor.js';
 import { accountStorage, markCorrect, lessonCompletion } from './account/store.js';
 import { renderExercises as cards } from './integral-exercises.js';
 import { mountIntegralNavigation } from './integral-navigation.js';
 import {integralModules, integralGoals} from './integral-plan.js';
 import {integrationTasks} from './tasks/bank/integration.js';
 import {gradePart,targetedFeedback} from './tasks/grading.js';
-import {escapeHTML,expressionMath} from './tasks/math.js';
+import {escapeHTML,expressionMath,answerPreviewMath} from './tasks/math.js';
 import {math,n,x,power,C,plus,minus,eq,frac,fn,prime,exp,ln,integral} from './integral-math.js';
 const root=document.querySelector('#integralLesson');
 const jump=(id,text)=>`<button type="button" class="text-button" data-int-jump="${id}">${text}</button>`;
@@ -91,10 +92,11 @@ function progress(){
 for(const task of all){
  const el=root.querySelector(`[data-int-card="${task.id}"]`),form=el.querySelector('form');
  const d=state[task.id]??={answers:{},checked:false,hints:0};
+ bindTutor(el, `${key}:${task.id}:v${task.version || 1}`, () => taskContext(task, d.answers, d.hints));
  function display(){
   for(const p of task.parts){
    const field=form.elements.namedItem(p.id),v=d.answers[p.id]??''; field.value=v;
-   const preview=el.querySelector(`[data-preview="${p.id}"]`);if(preview)preview.innerHTML=expressionMath(v);
+   const preview=el.querySelector(`[data-preview="${p.id}"]`);if(preview)preview.innerHTML=answerPreviewMath(v);
    const feedback=el.querySelector(`[data-feedback="${p.id}"]`);feedback.replaceChildren();
    if(d.checked){const result=gradePart(p,v);const msg=result.status==='incorrect'?targetedFeedback(task,p,v):result.message;feedback.textContent=msg;feedback.className=`int-feedback ${result.status}`;
     if(result.status==='incorrect'&&foundations.includes(task)) feedback.insertAdjacentHTML('beforeend',`<p>${jump('int-grundkort','Åbn konkret grundhjælp')}</p>`);

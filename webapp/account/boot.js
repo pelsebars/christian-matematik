@@ -1,4 +1,5 @@
-import { ready, user, startupError, preview, accountStorage, completions, flush, hasConflict, reopenSavedVersion } from './store.js';
+import { formatRewardPoints } from '../reward-points.js';
+import { ready, user, startupError, preview, accountStorage, completions, rewardPoints, flush, hasConflict, reopenSavedVersion } from './store.js';
 import { escapeHTML as esc } from '../tasks/math.js';
 const landing = document.querySelector('#accountLanding'), shell = document.querySelector('.app-shell');
 const form = document.querySelector('#accountForm'), message = document.querySelector('#accountMessage');
@@ -75,14 +76,17 @@ if (!user && !preview) {
   await new Promise((resolve, reject) => { const script = document.createElement('script'); script.src = './app.js'; script.onload = resolve; script.onerror = reject; document.head.append(script); });
   await import('../tasks/ui.js'); await import('../integral.js'); await import('../ode.js'); await import('../normal.js'); await import('../vector.js');
   await import('../sidebar.js');
+  await import('../shop.js');
   await import('./legacy.js');
+  const { bindLegacyTutors } = await import('../tutor.js');
+  bindLegacyTutors();
   const dashboard = document.createElement('section'); dashboard.className = 'personal-overview';
   document.querySelector('[data-page="home"]').prepend(dashboard);
   const labels = { equations: 'Ligninger', quadratic: 'Andengradsligninger', composite: 'Sammensatte funktioner', differentiation: 'Differentialregning', planeGeometry: 'Plangeometri og vektorer', integration: 'Integralregning', differentialEquations: 'Differentialligninger', normalDistribution: 'Normalfordeling', vectorFunctions: 'Vektorfunktioner' };
   function renderOverview() {
     const rows = completions();
     let resume; try { resume = JSON.parse(accountStorage.getItem('christian-matematik.resume.v1') || '{}').route; } catch {}
-    dashboard.innerHTML = `<p class="eyebrow">Mit overblik</p><h1>${preview ? 'Dit personlige arbejdsrum' : `Hej ${esc(user.username)}`}</h1><p>Ét trin ad gangen. Her kan du følge dine korrekt løste opgaver.</p><div class="personal-summary"><strong>${rows.length}</strong><span>opgaver løst korrekt</span>${resume && /^[a-zA-Z0-9/_-]+$/.test(resume) ? `<a class="primary-button" href="#${esc(resume)}">Fortsæt, hvor du slap →</a>` : '<a class="primary-button" href="#equations">Begynd med ligninger →</a>'}</div><div class="personal-topics">${Object.entries(labels).map(([topic, label]) => {
+    dashboard.innerHTML = `<p class="eyebrow">Mit overblik</p><h1>${preview ? 'Dit personlige arbejdsrum' : `Hej ${esc(user.username)}`}</h1><p>Ét trin ad gangen. Her kan du følge dine korrekt løste opgaver.</p><div class="personal-summary"><strong>${rows.length}</strong><span>opgaver løst korrekt</span>${resume && /^[a-zA-Z0-9/_-]+$/.test(resume) ? `<a class="primary-button" href="#${esc(resume)}">Fortsæt, hvor du slap →</a>` : '<a class="primary-button" href="#equations">Begynd med ligninger →</a>'}</div>${preview ? '' : `<div class="personal-rewards"><strong id="rewardPoints">${formatRewardPoints(rewardPoints)}</strong><span>butikspoint</span><p>I undervisningen: 1 point første gang. I opgavebanken: alle automatisk bedømte resultatpoint, hver gang du tager et nyt trænings- eller prøvesæt. Pointene vises efter gemning. <a href="#shop">Besøg butikken →</a></p></div>`}<div class="personal-topics">${Object.entries(labels).map(([topic, label]) => {
       const items = rows.filter(r => r.topic === topic);
       const groups = [...new Set(items.map(r => r.module))];
       return `<details><summary><span>${label}</span><strong>${items.length} løst</strong></summary>${items.length ? groups.map(group => `<div class="personal-module"><h3>${esc(group)}</h3><ul>${items.filter(r => r.module === group).map(r => `<li><a href="#${esc(r.route)}">${esc(r.label)}</a><span>✓ Løst korrekt</span></li>`).join('')}</ul></div>`).join('') : '<p>Du har endnu ikke løst opgaver i dette emne.</p>'}<a class="text-button" href="#${topic}">Åbn emnet →</a></details>`;

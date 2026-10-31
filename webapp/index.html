@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="./vector.css" />
     <link rel="stylesheet" href="./integral.css" />
     <link rel="stylesheet" href="./tasks/tasks.css" />
+    <link rel="stylesheet" href="./shop.css" />
+    <link rel="stylesheet" href="./skins.css" />
   </head>
   <body>
     <main id="accountLanding" class="account-landing">
@@ -176,6 +178,8 @@
             <span>Opgaver</span>
           </button>
 
+          <button class="nav-item" type="button" data-view="shop"><span class="nav-symbol" aria-hidden="true">♧</span><span>Butik</span></button>
+
           <button class="nav-item" type="button" data-view="formulas">
             <span class="nav-symbol" aria-hidden="true">Σ</span>
             <span>Formler &amp; huskeregler</span>
@@ -325,6 +329,7 @@
           </section>
         </section>
 
+        <section id="shopView" data-page="shop" hidden aria-label="Butik"></section>
         <section id="tasksView" data-page="tasks" hidden aria-label="Opgaver"></section>
 
         <section class="subject-view" data-page="subject" hidden>

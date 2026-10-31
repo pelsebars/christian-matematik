@@ -27,12 +27,17 @@ try {
   await a.evaluate(() => localStorage.setItem('christian-matematik.lessons.v1','{"exercise-1-v1":{"correct":true}}'));
   await enter(a,'elev_a',true);
   assert.equal(await a.locator('.personal-summary > strong').textContent(),'0');
+  assert.equal(await a.locator('#rewardPoints').textContent(),'0');
   await a.locator('.nav-item[data-view=equations]').click();
   const card = a.locator('#equationLesson .exercise-card').first();
   await card.locator('input').fill(await card.getAttribute('data-answer'));
   await card.locator('.check-answer').click(); await saved(a);
+  assert.equal(await a.locator('#rewardPoints').textContent(),'1');
+  await card.locator('.check-answer').click(); await saved(a);
+  assert.equal(await a.locator('#rewardPoints').textContent(),'1');
   await a.reload(); await a.locator('#accountLogout').waitFor();
   await a.locator('#equationLesson .exercise-card.is-correct').first().waitFor();
+  assert.equal(await a.locator('#rewardPoints').textContent(),'1');
   await a.goto(f.origin+'/#integration/1/start/1');
   const int = a.locator('[data-int-card="int.pre.function"]');
   await int.locator('input').fill('7'); await int.locator('button[type=submit]').click(); await saved(a);
@@ -93,10 +98,12 @@ try {
   await a.locator('[data-task-action=check]').click(); await saved(a);
   await a.locator('.nav-item[data-view=home]').click(); await saved(a);
   assert.equal(await a.locator('.personal-summary > strong').textContent(),'10');
+  assert.equal(await a.locator('#rewardPoints').textContent(),String(9+task.parts.reduce((sum,p)=>sum+p.points,0)));
   await a.screenshot({path:'/tmp/math-dashboard-desktop.png',fullPage:true});
   // A separate device can recover answers and permanent completion records.
   const device = await browser.newContext(); const other = await device.newPage(); await enter(other,'elev_a');
   assert.equal(await other.locator('.personal-summary > strong').textContent(),'10');
+  assert.equal(await other.locator('#rewardPoints').textContent(),String(9+task.parts.reduce((sum,p)=>sum+p.points,0)));
   await other.locator('.nav-item[data-view=equations]').click();
   assert.equal(await other.locator('#equationLesson .exercise-card').first().getAttribute('data-solved'),'true');
   await other.goto(f.origin+'/#normalDistribution/1/start');
@@ -135,6 +142,7 @@ try {
   await a.locator('#accountLogout').click(); await a.locator('#accountLanding').waitFor();
   await enter(a,'elev_b',true);
   assert.equal(await a.locator('.personal-summary > strong').textContent(),'0');
+  assert.equal(await a.locator('#rewardPoints').textContent(),'0');
   await a.locator('.nav-item[data-view=equations]').click();
   assert.equal(await a.locator('#equationLesson .exercise-card').first().getAttribute('data-solved'),null);
   assert.equal(await a.locator('#equationLesson .exercise-card input').first().inputValue(),'');
@@ -174,7 +182,9 @@ try {
   await bcard.locator('input').fill(await bcard.getAttribute('data-answer')); await bcard.locator('.check-answer').click();
   assert.equal(await a.evaluate(async () => (await import('/account/store.js')).flush()),false);
   assert.match(await a.locator('#accountSync').textContent(),/ikke synkroniseret/);
+  assert.equal(await a.locator('#rewardPoints').textContent(),'0');
   await a.unroute('**/api/learning'); await saved(a);
+  assert.equal(await a.locator('#rewardPoints').textContent(),'1');
   await a.reload(); await a.locator('#equationLesson .exercise-card.is-correct').waitFor();
   // Responsive landing form and workspace remain usable.
   const mobile = await browser.newContext({viewport:{width:390,height:844},isMobile:true}); const phone=await mobile.newPage();

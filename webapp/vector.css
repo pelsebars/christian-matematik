@@ -17,7 +17,7 @@
 #vectorLesson table { border-collapse:collapse; width:100%; }
 #vectorLesson th,#vectorLesson td { padding:12px; border-bottom:1px solid var(--line); text-align:left; }
 #vectorLesson .vector-goal-map table { min-width:1000px; }
-#vectorLesson [data-lesson-warning]:not([hidden]) { padding:16px; border:1px solid #b77b28; background:#fff1e2; border-radius:12px; }
+#vectorLesson [data-lesson-warning]:not([hidden]) { padding:16px; border:1px solid #b77b28; background:var(--skin-surface-soft, #fff1e2); border-radius:12px; }
 #vectorLesson :focus-visible { outline:3px solid #206eab; outline-offset:4px; }
 #vector-basics { scroll-margin-top:20px; }
 .vector-breadcrumb { margin-bottom:20px; }
@@ -26,8 +26,8 @@
 .vector-step-menu a span { color:var(--blue); }
 .vector-step-menu a[aria-current] { background:var(--blue-soft); border-color:var(--blue); color:var(--ink); }
 .vector-page-controls { display:flex; justify-content:space-between; gap:16px; border-top:1px solid var(--line); margin:28px 0; padding-top:20px; }
-.vector-important { background:#e8f4f1; border-left:4px solid #087d69; border-radius:10px; padding:18px; margin:22px 0; }
-.vector-important h3 { color:#145e51; }
+.vector-important { background:var(--skin-surface-soft, #e8f4f1); border-left:4px solid #087d69; border-radius:10px; padding:18px; margin:22px 0; }
+.vector-important h3 { color:var(--skin-text, #145e51); }
 #vectorLesson input:not([type=range]),#vectorLesson select,#vectorLesson textarea { width:100%; min-width:0; padding:12px; border:1px solid var(--line); border-radius:8px; font:inherit; background:var(--surface); color:var(--ink); }
 #vectorLesson .primary-button,#vectorLesson .secondary-button { padding:11px 16px; border:1px solid var(--blue); border-radius:11px; font:inherit; font-size:.86rem; font-weight:700; cursor:pointer; }
 #vectorLesson .primary-button { color:white; background:var(--blue); }
@@ -59,5 +59,5 @@
 #dynamics-time { width:100%; }
 #vectorLesson .dynamics-toggle { display:flex; align-items:flex-start; gap:10px; }
 #vectorLesson .dynamics-toggle input { flex:0 0 20px; width:20px; height:20px; margin-top:4px; }
-#vectorLesson [data-dynamics-warning]:not(:empty) { border-left:3px solid #ae5926; padding:12px; background:#fff3e8; border-radius:8px; }
+#vectorLesson [data-dynamics-warning]:not(:empty) { border-left:3px solid #ae5926; padding:12px; background:var(--skin-surface-soft, #fff3e8); border-radius:8px; }
 @media(max-width:700px){ .vector-dynamics-lab { padding:12px; } }

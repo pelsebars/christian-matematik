@@ -1,0 +1,23 @@
+.tutor-panel[hidden] { display: none; }
+.tutor-panel { position: fixed; z-index: 120; right: 20px; bottom: 20px; width: min(420px, calc(100vw - 24px)); max-height: calc(100dvh - 40px); display: flex; flex-direction: column; gap: 12px; padding: 20px; border: 1px solid #d6d0c5; border-radius: 20px; background: #fffcf6; color: #292923; box-shadow: 0 16px 64px #0003; font-size: 15px; overflow: auto; }
+.tutor-panel header { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+.tutor-panel header strong { font-size: 20px; }
+.tutor-panel p { margin: 4px 0; }
+.tutor-panel header p, .tutor-intro { color: #605e54; }
+.tutor-panel button { cursor: pointer; border: 1px solid #c9c7bb; border-radius: 10px; background: #fff; color: #292923; padding: 9px 12px; font: inherit; }
+.tutor-panel button:disabled { opacity: .55; cursor: wait; }
+.tutor-panel button:focus-visible, .tutor-panel textarea:focus-visible { outline: 3px solid #4d715f; outline-offset: 2px; }
+.tutor-messages { min-height: 60px; overflow-y: auto; flex: 1 1 auto; }
+.tutor-message { border-radius: 12px; padding: 12px; background: #f0eee6; margin: 8px 0; }
+.tutor-message.user { background: #e2ecdf; margin-left: 24px; }
+.tutor-message p { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+.tutor-message strong { font-size: 12px; }
+.tutor-shortcuts { display: flex; gap: 6px; flex-wrap: wrap; }
+.tutor-shortcuts button { font-size: 12px; padding: 7px; }
+.tutor-panel form { display: grid; gap: 8px; }
+.tutor-panel textarea { width: 100%; box-sizing: border-box; resize: vertical; border: 1px solid #aaa99d; border-radius: 8px; padding: 10px; font: inherit; color: #292923; background: white; }
+.tutor-panel .primary-button { background: #335747; color: white; }
+.tutor-status { font-size: 13px; }
+.tutor-status:empty { display: none; }
+.tutor-open { margin: 4px 0; }
+@media (max-width: 600px) { .tutor-panel { right: 12px; bottom: 12px; padding: 14px; max-height: 72dvh; } }

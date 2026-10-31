@@ -1,5 +1,5 @@
 #odeLesson .lesson-section { margin-top:24px; }
-#odeLesson [data-lesson-warning]:not([hidden]) { padding:16px; border:1px solid #b77b28; background:#fff1e2; border-radius:12px; }
+#odeLesson [data-lesson-warning]:not([hidden]) { padding:16px; border:1px solid #b77b28; background:var(--skin-surface-soft, #fff1e2); border-radius:12px; }
 #odeLesson .ode-figure { margin:24px 0; padding:20px; background:var(--surface); border:1px solid var(--line); border-radius:14px; }
 #odeLesson .ode-figure label,#odeLesson .ode-figure output { display:block; margin-bottom:12px; }
 #ode-constant { width:100%; }

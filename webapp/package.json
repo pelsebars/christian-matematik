@@ -13,7 +13,10 @@
     "test:accounts:browser": "node tests/accounts.browser.test.js && node tests/vector.accounts.browser.test.js && node tests/vector-dynamics.accounts.browser.test.js",
     "demo": "node scripts/demo.js",
     "test:normal": "node --test tests/normal.test.js tests/normal-standard.test.js tests/normal-parameters.test.js tests/normal-algebra.test.js tests/normal-plots.test.js && node tests/normal.browser.test.js && node tests/normal-standard.browser.test.js && node tests/normal-parameters.browser.test.js && node tests/normal-algebra.browser.test.js && node tests/normal-plots.browser.test.js",
-    "test:vector": "node --test tests/vector.test.js && node tests/vector.browser.test.js && node tests/vector.accounts.browser.test.js && node --test tests/vector-dynamics.test.js && node tests/vector-dynamics.browser.test.js && node tests/vector-dynamics.accounts.browser.test.js"
+    "test:vector": "node --test tests/vector.test.js && node tests/vector.browser.test.js && node tests/vector.accounts.browser.test.js && node --test tests/vector-dynamics.test.js && node tests/vector-dynamics.browser.test.js && node tests/vector-dynamics.accounts.browser.test.js",
+    "test:shop": "node --test tests/shop.test.js && node tests/shop.browser.test.js",
+    "test:bank-rewards": "node --test tests/bank-rewards.test.js && node tests/bank-rewards.browser.test.js",
+    "test:tutor": "node --test tests/tutor.test.js && npm run build && node tests/tutor.browser.test.js"
   },
   "dependencies": {
     "better-auth": "^1.7.10",

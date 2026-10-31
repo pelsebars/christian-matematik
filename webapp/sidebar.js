@@ -83,7 +83,7 @@ document.querySelectorAll('.nav-submenu a').forEach(link => {
 window.addEventListener('mathviewchange', event => {
   const group = groups.find(item => item.dataset.navGroup === event.detail.view);
   if (group) expandOnly(group);
-  else if (['home', 'tasks', 'formulas'].includes(event.detail.view)) expandOnly(null);
+  else if (['home', 'tasks', 'shop', 'formulas'].includes(event.detail.view)) expandOnly(null);
   syncCurrentRoute();
 });
 

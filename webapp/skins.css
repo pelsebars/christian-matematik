@@ -1,0 +1,69 @@
+/* Theme tokens are scoped to the account's active skin. Original remains the default. */
+:root[data-skin=military] {
+ color-scheme:light; --ink:#252b20;--ink-soft:#626b55;--navy:#252c20;--navy-light:#36402b;--paper:#eeece2;--surface:#fbfaf5;--surface-soft:#e8e7dc;--line:#cfd2c1;--blue:#4c6037;--blue-soft:#e6e9db;--violet:#62673f;--violet-soft:#eeeddc;--orange:#885a23;--orange-soft:#f3ead6;--green:#37633d;--green-soft:#e5ecdf;--cyan:#406354;--cyan-soft:#e5ece5;--amber-soft:#f1ead3;--shadow:0 12px 36px #343b2010;--skin-button:#4c6037;--skin-button-ink:#fff;--skin-nav-ink:#d8ddc8;
+}
+:root[data-skin=terminal] {
+ color-scheme:dark;--ink:#eee2c6;--ink-soft:#bcb193;--navy:#10120e;--navy-light:#23271b;--paper:#151811;--surface:#1e2218;--surface-soft:#292d20;--line:#444a34;--blue:#edbe6b;--blue-soft:#34301f;--violet:#c4bb7e;--violet-soft:#2b2b1f;--orange:#e2b47a;--orange-soft:#342b20;--green:#b6d08b;--green-soft:#283323;--cyan:#b5c9a5;--cyan-soft:#273327;--amber-soft:#37301e;--shadow:0 15px 40px #0002;--skin-button:#e5b359;--skin-button-ink:#171b10;--skin-nav-ink:#d5c69e;
+}
+:root[data-skin=machine] {
+ color-scheme:dark;--ink:#edf0f1;--ink-soft:#b2bec5;--navy:#10161c;--navy-light:#25313b;--paper:#171e25;--surface:#222c35;--surface-soft:#2a3640;--line:#45545f;--blue:#ffaaa0;--blue-soft:#422e30;--violet:#cfb8dd;--violet-soft:#343040;--orange:#f1bb91;--orange-soft:#3c302b;--green:#a8d6bf;--green-soft:#293c35;--cyan:#acd7dc;--cyan-soft:#293c41;--amber-soft:#3a3328;--shadow:0 15px 40px #0002;--skin-button:#a72e2e;--skin-button-ink:#fff;--skin-nav-ink:#c6d1d8;
+}
+html[data-skin=military] body { background: url('./skin-topography.svg') repeat, var(--paper);background-size:600px; }
+html[data-skin=military] .sidebar { background:linear-gradient(180deg,#242b20f8,#242b20ed),url('./skin-topography.svg') center bottom/600px; }
+html[data-skin=terminal] body { background:linear-gradient(#c7ab6210 1px,transparent 1px),linear-gradient(90deg,#c7ab6206 1px,transparent 1px),var(--paper);background-size:32px 32px; }
+html[data-skin=machine] body { background:radial-gradient(ellipse at 90% 0,#82342d16,transparent 60%),linear-gradient(130deg,#ffffff03,transparent 40%),var(--paper); }
+html[data-skin=terminal] .sidebar,html[data-skin=machine] .sidebar,html[data-skin=matrix] .sidebar { background:var(--navy);border-right:1px solid var(--line); }
+html:is([data-skin=terminal],[data-skin=matrix]) :is(h1,h2,h3,.eyebrow,.shop-eyebrow,.workspace-skin) { font-family:ui-monospace,'SFMono-Regular',Consolas,monospace; }
+html[data-skin=terminal] h1 { letter-spacing:-.05em;font-size:clamp(2rem,4.3vw,3.7rem); }
+html[data-skin=military] :is(.eyebrow,.shop-eyebrow,.workspace-skin,.exercise-number) { font-family:ui-monospace,Consolas,monospace;letter-spacing:.16em; }
+html[data-skin=military] :is(.exercise-card,.integral-exercise,.task-panel) { border-radius:5px;box-shadow:3px 3px 0 #67764b0a; }
+html[data-skin=machine] :is(.exercise-card,.integral-exercise,.task-panel) { border-radius:8px;border-top:2px solid #9b4d47; }
+html[data-skin]:not([data-skin=default]) :is(.brand-mark,.nav-item.is-active) { background:var(--skin-button);color:var(--skin-button-ink);box-shadow:none; }
+html[data-skin]:not([data-skin=default]) .nav-item.is-active { border-color:transparent; }
+html[data-skin]:not([data-skin=default]) :is(.brand-meta,.nav-item,.nav-submenu a,.nav-submenu button,.nav-expand,.nav-number,.nav-symbol,.sidebar-note span) { color:var(--skin-nav-ink); }
+html[data-skin]:not([data-skin=default]) .nav-submenu :is(a,button)[aria-current=page] { background:var(--navy-light);color:#fff; }
+html[data-skin]:not([data-skin=default]) :is(.personal-overview,.subject-card,.module-card,.lesson-section,.example-card,.exercise-card,.formula-card,.formula-section,.task-panel,.integral-exercise,.personal-topics details,.foundation-card,.recap-card,.concept-card,.learning-card,.lesson-card) { background:var(--surface);color:var(--ink);border-color:var(--line); }
+html[data-skin]:not([data-skin=default]) :is(.primary-button,.check-answer,.task-panel .primary-button,.shop-primary:not(:disabled),.shop-filters button[aria-pressed=true]) { background:var(--skin-button);color:var(--skin-button-ink);border-color:var(--skin-button); }
+html[data-skin]:not([data-skin=default]) :is(.secondary-button,.answer-choice,.hint-button,.task-settings,.task-help) { background:var(--blue-soft);color:var(--ink);border-color:var(--line); }
+html[data-skin]:not([data-skin=default]) :is(.answer-choice.is-selected,.answer-choice[aria-pressed=true]) { background:var(--blue-soft);border-color:var(--blue); }
+html[data-skin]:not([data-skin=default]) .main-content :is(input:not([type=range]):not([type=checkbox]):not([type=radio]),textarea,select) { background:var(--surface);color:var(--ink);border-color:var(--line); }
+html[data-skin]:not([data-skin=default]) :is(.int-formula,.int-solution,.foundation-links,.learning-steps,.formula-box,.example-step,.personal-rewards) { background:var(--surface-soft);color:var(--ink);border-color:var(--line); }
+html[data-skin]:is([data-skin=terminal],[data-skin=machine],[data-skin=matrix]) .main-content :is(.theory-card,.theory-section,.theory-intro,.visualization-card,.formula-highlight,.module-summary,.module-intro,.session-card,.int-table thead,.mini-check,.checkpoint,.lab-panel,.geometry-panel,.vector-panel,.rule-card,.worked-example,.example-grid > article,.example-grid > div,.lesson-overview,.progress-card,.progress-panel,.recap-note,.method-card) { background:var(--surface-soft);color:var(--ink);border-color:var(--line); }
+html[data-skin]:is([data-skin=terminal],[data-skin=machine],[data-skin=matrix]) :is(.normal-important,.vector-important,.int-feedback) { background:var(--surface-soft);color:var(--ink); }
+html[data-skin]:is([data-skin=terminal],[data-skin=machine],[data-skin=matrix]) :is(.normal-important h3,.vector-important h3) { color:var(--green); }
+html[data-skin]:is([data-skin=terminal],[data-skin=machine],[data-skin=matrix]) :is(.int-feedback.correct,.answer-feedback.is-correct) { color:var(--green);background:var(--green-soft); }
+html[data-skin]:is([data-skin=terminal],[data-skin=machine],[data-skin=matrix]) :is(.int-feedback.incorrect,.answer-feedback.is-incorrect) { color:var(--orange);background:var(--orange-soft); }
+/* Figures keep a light plotting surface: their mathematical colours stay legible. */
+html[data-skin]:is([data-skin=terminal],[data-skin=machine],[data-skin=matrix]) .main-content :is(figure,.int-figure,.normal-figure,.normal-lab,.normal-concepts,.vector-dynamics-lab,.vector-function-lab,.geometry-canvas,.graph-canvas,.visualization-canvas) svg { background:#f6f8fa;color:#16223a;border-radius:8px; }
+html[data-skin]:not([data-skin=default]) .coin-icon { color:var(--orange); }
+html[data-skin]:not([data-skin=default]) .shop-original,html[data-skin]:not([data-skin=default]) .shop-voucher { background:var(--surface); }
+html[data-skin]:not([data-skin=default]) .mobile-bar { background:var(--navy);color:#f7f9ef;border-color:var(--line); }
+html[data-skin]:not([data-skin=default]) :is(.shop-dialog,#passwordDialog) { background:var(--surface);color:var(--ink); }
+html[data-skin]:not([data-skin=default]) .shop-dialog .shop-secondary { background:var(--surface);color:var(--ink); }
+html[data-skin]:not([data-skin=default]) :is(button,input,select,textarea,a):focus-visible { outline-color:var(--blue); }
+/* No decorative motion: all three themes respect a focused workspace. */
+
+html[data-skin]:not([data-skin=default]) { --skin-surface:var(--surface);--skin-surface-soft:var(--surface-soft);--skin-text:var(--ink-soft); }
+html[data-skin]:is([data-skin=terminal],[data-skin=machine],[data-skin=matrix]) .balance-card { background:linear-gradient(135deg,var(--surface-soft),var(--blue-soft));border-color:var(--line); }
+html[data-skin]:not([data-skin=default]) .learning-steps { background:transparent; }
+html[data-skin]:not([data-skin=default]) .learning-steps article { background:var(--surface); }
+html[data-skin]:not([data-skin=default]) .answer-row label { background:var(--surface);border-color:var(--line); }
+html[data-skin]:not([data-skin=default]) .lesson-section { background:transparent; }
+
+html[data-skin]:not([data-skin=default]) :is(.nav-heading,.nav-submenu :is(a,button)>span) { color:var(--skin-nav-ink); }
+html[data-skin]:not([data-skin=default]) .nav-item.is-active span { color:var(--skin-button-ink); }
+html[data-skin]:not([data-skin=default]) :is(.step-number,.balance-equals) { background:var(--skin-button);color:var(--skin-button-ink); }
+html[data-skin]:is([data-skin=terminal],[data-skin=machine],[data-skin=matrix]) .check-mark { color:var(--paper); }
+
+:root[data-skin=matrix] {
+ color-scheme:dark;--ink:#dfffe7;--ink-soft:#a3c5ad;--navy:#020906;--navy-light:#102d1c;--paper:#020704;--surface:#08160e;--surface-soft:#10251a;--line:#2c4b36;--blue:#75ef97;--blue-soft:#163522;--violet:#b1edb9;--violet-soft:#1c3222;--orange:#f0bf92;--orange-soft:#39291d;--green:#88e9a7;--green-soft:#153521;--cyan:#9ce9c1;--cyan-soft:#15372b;--amber-soft:#21311b;--shadow:0 16px 42px #0005;--skin-button:#35c167;--skin-button-ink:#021b0a;--skin-nav-ink:#bbe2c6;
+}
+html[data-skin=matrix] body { background:linear-gradient(90deg,#0207049c,#020704ee 42%,#02070499),url('./skin-matrix-code.svg'),var(--paper);background-size:auto,560px 800px,auto; }
+html[data-skin=matrix] .sidebar { background:linear-gradient(#020906e8,#020906f2),url('./skin-matrix-code.svg') top/400px; }
+html[data-skin=matrix] h1 { letter-spacing:-.04em;font-size:clamp(2rem,4.3vw,3.7rem); }
+html[data-skin=matrix] :is(.exercise-card,.integral-exercise,.task-panel) { border-radius:8px;border-top:2px solid #369557; }
+html[data-skin=matrix] .brand-mark { box-shadow:0 0 22px #35c16724; }
+html[data-skin=matrix] .coin-icon { color:var(--blue); }
+html[data-skin=matrix] .workspace-skin { color:var(--blue); }
+html[data-skin=matrix] .app-shell .coin-icon { color:var(--blue); }
+html[data-skin=matrix] .nav-item { transition:transform 160ms ease; }

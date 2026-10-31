@@ -38,3 +38,32 @@ Differentialligningernes kilder, ruter, fremdriftskrav og tests er beskrevet i [
 Normalfordeling har fem modulruter, B-repetition 10–11 mellem modul 3 og 4, en læringsmålmatrix med 26 mål og en særskilt opsamling. Modul 1–4 og B-repetition 10–11 er komplette. Modul 4 har 10 trin, 43 øvelseskort og 16 nye bankopgaver med alle nødvendige data. De fire originale regneark (400/100/40/200 målinger) kan undersøges i tabeller og normalplot med begge akseretninger, rangmarkering og stikprøveestimater. Teorien skelner mellem rangfraktil og standardiseret måling, mellem yderpunkt og systematisk afvigelse samt mellem modelandel og optalt andel. Forløbet har i alt 75 fælles bankopgaver; hele banken har 317. Modul 5 og opsamlingen er planlagte. Hver undervisningsgang har separat kontolagring af svar, hints, noter og progression. Se [NORMALFORDELING_PLAN.md](NORMALFORDELING_PLAN.md) for kilder, data, rangregel og test. `npm run test:normal` kører de fem færdige undervisningsganges faglige og browserbaserede tests.
 
 Vektorfunktioner er hovedemne 09 med tre modulruter, særskilt B-repetition 12–13 mellem Modul 2 og 3 og en opsamling. Modul 1 og 2 er implementeret. Modul 1 har 11 trin, 37 kort og 16 bankopgaver. Modul 2 har 13 trin, 46 kort og 20 nye bankopgaver om hastighed, fart, acceleration, tangenter, dobbeltpunkter, vektor-/linjevinkler, maksimal højde og dokumenteret CAS. Fire bevægelsesmodeller viser position, hastighed og acceleration med tastaturstyring og tabelalternativ. Hver undervisningsgang har egen kontolagring af svar, hints, noter og kontrolleret fremdrift. Repetitionen, Modul 3 og opsamlingen er planlagte. Se [VEKTORFUNKTIONER_PLAN.md](VEKTORFUNKTIONER_PLAN.md) for kilder, Office Math-kontrol, 32 mål og ruter. `BROWSER_CHANNEL=chrome npm run test:vector` kører de to modulers faglige tests, browsertests og isolerede kontotests.
+
+Butikken (`#shop`) tilbyder fire konto-gemte skins samt vouchers til frysepizza, en øl hos ÅBEN og en Lamborghini Huracán for optjente butikspoint. Se [LOGIN_SETUP.md](LOGIN_SETUP.md#butik-og-skins) for priser, køb og test.
+
+### Opgavechat
+
+Den fælles vejleder ligger i `tutor.js` (panel, historik og kontekst) og
+`server/tutor.js` (instruktioner og Responses API). Den er koblet på
+`integral-exercises.js`, første integralmodul i `integral.js`, `tasks/ui.js` og de ældre `.exercise-card`-opgaver.
+Prøvesæt har ikke chat. Samtaler gemmes via kontolagringen i en separat
+namespace pr. opgave/version (og seed for opgavebanken). De seneste 40 beskeder
+bevares, og de seneste 24 sendes med hvert kald. Ingen fælles elevhukommelse.
+
+For at aktivere: indstil `OPENAI_API_KEY` og `OPENAI_TUTOR_MODEL` på serveren,
+byg og genstart/deploy. Serveren opretter automatisk `tutor_usage` ved første
+godkendte chatkald, så produktionshemmeligheder ikke skal eksporteres. Tabellen
+indgår også i den almindelige `npm run db:migrate`.
+Nøglen må aldrig ligge i frontend. Modelnavnet skal være en Responses API-model,
+som projektet har adgang til. Uden konfiguration vises en forklaring med henvisning
+til de almindelige hints. API'et kræver login og korrekt Origin, begrænser hver
+bruger til 12 kald/minut og har 40 sekunders timeout. Ingen automatiske API-retries.
+Provider-responser lagres ikke via Responses API (`store: false`).
+
+Opgavens MathML, SVG og billedbeskrivelser indgår som tekst; billedfiler og
+håndskrift analyseres ikke visuelt. Vejlederen instrueres i at spørge, hvis en
+figur ikke kan forstås. Svar vises som sikker almindelig tekst med Unicode-matematik.
+
+Kontrol: `npm run test:tutor` (servertests og browserforløb med simulerede
+modelsvar). En rigtig samtale skal også afprøves efter serverkonfiguration.
+API-reference: https://developers.openai.com/api/reference/resources/responses/methods/create

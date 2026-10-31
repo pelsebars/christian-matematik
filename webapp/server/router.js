@@ -1,3 +1,7 @@
+import { handleTutor } from './tutor.js';
+import { BANK_NAMESPACE, bankSessionReward } from '../tasks/rewards.js';
+import { awardBankSet } from './bank-rewards.js';
+import { handleShop, shopState, pointBalance } from './shop.js';
 const json = (value, status = 200) => Response.json(value, { status, headers: { 'Cache-Control': 'no-store' } });
 const allowedAuth = new Set(['/get-session', '/sign-up/email', '/sign-in/username', '/sign-out', '/change-password']);
 const namespacePattern = /^christian-matematik\.[a-zA-Z0-9._-]{1,100}$/;
@@ -29,12 +33,15 @@ export function createRouter({ auth, pool, origin }) {
       const session = await auth.api.getSession({ headers: request.headers });
       if (!session) return json({ message: 'Log ind for at åbne dine fremskridt.' }, 401);
       const userId = session.user.id; // Never accept a user ID from the client.
+      if (url.pathname === '/api/tutor') return await handleTutor(request, pool, userId);
+      if (url.pathname === '/api/shop') return await handleShop(request,pool,userId);
       if (url.pathname === '/api/learning' && request.method === 'GET') {
         const [states, completions] = await Promise.all([
           pool.query('SELECT namespace, value, revision FROM learning_state WHERE user_id=$1', [userId]),
-          pool.query('SELECT exercise_id AS id, topic, module, label, route, first_correct_at FROM learning_completion WHERE user_id=$1 ORDER BY first_correct_at DESC', [userId]),
+          pool.query('SELECT exercise_id AS id, topic, module, label, route, first_correct_at, points_awarded FROM learning_completion WHERE user_id=$1 ORDER BY first_correct_at DESC', [userId]),
         ]);
-        return json({ user: { id: userId, username: session.user.username }, states: states.rows, completions: completions.rows });
+        const shop = await shopState(pool,userId);
+        return json({ user: { id: userId, username: session.user.username }, states: states.rows, completions: completions.rows, rewardPoints: shop.rewardPoints, activeSkin: shop.activeSkin });
       }
       if (url.pathname !== '/api/learning' || request.method !== 'PUT') return json({ message: 'Ikke fundet.' }, 404);
       const raw = await request.text();
@@ -51,9 +58,13 @@ export function createRouter({ auth, pool, origin }) {
           ? await client.query('INSERT INTO learning_state(user_id,namespace,value) VALUES($1,$2,$3) ON CONFLICT DO NOTHING RETURNING revision', [userId, body.namespace, body.value])
           : await client.query('UPDATE learning_state SET value=$3,revision=revision+1,updated_at=now() WHERE user_id=$1 AND namespace=$2 AND revision=$4 RETURNING revision', [userId, body.namespace, body.value, body.revision]);
         if (!saved.rowCount) { await client.query('ROLLBACK'); return json({ message: 'Dette modul er ændret i en anden fane eller på en anden enhed. Genindlæs for at hente den gemte version.' }, 409); }
-        for (const c of completions) await client.query('INSERT INTO learning_completion(user_id,exercise_id,topic,module,label,route) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT DO NOTHING', [userId,c.id,c.topic,c.module,c.label,c.route]);
+        // The server sets the award. The unique completion key prevents repeat
+        // awards across retries, namespaces, tabs and devices.
+        for (const c of completions) await client.query('INSERT INTO learning_completion(user_id,exercise_id,topic,module,label,route,points_awarded) VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT DO NOTHING', [userId,c.id,c.topic,c.module,c.label,c.route,c.id.startsWith('bank:') ? 0 : 1]);
+        if (body.namespace === BANK_NAMESPACE) await awardBankSet(client,userId,bankSessionReward(body.value.session));
+        const rewards = await pointBalance(client,userId);
         await client.query('COMMIT');
-        return json({ revision: saved.rows[0].revision });
+        return json({ revision: saved.rows[0].revision, rewardPoints: rewards.rewardPoints });
       } catch (error) { await client.query('ROLLBACK'); throw error; }
       finally { client.release(); }
     } catch (error) {

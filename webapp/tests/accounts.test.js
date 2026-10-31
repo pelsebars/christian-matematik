@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fixture } from './account-fixture.js';
 import { createRouter } from '../server/router.js';
+import { migrate } from '../scripts/migrate.js';
 
 const password = 'en-lang-test-adgangskode';
 test('Real PostgreSQL protocol: accounts, sessions, isolation, CSRF, conflict and password changes', async () => {
@@ -23,10 +24,34 @@ test('Real PostgreSQL protocol: accounts, sessions, isolation, CSRF, conflict an
     const stateA = await (await request('/api/learning', { cookie:cookieA })).json();
     const stateB = await (await request('/api/learning', { cookie:cookieB })).json();
     assert.equal(stateA.completions.length,1); assert.equal(stateB.completions.length,0); assert.equal(stateB.states.length,0);
+    assert.equal(stateA.rewardPoints,1); assert.equal(stateB.rewardPoints,0);
+    assert.equal(stateA.completions[0].points_awarded,1);
     assert.equal((await request('/api/learning', { method:'PUT', cookie:cookieB, body:{ ...payload, userId:stateA.user.id, completions:[] } })).status,200);
     assert.equal((await (await request('/api/learning', { cookie:cookieA })).json()).states[0].revision,1);
     assert.equal((await request('/api/learning', { method:'PUT', cookie:cookieA, body:{ ...payload, revision:1, value:{exercise1:{correct:false}} } })).status,200);
     assert.equal((await (await request('/api/learning', { cookie:cookieA })).json()).completions.length,1);
+    // Repeated completion submissions and client-provided balances cannot award
+    // extra points, including when a different namespace sends the same task.
+    const repeat = await request('/api/learning', { method:'PUT', cookie:cookieA, body:{ ...payload, namespace:'christian-matematik.repeat.v1', rewardPoints:9999, completions:[{...payload.completions[0],points_awarded:9999}] } });
+    assert.equal(repeat.status,200);
+    assert.equal((await repeat.json()).rewardPoints,1);
+    const fresh = {...payload.completions[0], id:'exercise2-v1'};
+    const award = await request('/api/learning', { method:'PUT', cookie:cookieA, body:{ ...payload, namespace:'christian-matematik.repeat.v1', revision:1, completions:[fresh,fresh] } });
+    assert.equal(award.status,200); assert.equal((await award.json()).rewardPoints,2);
+    // A revision conflict must roll back the award along with the answers.
+    assert.equal((await request('/api/learning', {method:'PUT',cookie:cookieA,body:{...payload,completions:[{...fresh,id:'conflicted-v1'}]}})).status,409);
+    assert.equal((await (await request('/api/learning',{cookie:cookieA})).json()).rewardPoints,2);
+    assert.equal((await (await request('/api/learning',{cookie:cookieB})).json()).rewardPoints,0);
+    // Upgrade a pre-points database; rerunning migration must preserve both
+    // completion dates and the stored award, including future award amounts.
+    const before = await f.pool.query('SELECT first_correct_at FROM learning_completion ORDER BY exercise_id');
+    await f.pool.query('ALTER TABLE learning_completion DROP COLUMN points_awarded');
+    await migrate(f);
+    assert.equal((await (await request('/api/learning',{cookie:cookieA})).json()).rewardPoints,2);
+    await f.pool.query('UPDATE learning_completion SET points_awarded=3 WHERE exercise_id=$1', ['exercise2-v1']);
+    await migrate(f);
+    assert.equal((await (await request('/api/learning',{cookie:cookieA})).json()).rewardPoints,4);
+    assert.deepEqual((await f.pool.query('SELECT first_correct_at FROM learning_completion ORDER BY exercise_id')).rows,before.rows);
     assert.equal((await request('/api/auth/sign-in/username', {method:'POST',body:{username:'alice',password:'forkert'},ip:'192.0.2.3'})).status,401);
     const login = await request('/api/auth/sign-in/username', {method:'POST',body:{username:'alice',password},ip:'192.0.2.3'});
     assert.equal(login.status,200); const cookieA2=cookieFrom(login);
