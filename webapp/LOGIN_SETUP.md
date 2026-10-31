@@ -94,3 +94,14 @@ Serveren rekonstruerer opgaverne ud fra seed og version og bruger den fælles gr
 Ved opgradering: kør først `npm run db:migrate`, deploy derefter og kør `node --env-file-if-exists=.env scripts/backfill-bank-rewards.js`. Scriptet efterregulerer aktuelt gemt sæt og op til 30 afsluttede sæt i den centralt gemte historik. Det aktuelle sæt beregnes fra svarene; historik uden svar begrænses af opgavernes maksimum og fratrækkes egen vurdering konservativt. Det kan genkøres uden ekstra point og ændrer ikke besvarelser eller køb. Ældre sæt uden gemt historik kan ikke rekonstrueres.
 
 `npm run test:bank-rewards` dækker bl.a. gentagelser, delpoint, skriftlige delopgaver, prøvesæt, konflikter, gamle point og scenariet 21/25 med 7 oprindelige butikspoint.
+
+## Udgivelsesoprydning 31. oktober 2026
+
+Vercel er den eneste app-host og bygger `webapp` fra `main`. Railway-appservicen
+`christian-matematik` er frakoblet Git; den havde ingen kørende instanser eller
+volumener og forsøgte fejlagtigt at bygge repoets rod. Postgres-servicen og dens
+volumen er bevaret. Den gamle fejlede deployment kan stadig vises i historikken.
+
+Point, butik, skins og opgavechat er nu versionsstyret sammen med undervisningen.
+Kontrollér altid nye og ændrede filer før udgivelse, så en Git-udgivelse ikke
+overskriver funktioner, som kun tidligere er deployet fra lokale filer.
