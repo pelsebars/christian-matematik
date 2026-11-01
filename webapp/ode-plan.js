@@ -17,7 +17,7 @@ export const odeGoals = [
  ['U3 · Matematiske ræsonnementer og beviser','1: identitet på et interval','1: begrund begge sider; 2, 5, 6: løsninger','1: sluttjek; opsamling (planlagt)','Begge'],
  ['U4 · Matematikanvendelse','1: mængde og ændringshastighed','1: modelopgave; 2, 3, 5, 6','1: modelopgave; opsamling (planlagt)','Begge'],
  ['U5 · Fagets metoder og identitet','1: skeln model, funktion og kontrol','1: metodevalg; 4: numerisk kontra analytisk','1: sluttjek; opsamling (planlagt)','Begge'],
- ['U6 · Diskret matematik','B8–9: binomialmodel; 4: endelige regnetrin','B8–9 og 4','B8–9: eget sluttjek; opsamling (planlagt)','Begge'],
+ ['U6 · Diskret matematik','B8–9: binomialmodel; 4: endelige regnetrin','B8–9 og 4','B8–9: to separate sluttjek; opsamling (planlagt)','Begge'],
  ['U7 · Mindstekrav og grundlæggende færdigheder','1: forudsætningstjek og grundkort','Alle moduler med målrettet hjælp','1: mikroøvelser og sluttjek; øvrige (planlagt)','Uden'],
  ['K1 · Opstille differentialligninger ud fra tekst','1: ændringshastighed','1: modelopgave; 2, 5, 6','1: modelopgave; opsamling (planlagt)','Begge'],
  ['K2 · Differentialligningsmodeller og fortolkning','1: variable og enheder','2, 3, 5, 6','1: modelopgave; øvrige (planlagt)','Begge'],
@@ -32,6 +32,6 @@ export const odeGoals = [
  ['A5 · Væksthastighed, tangentligning og linjeelement','3','3 og 4','3: tangent- og linjeelementopgaver samt sluttjek; 4 (planlagt)','Begge'],
  ['A6 · Hældningsfelt og numeriske løsninger','4','4: kurver og sammenligning','4 og opsamling (planlagt)','Skitse uden; numerisk med'],
  ['A7 · Ligevægt og langsigtet adfærd','5','5 og 6','5 og 6 (planlagt)','Begge'],
- ['B8 · Logaritmeregler, eksponentialligninger og domæne','B-repetition: eget starttjek','B-repetition; 2, 5, 6','B-repetition: eget sluttjek (planlagt)','Uden; digitale værktøjer ved talberegning'],
- ['B9 · Binomialforsøg, parametre, sandsynligheder og middelværdi','B-repetition: separat starttjek','B-repetition: enkelt- og intervalsandsynligheder','B-repetition: eget sluttjek (planlagt)','Begreber uden; beregninger med'],
+ ['B8 · Logaritmeregler, eksponentialligninger og domæne','B-repetition: eget starttjek','B-repetition; 2, 5, 6','B-repetition: eget sluttjek','Uden; digitale værktøjer ved talberegning'],
+ ['B9 · Binomialforsøg, parametre, sandsynligheder og middelværdi','B-repetition: separat starttjek','B-repetition: enkelt- og intervalsandsynligheder','B-repetition: eget sluttjek','Begreber uden; beregninger med'],
 ];

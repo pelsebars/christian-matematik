@@ -1,0 +1,30 @@
+import {reviewTask,num,pick,logTasks,binomialTasks} from './tasks/bank/ode-review.js';
+import {math,N,x,exp,eq,ln,group,power,prob,X} from './ode-review-math.js';
+const q=(track,id,prompt,parts,help)=>reviewTask(track,id,prompt,parts,help,{hint:help});
+export const reviewPre=[
+ q('log','pre.zero',`Beregn ${math(exp(N(0)))}.`,[num('answer','Værdi',1)],'Eksponentialfunktionen har værdien én ved nul.'),
+ q('log','pre.inverse',`Beregn ${math(ln(N(1)))}.`,[num('answer','Værdi',0)],'Logaritmen spørger efter eksponenten, der giver én. Det er nul.'),
+ q('log','pre.domain',`Hvornår er ${math(ln(x+'<mo>−</mo>'+N(2)))} defineret som et reelt tal?`,[pick('answer','Domæne','right',[['right',math(x+'<mo>&gt;</mo>'+N(2))],['wrong',math(x+'<mo>≥</mo>'+N(2))]])],'Logaritmens argument skal være strengt positivt; nul er ikke tilladt.'),
+ q('binomial','pre.percent','Skriv 20 % som et decimaltal.',[num('answer','Sandsynlighed',.2)],'Divider procenttallet med 100.'),
+ q('binomial','pre.complement','En hændelse har sandsynlighed 0,3. Hvad er sandsynligheden for, at den ikke sker?',[num('answer','Sandsynlighed',.7)],'Hændelsen og dens komplement summerer til én.'),
+ q('binomial','pre.independent','To terningkast er uafhængige. Ændrer udfaldet af første kast sandsynligheden for en sekser i det andet?',[pick('answer','Vurdering','no',[['no','Nej.'],['yes','Ja, en sekser bliver mere eller mindre sandsynlig.']])],'Uafhængighed betyder, at viden om første udfald ikke ændrer sandsynligheden i det næste forsøg.'),
+];
+export const reviewMini=[
+ q('log','mini.inverse',`Beregn ${math(ln(exp(N(5))))}.`,[num('answer','Værdi',5)],'Den naturlige logaritme er den omvendte funktion til eksponentialfunktionen.'),
+ q('log','mini.sum',`Er ${math(ln('<mi>a</mi><mo>+</mo><mi>b</mi>')+eq+ln('<mi>a</mi>')+'<mo>+</mo>'+ln('<mi>b</mi>'))} en gyldig regel for alle positive tal?`,[pick('answer','Vurdering','no',[['no','Nej, sumreglen gælder logaritmen til et produkt.'],['yes','Ja, logaritmen fordeles på alle summer.']])],'Logaritmen til et produkt er en sum af logaritmer. En sum inde i logaritmen kan ikke splittes på den måde.'),
+ q('log','mini.domain',`Løs ${math(ln(x+'<mo>−</mo>'+N(1))+eq+N(0))}.`,[num('answer','Løsning',2)],'Logaritmen er nul, når dens argument er én. Argumentet minus én skal derfor være én.'),
+ q('binomial','mini.patterns','Hvor mange måder kan præcis to succeser placeres blandt fem forsøg?',[num('answer','Antal',10)],'Vælg to af fem positioner. Fem gange fire divideret med to giver ti; rækkefølgen af de to valgte positioner tælles ikke dobbelt.'),
+ q('binomial','mini.atmost','Hvilke værdier er med i »højst to succeser«?',[pick('answer','Værdier','right',[['right','Nul, én og to.'],['wrong','Kun nul og én.'],['exact','Kun to.']])],'Højst to inkluderer både grænsen to og alle lavere mulige heltal.'),
+ q('binomial','mini.mean','Der er ti uafhængige forsøg med successandsynlighed 0,2.',[num('answer','Forventet antal succeser',2)],'Forventet antal er ti gange 0,2. Det er ikke et sikkert antal i et enkelt forsøg.'),
+];
+export const reviewFinal=[
+ q('log','final.rules',`For positive tal: vælg udtrykket for ${math(ln(power('<mi>a</mi>',3)+'<mi>b</mi>'))}.`,[pick('answer','Udtryk','right',[['right',math(N(3)+ln('<mi>a</mi>')+'<mo>+</mo>'+ln('<mi>b</mi>'))],['wrong',math(power(ln('<mi>a</mi>'),3)+'<mo>+</mo>'+ln('<mi>b</mi>'))]])],'Produktet bliver en sum, og eksponenten bliver en faktor foran logaritmen.'),
+ q('log','final.equation',`Løs ${math(exp(N(2)+x)+eq+exp(N(6)))}.`,[num('answer','Løsning',3)],'Ens eksponentialværdier giver ens eksponenter. To gange argumentet er seks.'),
+ q('log','final.domain',`Løs ${math(ln(x+'<mo>−</mo>'+N(2))+eq+N(0))}.`,[num('answer','Løsning',3),pick('domain','Hvorfor er løsningen tilladt?','right',[['right','Logaritmens argument bliver én, som er positivt.'],['wrong','Alle algebraiske løsninger er altid tilladt.']])],'Argumentet skal være én for at logaritmen er nul. Løsningen tre giver positivt argument.'),
+ q('binomial','final.conditions','En elev kaster en mønt, indtil første krone optræder, og tæller antallet af kast.',[pick('answer','Er dette antal binomialfordelt?','no',[['no','Nej, antal forsøg er ikke fastlagt på forhånd.'],['yes','Ja, fordi hvert kast har to udfald.']])],'To udfald er ikke nok: en binomialmodel kræver et fast antal forsøg og tæller succeserne blandt dem.'),
+ q('binomial','final.exact','Fire uafhængige forsøg har successandsynlighed en halv.',[num('probability','Sandsynlighed for præcis to succeser',.375),num('mean','Forventet antal succeser',2)],'Der er seks placeringer af to succeser. Hver har sandsynlighed en sekstendedel, så resultatet er seks sekstendedele. Middelværdien er fire gange en halv.'),
+ q('binomial','final.interval',`Hvordan beregnes ${prob(N(2)+'<mo>≤</mo>'+X+'<mo>≤</mo>'+N(5))} kumulativt?`,[pick('answer','Beregning','right',[['right',prob(X+'<mo>≤</mo>'+N(5))+' minus '+prob(X+'<mo>≤</mo>'+N(1))],['wrong',prob(X+'<mo>≤</mo>'+N(5))+' minus '+prob(X+'<mo>≤</mo>'+N(2))]])],'Fjern kun værdierne under den nedre inkluderede grænse. To skal stadig være med.'),
+];
+export const reviewTracks=[{id:'log',label:'B8 · Logaritmer',bank:logTasks},{id:'binomial',label:'B9 · Binomialfordeling',bank:binomialTasks}].map(t=>({...t,pre:reviewPre.filter(q=>q.id.startsWith('odeb.'+t.id+'.')),practice:[...reviewMini.filter(q=>q.id.startsWith('odeb.'+t.id+'.')),...t.bank],final:reviewFinal.filter(q=>q.id.startsWith('odeb.'+t.id+'.'))}));
+export const reviewTrackProgress=complete=>reviewTracks.map(t=>{const preCount=t.pre.filter(complete).length,practiceCount=t.practice.filter(complete).length,finalCount=t.final.filter(complete).length;const fast=preCount===t.pre.length;return {...t,preCount,practiceCount,finalCount,fast,mastered:(fast||practiceCount===t.practice.length)&&finalCount===t.final.length};});
+export const reviewTaskStep=t=>t.id.includes('.pre.')?'start':t.id.includes('.final.')?'sluttjek':t.id.includes('.mini.')?(t.id.includes('.log.')?'logaritmer':'binomial'):(t.id.includes('.log.')?'log-opgaver':'binomial-opgaver');

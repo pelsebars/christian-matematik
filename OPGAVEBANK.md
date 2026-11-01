@@ -431,3 +431,7 @@ Modul `vf.2`, pakke `tasks/bank/vector-dynamics.js`: 20 faste version 1-opgaver 
 ## Differentialligninger · Modul 3
 
 `ode.3` tilføjer 17 faste version 1-opgaver i `tasks/bank/ode-local.js`: seks uden og elleve med hjælpemidler. Hældning, tangent, linjeelement og domæne efterfølges af samtlige elleve model/CAS-opgaver fra kildearket. Alle 329 tidligere bankopgaver bevares; samlet bank er 346, heraf 35 om differentialligninger. Forudsætninger ved modulfilter er `ode.1` og `ode.2`. Syv mål med præfiks `ode3.`, målrettet feedback, tre hints, trinvise løsninger, tal-/udtryksfelter og matematisk viste forskriftsvalg bruger fællessystemet. Gentag modul linker til M3. Kildedækning, matematiske kontroller, kontolagring og browsertests er dokumenteret i `webapp/DIFFERENTIALLIGNINGER_PLAN.md`.
+
+## Differentialligninger · B-repetition 8–9
+
+`ode.repetition` tilføjer 12 version 1-opgaver i `tasks/bank/ode-review.js`, seks til logaritmer og seks til binomialfordeling. De har ingen modulforudsætninger; hvert undervisningsspor har sit eget starttjek og kan gennemføres uafhængigt. Otte mål med præfiks `odeb.` dækker logaritmeregler/domæne/ligninger og binomialbetingelser/sandsynligheder/kumulative hændelser/middelværdi/modelvurdering. Opgaverne bruger fælles grading, hints, målrettet feedback og trænings-/prøvetilstand. Alle tidligere 346 opgaver bevares; banken har nu 358 opgaver, heraf 47 under Differentialligninger inkl. repetitionen. Se `webapp/DIFFERENTIALLIGNINGER_PLAN.md` for progression, kilder, lagring og tests.

@@ -19,7 +19,8 @@ Den fulde matrix er første gang oprettet i `ode-plan.js` før undervisningsindh
 - `/1/teori`, `/1/eksempler`, `/1/oevelser`, `/1/sluttjek`, `/1/opsummering`: selvstændige undervisningstrin under samme hash-præfiks.
 - `/2/start` og de ti øvrige M2-trin: implementeret undervisning (se nedenfor).
 - `/3/start` og de ni øvrige M3-trin: implementeret undervisning (se nedenfor).
-- `/repetition`, `/4`, `/5`, `/6`: separate planlagte undersider.
+- `/repetition/start` og syv øvrige B8–9-trin: implementeret repetition (se nedenfor).
+- `/4`, `/5`, `/6`: separate planlagte undersider.
 - `/opsamling`: separat planlagt afslutning, ikke en ottende undervisningsgang.
 
 `ode-routes.js` normaliserer ugyldige ruter. `ode.js` styrer oversigt og navigation. `ode-lesson.js` rummer kun modul 1. `ode-exercises.js` rummer diagnostik, mikroøvelser og sluttjek. De seks bankopgaver ligger i `tasks/bank/ode.js`. Matematik, opgaverendering, hints, sikker bedømmelse og versionskontrolleret lagring genbruges fra integralregning og fællessystemet. Fremtidige moduler skal have egne undervisningsfiler.
@@ -74,3 +75,17 @@ Figuren viser punkt, tangent og linjeelement for tre ligninger. Den lineære mod
 Lagring: `christian-matematik.ode.local.v1` og `christian-matematik.ode.local-notes.v1`. Historik mærkes Modul 3 med korrekt rute. Tidligere M1- og M2-nøgler og opgaveversioner er uændrede.
 
 Tests: `tests/ode-local.test.js` kontrollerer de faktisk renderede MathML-forskrifter ved uafhængige afledte, begyndelsesværdier, modelberegninger, inverse problemer, maksimum og numerisk integration af bilens hastighed. Browsertesten gennemfører alle 32 kort og 17 bankopgaver, prøve/repetition, alle ruter, mobil, domænegrænser, tastatur og noter/hints. Kontotesten bruger midlertidig lokal database og to brugere/enheder og kontrollerer adskilt fremdrift, vedvarende historik og M1. M1/M2-browserregression og samlet `npm test` køres før udgivelse.
+
+## Implementeret B-repetition 8–9 · logaritmer og binomialfordeling
+
+To uafhængige spor på `#differentialEquations/repetition/start`. Otte sider: separate starttjek, logaritmeteori, logaritmeopgaver, binomialteori, interaktiv sandsynlighedsfigur, binomialopgaver, separate sluttjek og opsummering/noter.
+
+Der er 30 kort. Hvert spor har tre diagnostiske kort, tre mikroøvelser, seks bankopgaver og tre slutkort. Et spor kræver alle tre slutkort og enten alle tre startkort eller alle ni træningskort. Begge spor skal være gennemført for at fuldføre undervisningsgangen. En forkert redigering fjerner kun gennemførelsen, hvis den nuværende besvarelse ikke længere opfylder nogen af de to veje. Den anden spors status påvirkes ikke. Historiske point og resultater bevares.
+
+B8 dækker ln og titalslogaritme, inverse funktioner, produkt/kvotient/potens, positive argumenter, falske summeringsregler, eksponentialligninger, forkastede algebraiske kandidater og halveringstid. B9 dækker faste uafhængige forsøg, konstant sandsynlighed, kombinationstal, præcis/højst/mindst, inklusive intervaller, middelværdi, varians, spredning og kritisk modelvurdering. Figuren viser sandsynlighedsmasser og valgte hændelser inklusive randtilfældene nul og én. Forklaringer og værktøjsnoter vurderes separat.
+
+Kildegrundlaget er læseplanens angivelse af emnerne den 30/10/2026. Der findes ikke et lokalt særskilt B8–9-ark; indhold og opgaver er derfor egne tilpasninger. Binomialfordelingen præsenteres som et selvstændigt repetitionsspor, ikke som en differentialligningsmetode.
+
+Bankmodul `ode.repetition` har ingen modulforudsætninger: sporene er diagnostisk styret. Tolv version 1-opgaver er tilføjet med præfikset `odeb.` og otte mål. Lagring bruger `christian-matematik.ode.review.v1` og `christian-matematik.ode.review-notes.v1`. Kontoens historik mærkes B-repetition 8–9; den blandes ikke sammen med integralrepetition eller Normalfordelings B10–11. Ingen eksisterende data eller opgaveversioner ændres.
+
+Verifikation: binomiale masser kontrolleres mod eksplicit enumeration af Bernoulli-følger; totalmasse, middelværdi, varians, randtilfælde, intervalgrænser og logaritmeløsninger kontrolleres uafhængigt. Begge gennemførelsesveje testes og redigering prøves særskilt. Browserforløbet dækker alle 30 kort, alle 12 bankopgaver, prøve/repetition, tastaturgenveje, figuren, MathML, mobil og lagring. Kontotesten dækker to brugere/enheder, korrekt historikmærkning, noter, hints og bevarelse af tidligere resultater.

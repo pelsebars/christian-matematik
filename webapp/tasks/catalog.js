@@ -11,6 +11,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "ode.repetition": {topic:"differentialEquations",name:"B-repetition 8–9: Logaritmer og binomialfordeling",section:"ode-module-repetition"},
   "ode.3": {topic:"differentialEquations",name:"Væksthastighed, tangent og linjeelement",section:"ode-module-3"},
   "ode.2": {topic:"differentialEquations",name:"Proportional differentialligning",section:"ode-module-2"},
   "vf.2": {topic:"vectorFunctions",name:"Hastighed, acceleration og tangenter",section:"vector-module-2"},
@@ -77,6 +78,15 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "odeb.rules": {module:"ode.repetition",text:"Bruge logaritmers definition og regneregler"},
+  "odeb.domain": {module:"ode.repetition",text:"Bevare logaritmers domæne og forkaste ugyldige kandidater"},
+  "odeb.equation": {module:"ode.repetition",text:"Løse eksponentialligninger og fortolke modeltider"},
+  "odeb.conditions": {module:"ode.repetition",text:"Vurdere betingelserne for en binomialmodel"},
+  "odeb.probability": {module:"ode.repetition",text:"Beregne sandsynligheden for præcis et antal succeser"},
+  "odeb.cumulative": {module:"ode.repetition",text:"Beregne højst, mindst og inklusive intervaller"},
+  "odeb.mean": {module:"ode.repetition",text:"Beregne og fortolke middelværdi, varians og spredning"},
+  "odeb.model": {module:"ode.repetition",text:"Vurdere sandsynlighedsmodeller og deres antagelser"},
+
   "ode3.slope": {module:"ode.3",text:"Beregne lokal hældning fra differentialligning og punkt"},
   "ode3.tangent": {module:"ode.3",text:"Bestemme og kontrollere tangentligning, også med ukendt punkt"},
   "ode3.element": {module:"ode.3",text:"Beskrive og fortolke linjeelementer"},
