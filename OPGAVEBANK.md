@@ -427,3 +427,7 @@ Modul `vf.2`, pakke `tasks/bank/vector-dynamics.js`: 20 faste version 1-opgaver 
 ## Differentialligninger · Modul 2
 
 `ode.2` tilføjer 12 version 1-opgaver i `tasks/bank/ode-proportional.js`: familie, begyndelsesværdi, forskudt begyndelsespunkt, aftagelse, kornmodel, eksakt konstant, nul-løsning, bakterier, befolkning, to punkter, skibsmodel og kontinuert kontra diskret procentvækst. Mål: `ode2.family`, `ode2.initial`, `ode2.parameter`, `ode2.model`. Otte opgaver er uden hjælpemidler, fire med. Alle tidligere 317 opgaver bevares; banken har nu 329 opgaver. Gentag modul åbner M2. Læseplan, kildedækning, kontoens separate lagring og tests er dokumenteret i `webapp/DIFFERENTIALLIGNINGER_PLAN.md`.
+
+## Differentialligninger · Modul 3
+
+`ode.3` tilføjer 17 faste version 1-opgaver i `tasks/bank/ode-local.js`: seks uden og elleve med hjælpemidler. Hældning, tangent, linjeelement og domæne efterfølges af samtlige elleve model/CAS-opgaver fra kildearket. Alle 329 tidligere bankopgaver bevares; samlet bank er 346, heraf 35 om differentialligninger. Forudsætninger ved modulfilter er `ode.1` og `ode.2`. Syv mål med præfiks `ode3.`, målrettet feedback, tre hints, trinvise løsninger, tal-/udtryksfelter og matematisk viste forskriftsvalg bruger fællessystemet. Gentag modul linker til M3. Kildedækning, matematiske kontroller, kontolagring og browsertests er dokumenteret i `webapp/DIFFERENTIALLIGNINGER_PLAN.md`.

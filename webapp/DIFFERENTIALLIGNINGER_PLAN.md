@@ -18,7 +18,8 @@ Den fulde matrix er første gang oprettet i `ode-plan.js` før undervisningsindh
 - `#differentialEquations/1/start`: mål og fem diagnostiske spørgsmål.
 - `/1/teori`, `/1/eksempler`, `/1/oevelser`, `/1/sluttjek`, `/1/opsummering`: selvstændige undervisningstrin under samme hash-præfiks.
 - `/2/start` og de ti øvrige M2-trin: implementeret undervisning (se nedenfor).
-- `/3`, `/repetition`, `/4`, `/5`, `/6`: separate planlagte undersider.
+- `/3/start` og de ni øvrige M3-trin: implementeret undervisning (se nedenfor).
+- `/repetition`, `/4`, `/5`, `/6`: separate planlagte undersider.
 - `/opsamling`: separat planlagt afslutning, ikke en ottende undervisningsgang.
 
 `ode-routes.js` normaliserer ugyldige ruter. `ode.js` styrer oversigt og navigation. `ode-lesson.js` rummer kun modul 1. `ode-exercises.js` rummer diagnostik, mikroøvelser og sluttjek. De seks bankopgaver ligger i `tasks/bank/ode.js`. Matematik, opgaverendering, hints, sikker bedømmelse og versionskontrolleret lagring genbruges fra integralregning og fællessystemet. Fremtidige moduler skal have egne undervisningsfiler.
@@ -59,3 +60,17 @@ Kildedækning: eksempel 1 giver familie og begge begyndelsespunkter; bakteriemod
 Lagring: `christian-matematik.ode.proportional.v1` og `christian-matematik.ode.proportional-notes.v1`. M1's `introduction.v1` er uændret. Kontoens resultater mærkes Modul 2 og linker til det relevante M2-trin. Ingen databaseændringer, nulstillinger eller genberegning af point.
 
 Verifikation: `npm run test:ode` kontrollerer matematik, bankfilter, alle 28 svarkort, alle 12 bankopgaver, prøve/repetition, MathML, mobil, graf, noter/hints og bevarelse af M1. En lokal PostgreSQL-kompatibel fixture tester to konti og to enheder samt historiske resultater efter ændring af et korrekt svar. `npm test` dækker den samlede bank; `npm run build` bygger produktionsfilerne.
+
+## Implementeret modul 3 · væksthastighed, tangent og linjeelement
+
+M3 er åbent på `#differentialEquations/3/start` med ti trin: grundtjek, væksthastighed, tangent, linjeelement, interaktiv figur, opgaver uden hjælpemidler, mængde/hastighed i modeller, udvidet CAS, sluttjek og opsummering. Næste undervisningsgang er B8–9, ikke M4 direkte.
+
+32 kort: 5 diagnostiske, 5 mikroøvelser, 17 bankopgaver og 5 sluttjek. De 27 ikke-diagnostiske kort kræves for gennemført. Egne noter, tegninger og mundtlige forklaringer vurderes separat. Bankmodulet `ode.3` kræver M1 og M2 ved filtrering på gennemførte moduler. De syv mål med præfiks `ode3.` dækker hældning, tangent, linjeelement, domæne, enheder, modeller og CAS.
+
+Kildedækning: alle fire opgaver uden hjælpemidler fra ark 3 er med. De elleve opgaver med hjælpemidler er med som kaniner (begge forsøg), græs, koncentration, verdensbefolkning, bil, infusion, beton, variabel koefficient, havkat, trigonometri og Mexico. De brede CAS-modeller er bevaret og tydeligt mærket som udvidelser ud over M2-formlen. Den senere systematiske teori om forskudt vækst forbliver i M5. Forskrifter, parenteser og eksponenter er læst fra DOCX-filens Office Math, ikke kun flad tekst. Den alternative kaninforskrift og den alternative Mexico-potensform i facit gengives ikke; de korrekte eksponentialformer er kontrolleret uafhængigt. Den variable koefficient giver hele parentesen `(ln(x)+4)` ganget med argumentet.
+
+Figuren viser punkt, tangent og linjeelement for tre ligninger. Den lineære model kan også vise sin analytiske løsningskurve. Ugyldige punkter ved kvadratrod/nævner giver forklaring og ingen falsk tangent. En tangent fremstilles ikke som en hel løsning.
+
+Lagring: `christian-matematik.ode.local.v1` og `christian-matematik.ode.local-notes.v1`. Historik mærkes Modul 3 med korrekt rute. Tidligere M1- og M2-nøgler og opgaveversioner er uændrede.
+
+Tests: `tests/ode-local.test.js` kontrollerer de faktisk renderede MathML-forskrifter ved uafhængige afledte, begyndelsesværdier, modelberegninger, inverse problemer, maksimum og numerisk integration af bilens hastighed. Browsertesten gennemfører alle 32 kort og 17 bankopgaver, prøve/repetition, alle ruter, mobil, domænegrænser, tastatur og noter/hints. Kontotesten bruger midlertidig lokal database og to brugere/enheder og kontrollerer adskilt fremdrift, vedvarende historik og M1. M1/M2-browserregression og samlet `npm test` køres før udgivelse.

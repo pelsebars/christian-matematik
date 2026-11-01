@@ -11,6 +11,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "ode.3": {topic:"differentialEquations",name:"Væksthastighed, tangent og linjeelement",section:"ode-module-3"},
   "ode.2": {topic:"differentialEquations",name:"Proportional differentialligning",section:"ode-module-2"},
   "vf.2": {topic:"vectorFunctions",name:"Hastighed, acceleration og tangenter",section:"vector-module-2"},
   "vf.1": {topic:"vectorFunctions",name:"Banekurver og skæringspunkter",section:"vector-module-1"},
@@ -76,6 +77,14 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "ode3.slope": {module:"ode.3",text:"Beregne lokal hældning fra differentialligning og punkt"},
+  "ode3.tangent": {module:"ode.3",text:"Bestemme og kontrollere tangentligning, også med ukendt punkt"},
+  "ode3.element": {module:"ode.3",text:"Beskrive og fortolke linjeelementer"},
+  "ode3.domain": {module:"ode.3",text:"Bevare domæne og skelne udefineret hældning fra nul"},
+  "ode3.units": {module:"ode.3",text:"Fortolke fortegn og enheder i ændringshastigheder"},
+  "ode3.model": {module:"ode.3",text:"Skelne mængde og ændringshastighed i modeller"},
+  "ode3.cas": {module:"ode.3",text:"Løse og kontrollere udvidede modeller med CAS, interval og modelvurdering"},
+
   "ode2.family": {module:"ode.2",text:"Bestemme og begrunde den fuldstændige eksponentielle løsningsfamilie"},
   "ode2.initial": {module:"ode.2",text:"Bestemme en partikulær løsning fra et begyndelsespunkt"},
   "ode2.parameter": {module:"ode.2",text:"Bestemme proportionalitetskonstanten fra to værdier"},

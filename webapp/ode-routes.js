@@ -3,7 +3,9 @@ export const odeSteps = [
  ['start','Mål og forudsætninger'],['teori','Teori og mikroøvelser'],['eksempler','Eksempler'],['oevelser','Opgaver'],['sluttjek','Forståelsestjek'],['opsummering','Opsummering'],
 ];
 export const proportionalSteps = [['start','Mål og forudsætninger'],['proportional','Proportional hastighed'],['familie','Løsningsfamilien'],['begyndelse','Begyndelsesværdi'],['punkt','Et andet begyndelsespunkt'],['parameter','Find vækstkonstanten'],['udforsk','Udforsk vækst og fald'],['oevelser','Uden hjælpemidler'],['modeller','Modeller og CAS'],['sluttjek','Sluttjek'],['opsummering','Opsummering']];
-export const stepsForOdeModule = id => id==='1'?odeSteps:id==='2'?proportionalSteps:[];
+export const localSteps=[['start','Mål og forudsætninger'],['hastighed','Væksthastighed'],['tangent','Tangentligning'],['linjeelement','Linjeelement'],['udforsk','Udforsk lokal retning'],['oevelser','Uden hjælpemidler'],['modeller','Mængde og hastighed'],['cas','Udvidede CAS-modeller'],['sluttjek','Sluttjek'],['opsummering','Opsummering']];
+export const odeImplemented=['1','2','3'];
+export const stepsForOdeModule = id => id==='1'?odeSteps:id==='2'?proportionalSteps:id==='3'?localSteps:[];
 export const odeRoute = (module='',step='') => ['differentialEquations',module,step].filter(Boolean).join('/');
 export function parseOdeRoute(hash) {
  const [topic,requested,step] = hash.replace(/^#/,'').split('/');
