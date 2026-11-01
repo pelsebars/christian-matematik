@@ -35,7 +35,7 @@ test('ODE bank integrates goals, exam filtering, grading and targeted feedback',
   for(const part of task.parts)assert.equal(gradePart(part,part.answer).status,'correct');
   assert.ok(task.hints.length>=2);assert.ok(task.errors.length);
  }
- const set=composeSet({topics:['differentialEquations'],minutes:180,distribution:{short:10,medium:10,complex:10}});
+ const set=composeSet({topics:['differentialEquations'],minutes:180,onlyCompleted:true,completed:['ode.1'],distribution:{short:10,medium:10,complex:10}});
  assert.equal(set.tasks.length,6);
  assert.equal(composeSet({topics:['differentialEquations'],onlyCompleted:true,completed:[]}).tasks.length,0);
  const task=odeTasks.find(t=>t.id==='ode.model');

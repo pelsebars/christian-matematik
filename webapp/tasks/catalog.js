@@ -11,6 +11,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "ode.2": {topic:"differentialEquations",name:"Proportional differentialligning",section:"ode-module-2"},
   "vf.2": {topic:"vectorFunctions",name:"Hastighed, acceleration og tangenter",section:"vector-module-2"},
   "vf.1": {topic:"vectorFunctions",name:"Banekurver og skæringspunkter",section:"vector-module-1"},
   "norm.4": {topic:"normalDistribution",name:"Normalfordelingsplot",section:"normal-module-4"},
@@ -75,6 +76,11 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "ode2.family": {module:"ode.2",text:"Bestemme og begrunde den fuldstændige eksponentielle løsningsfamilie"},
+  "ode2.initial": {module:"ode.2",text:"Bestemme en partikulær løsning fra et begyndelsespunkt"},
+  "ode2.parameter": {module:"ode.2",text:"Bestemme proportionalitetskonstanten fra to værdier"},
+  "ode2.model": {module:"ode.2",text:"Opstille, løse og vurdere proportionale modeller med enheder og hjælpemidler"},
+
   "vf2.differentiate": {module:"vf.2",text:"Differentiere koordinatvis med potens-, produkt-, kæde- og trigonometriske regler"},
   "vf2.velocity": {module:"vf.2",text:"Beregne og fortolke hastighedsvektoren i et punkt"},
   "vf2.speed": {module:"vf.2",text:"Skelne mellem hastighedsvektor og ikke-negativ fart"},

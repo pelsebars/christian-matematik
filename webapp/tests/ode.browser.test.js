@@ -71,7 +71,7 @@ try {
  await page.locator('#ode-module-one').waitFor({state:'visible'});
  assert.equal(await page.evaluate(()=>location.hash),'#differentialEquations/1/start');
  assert.equal(await page.locator('[data-ode-status="1"]').textContent(),'Ikke begyndt');
- assert.equal(await page.locator('[data-ode-step="start"]').isVisible(),true);
+ assert.equal(await page.locator('#ode-module-one [data-ode-step="start"]').isVisible(),true);
  assert.equal(await page.locator('#integralLesson').isVisible(),false);
  await answer(odeLessonTasks.find(t=>t.id==='ode.pre.derivative'),true);
  assert.match(await card('ode.pre.derivative').locator('[data-feedback]').innerText(),/eksponent/);
@@ -113,9 +113,9 @@ try {
   assert.equal(await page.locator('[data-ode-step]:visible').count(),1);
   assert.equal(await page.locator('#ode-session .ode-step-menu [aria-current="step"]').count(),1);
   await page.locator('#ode-session .ode-page-controls a').last().click();
-  await page.waitForFunction(expected=>location.hash===`#${expected}`,i<odePages.length-1?odePages[i+1]:'differentialEquations/2');
+  await page.waitForFunction(expected=>location.hash===`#${expected}`,i<odePages.length-1?odePages[i+1]:'differentialEquations/2/start');
  }
- for(const m of odeModules.slice(1)){
+ for(const m of odeModules.slice(2)){
   await go('differentialEquations/'+m.id);
   assert.match(await page.locator('#ode-planned').innerText(),/Planlagt · ikke implementeret/);
   assert.equal(await page.locator('[data-ode-step]:visible').count(),0);
@@ -164,11 +164,11 @@ try {
  // Malformed storage and storage failure produce a visible warning, not a broken app.
  const bad=await browser.newContext();await bad.addInitScript(key=>localStorage.setItem(key,'broken'),ODE_STORAGE_KEY);
  const badPage=await bad.newPage();await badPage.goto(url+'/?preview=1#differentialEquations/1');
- await badPage.locator('#odeLesson [data-lesson-warning]').waitFor({state:'visible'});await bad.close();
+ await badPage.locator('#ode-module-one [data-lesson-warning]').waitFor({state:'visible'});await bad.close();
  const blocked=await browser.newContext();await blocked.addInitScript(()=>{Storage.prototype.setItem=function(){throw Error('blocked');};});
  const blockedPage=await blocked.newPage();await blockedPage.goto(url+'/?preview=1#differentialEquations/1/start');
  await blockedPage.locator('[data-int-card="ode.pre.function"] input').fill('7');
- await blockedPage.locator('#odeLesson [data-lesson-warning]').waitFor({state:'visible'});await blocked.close();
+ await blockedPage.locator('#ode-module-one [data-lesson-warning]').waitFor({state:'visible'});await blocked.close();
  assert.deepEqual(errors,[]);
  console.log('ODE browser passed: all cards, feedback, hints, storage/reload, completion, routes, MathML, graph, keyboard and mobile.');
 }finally{await browser.close();server.close();}

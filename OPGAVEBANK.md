@@ -423,3 +423,7 @@ Hovedemne `vectorFunctions`, modul `vf.1`, pakke `tasks/bank/vector.js`: 16 fast
 ## Vektorfunktioner · Modul 2
 
 Modul `vf.2`, pakke `tasks/bank/vector-dynamics.js`: 20 faste version 1-opgaver om koordinatvis differentiation, hastighed/acceleration, fart og enheder, tangentligning, vandret/lodret tangent og nulvektor, begge hastigheder i dobbeltpunkt, vektorvinkel kontra mindste linjevinkel, maksimal højde og interval, basketball, fly og pil samt CAS med produkt- og kæderegel. De følger eksisterende schema, har delspørgsmål med delpoint, tre hints og specifik fejlfeedback, og virker i træning og prøvesæt. Gentag modul linker til `#vectorFunctions/2/start`. Alle 297 tidligere opgaver og versioner er bevaret. Samlet bank: 317 opgaver, heraf 36 til vektorfunktioner. B-repetition 12–13, Modul 3 og opsamlingen er fortsat kun planlagte.
+
+## Differentialligninger · Modul 2
+
+`ode.2` tilføjer 12 version 1-opgaver i `tasks/bank/ode-proportional.js`: familie, begyndelsesværdi, forskudt begyndelsespunkt, aftagelse, kornmodel, eksakt konstant, nul-løsning, bakterier, befolkning, to punkter, skibsmodel og kontinuert kontra diskret procentvækst. Mål: `ode2.family`, `ode2.initial`, `ode2.parameter`, `ode2.model`. Otte opgaver er uden hjælpemidler, fire med. Alle tidligere 317 opgaver bevares; banken har nu 329 opgaver. Gentag modul åbner M2. Læseplan, kildedækning, kontoens separate lagring og tests er dokumenteret i `webapp/DIFFERENTIALLIGNINGER_PLAN.md`.

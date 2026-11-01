@@ -1,0 +1,40 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {createServer} from 'node:http';
+import {readFile} from 'node:fs/promises';
+import {extname,resolve} from 'node:path';
+import {proportionalLessonTasks,PROPORTIONAL_STORAGE_KEY} from '../ode-proportional-lesson.js';
+import {proportionalTasks} from '../tasks/bank/ode-proportional.js';
+import {proportionalSteps} from '../ode-routes.js';
+import {odeLessonTasks,ODE_STORAGE_KEY} from '../ode-lesson.js';
+import { proportionalTaskStep as stepFor } from '../ode-proportional-exercises.js';
+const dir=resolve(import.meta.dirname,'..');
+const server=createServer(async(req,res)=>{try{const path=decodeURIComponent(req.url.split('?')[0]);const p=resolve(dir,'.'+(path==='/'?'/index.html':path));if(!p.startsWith(dir+'/'))throw Error();res.setHeader('Content-Type',{'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml'}[extname(p)]||'text/plain');res.end(await readFile(p));}catch{res.statusCode=404;res.end('Not found');}});
+await new Promise(done=>server.listen(0,'127.0.0.1',done));const url=`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({headless:true,channel:'chrome'}),errors=[];
+const fixture=(task,mode='training')=>({schema:1,completed:[],history:[],session:{mode,status:'active',seed:'ode2',items:[{id:task.id,version:task.version}],index:0,answers:{},checked:{},hints:{},marked:{},self:{},startedAt:Date.now(),timer:false,minutes:30,requested:1}});
+try{
+ const ctx=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),page=await ctx.newPage();page.on('pageerror',e=>errors.push(e.message));
+ const old=JSON.stringify({version:1,cards:Object.fromEntries(odeLessonTasks.map(t=>[t.id,{answers:Object.fromEntries(t.parts.map(p=>[p.id,p.answer])),checked:true,hints:0}]))});
+ await ctx.addInitScript(({key,state})=>{if(!localStorage.getItem(key))localStorage.setItem(key,state);},{key:ODE_STORAGE_KEY,state:old});
+ const go=path=>page.evaluate(path=>window.showMathView(path),path),card=id=>page.locator(`[data-int-card="${id}"]`);
+ await page.goto(url+'/?preview=1#differentialEquations/2');await page.locator('#ode-module-two').waitFor({state:'visible'});
+ assert.equal(await page.evaluate(()=>location.hash),'#differentialEquations/2/start');assert.equal(await page.locator('[data-ode-status="1"]').textContent(),'Gennemført');
+ await card('ode2.pre.exponential').locator('input').fill('0');await card('ode2.pre.exponential').locator('button[type=submit]').click();await card('ode2.pre.exponential').locator('[data-int-jump]').click();assert.equal(await page.evaluate(()=>document.activeElement.id),'ode2-basics');
+ for(const task of proportionalLessonTasks){await go('differentialEquations/2/'+stepFor(task));for(const p of task.parts){const field=card(task.id).locator(`[name="${p.id}"]`);if(p.type==='choice')await field.selectOption(p.answer);else await field.fill(p.answer);}await card(task.id).locator('button[type=submit]').click();assert.ok(await card(task.id).evaluate(el=>el.classList.contains('is-correct')),task.id);}
+ assert.equal(await page.locator('[data-ode-status="2"]').textContent(),'Gennemført');
+ await go('differentialEquations/2/modeller');await page.locator('#ode2-notes').fill('Min CAS-kontrol, enheder og interval.');await card('ode2.ship').locator('[data-int-hint]').click();await page.reload();await page.locator('#ode2-notes').waitFor({state:'visible'});assert.match(await page.locator('#ode2-notes').inputValue(),/CAS-kontrol/);assert.equal(await card('ode2.ship').locator('.int-hints p').count(),1);
+ await go('differentialEquations/2/oevelser');await card('ode2.origin').locator('[name=constant]').fill('99');assert.equal(await page.locator('[data-ode-status="2"]').textContent(),'I gang');assert.equal(await page.locator('[data-ode-status="1"]').textContent(),'Gennemført');assert.equal(await page.evaluate(key=>localStorage.getItem(key),ODE_STORAGE_KEY),old);
+ await go('differentialEquations/2/udforsk');const before=await page.locator('#ode2-reading').innerText();await page.locator('#ode2-k').focus();await page.keyboard.press('ArrowRight');assert.notEqual(await page.locator('#ode2-reading').innerText(),before);await page.locator('#ode2-k').fill('0');assert.match(await page.locator('#ode2-reading').innerText(),/Ændringshastighed: 0/);
+ assert.deepEqual(await page.locator('#ode-module-two math,#ode-module-two msup,#ode-module-two mfrac').evaluateAll(ns=>ns.filter(e=>e.namespaceURI!=='http://www.w3.org/1998/Math/MathML'||(['msup','mfrac'].includes(e.tagName)&&e.children.length!==2)).map(e=>e.outerHTML)),[]);
+ assert.deepEqual(await page.locator('#ode-module-two input,#ode-module-two select,#ode-module-two textarea').evaluateAll(es=>es.filter(e=>!e.labels?.length).map(e=>e.id)),[]);
+ assert.deepEqual(await page.evaluate(()=>{const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);return ids.filter((id,i)=>ids.indexOf(id)!==i);}),[]);
+ for(const [step] of proportionalSteps){await go('differentialEquations/2/'+step);assert.equal(await page.locator('[data-ode-step]:visible').count(),1);assert.equal(await page.locator('.ode-step-menu [aria-current=step]').count(),1);}
+ await go('differentialEquations/1/opsummering');await page.locator('.ode-page-controls a').last().click();await page.waitForURL('**/*#differentialEquations/2/start');
+ await go('differentialEquations/3');assert.match(await page.locator('#ode-planned').innerText(),/Planlagt/);
+ await go('tasks');for(const task of proportionalTasks){await page.evaluate(s=>localStorage.setItem('christian-matematik.tasks.v1',JSON.stringify(s)),fixture(task));await page.reload();await page.locator('.task-question').waitFor();for(const p of task.parts){if(p.type==='choice')await page.locator(`.task-question [data-part="${p.id}"][value="${p.answer}"]`).check();else await page.locator(`.task-question [data-part="${p.id}"]`).fill(p.answer);}await page.locator('[data-task-action=check]').click();assert.match(await page.locator('.task-feedback').innerText(),/Det passer/);assert.doesNotMatch(await page.locator('.task-feedback').innerText(),/Se løsningen og find det trin/);}
+ await page.evaluate(s=>localStorage.setItem('christian-matematik.tasks.v1',JSON.stringify(s)),fixture(proportionalTasks.find(t=>t.id==='ode2.ship'),'exam'));await page.reload();await page.locator('.task-question').waitFor();assert.equal(await page.locator('.task-feedback,[data-task-action=hint]').count(),0);await page.locator('[data-task-action=finish]').click();await page.locator('[data-task-action=submit]').click();await page.locator('[data-task-action=repeat-module][data-module="ode.2"]').first().click();await page.waitForURL('**/*#differentialEquations/2/start');
+ await go('differentialEquations/2/udforsk');await page.locator('#ode-module-two').screenshot({path:'/tmp/ode2-desktop.png'});
+ await page.setViewportSize({width:390,height:844});for(const [step] of proportionalSteps){await go('differentialEquations/2/'+step);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),step);}await go('differentialEquations/2/udforsk');await page.locator('#ode-module-two').screenshot({path:'/tmp/ode2-mobile.png'});
+ assert.deepEqual(errors,[]);console.log('ODE M2 browser: all 28 cards, 12 bank tasks, exam, M1 preservation, notes, hints, graph, MathML, routes and mobile passed.');
+}finally{await browser.close();server.close();}

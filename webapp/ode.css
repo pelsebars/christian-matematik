@@ -44,3 +44,6 @@
  .ode-page-controls a { flex:1; }
  #odeLesson .example-card { padding:18px; }
 }
+
+#ode-module-two .ode-figure input[type="range"] { display:block; width:100%; margin: .6rem 0 1.2rem; }
+#ode2-notes { display:block; width:100%; box-sizing:border-box; margin:.6rem 0; }
