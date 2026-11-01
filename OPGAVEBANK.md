@@ -443,3 +443,7 @@ Modul `vf.2`, pakke `tasks/bank/vector-dynamics.js`: 20 faste version 1-opgaver 
 ## Differentialligninger M5
 
 13 nye faste version 1-opgaver i `webapp/tasks/bank/ode-shifted.js` dækker alle fem opgaver uden hjælpemidler og otte med hjælpemidler fra ark 5. Modul `ode.5` har forudsætningerne `ode.1` og `ode.2`. Ligevægt, familie, begyndelsespunkt, modelparametre, metodevalg, enheder og gyldighed kontrolleres med fællessystemets grader. Egne tegninger og begrundelser vurderes særskilt. Banken rummer nu 384 opgaver, heraf 73 til differentialligninger inklusive B8–9.
+
+## Differentialligninger M6
+
+11 nye faste version 1-opgaver i `webapp/tasks/bank/ode-logistic.js` dækker alle tre opgaver uden hjælpemidler og otte med hjælpemidler fra ark 6. Modul `ode.6` har forudsætningerne `ode.1` og `ode.2`. Modeller, begyndelsesbetingelser, grænse, maksimal væksthastighed, inverse problemer og fortjeneste kontrolleres med fællesbankens grader. Egne skitser og begrundelser vurderes særskilt. Banken rummer nu 395 opgaver, heraf 84 til differentialligninger inklusive B8–9.

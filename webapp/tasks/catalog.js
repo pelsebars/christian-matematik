@@ -12,6 +12,7 @@ export const topics = {
 };
 export const modules = {
   "ode.repetition": {topic:"differentialEquations",name:"B-repetition 8–9: Logaritmer og binomialfordeling",section:"ode-module-repetition"},
+  "ode.6": {topic:"differentialEquations",name:"Logistisk vækst",section:"ode-module-6"},
   "ode.5": {topic:"differentialEquations",name:"Forskudt eksponentiel vækst",section:"ode-module-5"},
   "ode.4": {topic:"differentialEquations",name:"Hældningsfelt og numerisk løsning",section:"ode-module-4"},
   "ode.3": {topic:"differentialEquations",name:"Væksthastighed, tangent og linjeelement",section:"ode-module-3"},
@@ -89,6 +90,14 @@ export const goals = {
   "odeb.mean": {module:"ode.repetition",text:"Beregne og fortolke middelværdi, varians og spredning"},
   "odeb.model": {module:"ode.repetition",text:"Vurdere sandsynlighedsmodeller og deres antagelser"},
 
+  "ode6.model": {module:"ode.6",text:"Opstille og fortolke logistiske modeller med enheder"},
+  "ode6.initial": {module:"ode.6",text:"Bestemme løsning gennem et begyndelsespunkt"},
+  "ode6.equilibrium": {module:"ode.6",text:"Fortolke grænse og ligevægtsløsninger"},
+  "ode6.maximum": {module:"ode.6",text:"Bestemme maksimal væksthastighed og relevant tidspunkt"},
+  "ode6.parameter": {module:"ode.6",text:"Bestemme logistiske parametre"},
+  "ode6.rate": {module:"ode.6",text:"Beregne hastighed og finde alle relevante mængder"},
+  "ode6.optimization": {module:"ode.6",text:"Optimere fortjeneste med interval og endepunkter"},
+  "ode6.inverse": {module:"ode.6",text:"Bestemme begyndelsesværdi fra en oplyst hastighed"},
   "ode5.rate": {module:"ode.5",text:"Beregne og fortolke ændringshastighed"},
   "ode5.family": {module:"ode.5",text:"Begrunde den fuldstændige løsningsfamilie"},
   "ode5.initial": {module:"ode.5",text:"Bestemme løsning gennem et begyndelsespunkt"},

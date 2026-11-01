@@ -22,7 +22,7 @@ Den fulde matrix er første gang oprettet i `ode-plan.js` før undervisningsindh
 - `/repetition/start` og syv øvrige B8–9-trin: implementeret repetition (se nedenfor).
 - `/4/start` og otte øvrige M4-trin: implementeret undervisning.
 - `/5/start` og ti øvrige M5-trin: implementeret undervisning.
-- `/6`: planlagt undervisningsmodul.
+- `/6/start` og ti øvrige M6-trin: implementeret undervisning.
 - `/opsamling`: separat planlagt afslutning, ikke en ottende undervisningsgang.
 
 `ode-routes.js` normaliserer ugyldige ruter. `ode.js` styrer oversigt og navigation. `ode-lesson.js` rummer kun modul 1. `ode-exercises.js` rummer diagnostik, mikroøvelser og sluttjek. De seks bankopgaver ligger i `tasks/bank/ode.js`. Matematik, opgaverendering, hints, sikker bedømmelse og versionskontrolleret lagring genbruges fra integralregning og fællessystemet. Fremtidige moduler skal have egne undervisningsfiler.
@@ -111,3 +111,15 @@ Teorien begrunder familien ved forskydningen z = y − a/b og kontrollerer ved d
 Arkets Mexico-model har en tidsafhængig koefficient og er tydeligt markeret som en anden modeltype med referencefelt og kontrolleret analytisk kurve. Badekarrets minimumstilførsel er kontrolleret over hele tidsintervallet og mod lidt mindre/større tilførsel. Boldens afstand findes ved integration og sammenholdes med bassinets dybde. Barnets højde anvendes kun inden for kildens 0–48 måneder. Numeriske svar bruger uafrundede parametre.
 
 Lagring: `christian-matematik.ode.shifted.v1` og `christian-matematik.ode.shifted-notes.v1`. Kontoresultater hører til Modul 5. Prøvetilstand og bankens manuelle modulvalg følger fællessystemet. Kontrollen omfatter uafhængigt evalueret MathML, numeriske afledte, begyndelsesbetingelser, måledata, integral, modelinterval og minimumsbetingelse samt browser- og kontotest.
+
+## Modul 6 · Logistisk vækst
+
+M6 følger ark 6 med alle tre opgaver uden hjælpemidler og otte med hjælpemidler samt de gennemregnede eksempler. Elleve undervisningstrin indeholder fem diagnostiske spørgsmål, fem mikroøvelser, 11 bankopgaver og fem sluttjek: 26 kort i alt, hvoraf 21 er obligatoriske. Den samlede afsluttende opsamling er fortsat planlagt.
+
+Teorien forbinder y′ = ay(M − y) med r = aM, begrunder familien ved u = M/y − 1 og bevarer nul- og M-løsningerne. Kravet 0 < y < M adskilles fra differentialligningens andre løsninger. Maksimal væksthastighed aM²/4 ved M/2 kontrolleres i det relevante tidsinterval, herunder begyndelsesværdier over M/2. Den interaktive figur kobler løsningskurven med hastighedsparablen, ligevægte, start over grænsen og proportional sammenligning.
+
+Den positive modelgren stopper matematisk ved nævnerens nulpunkt bagud i tid. Parameterbestemmelse, to mulige mængder ved en oplyst hastighed, ikke-nul begyndelsestid og enheder behandles eksplicit. Fortjenesten i gødningsopgaven kontrolleres i alle stationære punkter inden for 0–1000 kg samt begge endepunkter. En referencegraf kan åbnes efter elevens egen skitse.
+
+Kildekontrol: Griseopgavens differentialligning angiver a = 0,000193 og M = 139,6. Derfor er eksponentkoefficienten 0,0269428. Arkets facit 0,026524 passer ikke og er ikke videreført. Bakteriesuppens mindste rod bevares uafrundet; C = 3 + 2√2 i formen med x − 40.
+
+Svar/hints gemmes i `christian-matematik.ode.logistic.v1`, noter i `christian-matematik.ode.logistic-notes.v1`, og historiske resultater hører til Modul 6. Verifikation omfatter uafhængig evaluering af de viste MathML-forskrifter, numeriske afledte, begyndelsesbetingelser, alle kildeopgaver, inverse værdier, ligevægte, maksimum og fortjenestens globale maksimum på intervallet. Browser- og kontotest kontrollerer alle kort, bank og prøve, mobile ruter, kontosynkronisering, brugeradskillelse og bevaret historik.
