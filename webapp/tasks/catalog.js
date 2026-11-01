@@ -12,6 +12,7 @@ export const topics = {
 };
 export const modules = {
   "ode.repetition": {topic:"differentialEquations",name:"B-repetition 8–9: Logaritmer og binomialfordeling",section:"ode-module-repetition"},
+  "ode.5": {topic:"differentialEquations",name:"Forskudt eksponentiel vækst",section:"ode-module-5"},
   "ode.4": {topic:"differentialEquations",name:"Hældningsfelt og numerisk løsning",section:"ode-module-4"},
   "ode.3": {topic:"differentialEquations",name:"Væksthastighed, tangent og linjeelement",section:"ode-module-3"},
   "ode.2": {topic:"differentialEquations",name:"Proportional differentialligning",section:"ode-module-2"},
@@ -88,6 +89,15 @@ export const goals = {
   "odeb.mean": {module:"ode.repetition",text:"Beregne og fortolke middelværdi, varians og spredning"},
   "odeb.model": {module:"ode.repetition",text:"Vurdere sandsynlighedsmodeller og deres antagelser"},
 
+  "ode5.rate": {module:"ode.5",text:"Beregne og fortolke ændringshastighed"},
+  "ode5.family": {module:"ode.5",text:"Begrunde den fuldstændige løsningsfamilie"},
+  "ode5.initial": {module:"ode.5",text:"Bestemme løsning gennem et begyndelsespunkt"},
+  "ode5.equilibrium": {module:"ode.5",text:"Bestemme og fortolke ligevægt og grafer"},
+  "ode5.parameter": {module:"ode.5",text:"Bestemme konstant fra to målinger"},
+  "ode5.method": {module:"ode.5",text:"Skelne standardmodellen fra tidsafhængige koefficienter"},
+  "ode5.model": {module:"ode.5",text:"Løse og kontrollere modeller med enheder"},
+  "ode5.rearrange": {module:"ode.5",text:"Isolere den afledte korrekt"},
+  "ode5.domain": {module:"ode.5",text:"Vurdere løsningen inden for modellens interval"},
   "ode4.field": {module:"ode.4",text:"Forstå hældningsfelt og begyndelsesbetingelse"},
   "ode4.sketch": {module:"ode.4",text:"Skitsere kurver gennem et punkt"},
   "ode4.slope": {module:"ode.4",text:"Beregne lokale linjeelementer"},

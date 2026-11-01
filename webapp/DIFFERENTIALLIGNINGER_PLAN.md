@@ -21,7 +21,8 @@ Den fulde matrix er første gang oprettet i `ode-plan.js` før undervisningsindh
 - `/3/start` og de ni øvrige M3-trin: implementeret undervisning (se nedenfor).
 - `/repetition/start` og syv øvrige B8–9-trin: implementeret repetition (se nedenfor).
 - `/4/start` og otte øvrige M4-trin: implementeret undervisning.
-- `/5`, `/6`: separate planlagte undersider.
+- `/5/start` og ti øvrige M5-trin: implementeret undervisning.
+- `/6`: planlagt undervisningsmodul.
 - `/opsamling`: separat planlagt afslutning, ikke en ottende undervisningsgang.
 
 `ode-routes.js` normaliserer ugyldige ruter. `ode.js` styrer oversigt og navigation. `ode-lesson.js` rummer kun modul 1. `ode-exercises.js` rummer diagnostik, mikroøvelser og sluttjek. De seks bankopgaver ligger i `tasks/bank/ode.js`. Matematik, opgaverendering, hints, sikker bedømmelse og versionskontrolleret lagring genbruges fra integralregning og fællessystemet. Fremtidige moduler skal have egne undervisningsfiler.
@@ -100,3 +101,13 @@ Den interaktive figur viser fem modeller, valgfrit begyndelsespunkt, tre Euler-s
 Svar og hints bruger `christian-matematik.ode.field.v1`; noter bruger `christian-matematik.ode.field-notes.v1`. Kontoresultater registreres på Modul 4. Redigering af korrekt svar trækker aktuel gennemførsel tilbage, men sletter ikke historiske resultater. Bankens manuelt valgte gennemførte moduler forbliver uafhængige.
 
 Verifikation: uafhængig numerisk kontrol af Euler, RK4, begyndelsesværdier, ligevægte, baglæns trin og domænestop; alle kort gennemført i browser og bank; prøvetilstand, noter, hints, mobil, MathML, navigation og kontosynkronisering mellem to enheder med brugeradskillelse.
+
+## Modul 5 · Forskudt eksponentiel vækst
+
+M5 har elleve trin med ligevægt, løsningsfamilie, begyndelsespunkt, parameterbestemmelse, interaktiv figur, opgaver, modeller, udvidede anvendelser og sluttjek. Fem startspørgsmål, fem mikroøvelser, 13 bankopgaver og fem sluttjek giver 28 kort; 23 er obligatoriske. Alle fem opgaver uden hjælpemidler og otte med hjælpemidler fra ark 5 indgår. Den oprindelige grafmatch-figur er medtaget som PNG-udsnit.
+
+Teorien begrunder familien ved forskydningen z = y − a/b og kontrollerer ved differentiation. Den konstante løsning bevares. Tilfældene b = 0 og b < 0 adskilles fra den stabile ligevægt ved b > 0. Parameterbestemmelse bruger afstandene til ligevægten og kræver et positivt forhold. Figuren viser opvarmning, afkøling, ligevægt, tangent og halvering af afstanden.
+
+Arkets Mexico-model har en tidsafhængig koefficient og er tydeligt markeret som en anden modeltype med referencefelt og kontrolleret analytisk kurve. Badekarrets minimumstilførsel er kontrolleret over hele tidsintervallet og mod lidt mindre/større tilførsel. Boldens afstand findes ved integration og sammenholdes med bassinets dybde. Barnets højde anvendes kun inden for kildens 0–48 måneder. Numeriske svar bruger uafrundede parametre.
+
+Lagring: `christian-matematik.ode.shifted.v1` og `christian-matematik.ode.shifted-notes.v1`. Kontoresultater hører til Modul 5. Prøvetilstand og bankens manuelle modulvalg følger fællessystemet. Kontrollen omfatter uafhængigt evalueret MathML, numeriske afledte, begyndelsesbetingelser, måledata, integral, modelinterval og minimumsbetingelse samt browser- og kontotest.
