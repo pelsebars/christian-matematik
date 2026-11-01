@@ -12,6 +12,7 @@ export const topics = {
 };
 export const modules = {
   "ode.repetition": {topic:"differentialEquations",name:"B-repetition 8–9: Logaritmer og binomialfordeling",section:"ode-module-repetition"},
+  "ode.4": {topic:"differentialEquations",name:"Hældningsfelt og numerisk løsning",section:"ode-module-4"},
   "ode.3": {topic:"differentialEquations",name:"Væksthastighed, tangent og linjeelement",section:"ode-module-3"},
   "ode.2": {topic:"differentialEquations",name:"Proportional differentialligning",section:"ode-module-2"},
   "vf.2": {topic:"vectorFunctions",name:"Hastighed, acceleration og tangenter",section:"vector-module-2"},
@@ -87,6 +88,14 @@ export const goals = {
   "odeb.mean": {module:"ode.repetition",text:"Beregne og fortolke middelværdi, varians og spredning"},
   "odeb.model": {module:"ode.repetition",text:"Vurdere sandsynlighedsmodeller og deres antagelser"},
 
+  "ode4.field": {module:"ode.4",text:"Forstå hældningsfelt og begyndelsesbetingelse"},
+  "ode4.sketch": {module:"ode.4",text:"Skitsere kurver gennem et punkt"},
+  "ode4.slope": {module:"ode.4",text:"Beregne lokale linjeelementer"},
+  "ode4.rate": {module:"ode.4",text:"Aflæse hastighedsgrafer med korrekte akser"},
+  "ode4.tools": {module:"ode.4",text:"Kontrollere numerisk løsning og grafvindue"},
+  "ode4.model": {module:"ode.4",text:"Fortolke numeriske modeller og enheder"},
+  "ode4.equilibrium": {module:"ode.4",text:"Bestemme og fortolke ligevægt"},
+  "ode4.numerical": {module:"ode.4",text:"Beregne Euler-trin og vurdere tilnærmelse"},
   "ode3.slope": {module:"ode.3",text:"Beregne lokal hældning fra differentialligning og punkt"},
   "ode3.tangent": {module:"ode.3",text:"Bestemme og kontrollere tangentligning, også med ukendt punkt"},
   "ode3.element": {module:"ode.3",text:"Beskrive og fortolke linjeelementer"},

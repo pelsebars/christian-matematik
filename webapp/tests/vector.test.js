@@ -72,7 +72,7 @@ test('new bank pack uses the unchanged contract, partial credit, neutral prompts
  assert.match(targetedFeedback(get('circle'),get('circle').parts[2],'6'),/Radius/);
  const set=composeSet({topics:['vectorFunctions'],onlyCompleted:true,completed:['vf.1','geo.1','eq.basic','comp.basic'],minutes:400,distribution:{short:30,medium:30,complex:30}});assert.equal(set.tasks.length,16);
  assert.equal(composeSet({topics:['vectorFunctions'],onlyCompleted:true,completed:[]}).tasks.length,0);
- assert.equal(bank.filter(t=>t.topic!=='vectorFunctions' && !['ode.2','ode.3','ode.repetition'].includes(t.module)).length,281);
+ assert.equal(bank.filter(t=>t.topic!=='vectorFunctions' && !['ode.2','ode.3','ode.repetition','ode.4'].includes(t.module)).length,281);
 });
 test('diagnostics, goal matrix and ordered routes keep future sessions planned',()=>{
  assert.equal(vectorPre.length,7);assert.equal(vectorMini.length,8);assert.equal(vectorFinal.length,6);

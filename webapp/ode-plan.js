@@ -4,7 +4,7 @@ export const odeModules = [
  {id:'2',title:'Proportional differentialligning',date:'28/10',pages:'102–103 og 110',summary:'Forbind proportional ændringshastighed med eksponentiel vækst og aftagelse.',prerequisites:'Eksponentialfunktioner, begyndelsesbetingelser og kontrol fra modul 1.',practice:'Bestem parametre og partikulær løsning, fortolk enheder og dokumentér CAS.'},
  {id:'3',title:'Væksthastighed, tangent og linjeelement',date:'29/10',pages:'104–105',summary:'Find lokale hældninger, tangentligninger og linjeelementer uden hele løsningen.',prerequisites:'Punkter, hældning, tangentligning og indsættelse.',practice:'Lokale beregninger samt modeller med varierende koefficienter og CAS.'},
  {id:'repetition',title:'Logaritmer og binomialfordeling',date:'30/10',pages:'',summary:'Virtuel repetition B-niveau 8–9. To selvstændige spor med hvert sit diagnostiske tjek.',prerequisites:'Potenser, omvendte funktioner, sandsynlighed og uafhængige forsøg.',practice:'Gå hurtigt videre i det spor, du behersker. Logaritmer forbindes med eksponentialligninger; binomialfordelingen er selvstændig repetition.'},
- {id:'4',title:'Hældningsfelt og numerisk løsning',date:'2/11',pages:'106–107',summary:'Forbind hældningsfelt, begyndelsespunkt og løsningskurve; sammenlign med numeriske løsninger.',prerequisites:'Linjeelementer, koordinater og begyndelsesbetingelser.',practice:'Skitsér kurver og tegn hældningsfelt med digitale værktøjer. En trinvis numerisk metode bliver et tydeligt mærket pædagogisk supplement.'},
+ {id:'4',title:'Hældningsfelt og numerisk løsning',date:'2/11',pages:'106–107',summary:'Forbind hældningsfelt, begyndelsespunkt og løsningskurve; sammenlign med numeriske løsninger.',prerequisites:'Linjeelementer, koordinater og begyndelsesbetingelser.',practice:'Skitsér kurver og tegn hældningsfelt med digitale værktøjer. Eulers metode er et tydeligt mærket pædagogisk supplement.'},
  {id:'5',title:'Forskudt eksponentiel vækst',date:'2/11',pages:'120–121',summary:'Arbejd med ligevægt, Newtons afkølingslov og lineære modeller af første orden.',prerequisites:'Eksponentialfunktioner, logaritmer, parenteser og fortegn.',practice:'Opstil modeller fra tekst, bestem og kontrollér løsning, fortolk ligevægt og langsigtet udvikling.'},
  {id:'6',title:'Logistisk vækst',date:'3/11',pages:'108–109',summary:'Beskriv begrænset vækst, bærekapacitet, ligevægt og maksimal væksthastighed.',prerequisites:'Eksponentialfunktioner, brøker, begyndelsesbetingelser og modeltolkning.',practice:'Opstil og vurder modeller, bestem parametre, løsninger, vendepunkt og maksimal væksthastighed.'},
  {id:'opsamling',title:'Samlet repetition og blandede opgaver',date:'Efter modul 6',pages:'',summary:'Vælg metode på tværs af modeller og forklar dine regnetrin.',prerequisites:'De seks moduler og relevant B-repetition.',practice:'Blandede prøver uden metodeafsløring, mindstekrav, ræsonnementer og dokumenteret CAS.'},
@@ -12,7 +12,7 @@ export const odeModules = [
 export const odeLabel = m => m.id === 'repetition' ? 'B-repetition 8–9' : m.id === 'opsamling' ? 'Opsamling' : `Modul ${m.id}`;
 // [goal, introduced, practised, checked, aids]. Later checks remain planned.
 export const odeGoals = [
- ['U1 · Forskellige løsningsmetoder','1: kontrol; 2, 5, 6: analytisk; 4: numerisk','1–6','1–3: sluttjek; 4–6 og opsamling (planlagt)','Begge'],
+ ['U1 · Forskellige løsningsmetoder','1: kontrol; 2, 5, 6: analytisk; 4: numerisk','1–6','1–4: sluttjek; 5–6 og opsamling (planlagt)','Begge'],
  ['U2 · Symbolbehandling og problemløsning med CAS','1: dokumenteret kontrol','1: CAS-opgave; 2–6','1: CAS-tjek; opsamling (planlagt)','Med'],
  ['U3 · Matematiske ræsonnementer og beviser','1: identitet på et interval','1: begrund begge sider; 2, 5, 6: løsninger','1: sluttjek; opsamling (planlagt)','Begge'],
  ['U4 · Matematikanvendelse','1: mængde og ændringshastighed','1: modelopgave; 2, 3, 5, 6','1: modelopgave; opsamling (planlagt)','Begge'],
@@ -30,7 +30,7 @@ export const odeGoals = [
  ['A3 · Differentiering, indsættelse og gyldigt interval','1: kontrol i tre trin','1: polynomier og eksponentialfunktioner','1: kontrolopgaver og sluttjek','Begge'],
  ['A4 · Proportional model og eksponentiel vækst','2','2 og 3','2: modelopgaver og sluttjek; opsamling (planlagt)','Begge'],
  ['A5 · Væksthastighed, tangentligning og linjeelement','3','3 og 4','3: tangent- og linjeelementopgaver samt sluttjek; 4 (planlagt)','Begge'],
- ['A6 · Hældningsfelt og numeriske løsninger','4','4: kurver og sammenligning','4 og opsamling (planlagt)','Skitse uden; numerisk med'],
+ ['A6 · Hældningsfelt og numeriske løsninger','4','4: kurver og sammenligning','4: sluttjek; opsamling planlagt','Skitse uden; numerisk med'],
  ['A7 · Ligevægt og langsigtet adfærd','5','5 og 6','5 og 6 (planlagt)','Begge'],
  ['B8 · Logaritmeregler, eksponentialligninger og domæne','B-repetition: eget starttjek','B-repetition; 2, 5, 6','B-repetition: eget sluttjek','Uden; digitale værktøjer ved talberegning'],
  ['B9 · Binomialforsøg, parametre, sandsynligheder og middelværdi','B-repetition: separat starttjek','B-repetition: enkelt- og intervalsandsynligheder','B-repetition: eget sluttjek','Begreber uden; beregninger med'],

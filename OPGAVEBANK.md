@@ -435,3 +435,7 @@ Modul `vf.2`, pakke `tasks/bank/vector-dynamics.js`: 20 faste version 1-opgaver 
 ## Differentialligninger · B-repetition 8–9
 
 `ode.repetition` tilføjer 12 version 1-opgaver i `tasks/bank/ode-review.js`, seks til logaritmer og seks til binomialfordeling. De har ingen modulforudsætninger; hvert undervisningsspor har sit eget starttjek og kan gennemføres uafhængigt. Otte mål med præfiks `odeb.` dækker logaritmeregler/domæne/ligninger og binomialbetingelser/sandsynligheder/kumulative hændelser/middelværdi/modelvurdering. Opgaverne bruger fælles grading, hints, målrettet feedback og trænings-/prøvetilstand. Alle tidligere 346 opgaver bevares; banken har nu 358 opgaver, heraf 47 under Differentialligninger inkl. repetitionen. Se `webapp/DIFFERENTIALLIGNINGER_PLAN.md` for progression, kilder, lagring og tests.
+
+## Differentialligninger M4
+
+13 nye faste version 1-opgaver i `webapp/tasks/bank/ode-field.js`: seks fra arkets del uden hjælpemidler, fem med hjælpemidler og to mærkede numeriske supplementer. Modul `ode.4` kræver `ode.1` og `ode.3` ved filtrering efter gennemførte forudsætninger. Figuroplæg, løsningsskitser, tre hints, målrettet feedback, træning og prøvetilstand genbruger fællessystemet. Gentag-modul åbner M4. Banken rummer nu 371 opgaver, heraf 60 til differentialligninger inklusive B8–9.
