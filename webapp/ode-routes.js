@@ -8,8 +8,9 @@ export const reviewSteps=[['start','To starttjek'],['logaritmer','Logaritmer'],[
 export const fieldSteps=[['start','Mål og forudsætninger'],['felt','Hældningsfelt'],['hastighedsgraf','Hastighedsgraf'],['numerisk','Numeriske trin'],['udforsk','Udforsk felt og kurver'],['oevelser','Skitser og opgaver'],['modeller','Digitale modeller'],['sluttjek','Sluttjek'],['opsummering','Opsummering']];
 export const shiftedSteps=[['start','Mål og forudsætninger'],['ligevaegt','Ligevægt'],['familie','Løsningsfamilien'],['begyndelse','Begyndelsespunkt'],['parameter','Find konstanten'],['udforsk','Udforsk ligevægt'],['oevelser','Uden hjælpemidler'],['modeller','Modeller med CAS'],['udvidet','Udvidede anvendelser'],['sluttjek','Sluttjek'],['opsummering','Opsummering']];
 export const logisticSteps=[['start','Mål og forudsætninger'],['model','Den logistiske model'],['loesning','Løsningsfamilien'],['maksimum','Maksimal vækst'],['parameter','Find parametre'],['udforsk','Udforsk vækst og hastighed'],['oevelser','Uden hjælpemidler'],['modeller','Modeller med CAS'],['udvidet','Udvidede anvendelser'],['sluttjek','Sluttjek'],['opsummering','Opsummering']];
-export const odeImplemented=['1','2','3','repetition','4','5','6'];
-export const stepsForOdeModule = id => id==='1'?odeSteps:id==='2'?proportionalSteps:id==='3'?localSteps:id==='repetition'?reviewSteps:id==='4'?fieldSteps:id==='5'?shiftedSteps:id==='6'?logisticSteps:[];
+export const finishSteps=[['start','Mål og starttjek'],['overblik','Metode og kontrol'],['uden','Uden hjælpemidler'],['med','Med hjælpemidler'],['sluttjek','Samlet sluttjek'],['opsummering','Resultat og næste skridt']];
+export const odeImplemented=['1','2','3','repetition','4','5','6','opsamling'];
+export const stepsForOdeModule = id => id==='1'?odeSteps:id==='2'?proportionalSteps:id==='3'?localSteps:id==='repetition'?reviewSteps:id==='4'?fieldSteps:id==='5'?shiftedSteps:id==='6'?logisticSteps:id==='opsamling'?finishSteps:[];
 export const odeRoute = (module='',step='') => ['differentialEquations',module,step].filter(Boolean).join('/');
 export function parseOdeRoute(hash) {
  const [topic,requested,step] = hash.replace(/^#/,'').split('/');

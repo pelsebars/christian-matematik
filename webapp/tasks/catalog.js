@@ -12,6 +12,7 @@ export const topics = {
 };
 export const modules = {
   "ode.repetition": {topic:"differentialEquations",name:"B-repetition 8–9: Logaritmer og binomialfordeling",section:"ode-module-repetition"},
+  "ode.opsamling": {topic:"differentialEquations",name:"Opsamling: blandede opgaver og metodevalg",section:"ode-module-opsamling"},
   "ode.6": {topic:"differentialEquations",name:"Logistisk vækst",section:"ode-module-6"},
   "ode.5": {topic:"differentialEquations",name:"Forskudt eksponentiel vækst",section:"ode-module-5"},
   "ode.4": {topic:"differentialEquations",name:"Hældningsfelt og numerisk løsning",section:"ode-module-4"},
@@ -90,6 +91,12 @@ export const goals = {
   "odeb.mean": {module:"ode.repetition",text:"Beregne og fortolke middelværdi, varians og spredning"},
   "odeb.model": {module:"ode.repetition",text:"Vurdere sandsynlighedsmodeller og deres antagelser"},
 
+  "odeend.check": {module:"ode.opsamling",text:"Kontrollere løsninger og gyldigt interval"},
+  "odeend.exponential": {module:"ode.opsamling",text:"Vælge og anvende eksponentiel løsning"},
+  "odeend.local": {module:"ode.opsamling",text:"Fortolke hastighedsdata og bestemme tangent"},
+  "odeend.numerical": {module:"ode.opsamling",text:"Beregne og vurdere numeriske tilnærmelser"},
+  "odeend.shifted": {module:"ode.opsamling",text:"Anvende ligevægt og afstande i modeller"},
+  "odeend.logistic": {module:"ode.opsamling",text:"Vurdere logistisk vækst og modelinterval"},
   "ode6.model": {module:"ode.6",text:"Opstille og fortolke logistiske modeller med enheder"},
   "ode6.initial": {module:"ode.6",text:"Bestemme løsning gennem et begyndelsespunkt"},
   "ode6.equilibrium": {module:"ode.6",text:"Fortolke grænse og ligevægtsløsninger"},

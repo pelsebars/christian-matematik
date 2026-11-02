@@ -10,7 +10,7 @@ Beviserne henvises ifølge undervisningsbeskrivelsen til særskilte fotokopier. 
 
 ## Læringsmålmatrix
 
-Den fulde matrix er første gang oprettet i `ode-plan.js` før undervisningsindholdet. Den vises direkte i forløbsoversigten. U1–U7 følger undervisningsbeskrivelsens faglige mål, K1–K6 kernestoffet, A1–A7 præciserer de seks ark, og B8–B9 beskriver repetitionen. Hver række angiver introduktion, øvelse, kontrol og hjælpemidler. Kommende kontroller er eksplicit planlagte.
+Den fulde matrix er første gang oprettet i `ode-plan.js` før undervisningsindholdet. Den vises direkte i forløbsoversigten. U1–U7 følger undervisningsbeskrivelsens faglige mål, K1–K6 kernestoffet, A1–A7 præciserer de seks ark, og B8–B9 beskriver repetitionen. Hver række angiver introduktion, øvelse, kontrol og hjælpemidler. Kontrollerne omfatter nu også den implementerede afsluttende opsamling.
 
 ## Navigation og filer
 
@@ -23,7 +23,7 @@ Den fulde matrix er første gang oprettet i `ode-plan.js` før undervisningsindh
 - `/4/start` og otte øvrige M4-trin: implementeret undervisning.
 - `/5/start` og ti øvrige M5-trin: implementeret undervisning.
 - `/6/start` og ti øvrige M6-trin: implementeret undervisning.
-- `/opsamling`: separat planlagt afslutning, ikke en ottende undervisningsgang.
+- `/opsamling/start`: separat afslutning med starttjek, overblik, opgaver uden og med hjælpemidler, sluttjek og opsummering.
 
 `ode-routes.js` normaliserer ugyldige ruter. `ode.js` styrer oversigt og navigation. `ode-lesson.js` rummer kun modul 1. `ode-exercises.js` rummer diagnostik, mikroøvelser og sluttjek. De seks bankopgaver ligger i `tasks/bank/ode.js`. Matematik, opgaverendering, hints, sikker bedømmelse og versionskontrolleret lagring genbruges fra integralregning og fællessystemet. Fremtidige moduler skal have egne undervisningsfiler.
 
@@ -114,7 +114,7 @@ Lagring: `christian-matematik.ode.shifted.v1` og `christian-matematik.ode.shifte
 
 ## Modul 6 · Logistisk vækst
 
-M6 følger ark 6 med alle tre opgaver uden hjælpemidler og otte med hjælpemidler samt de gennemregnede eksempler. Elleve undervisningstrin indeholder fem diagnostiske spørgsmål, fem mikroøvelser, 11 bankopgaver og fem sluttjek: 26 kort i alt, hvoraf 21 er obligatoriske. Den samlede afsluttende opsamling er fortsat planlagt.
+M6 følger ark 6 med alle tre opgaver uden hjælpemidler og otte med hjælpemidler samt de gennemregnede eksempler. Elleve undervisningstrin indeholder fem diagnostiske spørgsmål, fem mikroøvelser, 11 bankopgaver og fem sluttjek: 26 kort i alt, hvoraf 21 er obligatoriske. Den samlede afsluttende opsamling er implementeret efter M6, se nedenfor.
 
 Teorien forbinder y′ = ay(M − y) med r = aM, begrunder familien ved u = M/y − 1 og bevarer nul- og M-løsningerne. Kravet 0 < y < M adskilles fra differentialligningens andre løsninger. Maksimal væksthastighed aM²/4 ved M/2 kontrolleres i det relevante tidsinterval, herunder begyndelsesværdier over M/2. Den interaktive figur kobler løsningskurven med hastighedsparablen, ligevægte, start over grænsen og proportional sammenligning.
 
@@ -123,3 +123,14 @@ Den positive modelgren stopper matematisk ved nævnerens nulpunkt bagud i tid. P
 Kildekontrol: Griseopgavens differentialligning angiver a = 0,000193 og M = 139,6. Derfor er eksponentkoefficienten 0,0269428. Arkets facit 0,026524 passer ikke og er ikke videreført. Bakteriesuppens mindste rod bevares uafrundet; C = 3 + 2√2 i formen med x − 40.
 
 Svar/hints gemmes i `christian-matematik.ode.logistic.v1`, noter i `christian-matematik.ode.logistic-notes.v1`, og historiske resultater hører til Modul 6. Verifikation omfatter uafhængig evaluering af de viste MathML-forskrifter, numeriske afledte, begyndelsesbetingelser, alle kildeopgaver, inverse værdier, ligevægte, maksimum og fortjenestens globale maksimum på intervallet. Browser- og kontotest kontrollerer alle kort, bank og prøve, mobile ruter, kontosynkronisering, brugeradskillelse og bevaret historik.
+
+
+## Forløbsafslutning
+
+Seks trin på `/opsamling/start`, `/overblik`, `/uden`, `/med`, `/sluttjek` og `/opsummering` samler M1–M6. Seks diagnostiske spørgsmål, 12 nye blandede bankopgaver og seks sluttjek giver 24 kort. De 18 opgaver og sluttjek er obligatoriske; startspørgsmålene er diagnostiske. Seks faglige områder viser hver tre kontroller og målrettede links tilbage til undervisningen. Binomialfordelingen afsluttes i B-repetitionens eget spor.
+
+Opgaverne træner løsningskontrol på et interval, eksponentielle modeller, lokal hældning og tangent, numeriske trin, forskudt vækst og logistisk vækst. Seks opgaver er uden hjælpemidler og seks med. Metodeoversigt, hints, feedback, løsningsforslag, dokumentationsnoter og egenvurdering følger de eksisterende moduler. Materialet er egenproduceret repetition, ikke et officielt eksamenssæt. Prøvesæt i den fælles bank skjuler feedback indtil aflevering og kan blande alle emnets opgaver.
+
+Lagring bruger `christian-matematik.ode.finish.v1` og separate noter. Aktuel gennemførelse kræver alle 18 obligatoriske kort korrekte og går tilbage til I gang, hvis et korrekt svar ændres. Historiske resultater og tidligere modulers status bevares. Kontoresultater benævnes Opsamling. Der er ingen databaseændringer.
+
+Verifikation: uafhængige matematiske beregninger, bankfiltrering og gennemførselslogik i enhedstests; browserkontrol af alle 24 kort og 12 bankopgaver, prøvetilstand, slutnavigation, målrettet repetition, mobilbredde, MathML og labels; kontotest med genindlæsning, anden enhed, brugeradskillelse og bevarelse af historik og M1.

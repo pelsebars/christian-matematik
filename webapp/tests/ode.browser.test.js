@@ -115,10 +115,10 @@ try {
   await page.locator('#ode-session .ode-page-controls a').last().click();
   await page.waitForFunction(expected=>location.hash===`#${expected}`,i<odePages.length-1?odePages[i+1]:'differentialEquations/2/start');
  }
- for(const m of odeModules.slice(7)){
-  await go('differentialEquations/'+m.id);
-  assert.match(await page.locator('#ode-planned').innerText(),/Planlagt · ikke implementeret/);
-  assert.equal(await page.locator('[data-ode-step]:visible').count(),0);
+ for(const m of odeModules.slice(1)){
+  await go('differentialEquations/'+m.id+'/start');
+  assert.equal(await page.locator('#ode-planned').isVisible(),false);
+  assert.equal(await page.locator('[data-ode-step]:visible').count(),1);
   await page.locator('#ode-session .ode-breadcrumb a').click();
   await page.waitForURL('**/*#differentialEquations');
  }

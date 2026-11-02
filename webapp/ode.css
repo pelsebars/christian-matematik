@@ -60,3 +60,6 @@
 #ode-module-four input[type="range"]{width:100%}#odeLesson .ode-euler-table th,#odeLesson .ode-euler-table td{padding:10px 6px;font-size:.85rem;white-space:normal}#odeLesson .ode-euler-table{table-layout:fixed}
 #ode-module-five input[type="range"]{width:100%}#ode5-reading{display:block;margin:1rem 0}#ode-module-five svg{width:100%;height:auto}#ode-module-five svg text{fill:currentColor;font-size:11px}
 #ode-module-six input[type="range"]{width:100%}#ode6-reading{display:block;margin:1rem 0}#ode-module-six svg{width:100%;height:auto}#ode-module-six svg text{fill:currentColor;font-size:11px}
+#odeend-notes { display:block; width:100%; box-sizing:border-box; margin:.6rem 0; }
+#ode-module-finish [data-finish-areas] ul { padding-inline-start:24px; }
+#ode-module-finish [data-finish-areas] strong { display:block; }
