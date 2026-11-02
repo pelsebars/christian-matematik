@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {fixture} from './account-fixture.js';
+import {regressionLessonTasks,REGRESSION_STORAGE_KEY,REGRESSION_NOTES_KEY} from '../normal-regression-lesson.js';
+import {regressionTaskStep} from '../normal-regression-exercises.js';
+import '../scripts/build.js';
+const f=await fixture(),browser=await chromium.launch({headless:true,channel:'chrome'}),errors=[];
+async function enter(page,name,signup=false){page.setDefaultTimeout(20000);await page.goto(f.origin+'/#normalDistribution/5');await page.locator('#accountLanding').waitFor();if(signup)await page.locator('.auth-tabs [data-auth-mode=signup]').click();await page.locator('#accountUsername').fill(name);await page.locator('#accountPassword').fill('midlertidig-testkonto-kun-lokalt');if(signup)await page.locator('#repeatPassword').fill('midlertidig-testkonto-kun-lokalt');await page.locator('#accountSubmit').click();await page.locator('html[data-sidebar-navigation=ready]').waitFor();}
+const go=(p,path)=>p.evaluate(path=>window.showMathView(path),path);
+const saved=async p=>assert.equal(await p.evaluate(async()=>(await import('/account/store.js')).flush()),true);
+const records=p=>p.evaluate(async()=>(await import('/account/store.js')).completions());
+try{
+ const ca=await browser.newContext(),a=await ca.newPage();a.on('pageerror',e=>errors.push(e.message));await enter(a,'norm5_elev_a',true);assert.equal(await a.evaluate(()=>location.hash),'#normalDistribution/5/start');
+ await go(a,'normalDistribution/4/start');await a.locator('[data-int-card="norm4.pre.mean"] input').fill('4');await a.locator('[data-int-card="norm4.pre.mean"] button[type=submit]').click();await saved(a);
+ for(const task of regressionLessonTasks){await go(a,'normalDistribution/5/'+regressionTaskStep(task));const c=a.locator(`[data-int-card="${task.id}"]`);for(const p of task.parts){if(p.type==='choice')await c.locator(`[name="${p.id}"]`).selectOption(p.answer);else await c.locator(`[name="${p.id}"]`).fill(p.answer);}await c.locator('button[type=submit]').click();}
+ await go(a,'normalDistribution/5/oevelser');await a.locator('#regression-notes').fill('Min dokumentation: parrede kildedata, residualer, t-interval, nul og forbehold.');await a.locator('[data-int-card="norm5.phillips"] [data-int-hint]').click();await saved(a);
+ assert.equal(await a.locator('[data-normal-status="5"]').textContent(),'Gennemført');const all=await records(a),five=all.filter(r=>r.topic==='normalDistribution'&&r.module==='Modul 5');assert.equal(five.length,48);assert.ok(five.every(r=>r.route.startsWith('normalDistribution/5/')));assert.equal(all.filter(r=>r.module==='Modul 4').length,1);
+ const cb=await browser.newContext(),b=await cb.newPage();await enter(b,'norm5_elev_a');await go(b,'normalDistribution/5/oevelser');assert.equal(await b.locator('[data-normal-status="5"]').textContent(),'Gennemført');assert.match(await b.locator('#regression-notes').inputValue(),/t-interval/);assert.equal(await b.locator('[data-int-card="norm5.phillips"] .int-hints p').count(),1);assert.equal(await b.locator('[data-normal-status="4"]').textContent(),'I gang');
+ await go(b,'normalDistribution/5/sluttjek');await b.locator('[data-int-card="norm5.final.residual"] input').fill('99');assert.equal(await b.locator('[data-normal-status="5"]').textContent(),'I gang');await saved(b);await b.reload();await b.locator('#normal-module-five').waitFor({state:'visible'});assert.equal(await b.locator('[data-normal-status="5"]').textContent(),'I gang');assert.equal((await records(b)).filter(r=>r.module==='Modul 5').length,48);assert.equal(await b.locator('[data-normal-status="4"]').textContent(),'I gang');
+ const cc=await browser.newContext(),c=await cc.newPage();await enter(c,'norm5_elev_b',true);await go(c,'normalDistribution/5/oevelser');assert.equal(await c.locator('#regression-notes').inputValue(),'');assert.equal(await c.locator('[data-normal-status="5"]').textContent(),'Ikke begyndt');assert.equal((await records(c)).length,0);
+ const states=await f.pool.query('SELECT namespace FROM learning_state WHERE namespace = ANY($1)',[[REGRESSION_STORAGE_KEY,REGRESSION_NOTES_KEY]]);assert.equal(states.rows.length,2);assert.deepEqual(errors,[]);console.log('Regression accounts passed: direct login route, 48 saved cards, correct module-5 achievements, hints and notes, second device, user isolation, mastery rollback preserves history and module 4.');
+}finally{await browser.close();await f.close();}

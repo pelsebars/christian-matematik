@@ -92,3 +92,6 @@
 #normalLesson #plot-data label:has(input[type=checkbox]),#normalLesson #plot-lab label:has(input[type=checkbox]) { display:flex; align-items:flex-start; gap:10px; margin:16px 0; }
 #normalLesson #plot-data input[type=checkbox],#normalLesson #plot-lab input[type=checkbox] { width:20px; height:20px; flex-shrink:0; margin-top:4px; }
 #normalLesson #plot-lab svg { width:100%; height:auto; display:block; margin:18px 0; }
+
+#normalLesson #regression-basics { scroll-margin-top:20px; }
+#normalLesson #regression-lab svg,#normalLesson #regression-check svg,#normalLesson #regression-interval svg,#normalLesson #regression-coverage svg { display:block; width:100%; height:auto; margin:18px 0; }

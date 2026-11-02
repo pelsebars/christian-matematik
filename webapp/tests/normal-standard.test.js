@@ -68,15 +68,15 @@ test('new bank obeys contract, covers goals, separates feedback and preserves ol
  assert.equal(new Set(normalStandardTasks.map(t=>t.prompt)).size,15);assert.ok(normalStandardTasks.some(t=>t.size==='complex'));assert.ok(normalStandardTasks.some(t=>!t.aids));assert.ok(normalStandardTasks.some(t=>t.aids));
 });
 test('shared selection requires the preceding module only when completed-module filtering is enabled',()=>{
- const config={topics:['normalDistribution'],minutes:500,distribution:{short:50,medium:50,complex:50},onlyCompleted:true};
+ const config={topics:['normalDistribution'],minutes:1000,distribution:{short:50,medium:50,complex:50},onlyCompleted:true};
  assert.equal(composeSet({...config,completed:['norm.2']}).tasks.length,0);
  assert.equal(composeSet({...config,completed:['norm.1']}).tasks.length,12);
  assert.equal(composeSet({...config,completed:['norm.1','norm.2']}).tasks.length,27);
- assert.equal(composeSet({...config,onlyCompleted:false}).tasks.length,75);
+ assert.equal(composeSet({...config,onlyCompleted:false}).tasks.length,93);
 });
 test('direct routes preserve module 1 and add all module-2 steps; later modules remain planned',()=>{
- assert.deepEqual(normalImplemented,['1','2','3','repetition','4']);assert.equal(standardSteps.length,8);assert.equal(pagesForNormalModule('2').length,8);
+ assert.deepEqual(normalImplemented,['1','2','3','repetition','4','5']);assert.equal(standardSteps.length,8);assert.equal(pagesForNormalModule('2').length,8);
  for(const path of [...normalPages,...pagesForNormalModule('2')])assert.equal(parseNormalRoute('#'+path).path,path);
  assert.equal(parseNormalRoute('#normalDistribution/2').path,'normalDistribution/2/start');assert.equal(parseNormalRoute('#normalDistribution/2/bad').path,'normalDistribution/2/start');
- assert.equal(parseNormalRoute('#normalDistribution/5').step,'');assert.deepEqual(pagesForNormalModule('5'),[]);
+ assert.equal(parseNormalRoute('#normalDistribution/5').step,'start');assert.equal(pagesForNormalModule('5').length,12);
 });

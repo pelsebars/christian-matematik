@@ -452,3 +452,13 @@ Modul `vf.2`, pakke `tasks/bank/vector-dynamics.js`: 20 faste version 1-opgaver 
 ## Differentialligninger · Forløbsafslutning
 
 12 nye faste version 1-opgaver i `webapp/tasks/bank/ode-finish.js` samler seks faglige områder fra M1–M6, med seks opgaver uden og seks med hjælpemidler. Modul `ode.opsamling` kræver `ode.1`–`ode.6` ved filtrering efter gennemførte forudsætninger. Fælles grading, tre hints, feedback, løsningsforslag og prøvetilstand bevares; Gentag modul åbner afslutningen. Banken rummer nu 407 opgaver, heraf 96 til differentialligninger inklusive B8–9 og afslutningen.
+
+## Normalfordeling · Modul 5
+
+`tasks/bank/normal-regression.js` tilføjer 18 version 1-opgaver i `norm.5`, med `norm.1` og `norm.4` som forudsætninger ved filter på gennemførte moduler. Hele banken har 425 opgaver, heraf 93 i normalforløbet. De 17 `norm5.`-mål dækker hældning og enheder, residualer/aflæsning, residualspredning, standardfejl, antagelser, estimat, dækning, interval, nul, ræsonnement, data, værktøjer, omformning, begrænsninger og normalmodelbro.
+
+Pakken omfatter korte begrebs- og beregningsopgaver, flere trin, teksttung agronom-/biologfortolkning, metodevalg, alle fire originale datasæt, reciprok respons, kvadreret hastighed og arkets normalfordelte frøposer. Nødvendige sammenhørende data er med i bilagene, også i prøve. Hinttrin, gennemregnede løsninger, læringsmål og målrettet feedback følger den fælles kontrakt. Tidligere opgaver/versioner er bevaret.
+
+Feedback adskiller fortegnsfejl, procentpoint, varians uden rod, residualspredning kontra hældningsusikkerhed, forkert parring/variabelvalg, intervalregning, nul på grænsen, 95 %-fejltolkning og omformning. De fire hældningsintervaller er uafhængigt genberegnet fra alle regnearkspar. Student-t med n−2 frihedsgrader anvendes; nul i intervallet er ikke bevis for ingen sammenhæng. En ukritisk årsags- eller fremtidsgaranti accepteres ikke.
+
+Modul 5 har 48 kort og 40 obligatoriske aktiviteter. Åbning, figurkontroller og egne noter gennemfører ikke modulet. Konto-, browser- og enhedstests kontrollerer genindlæsning, en anden enhed/profil, korrekt historikrute, hints, noter, statusændring efter redigering og bevaring af tidligere moduler.

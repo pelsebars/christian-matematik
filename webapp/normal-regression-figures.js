@@ -1,0 +1,28 @@
+import {math,n,op} from './normal-math.js';
+import {normalData} from './normal-data.js';
+import {sourceRegression,regressionSources,regressionPairs} from './normal-regression-math.js';
+import {normalPlotPoints} from './normal-plot-math.js';
+import {plotSvg} from './normal-plot-figures.js';
+export const regressionFormat=(v,d=4)=>v.toLocaleString('da-DK',{minimumFractionDigits:d,maximumFractionDigits:d});
+const f=regressionFormat;
+export const regressionInterval=(lower,upper)=>math(op('[')+n(String(lower).replace('-', '−'))+op(';')+n(String(upper).replace('-', '−'))+op(']'));
+export const regressionTypography=html=>html.replace(/\[([−\-\d,.]+);\s*([−\-\d,.]+)\]/g,(_,lower,upper)=>regressionInterval(lower,upper));
+export function regressionSvg(model,{mode='scatter',selected=1,xLabel='Vandret værdi',yLabel='Lodret værdi'}={}){
+ if(mode==='qq'){const plot=normalPlotPoints(model.points.map(p=>p.residual)),rank=plot.points.find(p=>p.original===selected)?.rank;return plotSvg(plot,{label:'Normalplot af residualer',selected:rank});}
+ if(!['scatter','residual'].includes(mode))throw RangeError('Ukendt figurtype.');
+ const residual=mode==='residual',xs=model.points.map(p=>p.x),ys=model.points.flatMap(p=>residual?[p.residual,0]:[p.y,p.fitted]),xmin=Math.min(...xs),xmax=Math.max(...xs),ymn=Math.min(...ys),ymx=Math.max(...ys),pad=Math.max((ymx-ymn)*.13,1e-5),ymin=ymn-pad,ymax=ymx+pad,px=v=>70+(v-xmin)/(xmax-xmin)*500,py=v=>280-(v-ymin)/(ymax-ymin)*225;
+ const title=residual?'Residualplot':'Målinger og regressionslinje',desc=`${title}. ${model.n} datapunkter. Vandret: ${xLabel}. Lodret: ${residual?'Residual i samme enhed som responsen':yLabel}. ${residual?'Positivt residual betyder observeret værdi over modellen.':'De lodrette linjestykker viser afvigelserne fra modellen.'}`;
+ return `<svg viewBox="0 0 640 350" role="img" aria-label="${desc}"><title>${title}</title><desc>${desc}</desc>${Array.from({length:5},(_,i)=>{const x=xmin+(xmax-xmin)*i/4,y=ymin+(ymax-ymin)*i/4;return`<path d="M${px(x)} 55V280M70 ${py(y)}H570" stroke="#e2e8ec"/><text x="${px(x)}" y="302" text-anchor="middle">${f(x,1)}</text><text x="62" y="${py(y)+4}" text-anchor="end">${f(y,1)}</text>`;}).join('')}<path d="M70 55V280H570" stroke="currentColor" fill="none"/>${residual?`<path d="M70 ${py(0)}H570" stroke="#8b512a" stroke-width="2"/>`:`<path d="M${px(xmin)} ${py(model.slope*xmin+model.intercept)}L${px(xmax)} ${py(model.slope*xmax+model.intercept)}" stroke="#8b512a" stroke-width="2"/>`}${model.points.map(p=>`<path d="M${px(p.x)} ${py(residual?0:p.fitted)}V${py(residual?p.residual:p.y)}" stroke="#b1cbd9"/><circle data-regression-row="${p.row}" cx="${px(p.x)}" cy="${py(residual?p.residual:p.y)}" r="${p.row===selected?5:3}" fill="#176489"/>`).join('')}<text x="70" y="25">${residual?'Residual (responsens enhed)':yLabel}</text><text x="320" y="335" text-anchor="middle">${xLabel}</text></svg>`;
+}
+export function slopeIntervalSvg({lower,upper,slope},{truth}={}){
+ const range=Math.max(upper-lower,Math.abs(slope)*.1,.01),min=Math.min(lower,0,truth??0)-range*.15,max=Math.max(upper,0,truth??0)+range*.15,px=v=>60+(v-min)/(max-min)*520;
+ return `<svg viewBox="0 0 640 160" role="img" aria-label="Hældningsinterval fra ${f(lower,5)} til ${f(upper,5)}. Beregnet hældning ${f(slope,5)}. Nul er markeret."><title>Interval for hældningen</title><path d="M60 95H580" stroke="currentColor"/><path d="M${px(0)} 30V105" stroke="#8b512a" stroke-dasharray="4 3"/><text x="${px(0)}" y="128" text-anchor="middle">0</text><path d="M${px(lower)} 55H${px(upper)}M${px(lower)} 45V65M${px(upper)} 45V65" stroke="#176489" stroke-width="4"/><circle cx="${px(slope)}" cy="55" r="5" fill="#176489"/><text x="${px(lower)}" y="32" text-anchor="middle">${f(lower,4)}</text><text x="${px(upper)}" y="83" text-anchor="middle">${f(upper,4)}</text><text x="320" y="151" text-anchor="middle">Hældning i modellens enhed</text></svg>`;
+}
+export function regressionDataFigure(key,{plot=false}={}){
+ const source=regressionSources[key],data=normalData[key],pairs=regressionPairs[key];
+ return `<figure class="normal-concepts task-figure">${plot?regressionSvg(sourceRegression(key),source):''}<figcaption>Kilde: ${data.source.split('/').at(-1)}, ${data.sheet}. ${pairs.length} sammenhørende talpar. ${key==='grain'?'Årstal er omsat til år efter 1961.':key==='phillips'?'Årstal er bevaret i kilden; x er arbejdsløshed og y er inflation.':''}</figcaption><details class="normal-data-details"><summary>Vis alle ${pairs.length} talpar</summary><div class="normal-data-scroll" tabindex="0" role="region" aria-label="Sammenhørende data"><table><thead><tr><th>Række</th><th>${source.xLabel}</th><th>${source.yLabel}</th></tr></thead><tbody>${pairs.map(([x,y],i)=>`<tr><td>${i+1}</td><td>${f(x,2)}</td><td>${f(y,2)}</td></tr>`).join('')}</tbody></table></div></details></figure>`;
+}
+export function coverageSvg(simulation){
+ const {intervals,truth}=simulation,min=Math.min(...intervals.map(i=>i.lower),truth)-.1,max=Math.max(...intervals.map(i=>i.upper),truth)+.1,px=v=>60+(v-min)/(max-min)*520,py=i=>30+i*2.8;
+ return `<svg viewBox="0 0 640 ${intervals.length*2.8+85}" role="img" aria-label="${simulation.covered} af ${intervals.length} simulerede intervaller dækker den faste sande hældning to. Blå dækker; brune dækker ikke."><title>Gentagne stikprøver og intervaller</title><path d="M${px(truth)} 20V${py(intervals.length)}" stroke="currentColor" stroke-dasharray="4 3"/>${intervals.map((v,i)=>`<path data-coverage="${v.covers}" d="M${px(v.lower)} ${py(i)}H${px(v.upper)}" stroke="${v.covers?'#176489':'#a84024'}" stroke-width="1.8"/>`).join('')}<text x="${px(truth)}" y="${py(intervals.length)+23}" text-anchor="middle">Fast sand hældning: 2</text></svg>`;
+}
