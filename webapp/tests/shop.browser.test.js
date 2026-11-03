@@ -54,5 +54,23 @@ try{
  const device=await browser.newContext();const other=await device.newPage();await login(other,'skin_tester');assert.equal(await other.locator('html').getAttribute('data-skin'),'military');assert.equal(await other.locator('#rewardPoints').textContent(),'31');await shop(other);await filter(other,'mine');assert.equal(await other.locator('.shop-voucher.is-used').count(),1);
  const stranger=await browser.newPage();await login(stranger,'other_skin_user',true);assert.equal(await stranger.locator('html').getAttribute('data-skin'),'default');assert.equal(await stranger.locator('#rewardPoints').textContent(),'0');
  await shop(stranger);await filter(stranger,'mine');assert.equal(await stranger.locator('.shop-skin-card').count(),0);assert.equal(await stranger.locator('.shop-voucher').count(),0);
- assert.deepEqual(errors,[]);console.log('Shop browser passed: previews, purchases, four skins, saved math, reload, vouchers, mobile and account isolation.');
+ // A digital reward has its own artwork and persists as a 300-point voucher.
+ await f.pool.query(`INSERT INTO learning_completion(user_id,exercise_id,topic,module,label,route) SELECT $1,'phantom-qa-'||n::text,'equations','1','Testopgave','equations' FROM generate_series(1,300) n`,[rows[0].id]);
+ await page.setViewportSize({width:1440,height:1100});await page.reload();await page.waitForFunction(()=>document.querySelector('#rewardPoints')?.textContent==='331');await shop(page);await filter(page,'rewards');
+ const phantom=page.locator('.shop-reward-card').filter({has:page.locator('[data-buy="dcs-f4e-phantom"]')});
+ assert.equal(await phantom.locator('.shop-eyebrow').textContent(),'DIGITAL BELØNNING');
+ assert.match(await phantom.locator('.shop-price').textContent(),/300 point/);
+ await page.locator('[data-buy="dcs-f4e-phantom"]').click();
+ assert.equal(await page.locator('#shopDialogTitle').textContent(),'DCS: F-4E Phantom II');
+ assert.match(await page.locator('.dialog-reward-image').getAttribute('src'),/shop-phantom/);
+ await page.waitForFunction(()=>{const img=document.querySelector('.dialog-reward-image');return img?.complete&&img.naturalWidth>0;});
+ assert.match(await page.locator('.voucher-explanation').textContent(),/platform/);
+ await page.locator('[data-confirm-buy]').click();await page.waitForFunction(()=>!document.querySelector('.shop-dialog').open);
+ assert.equal(await page.locator('#rewardPoints').textContent(),'31');
+ await page.reload();await shop(page);await filter(page,'mine');
+ const phantomVoucher=page.locator('.shop-voucher').filter({hasText:'DCS: F-4E Phantom II'});
+ assert.match(await phantomVoucher.textContent(),/300 point/);
+ await phantomVoucher.locator('[data-redeem]').click();await page.locator('[data-confirm-redeem]').click();
+ await phantomVoucher.locator('button:disabled').waitFor();assert.equal(await page.locator('#rewardPoints').textContent(),'31');
+ assert.deepEqual(errors,[]);console.log('Shop browser passed: previews, purchases, four skins, saved math, reload, physical and digital vouchers, mobile and account isolation.');
 }finally{await browser.close();await f.close();}

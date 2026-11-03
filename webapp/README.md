@@ -39,7 +39,7 @@ Normalfordeling har fem modulruter, B-repetition 10–11 mellem modul 3 og 4 og 
 
 Vektorfunktioner er hovedemne 09 med tre modulruter, særskilt B-repetition 12–13 mellem Modul 2 og 3 og en opsamling. Modul 1 og 2 er implementeret. Modul 1 har 11 trin, 37 kort og 16 bankopgaver. Modul 2 har 13 trin, 46 kort og 20 nye bankopgaver om hastighed, fart, acceleration, tangenter, dobbeltpunkter, vektor-/linjevinkler, maksimal højde og dokumenteret CAS. Fire bevægelsesmodeller viser position, hastighed og acceleration med tastaturstyring og tabelalternativ. Hver undervisningsgang har egen kontolagring af svar, hints, noter og kontrolleret fremdrift. Repetitionen, Modul 3 og opsamlingen er planlagte. Se [VEKTORFUNKTIONER_PLAN.md](VEKTORFUNKTIONER_PLAN.md) for kilder, Office Math-kontrol, 32 mål og ruter. `BROWSER_CHANNEL=chrome npm run test:vector` kører de to modulers faglige tests, browsertests og isolerede kontotests.
 
-Butikken (`#shop`) tilbyder fire konto-gemte skins samt vouchers til frysepizza, en øl hos ÅBEN og en Lamborghini Huracán for optjente butikspoint. Se [LOGIN_SETUP.md](LOGIN_SETUP.md#butik-og-skins) for priser, køb og test.
+Butikken (`#shop`) tilbyder fire konto-gemte skins samt vouchers til frysepizza, en øl hos ÅBEN, DCS: F-4E Phantom II og en Lamborghini Huracán for optjente butikspoint. Se [LOGIN_SETUP.md](LOGIN_SETUP.md#butik-og-skins) for priser, køb og test.
 
 ### Opgavechat
 

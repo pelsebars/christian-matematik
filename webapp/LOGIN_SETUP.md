@@ -71,19 +71,25 @@ Opgave-ID'erne i HTML er nu eksplicitte. Bevar dem ved flytning/omformulering af
 
 ## Butik og skins
 
-Butikken findes via **Butik** i menuen eller `#shop`. Military, Terminal og The Matrix koster 40 point, Machine 60 point, en frysepizza 40 point, en personlig ÅBEN-voucher 150 point og en Lamborghini Huracán 9.600.000 point. Bilprisen bruger cirka 0,50 kr. pr. point (pizza anslået til 20 kr., øl til 75 kr.) og en registreret nypris på cirka 4,8 mio. kr. ([prisreference](https://www.nummerplade.net/nummerplade/lambo.html)). Produkter og priser er defineret i `shop-catalog.js`; API'et bruger altid serverens pris. Det oprindelige skin er gratis og kan altid genaktiveres under Mine køb. Skins købes én gang pr. konto, mens vouchers kan købes flere gange.
+Butikken findes via **Butik** i menuen eller `#shop`. Military, Terminal og The Matrix koster 40 point, Machine 60 point, en frysepizza 40 point, en personlig ÅBEN-voucher 150 point, DCS: F-4E Phantom II 300 point og en Lamborghini Huracán 9.600.000 point. Bilprisen bruger cirka 0,50 kr. pr. point (pizza anslået til 20 kr., øl til 75 kr.) og en registreret nypris på cirka 4,8 mio. kr. ([prisreference](https://www.nummerplade.net/nummerplade/lambo.html)). Produkter og priser er defineret i `shop-catalog.js`; API'et bruger altid serverens pris. Det oprindelige skin er gratis og kan altid genaktiveres under Mine køb. Skins købes én gang pr. konto, mens vouchers kan købes flere gange.
 
 `shop_purchase` gemmer hvert køb med pris og et idempotent købsnummer. En lås på brugerens række serialiserer køb fra flere faner/enheder, så saldoen ikke kan bruges to gange. `shop_profile` gemmer aktivt skin. Begge tabeller er brugerafgrænsede og slettes med kontoen. Genindsendelse af samme købsnummer trækker ikke flere point. Et voucherforbrug opdaterer kun den købte voucher og trækker ikke point igen.
 
-`GET /api/shop` henter butik og saldo; `POST` køber; `PUT` aktiverer et ejet skin eller markerer egen voucher brugt. Muterende kald kræver session og samme origin som øvrig kontolagring. Voucherens fysiske belønning aftales med Jacob; den er ikke et gavekort eller en automatisk bestilling hos ÅBEN.
+`GET /api/shop` henter butik og saldo; `POST` køber; `PUT` aktiverer et ejet skin eller markerer egen voucher brugt. Muterende kald kræver session og samme origin som øvrig kontolagring. Voucherens belønning aftales med Jacob; den er ikke et gavekort eller en automatisk bestilling hos ÅBEN.
 
-Temaerne består af CSS, fælles farvevariabler og en lille SVG-baggrund. MathML og bedømmelse ændres ikke. Originale farver bruges som fallback, og videnskabelige figurer beholder en lys plotflade i mørke skins. De genererede belønningsbilleder ligger lokalt som `shop-beer.jpg`, `shop-pizza.jpg` og `shop-lamborghini.jpg` og kræver ingen ekstern billedtjeneste. Forhåndsvisninger er bygget i HTML/CSS.
+Temaerne består af CSS, fælles farvevariabler og en lille SVG-baggrund. MathML og bedømmelse ændres ikke. Originale farver bruges som fallback, og videnskabelige figurer beholder en lys plotflade i mørke skins. De genererede belønningsbilleder ligger lokalt som `shop-beer.jpg`, `shop-pizza.jpg`, `shop-phantom.jpg` og `shop-lamborghini.jpg` og kræver ingen ekstern billedtjeneste. Forhåndsvisninger er bygget i HTML/CSS.
 
 Lamborghini-billedet er genereret med den indbyggede imagegen og gemt som JPEG. Prompt:
 
 > Create a polished photorealistic editorial product photograph for a Danish reward shop. A lime green Lamborghini Huracán sports coupe, front three-quarter view, parked on an understated concrete forecourt beside modern Scandinavian architecture. Warm golden late afternoon light, tasteful aspirational mood, subtle softly blurred background. Entire car visible with generous margins on all sides for cropping to a landscape 3:2 card, car centered, realistically accurate wheels and proportions. No people, no text, no price, no watermark, no graphic overlays. Landscape composition.
 
 Kør `npm run test:shop` for API- og browsertest af saldo, samtidige køb, genforsøg, ejerskab, temaskift, vouchers, mobil og brugeradskillelse. Kør `npm run db:migrate` før deployment af shop-versionen. Test bruger midlertidig database, ikke Railway.
+
+DCS-belønningen er modulet [DCS: F-4E Phantom II fra Heatblur](https://www.digitalcombatsimulator.com/en/shop/modules/phantom/). Den vises som en digital belønning, koster 300 point og bruger samme personlige voucher som de øvrige belønninger. Køb og platform aftales med Jacob.
+
+Phantom-billedet er genereret med den indbyggede imagegen og gemt som `shop-phantom.jpg`. Prompt:
+
+> Create a premium aviation simulator reward-shop illustration in photorealistic flight-simulator screenshot style. One accurately proportioned McDonnell Douglas F-4E Phantom II twin-engine fighter jet, recognizable long nose, twin intakes, single vertical tail and two-seat canopy, Vietnam-era green and tan camouflage, flying above a scenic coastline at golden hour. Front-side three-quarter view, entire aircraft including both wingtips visible, generous framing margins for a landscape 3:2 reward card crop. Beautiful restrained cinematic light, realistic aircraft geometry and materials, no combat, no weapons being fired, no explosions. No text, no UI, no watermark, no invented logos. Landscape composition. This image represents the F-4E aircraft module for the DCS World flight simulator.
 
 ### Point fra opgavebankens sæt
 
