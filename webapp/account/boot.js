@@ -77,6 +77,7 @@ if (!user && !preview) {
   await import('../tasks/ui.js'); await import('../integral.js'); await import('../ode.js'); await import('../normal.js'); await import('../vector.js');
   await import('../sidebar.js');
   await import('../shop.js');
+  await import('../guide.js');
   await import('./legacy.js');
   const { bindLegacyTutors } = await import('../tutor.js');
   bindLegacyTutors();

@@ -12,7 +12,7 @@ export function appServer() {
       if (url.pathname.startsWith('/api/')) {
         if (!router) { res.writeHead(503); res.end(); return; }
         const chunks = []; let size = 0;
-        for await (const chunk of req) { size += chunk.length; if (size > 600000) { res.writeHead(413); res.end(); return; } chunks.push(chunk); }
+        for await (const chunk of req) { size += chunk.length; if (size > (req.url.split('?')[0] === '/api/tutor' ? 3100000 : 600000)) { res.writeHead(413); res.end(); return; } chunks.push(chunk); }
         const headers = new Headers(req.headers);
         headers.set('x-real-ip', req.socket.remoteAddress);
         const response = await router(new Request(url, { method: req.method, headers, ...(!['GET','HEAD'].includes(req.method) ? { body: Buffer.concat(chunks) } : {}) }));

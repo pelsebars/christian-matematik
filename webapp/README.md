@@ -67,3 +67,50 @@ figur ikke kan forstås. Svar vises som sikker almindelig tekst med Unicode-mate
 Kontrol: `npm run test:tutor` (servertests og browserforløb med simulerede
 modelsvar). En rigtig samtale skal også afprøves efter serverkonfiguration.
 API-reference: https://developers.openai.com/api/reference/resources/responses/methods/create
+
+### Forstå en opgave (hovedmenu)
+
+`#guide` giver en selvstændig billed- og tekstvejleder. `guide.js` håndterer input,
+forhåndsvisning, rettelser, genforsøg og samtalen. `guide-curriculum.js` indeholder
+24 kontrollerede begrebsbroer med teoriuddrag og verificerede destinationer.
+Emner uden implementeret appmodul har teoriuddrag, men intet opdigtet link.
+Kataloget er et pensumoverblik, ikke en fuld indeksering af alle kildedokumenter.
+
+`POST /api/tutor` med `mode: "guide"` bruger instruktionerne og det strukturerede
+svarformat i `server/guide.js`. Den eksisterende opgavechat fortsætter uden dette
+mode. Modellen får hele det lille katalog og vælger højst to relevante kort;
+serveren kontrollerer id'erne og leverer destinationer fra kataloget. Klienten
+bruger sit eget katalog ved rendering og indsætter aldrig modeltekst som HTML.
+
+Brug en model med billedinput og Structured Outputs. `OPENAI_GUIDE_MODEL` kan
+vælge en separat model; ellers bruges `OPENAI_TUTOR_MODEL`. Samme servernøgle,
+login, Origin-kontrol og fælles grænse på 12 kald/minut pr. bruger anvendes.
+Ingen ny databasemigration, ingen ændring af besvarelser eller point.
+Den konfigurerede produktionsmodels kompatibilitet skal verificeres før udgivelse.
+
+Billeder op til 15 MB læses i browseren og omkodes til JPEG, længste side højst
+2200 px og højst 2.800.000 tegn som data-URL. JPEG, PNG og WebP understøttes;
+HEIC/HEIF virker kun, hvis browseren kan dekode dem, ellers vises en forklaring.
+Serveren kontrollerer format/signatur og størrelse; kun `/api/tutor` får den større
+transportgrænse på 3,1 MB. Billedet sendes igen ved opfølgende spørgsmål, så grafen
+stadig er tilgængelig. Dette har en løbende tokenomkostning.
+
+Den nye vejleders opgaver, billeder og samtaler lever kun i fanens hukommelse og
+skrives ikke til kontolagringen, databasen eller applikationslogs. `Ny opgave`
+rydder dem og annullerer ventende UI-svar. Navigation til teori bevarer dem;
+genindlæsning/logout fjerner dem. `store:false` bruges hos OpenAI; dette er ikke
+et løfte om nul opbevaring hos udbyderen. Udbyderens gældende dataregler gælder.
+
+Verifikation:
+- `npm run test:guide`: serverkontrakt, kildehenvisninger og 12 browserforløb.
+  Browserforløbene bruger simulerede modelsvar og dokumenterer ikke AI-kvalitet.
+- `npm run test:tutor`: regression for den eksisterende opgavechat.
+- `npm test`: matematik og eksisterende opgavebank.
+- Med tilgængelig API-nøgle: `node scripts/evaluate-guide.js --holdout --repeats=3`.
+  Til billedafprøvning tilføjes `--images` (renderede opgavebilleder, ikke fotos).
+  Resultater gemmes i ignoreret `.test-data/guide-evaluation/results.json`.
+  Bedøm svarene efter backloggens rubric; korrekt referencevalg er ikke nok.
+
+Kilder til API-kontrakten:
+[OpenAI billedinput](https://developers.openai.com/api/docs/guides/images-vision) og
+[Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs).

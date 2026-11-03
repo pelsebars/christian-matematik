@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./integral.css" />
     <link rel="stylesheet" href="./tasks/tasks.css" />
     <link rel="stylesheet" href="./shop.css" />
+    <link rel="stylesheet" href="./guide.css" />
     <link rel="stylesheet" href="./skins.css" />
   </head>
   <body>
@@ -46,6 +47,7 @@
             <span>Start</span>
           </button>
 
+          <button class="nav-item" type="button" data-view="guide"><span class="nav-symbol" aria-hidden="true">↗</span><span>Forstå en opgave</span></button>
           <p class="nav-heading">Emner</p>
 
           <button class="nav-item" type="button" data-view="equations">
@@ -215,6 +217,7 @@
 
       <main class="main-content" id="mainContent" tabindex="-1">
         <section class="home-view" data-page="home">
+          <a href="#guide" class="guide-home-link"><strong>Hjælp mig med at forstå en opgave →</strong><span>Vis et foto, indsæt tekst, eller beskriv opgaven. Få hjælp til at finde en retning.</span></a>
           <header class="page-intro">
             <p class="eyebrow">Start her</p>
             <h1>Hvad vil du arbejde med?</h1>
@@ -330,6 +333,7 @@
         </section>
 
         <section id="shopView" data-page="shop" hidden aria-label="Butik"></section>
+        <section id="guideView" data-page="guide" hidden aria-label="Forstå en opgave"></section>
         <section id="tasksView" data-page="tasks" hidden aria-label="Opgaver"></section>
 
         <section class="subject-view" data-page="subject" hidden>
@@ -2932,7 +2936,7 @@
               </div>
             </article>
 
-            <article class="rule-card">
+            <article class="rule-card" id="formula-extrema">
               <div class="rule-copy">
                 <p class="rule-category">Differentialregning</p>
                 <h2>Monotoniforhold og ekstrema</h2>

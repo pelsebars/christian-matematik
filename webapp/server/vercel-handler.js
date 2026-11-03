@@ -11,9 +11,9 @@ export default async function handler(req, res) {
     let body;
     if (!['GET', 'HEAD'].includes(req.method)) {
       if (req.body !== undefined) body = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
-      else { const chunks = []; let size = 0; for await (const chunk of req) { size += chunk.length; if (size > 600000) { res.statusCode = 413; res.end(); return; } chunks.push(chunk); } body = Buffer.concat(chunks); }
+      else { const chunks = []; let size = 0; for await (const chunk of req) { size += chunk.length; if (size > (req.url.split('?')[0] === '/api/tutor' ? 3100000 : 600000)) { res.statusCode = 413; res.end(); return; } chunks.push(chunk); } body = Buffer.concat(chunks); }
     }
-    if (body && Buffer.byteLength(body) > 600000) { res.statusCode = 413; res.end(); return; }
+    if (body && Buffer.byteLength(body) > (req.url.split('?')[0] === '/api/tutor' ? 3100000 : 600000)) { res.statusCode = 413; res.end(); return; }
     const response = await router(new Request(new URL(req.url, origin), { method: req.method, headers, body }));
     res.statusCode = response.status;
     for (const [key, value] of response.headers) if (key !== 'set-cookie') res.setHeader(key, value);
