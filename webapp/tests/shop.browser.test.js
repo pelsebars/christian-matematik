@@ -70,7 +70,28 @@ try{
  await page.reload();await shop(page);await filter(page,'mine');
  const phantomVoucher=page.locator('.shop-voucher').filter({hasText:'DCS: F-4E Phantom II'});
  assert.match(await phantomVoucher.textContent(),/300 point/);
+ assert.equal(await phantomVoucher.locator('[data-redeem]').textContent(),'Brug voucher');
  await phantomVoucher.locator('[data-redeem]').click();await page.locator('[data-confirm-redeem]').click();
  await phantomVoucher.locator('button:disabled').waitFor();assert.equal(await page.locator('#rewardPoints').textContent(),'31');
- assert.deepEqual(errors,[]);console.log('Shop browser passed: previews, purchases, four skins, saved math, reload, physical and digital vouchers, mobile and account isolation.');
+ // The restaurant reward keeps its playful spelling throughout its lifecycle.
+ await f.pool.query(`INSERT INTO learning_completion(user_id,exercise_id,topic,module,label,route) SELECT $1,'wuaucha-qa-'||n::text,'equations','1','Testopgave','equations' FROM generate_series(1,250) n`,[rows[0].id]);
+ await page.reload();await page.waitForFunction(()=>document.querySelector('#rewardPoints')?.textContent==='281');await shop(page);await filter(page,'rewards');
+ assert.equal(await page.locator('[data-buy="restaurant-wuaucha"]').textContent(),'Køb wuaucha');
+ await page.locator('[data-buy="restaurant-wuaucha"]').click();
+ assert.equal(await page.locator('#shopDialogTitle').textContent(),'Wuaucha til WhiteHorses eller DOSA Bar');
+ assert.match(await page.locator('.voucher-explanation').textContent(),/wuaucha/);
+ assert.match(await page.locator('.dialog-reward-image').getAttribute('src'),/shop-wuaucha/);
+ await page.waitForFunction(()=>{const img=document.querySelector('.dialog-reward-image');return img?.complete&&img.naturalWidth>0;});
+ await page.locator('[data-confirm-buy]').click();await page.waitForFunction(()=>!document.querySelector('.shop-dialog').open);
+ assert.equal(await page.locator('#rewardPoints').textContent(),'31');
+ await page.reload();await shop(page);await filter(page,'mine');
+ const wuaucha=page.locator('.shop-voucher').filter({hasText:'Wuaucha til WhiteHorses eller DOSA Bar'});
+ assert.match(await wuaucha.textContent(),/250 point/);
+ assert.match(await wuaucha.locator('small').textContent(),/^Wuaucha /);
+ assert.equal(await wuaucha.locator('[data-redeem]').textContent(),'Brug wuaucha');
+ await wuaucha.locator('[data-redeem]').click();assert.match(await page.locator('.shop-dialog').textContent(),/wuauchaen/);
+ await page.locator('[data-confirm-redeem]').click();await wuaucha.locator('button:disabled').waitFor();
+ assert.equal(await wuaucha.locator('.shop-eyebrow').textContent(),'BRUGT WUAUCHA');
+ assert.equal(await page.locator('#rewardPoints').textContent(),'31');
+ assert.deepEqual(errors,[]);console.log('Shop browser passed: previews, purchases, four skins, saved math, reload, physical and digital vouchers, restaurant wuaucha, mobile and account isolation.');
 }finally{await browser.close();await f.close();}

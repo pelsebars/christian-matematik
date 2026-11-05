@@ -71,13 +71,13 @@ Opgave-ID'erne i HTML er nu eksplicitte. Bevar dem ved flytning/omformulering af
 
 ## Butik og skins
 
-Butikken findes via **Butik** i menuen eller `#shop`. Military, Terminal og The Matrix koster 40 point, Machine 60 point, en frysepizza 40 point, en personlig ÅBEN-voucher 150 point, DCS: F-4E Phantom II 300 point og en Lamborghini Huracán 9.600.000 point. Bilprisen bruger cirka 0,50 kr. pr. point (pizza anslået til 20 kr., øl til 75 kr.) og en registreret nypris på cirka 4,8 mio. kr. ([prisreference](https://www.nummerplade.net/nummerplade/lambo.html)). Produkter og priser er defineret i `shop-catalog.js`; API'et bruger altid serverens pris. Det oprindelige skin er gratis og kan altid genaktiveres under Mine køb. Skins købes én gang pr. konto, mens vouchers kan købes flere gange.
+Butikken findes via **Butik** i menuen eller `#shop`. Military, Terminal og The Matrix koster 40 point, Machine 60 point, en frysepizza 40 point, en personlig ÅBEN-voucher 150 point, DCS: F-4E Phantom II 300 point, en wuaucha til WhiteHorses eller DOSA Bar 250 point og en Lamborghini Huracán 9.600.000 point. Bilprisen bruger cirka 0,50 kr. pr. point (pizza anslået til 20 kr., øl til 75 kr.) og en registreret nypris på cirka 4,8 mio. kr. ([prisreference](https://www.nummerplade.net/nummerplade/lambo.html)). Produkter og priser er defineret i `shop-catalog.js`; API'et bruger altid serverens pris. Det oprindelige skin er gratis og kan altid genaktiveres under Mine køb. Skins købes én gang pr. konto, mens vouchers kan købes flere gange.
 
 `shop_purchase` gemmer hvert køb med pris og et idempotent købsnummer. En lås på brugerens række serialiserer køb fra flere faner/enheder, så saldoen ikke kan bruges to gange. `shop_profile` gemmer aktivt skin. Begge tabeller er brugerafgrænsede og slettes med kontoen. Genindsendelse af samme købsnummer trækker ikke flere point. Et voucherforbrug opdaterer kun den købte voucher og trækker ikke point igen.
 
 `GET /api/shop` henter butik og saldo; `POST` køber; `PUT` aktiverer et ejet skin eller markerer egen voucher brugt. Muterende kald kræver session og samme origin som øvrig kontolagring. Voucherens belønning aftales med Jacob; den er ikke et gavekort eller en automatisk bestilling hos ÅBEN.
 
-Temaerne består af CSS, fælles farvevariabler og en lille SVG-baggrund. MathML og bedømmelse ændres ikke. Originale farver bruges som fallback, og videnskabelige figurer beholder en lys plotflade i mørke skins. De genererede belønningsbilleder ligger lokalt som `shop-beer.jpg`, `shop-pizza.jpg`, `shop-phantom.jpg` og `shop-lamborghini.jpg` og kræver ingen ekstern billedtjeneste. Forhåndsvisninger er bygget i HTML/CSS.
+Temaerne består af CSS, fælles farvevariabler og en lille SVG-baggrund. MathML og bedømmelse ændres ikke. Originale farver bruges som fallback, og videnskabelige figurer beholder en lys plotflade i mørke skins. De genererede belønningsbilleder ligger lokalt som `shop-beer.jpg`, `shop-pizza.jpg`, `shop-phantom.jpg`, `shop-wuaucha.jpg` og `shop-lamborghini.jpg` og kræver ingen ekstern billedtjeneste. Forhåndsvisninger er bygget i HTML/CSS.
 
 Lamborghini-billedet er genereret med den indbyggede imagegen og gemt som JPEG. Prompt:
 
@@ -90,6 +90,12 @@ DCS-belønningen er modulet [DCS: F-4E Phantom II fra Heatblur](https://www.digi
 Phantom-billedet er genereret med den indbyggede imagegen og gemt som `shop-phantom.jpg`. Prompt:
 
 > Create a premium aviation simulator reward-shop illustration in photorealistic flight-simulator screenshot style. One accurately proportioned McDonnell Douglas F-4E Phantom II twin-engine fighter jet, recognizable long nose, twin intakes, single vertical tail and two-seat canopy, Vietnam-era green and tan camouflage, flying above a scenic coastline at golden hour. Front-side three-quarter view, entire aircraft including both wingtips visible, generous framing margins for a landscape 3:2 reward card crop. Beautiful restrained cinematic light, realistic aircraft geometry and materials, no combat, no weapons being fired, no explosions. No text, no UI, no watermark, no invented logos. Landscape composition. This image represents the F-4E aircraft module for the DCS World flight simulator.
+
+Restaurantbelønningen er én wuaucha til 250 point: vælg brunch på WhiteHorses eller indisk på DOSA Bar og aftal besøget med Jacob. `voucherLabel` styrer den særlige stavemåde på netop denne vares købsknap, købshistorik og indløsningsdialog; øvrige varer bruger fortsat voucher.
+
+Restaurantbilledet er en generisk madillustration genereret med den indbyggede imagegen, gemt som `shop-wuaucha.jpg`. Det forestiller ikke de konkrete restauranter. Prompt:
+
+> Create a tasteful photorealistic editorial food photograph for a Danish restaurant reward-shop card, landscape 3:2. One inviting Scandinavian cafe table with two clear food choices arranged side by side: on the left a beautiful brunch plate with poached eggs on sourdough toast, avocado, small fruit bowl and cappuccino; on the right an appetizing authentic South Indian crispy golden dosa folded into a long roll, with small bowls of coconut chutney and sambar. Warm natural window light, pale oak tabletop, ceramic dishes, elegant relaxed restaurant mood, realistic appetizing food textures. Both meals fully visible with generous margins for cropping to a card. No people, no hands, no text, no logos, no brand names, no vouchers, no collage borders, no watermark. A generic illustration of the choice between brunch and Indian dining, not a photo of any specific restaurant.
 
 ### Point fra opgavebankens sæt
 
