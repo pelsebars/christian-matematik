@@ -16,7 +16,7 @@ export function createDynamicsLesson(host,onStatus){
   const status=count===dynamicsRequired.length?'Gennemført':attempted?'I gang':'Ikke begyndt';
   host.querySelector('[data-dynamics-pre-status]').textContent=`${dynamicsPre.filter(complete).length} af ${dynamicsPre.length} forudsætninger er korrekt kontrolleret.`;
   host.querySelector('[data-dynamics-final-status]').textContent=`${dynamicsFinal.filter(complete).length} af ${dynamicsFinal.length} sluttjek er korrekt kontrolleret.`;
-  host.querySelector('[data-dynamics-next]').textContent=status==='Gennemført'?'Modul 2’s obligatoriske kontroller er gennemført. Genbesøg opgaverne i blandet træning senere. B-repetition 12–13 er næste undervisningsgang og er planlagt.':`${count} af ${dynamicsRequired.length} obligatoriske øvelser er korrekt kontrolleret. Genbesøg de trin, der mangler.`;
+  host.querySelector('[data-dynamics-next]').textContent=status==='Gennemført'?'Modul 2’s obligatoriske kontroller er gennemført. Genbesøg opgaverne i blandet træning senere. B-repetition 12–13 er næste undervisningsgang og er nu åben.':`${count} af ${dynamicsRequired.length} obligatoriske øvelser er korrekt kontrolleret. Genbesøg de trin, der mangler.`;
   onStatus(status,count,dynamicsRequired.length);
  },'dynamics-basics');
  host.addEventListener('click',event=>{

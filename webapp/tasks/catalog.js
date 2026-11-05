@@ -18,6 +18,7 @@ export const modules = {
   "ode.4": {topic:"differentialEquations",name:"Hældningsfelt og numerisk løsning",section:"ode-module-4"},
   "ode.3": {topic:"differentialEquations",name:"Væksthastighed, tangent og linjeelement",section:"ode-module-3"},
   "ode.2": {topic:"differentialEquations",name:"Proportional differentialligning",section:"ode-module-2"},
+  "vf.repetition": {topic:"vectorFunctions",name:"B-repetition 12–13: Monotoniforhold og optimering",section:"vector-module-repetition"},
   "vf.2": {topic:"vectorFunctions",name:"Hastighed, acceleration og tangenter",section:"vector-module-2"},
   "vf.1": {topic:"vectorFunctions",name:"Banekurver og skæringspunkter",section:"vector-module-1"},
   "norm.opsamling": {topic:"normalDistribution",name:"Samlet repetition og blandede opgaver",section:"normal-module-opsamling"},
@@ -84,6 +85,17 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "b1213.sign": {module:"vf.repetition",text:"Aflæse fortegnet for den afledte"},
+  "b1213.monotony": {module:"vf.repetition",text:"Bestemme voksende og aftagende intervaller"},
+  "b1213.stationary": {module:"vf.repetition",text:"Klassificere stationære punkter med fortegnsskift"},
+  "b1213.global": {module:"vf.repetition",text:"Skelne lokale og globale ekstrema og sammenligne kandidater"},
+  "b1213.domain": {module:"vf.repetition",text:"Bevare definitionsinterval, randpunkter og metodebetingelser"},
+  "b1213.translate": {module:"vf.repetition",text:"Omsætte tekst og begrænsning til målfunktion"},
+  "b1213.height": {module:"vf.repetition",text:"Optimere højde uden at forveksle den med fart"},
+  "b1213.distance": {module:"vf.repetition",text:"Optimere retlinjet afstand via dens kvadrat og omregne korrekt"},
+  "b1213.model": {module:"vf.repetition",text:"Kontrollere og fortolke modelresultater med enheder"},
+  "b1213.tools": {module:"vf.repetition",text:"Dokumentere alle CAS-kandidater, output og egen kontrol"},
+
   "odeb.rules": {module:"ode.repetition",text:"Bruge logaritmers definition og regneregler"},
   "odeb.domain": {module:"ode.repetition",text:"Bevare logaritmers domæne og forkaste ugyldige kandidater"},
   "odeb.equation": {module:"ode.repetition",text:"Løse eksponentialligninger og fortolke modeltider"},

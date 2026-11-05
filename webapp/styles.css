@@ -6105,3 +6105,19 @@ math {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* B12–13: shared lesson cards with two small keyboard-controlled figures. */
+.vector-repetition-lab { margin: 24px 0; padding: clamp(14px, 3vw, 24px); border: 1px solid var(--line); border-radius: 18px; background: var(--paper, #fff); }
+.vector-repetition-lab label { display: grid; gap: 8px; margin: 14px 0; }
+.vector-repetition-lab select, .vector-repetition-lab input { width: 100%; max-width: 100%; }
+.vector-repetition-lab svg { display: block; width: 100%; height: auto; overflow: hidden; }
+.vector-repetition-lab svg text { font: 13px sans-serif; fill: currentColor; }
+.vector-repetition-lab .rep-grid { stroke: #d7dce0; stroke-width: 1; }
+.vector-repetition-lab .rep-axis { stroke: #73808a; stroke-width: 1.4; }
+.vector-repetition-lab .rep-function { fill: none; stroke: #245b86; stroke-width: 3; }
+.vector-repetition-lab .rep-derivative { fill: none; stroke: #a05221; stroke-width: 2.5; stroke-dasharray: 7 5; }
+.vector-repetition-lab circle { fill: #922f4c; stroke: #fff; stroke-width: 1.5; }
+[data-repetition-shortcut]:disabled { opacity: .6; cursor: default; }
+@media (max-width: 600px) {
+  .vector-repetition-lab svg text { font-size: 22px; }
+}
