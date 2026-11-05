@@ -95,3 +95,7 @@
 
 #normalLesson #regression-basics { scroll-margin-top:20px; }
 #normalLesson #regression-lab svg,#normalLesson #regression-check svg,#normalLesson #regression-interval svg,#normalLesson #regression-coverage svg { display:block; width:100%; height:auto; margin:18px 0; }
+
+#normalLesson #normal-finish-basics { scroll-margin-top:20px; }
+#normalLesson #normal-finish-lab svg { display:block; width:100%; height:auto; margin:18px 0; }
+#normalLesson [data-normal-finish-areas] li { margin:12px 0; }

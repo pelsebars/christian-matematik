@@ -114,5 +114,5 @@ ${panel('sluttjek',section('Afsluttende forståelsestjek',`<p>Kontrollér residu
 ${panel('opsummering',section('Det skal du tage med',`
  <p>En regression giver en beregnet linje. Residualerne viser målingernes afvigelser fra den. Et hældningsinterval beskriver usikkerhed på en underliggende modelparameter under bestemte antagelser.</p>${important('Se på hele intervallet og på den model, der ligger bag. Et tal beregnet af et værktøj er ikke i sig selv en faglig konklusion.')}
  <p data-regression-next role="status"></p><ul><li>Regnefejl: gå til grundhjælp og gennemregnede residualer.</li><li>Begrebsfejl: genlæs usikkerhed, 95 % og nul i intervallet.</li><li>Modeltvivl: genbesøg residualplot, normalplot og dataindsamling.</li></ul>
- <p>Næste side er den samlede repetition, som fortsat er planlagt. Du kan allerede nu vælge blandede opgaver i opgavebanken.</p><a href="#normalDistribution">Tilbage til forløbsoversigten</a> · <a href="#tasks">Træn blandede opgaver</a>
+ <p>Næste side er den åbne opsamling med blandede opgaver og et samlet forståelsestjek.</p><a href="#normalDistribution/opsamling/start">Fortsæt til opsamlingen</a> · <a href="#normalDistribution">Forløbsoversigt</a> · <a href="#tasks">Opgavebank</a>
 `))}`);}

@@ -462,3 +462,11 @@ Pakken omfatter korte begrebs- og beregningsopgaver, flere trin, teksttung agron
 Feedback adskiller fortegnsfejl, procentpoint, varians uden rod, residualspredning kontra hældningsusikkerhed, forkert parring/variabelvalg, intervalregning, nul på grænsen, 95 %-fejltolkning og omformning. De fire hældningsintervaller er uafhængigt genberegnet fra alle regnearkspar. Student-t med n−2 frihedsgrader anvendes; nul i intervallet er ikke bevis for ingen sammenhæng. En ukritisk årsags- eller fremtidsgaranti accepteres ikke.
 
 Modul 5 har 48 kort og 40 obligatoriske aktiviteter. Åbning, figurkontroller og egne noter gennemfører ikke modulet. Konto-, browser- og enhedstests kontrollerer genindlæsning, en anden enhed/profil, korrekt historikrute, hints, noter, statusændring efter redigering og bevaring af tidligere moduler.
+
+## Normalfordeling · opsamling
+
+`tasks/bank/normal-finish.js` tilføjer 16 version 1-opgaver i `norm.opsamling`. Den fælles bank har 441 opgaver, heraf 109 i normalforløbet. De seks `normend.`-mål er `area`, `scale`, `parameters`, `plot`, `regression` og `algebra`. Ved filter på gennemførte moduler kræves Modul 1–5, B10–11 og opsamlingen; undervisningens ruter er åbne uanset denne bankmarkering.
+
+Blandingen dækker tæthed kontra areal og optælling, standardisering og strenge udfaldsgrænser, areal til grænse, ukendte parametre, kvadratsætning, to ligninger, normalplot, residualer, t-baseret hældningsinterval, nul, 95 %-fortolkning, modelbegrænsning og kvadreret respons. De nye spørgsmål bruger blandt andet Gulerødder under 410 g, 200 klubhøjder, Phillipsdata og modeltid ved 1000 hl i Unibrew. Alle nødvendige observationer/par står i bilag, også i prøve. Kildeark og gamle opgave-id'er/versioner ændres ikke.
+
+Pakken følger samme kontrakt med størrelser/sværhedsgrader, med/uden hjælpemidler, hints i flere trin, gennemregnede løsninger, læringsmål og konkret fejlfeedback. Prøvesæt skjuler emnemetadata, hints, facit og løbende bedømmelse. Et resultat kan føre direkte tilbage til opsamlingen. Den har 34 øvelseskort og 28 obligatoriske aktiviteter med egen kontolagring og anbefalinger i seks områder; tidligere modulstatus og historik bevares.
