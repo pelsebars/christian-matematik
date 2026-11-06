@@ -15,6 +15,16 @@ try{
  const {rows}=await f.pool.query('SELECT id FROM "user" WHERE username=$1',['skin_tester']);
  await f.pool.query(`INSERT INTO learning_completion(user_id,exercise_id,topic,module,label,route) SELECT $1,'qa-'||n::text,'equations','1','Testopgave','equations' FROM generate_series(1,400) n`,[rows[0].id]);
  await page.reload();await page.locator('.personal-overview').waitFor();await shop(page);
+ await filter(page,'overview');
+ assert.match(await page.locator('.point-summary').textContent(),/400/);
+ assert.equal(await page.locator('.point-planned').count(),3);
+ assert.equal(await page.locator('.point-chart a[href="#equations"]').count(),1);
+ await page.screenshot({path:'/tmp/math-point-overview-desktop.png',fullPage:true});
+ await page.setViewportSize({width:390,height:844});
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ await page.screenshot({path:'/tmp/math-point-overview-mobile.png',fullPage:true});
+ await page.setViewportSize({width:1440,height:1100});
+ await filter(page,'all');
  const car=page.locator('.shop-reward-card').filter({has:page.locator('[data-buy="lamborghini-huracan"]')});
  assert.match(await car.locator('.shop-price').textContent(),/9\.600\.000 point/);
  assert.equal(await car.locator('[data-buy]').isDisabled(),true);

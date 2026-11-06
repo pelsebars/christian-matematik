@@ -23,6 +23,7 @@ test('Shop: atomic spending, idempotency, ownership, account isolation and vouch
   const id=randomUUID();
   assert.equal((await buy(a,'military',id,{price:0,rewardPoints:99999,userId:'other'})).status,200);
   assert.equal((await read(a)).rewardPoints,60);
+  assert.deepEqual((await read(a)).pointOverview,[{topic:'equations',solved:100,points:100}]);
   assert.equal((await buy(a,'military',id)).status,200);
   assert.equal((await buy(a,'terminal',id)).status,409);
   assert.equal((await buy(a,'military')).status,409);
@@ -47,6 +48,7 @@ test('Shop: atomic spending, idempotency, ownership, account isolation and vouch
   assert.equal((await redeem()).status,200);
   const used=await read(a);assert.ok(used.purchases.find(p=>p.id===voucherId).redeemed_at);
   await redeem();assert.equal((await read(a)).rewardPoints,after.rewardPoints);
+  assert.deepEqual((await read(b)).pointOverview,[]);
   assert.equal((await read(b)).rewardPoints,0);assert.equal((await read(b)).purchases.length,0);assert.equal((await read(b)).activeSkin,'default');
   assert.equal((await request('/api/shop','PUT',{action:'activate',skinId:'default'},a)).status,200);
   assert.equal((await read(a)).activeSkin,'default');

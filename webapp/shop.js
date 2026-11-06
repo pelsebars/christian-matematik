@@ -1,3 +1,4 @@
+import { renderPointOverview } from './point-overview.js';
 import { formatRewardPoints } from './reward-points.js';
 import { user, preview, rewardPoints, activeSkin, applyShopState, flush } from './account/store.js';
 import { shopCatalog } from './shop-catalog.js';
@@ -43,7 +44,7 @@ function renderPurchases() {
 function render() {
   renderToolbar();
   if (root.hidden) return;
-  root.innerHTML = `<header class="shop-heading"><div><p class="shop-eyebrow">DINE POINT. DIT VALG.</p><h1>Butikken</h1><p>Gør appen til din egen — eller spar op til noget større.</p></div><div class="shop-balance">${coin}<span><strong>${formatRewardPoints(rewardPoints)}</strong> butikspoint</span></div></header><div class="shop-filters" role="group" aria-label="Vis varer">${[['all','Alle'],['skins','Skins'],['rewards','Belønninger'],['mine','Mine køb']].map(([id,label])=>`<button type="button" data-filter="${id}" aria-pressed="${filter===id}">${label}</button>`).join('')}</div><p class="shop-message" role="status">${esc(message || (preview?'Log ind for at optjene point og købe. Du kan se udvalget her.':!loaded?'Henter din butik…':''))}</p>${loaded||preview?`${['all','skins'].includes(filter)?`<div class="shop-section-heading"><h2>Skins til din app</h2><span>Køb én gang. Brug så tit du vil.</span></div><div class="shop-skin-grid">${state.catalog.filter(i=>i.kind==='skin').map(skinCard).join('')}</div>`:''}${['all','rewards'].includes(filter)?`<div class="shop-section-heading"><h2>Noget at spare op til</h2></div>${state.catalog.filter(i=>i.kind==='reward').map(rewardCard).join('')}`:''}${filter==='mine'?renderPurchases():''}<footer class="shop-footer"><span>Dine løste opgaver bliver stående, når du bruger point.</span><span>${formatRewardPoints(state.earnedPoints)} optjent · ${formatRewardPoints(state.spentPoints)} brugt</span></footer>`:''}`;
+  root.innerHTML = `<header class="shop-heading"><div><p class="shop-eyebrow">DINE POINT. DIT VALG.</p><h1>Butikken</h1><p>Gør appen til din egen — eller spar op til noget større.</p></div><div class="shop-balance">${coin}<span><strong>${formatRewardPoints(rewardPoints)}</strong> butikspoint</span></div></header><div class="shop-filters" role="group" aria-label="Vis varer">${[['all','Alle'],['skins','Skins'],['rewards','Belønninger'],['mine','Mine køb'],['overview','Pointoverblik']].map(([id,label])=>`<button type="button" data-filter="${id}" aria-pressed="${filter===id}">${label}</button>`).join('')}</div><p class="shop-message" role="status">${esc(message || (preview?'Log ind for at optjene point og købe. Du kan se udvalget her.':!loaded?'Henter din butik…':''))}</p>${loaded||preview?`${['all','skins'].includes(filter)?`<div class="shop-section-heading"><h2>Skins til din app</h2><span>Køb én gang. Brug så tit du vil.</span></div><div class="shop-skin-grid">${state.catalog.filter(i=>i.kind==='skin').map(skinCard).join('')}</div>`:''}${['all','rewards'].includes(filter)?`<div class="shop-section-heading"><h2>Noget at spare op til</h2></div>${state.catalog.filter(i=>i.kind==='reward').map(rewardCard).join('')}`:''}${filter==='mine'?renderPurchases():''}${filter==='overview'?renderPointOverview(state):''}<footer class="shop-footer"><span>Dine løste opgaver bliver stående, når du bruger point.</span><span>${formatRewardPoints(state.earnedPoints)} optjent · ${formatRewardPoints(state.spentPoints)} brugt</span></footer>`:''}`;
 }
 async function api(options) {
   const response = await fetch('/api/shop',{cache:'no-store',...options});
@@ -55,7 +56,7 @@ function accept(data) { state = data; loaded = true; applyShopState(data); }
 async function load() {
   if (preview) { loaded=true;render();return; }
   const version = ++loadVersion;
-  try { const data=await api();if(version===loadVersion){accept(data);render();} }
+  try { if (!await flush()) throw Error('Dine seneste svar kunne ikke gemmes. Prøv igen for at opdatere overblikket.'); const data=await api();if(version===loadVersion){accept(data);render();} }
   catch(error){if(version===loadVersion){message=error.message;render();}}
 }
 function closeDialog() {

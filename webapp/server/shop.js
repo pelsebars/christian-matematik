@@ -1,3 +1,4 @@
+import { pointOverview } from './point-overview.js';
 import { shopCatalog, skinIds } from '../shop-catalog.js';
 
 export async function pointBalance(db, userId) {
@@ -11,7 +12,7 @@ export async function shopState(db, userId) {
   const balance = await pointBalance(db, userId);
   const { rows: purchases } = await db.query('SELECT request_id AS id,item_id,kind,name,price,purchased_at,redeemed_at FROM shop_purchase WHERE user_id=$1 ORDER BY purchased_at DESC,request_id', [userId]);
   const { rows } = await db.query('SELECT active_skin FROM shop_profile WHERE user_id=$1', [userId]);
-  return { ...balance, activeSkin: rows[0]?.active_skin || 'default', purchases, catalog: shopCatalog };
+  return { ...balance, pointOverview: await pointOverview(db, userId), activeSkin: rows[0]?.active_skin || 'default', purchases, catalog: shopCatalog };
 }
 const reply = (value, status = 200) => Response.json(value, { status, headers: { 'Cache-Control': 'no-store' } });
 const uuid = value => typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);

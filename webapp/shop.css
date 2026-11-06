@@ -111,3 +111,25 @@
 .skin-mini--matrix { --mini-paper:#020704;--mini-panel:#08160e;--mini-ink:#dfffe7;--mini-soft:#a3c5ad;--mini-accent:#50e881;--mini-line:#2c4b36;--mini-nav:#020906;--mini-nav-ink:#bbe2c6;font-family:ui-monospace,monospace; }
 .skin-mini--matrix .mini-main { background-image:linear-gradient(#020704b0,#020704df),url('./skin-matrix-code.svg');background-size:cover; }
 .skin-mini--matrix .mini-nav { background-image:linear-gradient(#020906b8,#020906ef),url('./skin-matrix-code.svg');background-size:cover; }
+
+.point-overview { max-width:960px; padding:clamp(18px,3vw,36px); border:1px solid var(--line); border-radius:18px; background:var(--surface); }
+.point-overview > p, .point-next p { color:var(--ink-soft); line-height:1.7; }
+.point-overview h2 { font-size:clamp(1.4rem,3vw,2rem); margin:0 0 12px; }
+.point-summary { display:flex; flex-wrap:wrap; gap:36px; margin:28px 0; }
+.point-summary > div { display:grid; gap:7px; }
+.point-summary strong { font-size:2rem; font-variant-numeric:tabular-nums; }
+.point-summary span, .point-caption { font-size:.8rem; color:var(--ink-soft); }
+.point-chart { list-style:none; padding:0; margin:20px 0 32px; display:grid; gap:22px; }
+.point-row-heading { display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap; font-size:.9rem; }
+.point-row-heading a { color:var(--ink); text-underline-offset:4px; font-weight:700; }
+.point-row-heading small { color:var(--ink-soft); font-weight:400; }
+.point-track { height:10px; border-radius:6px; background:var(--line); margin-top:10px; overflow:hidden; }
+.point-track span { display:block; height:100%; background:var(--green); border-radius:6px; }
+.point-chart p { font-size:.75rem; color:var(--ink-soft); margin:7px 0 0; line-height:1.6; }
+.point-planned { color:var(--ink-soft); padding:14px; border:1px dashed var(--line); border-radius:10px; }
+.point-planned .point-track { background:repeating-linear-gradient(135deg,transparent 0 6px,var(--line) 6px 12px); }
+.point-planned .point-row-heading span { font-size:.75rem; }
+.point-unallocated .point-track span { background:var(--ink-soft); }
+.point-next { padding-top:20px; border-top:1px solid var(--line); }
+.point-next > div { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 24px; }
+.point-next a { text-decoration:none; font-size:.8rem; }
