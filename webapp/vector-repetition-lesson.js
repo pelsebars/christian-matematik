@@ -20,7 +20,7 @@ export function createRepetitionLesson(host,onStatus){
   }
   host.querySelector('[data-repetition-summary]').replaceChildren(...tracks.map(t=>{const p=document.createElement('p');p.dataset.repetitionTrackStatus=t.id;p.textContent=`${t.label}: ${t.status}. Starttjek ${t.preCount} af ${t.pre.length}; træning ${t.practiceCount} af ${t.practice.length}; sluttjek ${t.finalCount} af ${t.final.length}.`;return p;}));
   const count=tracks.filter(t=>t.mastered).length,status=count===2?'Gennemført':tracks.some(t=>t.status!=='Ikke begyndt')?'I gang':'Ikke begyndt';
-  host.querySelector('[data-repetition-next]').textContent=count===2?'Begge repetitionsspor er gennemført. Gennemgå dine forklaringer og kontroller. Modul 3 om areal og kurvelængde er næste undervisningsgang og er fortsat planlagt.':`Fortsæt med ${tracks.filter(t=>!t.mastered).map(t=>t.label).join(' og ')}. Et gennemført spor behøver ikke gentages.`;
+  host.querySelector('[data-repetition-next]').textContent=count===2?'Begge repetitionsspor er gennemført. Gennemgå dine forklaringer og kontroller. Modul 3 om areal og kurvelængde er næste undervisningsgang og er nu åben.':`Fortsæt med ${tracks.filter(t=>!t.mastered).map(t=>t.label).join(' og ')}. Et gennemført spor behøver ikke gentages.`;
   onStatus(status,count,2);
  },'repetition-basics');
  host.addEventListener('click',e=>{

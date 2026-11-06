@@ -1,6 +1,6 @@
-# Vektorfunktioner · samlet plan, Modul 1–2 og B-repetition 12–13
+# Vektorfunktioner · samlet plan, Modul 1–3 og B-repetition 12–13
 
-Status 5. november 2026: **Modul 1, Modul 2 og B-repetition 12–13 er implementeret**. Modul 3 og opsamlingen er planlagte. Repetitionen er unummereret og indeholder to uafhængige spor. Opsamlingen er ikke en ekstra undervisningsgang. Fortsættelse kræver brugerens næste besked om den konkrete undervisningsgang.
+Status 6. november 2026: **Modul 1–3 og B-repetition 12–13 er implementeret**. Opsamlingen er fortsat planlagt. Repetitionen er unummereret og indeholder to uafhængige spor. Opsamlingen er ikke en ekstra undervisningsgang. Modul 3 er implementeret efter brugerens fortsættelse og udgivelsesinstruks. Opsamlingen afventer en ny konkret fortsættelse.
 
 ## Kilder og kildekontrol
 
@@ -35,11 +35,11 @@ Kildearket indeholder også opgaver, der kræver senere stof. Pindsvinets størs
 
 Ark 3, eksempel 1, P27 indeholder strukturen **en halv gange absolutværdien af integralet fra a til b af den afledte stedvektor skalarprikket med stedvektorens tværvektor**. XML har m:f med 1 og 2, m:d med lodrette streger rundt om integralet, m:nary med nedre grænse a og øvre grænse b, afledt m:sSup og en ydre m:acc omkring den vektor-markerede r. Formlen er dermed tværvektorformlen, ikke blot integral af højden.
 
-Den skal i Modul 3 vises som korrekt MathML: A = ½ · |∫ₐᵇ r⃗′(t) · r⃗̂(t) dt|. Med tværvektoren (−y; x) bliver det ækvivalent med ½ · |∫ₐᵇ (x(t)y′(t) − y(t)x′(t)) dt|. Introducér tværvektorens orientering udtrykkeligt. Ved en simpel lukket kurve, gennemløbet én gang mod uret, er det orienterede udtryk positivt; modsat omløb ændrer fortegnet. Flere løkker skal afgrænses og behandles særskilt, så modsat orienterede bidrag ikke fejlagtigt udligner geometriske arealer. En åben kurve kræver også beskrivelse af lukningen.
+Den vises i Modul 3 som korrekt MathML: A = ½ · |∫ₐᵇ r⃗′(t) · r⃗̂(t) dt|. Med tværvektoren (−y; x) bliver det ækvivalent med ½ · |∫ₐᵇ (x(t)y′(t) − y(t)x′(t)) dt|. Tværvektorens orientering forklares udtrykkeligt. Ved en simpel lukket kurve, gennemløbet én gang mod uret, er det orienterede udtryk positivt; modsat omløb ændrer fortegnet. Flere løkker skal afgrænses og behandles særskilt, så modsat orienterede bidrag ikke fejlagtigt udligner geometriske arealer. En åben kurve kræver også beskrivelse af lukningen.
 
 Ark 3, P18 angiver kurvelængden som integral af længden af den afledte vektor; P38/P55 viser koordinatformen med kvadratroden af summen af koordinatafledtes kvadrater. Skeln mellem rutelængde med gentagne gennemløb og længden af den geometriske punktmængde. Hele tidsintervallet kan tælle samme delstrækning flere gange.
 
-Dette er planlægning og kildekontrol. Modul 3 har endnu ingen undervisning, øvelser eller fremdrift i appen.
+Formlerne og deres betingelser er nu implementeret i Modul 3. Kilderne er genlæst fra originalernes XML, og de relevante indlejrede figurer er gennemset igen den 6. november 2026.
 
 ## Rækkefølge og omfang
 
@@ -48,26 +48,26 @@ Dette er planlægning og kildekontrol. Modul 3 har endnu ingen undervisning, øv
 | Modul 1 · Banekurver og skæringspunkter | 11. november 2026 | 84–87 | Implementeret |
 | Modul 2 · Hastighed, acceleration og tangenter | 12. november 2026 | 88–91 | Implementeret |
 | B-repetition 12–13 · Monotoniforhold og optimering | 13. november 2026 | – | Implementeret |
-| Modul 3 · Areal og kurvelængde | 16. november 2026 | 88–91 | Planlagt |
+| Modul 3 · Areal og kurvelængde | 16. november 2026 | 88–91 | Implementeret |
 | Opsamling · Opsamling | Efter Modul 3 | – | Planlagt |
 
 Repetitionens to spor har egne starttjek og egne kontroller. Bestået starttjek giver adgang til en hurtigere vej til selvstændige opgaver og sluttjek. Et forkert starttjek tilbyder rolig genopbygning; en sidevisning må aldrig give gennemførelse. Monotonisporet: afledtes fortegn, voksende/aftagende, stationære punkter, lokale/globale ekstrema og definitionsinterval. Optimeringssporet: oversæt tekst, opstil målfunktion og interval, find kandidater og randpunkter, sammenlign, kontrollér og fortolk. Broer: maksimal højde som andenkoordinat; største afstand via afstandens kvadrat, når det bevarer maksimum.
 
 ## Læringsmålmatrix
 
-Samme 32 rækker bruges i appens udfoldelige målskort via vector-plan.js. Senere introduktioner, øvelser og kontroller er eksplicit planlagte.
+Samme 32 rækker bruges i appens udfoldelige målskort via vector-plan.js. Alle introduktioner, øvelser og kontroller er implementeret; kun den afsluttende opsamling er planlagt.
 
 | Mål | Introduceres | Øves | Kontrolleres | Hjælpemidler og kilde |
 | --- | --- | --- | --- | --- |
-| U1 · Problemløsning med vektorfunktioner | M1 · position og baner | M1 · punkt og akser; M2 · bevægelse, tangent og højde; Rep. · højde og afstand; M3 (planlagt) | M1–M2 og Rep. · selvstændige opgaver og sluttjek; M3 (planlagt) | Begge · undervisningsbeskrivelse s. 7 |
-| U2 · Værktøjsprogrammer til symbolbehandling og problemløsning | M1 · CAS og kontrol | M1 · tennis og dobbeltpunkt; M2; Rep. · alle kandidater; M3 (planlagt) | M1 · numerisk model; M2 · CAS-produkt og trigonometrisk tangent; Rep. · global CAS-kontrol | CAS · ark 1, opg. 2 og 4 |
-| U3 · Matematikanvendelse inden for udvalgte områder | M1 · sport og køretøjer | M1 · fodbold og ruter; M2 · basketball, fly og pil; Rep. · hegn og pindsvin; M3 (planlagt) | M1–M2 og Rep. · modelinterval, bevægelse og enheder | Begge · ark 1, opg. 4 og 6 |
-| U4 · Fagets metoder og identitet | M1 · parameter, geometri og kontrol | M1 · nødvendig/tilstrækkelig kontrol; M2 · tangentbetingelser og globale kandidater; Rep. · nødvendig/tilstrækkelig betingelse | M1 · punktkontrol; M2 · nulvektor, kollision og CAS-kontrol; Rep. · lokale/globale udsagn | Begge · undervisningsbeskrivelse s. 7 |
-| U5 · Grundlæggende færdigheder i kernestoffet | M1 · diagnostik og grundhjælp | M1 · koordinater og ligninger; M2 · differentiation, hældning og længde; Rep. · fortegn og modelopstilling | M1–M2 og Rep. · små kontroller og sluttjek; M3 (planlagt) | Uden · undervisningsbeskrivelse s. 7 |
+| U1 · Problemløsning med vektorfunktioner | M1 · position og baner | M1 · punkt og akser; M2 · bevægelse, tangent og højde; Rep. · højde og afstand; M3 | M1–M3 og Rep. · selvstændige opgaver og sluttjek | Begge · undervisningsbeskrivelse s. 7 |
+| U2 · Værktøjsprogrammer til symbolbehandling og problemløsning | M1 · CAS og kontrol | M1 · tennis og dobbeltpunkt; M2; Rep. · alle kandidater; M3 | M1 · numerisk model; M2 · CAS-produkt og trigonometrisk tangent; Rep. · global CAS-kontrol; M3 · kildeintegraler og numerisk kontrol | CAS · ark 1, opg. 2 og 4 |
+| U3 · Matematikanvendelse inden for udvalgte områder | M1 · sport og køretøjer | M1 · fodbold og ruter; M2 · basketball, fly og pil; Rep. · hegn og pindsvin; M3 | M1–M3 og Rep. · modelinterval, bevægelse og enheder | Begge · ark 1, opg. 4 og 6 |
+| U4 · Fagets metoder og identitet | M1 · parameter, geometri og kontrol | M1 · nødvendig/tilstrækkelig kontrol; M2 · tangentbetingelser og globale kandidater; Rep. · nødvendig/tilstrækkelig betingelse | M1 · punktkontrol; M2 · nulvektor, kollision og CAS-kontrol; Rep. · lokale/globale udsagn; M3 · lukning, orientering og geometrisk areal | Begge · undervisningsbeskrivelse s. 7 |
+| U5 · Grundlæggende færdigheder i kernestoffet | M1 · diagnostik og grundhjælp | M1 · koordinater og ligninger; M2 · differentiation, hældning og længde; Rep. · fortegn og modelopstilling | M1–M3 og Rep. · små kontroller og sluttjek | Uden · undervisningsbeskrivelse s. 7 |
 | K1 · Banekurve og dobbeltpunkter | M1 · parameter og dobbeltpunkt | M1 · kurvelaboratorium; M2 · begge hastigheder i dobbeltpunkt | M1 · alle parameterværdier og samme punkt | Begge · ark 1 |
 | K2 · Tangent, hastighed, fart og acceleration | M2 · koordinatvis differentiation | M2 · bevægelse og tangent | M2 · selvstændige opgaver/sluttjek | Begge · ark 2 |
-| K3 · Opgaver uden hjælpemidler | M1 · punkt, akser, cirkel | M1–M2 og Rep. · håndregning; M3 (planlagt) | M1–M2 og Rep. · selvstændig del og sluttjek | Uden · alle tre ark |
-| K4 · Relevant, dokumenteret CAS | M1 · model, ligning, interval, output, kontrol | M1–M2 og Rep. · egne værktøjsnoter; M3 (planlagt) | M1–M2 og Rep. · kontrollerede resultater; egne noter selvvurderes | CAS · alle tre ark |
+| K3 · Opgaver uden hjælpemidler | M1 · punkt, akser, cirkel | M1–M2 og Rep. · håndregning; M3 | M1–M3 og Rep. · selvstændig del og sluttjek | Uden · alle tre ark |
+| K4 · Relevant, dokumenteret CAS | M1 · model, ligning, interval, output, kontrol | M1–M2 og Rep. · egne værktøjsnoter; M3 | M1–M3 og Rep. · kontrollerede resultater; egne noter selvvurderes | CAS · alle tre ark |
 | A1 · Vektorfunktion og koordinatfunktioner | M1 · parameter og position | M1 · indsættelse i begge koordinater | M1 · position og sluttjek | Uden · ark 1 |
 | A2 · Parameter, punkt og banekurve | M1 · tre forskellige objekter | M1 · tabel og interaktiv figur | M1 · begrebskontrol og sluttjek | Uden · ark 1, eksempel 1 |
 | A3 · Position ved bestemt parameter | M1 · gennemregnet eksempel | M1 · guidet position og model | M1 · selvstændig position | Uden · ark 1, kuglestød |
@@ -77,7 +77,7 @@ Samme 32 rækker bruges i appens udfoldelige målskort via vector-plan.js. Sener
 | A7 · Dobbeltpunkt og forskellige parametre | M1 · løkke og fuld indsættelseskontrol | M1 · begge parameterværdier og koordinater | M1 · dobbeltpunkt og sluttjek | Begge · ark 1, opg. 2 |
 | A8 · Eliminering med domæne | M1 · parabel | M1 · interval og valg af gren | M1 · selvstændig elimination og interval | Uden · ark 1, eksempel 3 |
 | A9 · Cirkler, radianer og gennemløb | M1 · centrum, radius og vinkel | M1 · cirkelforskrift og laboratoriet | M1 · centrum, radius og periode | Uden · ark 1, eksempel 2/4 og u4 |
-| A10 · Bevægelsesmodeller, definitionsinterval og enheder | M1 · tennis og fodbold | M1–M2 · landing og højde; M3 (planlagt) | M1–M2 · fysisk rod, enheder og modelbegrænsning | Begge · ark 1, opg. 4/6 |
+| A10 · Bevægelsesmodeller, definitionsinterval og enheder | M1 · tennis og fodbold | M1–M2 · landing og højde; M3 | M1–M3 · fysisk rod, enheder og modelbegrænsning | Begge · ark 1, opg. 4/6 |
 | A11 · Komponentvis differentiation og hastighedsvektor | M2 · teori | M2 · polynomier og trigonometriske baner | M2 · håndregning og CAS | Begge · ark 2 |
 | A12 · Fart som skalar og acceleration | M2 · vektorlængde og anden afledt | M2 · fart, acceleration og enheder | M2 · model og sluttjek | Begge · ark 2 |
 | A13 · Tangentretning og tangentligning | M2 · punkt og retningsvektor | M2 · vandret/lodret tangent; nulvektor kræver særskilt analyse | M2 · tangent og sluttjek | Begge · ark 2 |
@@ -87,10 +87,10 @@ Samme 32 rækker bruges i appens udfoldelige målskort via vector-plan.js. Sener
 | B12a · Stationære punkter og lokale/globale ekstrema | Rep. · monotonispor | Rep. · fortegnsskift og definitionsinterval | Rep. · klassifikation og randpunkter | Begge · læseplan s. 3 |
 | B13 · Tekst til optimeringsfunktion og interval | Rep. · eget starttjek | Rep. · største afstand, brug evt. kvadreret afstand | Rep. · selvstændig model | Begge · ark 1, pindsvin opg. 9c som bro |
 | B13a · Kontrol, randpunkter og fortolkning | Rep. · optimeringsspor | Rep. · kandidatværdier og fysisk betydning | Rep. · globalt resultat med enhed | Begge · læseplan s. 3 |
-| A16 · Kurvelængde som integral af farten | M3 · integralstarttjek og teori (planlagt) | M3 · bil, projektil og rute (planlagt) | M3 · længde, interval og enheder (planlagt) | CAS · ark 3 |
-| A17 · Areal, tværvektor og koordinatform | M3 · kildeformel (planlagt) | M3 · orienteret integral og geometrisk areal (planlagt) | M3 · fortegn, orientering og positivt areal (planlagt) | CAS · ark 3, eksempel 1 |
-| A18 · Dobbeltpunkter og korrekt områdeafgrænsning | M3 · lukkede delkurver (planlagt) | M3 · opdeling af områder og omløb (planlagt) | M3 · dobbeltpunkt, grænser og areal (planlagt) | CAS · ark 3, opg. 3 |
-| A19 · CAS-integraler, numerik og grafisk kontrol | M3 · dokumentation (planlagt) | M3 · præcist integral og afrunding (planlagt) | M3 · reproducerbar løsning og rimelighed (planlagt) | CAS · ark 3 |
+| A16 · Kurvelængde som integral af farten | M3 · integralstarttjek og teori | M3 · bil, projektil og rute | M3 · længde, interval og enheder | CAS · ark 3 |
+| A17 · Areal, tværvektor og koordinatform | M3 · kildeformel | M3 · orienteret integral og geometrisk areal | M3 · fortegn, orientering og positivt areal | CAS · ark 3, eksempel 1 |
+| A18 · Dobbeltpunkter og korrekt områdeafgrænsning | M3 · lukkede delkurver | M3 · opdeling af områder og omløb | M3 · dobbeltpunkt, grænser og areal | CAS · ark 3, opg. 3 |
+| A19 · CAS-integraler, numerik og grafisk kontrol | M3 · dokumentation | M3 · præcist integral og afrunding | M3 · reproducerbar løsning og rimelighed | CAS · ark 3 |
 
 ## Rutestruktur
 
@@ -131,7 +131,19 @@ Samme 32 rækker bruges i appens udfoldelige målskort via vector-plan.js. Sener
 - #vectorFunctions/repetition/eksamen
 - #vectorFunctions/repetition/sluttjek
 - #vectorFunctions/repetition/opsummering
-- #vectorFunctions/3/start: planlagt Modul 3.
+- #vectorFunctions/3/start
+- #vectorFunctions/3/fart
+- #vectorFunctions/3/laengde
+- #vectorFunctions/3/interval
+- #vectorFunctions/3/areal
+- #vectorFunctions/3/orientering
+- #vectorFunctions/3/loekker
+- #vectorFunctions/3/modeller
+- #vectorFunctions/3/vaerktoej
+- #vectorFunctions/3/oevelser
+- #vectorFunctions/3/eksamen
+- #vectorFunctions/3/sluttjek
+- #vectorFunctions/3/opsummering
 - #vectorFunctions/opsamling: planlagt opsamling uden undervisningsgangsnummer.
 
 Gamle emners ruter bevares. #vectorFunctions/1 og #vectorFunctions/2 samt ukendte trin i disse moduler normaliseres til deres start. Planlagte moduler har ingen svarfelter og ingen gennemførelsesmarkering. Hashnavigation følger browserens historik; trinlinks og direkte genindlæsning virker. Sideoverskriften får fokus ved navigation. Venstremenuens fælles accordion viser M1, M2, Rep., M3 og Opsamling.
@@ -149,16 +161,16 @@ Gamle emners ruter bevares. #vectorFunctions/1 og #vectorFunctions/2 samt ukendt
 
 ## Bank, versioner og personlige data
 
-Hovedemne vectorFunctions med bankmoduler vf.1 og vf.2. tasks/bank/vector.js har 16 faste, verificerede version 1-opgaver; tasks/bank/vector-dynamics.js har yderligere 20 version 1-opgaver. De kan indgå i træning og prøvesæt med bankens eksisterende udvælgelse og sessionsformat. Neutrale opgavetekster; metoder ligger i hints og løsninger. Særskilte kontrollerede delspørgsmål giver delpoint. Prøvetilstand skjuler hints og løsninger til aflevering. Gentag-modul linker til det relevante modul: #vectorFunctions/1/start eller #vectorFunctions/2/start.
+Hovedemne vectorFunctions har bankmoduler vf.1, vf.2, vf.repetition og vf.3. Pakkerne leverer henholdsvis 16, 20, 16 og 20 faste, verificerede version 1-opgaver, i alt 72. Hele fællesbanken har 477 opgaver. Gamle id'er, versioner og gemte sæt er bevaret. Den eksisterende udvælgelse, bedømmelse og sessionskontrakt genbruges. Neutrale opgavetekster; metoder ligger i hints og løsninger. Særskilte delspørgsmål giver delpoint. Prøvetilstand skjuler hjælp til aflevering, og Gentag-modul linker til den relevante direkte startrute.
 
-Alle 297 opgaver fra før Modul 2 og deres id'er/versioner er bevaret; samlet bank er 317. Ingen eksisterende bankpakker, svarformater eller databasetabeller ændres. Nye namespaces:
+Kontonamespaces:
 
-- christian-matematik.vector.introduction.v1: fælles øvelsesformat version 1, med svar, checked og hints pr. id.
-- christian-matematik.vector.notes.v1: egne noter til Modul 1.
-- christian-matematik.vector.dynamics.v1: Modul 2, samme version 1-kortformat.
-- christian-matematik.vector.dynamics-notes.v1: særskilte noter til Modul 2.
+- christian-matematik.vector.introduction.v1 og christian-matematik.vector.notes.v1: Modul 1.
+- christian-matematik.vector.dynamics.v1 og christian-matematik.vector.dynamics-notes.v1: Modul 2.
+- christian-matematik.vector.repetition.v1 og christian-matematik.vector.repetition-notes.v1: B-repetition 12–13.
+- christian-matematik.vector.measure.v1 og christian-matematik.vector.measure-notes.v1: Modul 3.
 
-Den eksisterende accountStorage, revisionskontrol, synkroniseringskø og markCorrect/lessonCompletion genbruges. Første korrekt kontrollerede løsning registreres med vectorFunctions, det korrekte modulnummer og konkret rute. Modul 1 og 2 har uafhængig aktiv fremdrift. Den permanente historik beholdes, mens den **aktive** modulstatus kun beregnes fra aktuelt kontrollerede svar. Enhver svarredigering fjerner checked, så aktiv gennemførelse trækkes tilbage også efter genindlæsning. Korrekt tekst i et ubekræftet felt tæller ikke. Besøg, noter og manuelt vurderet CAS-dokumentation tæller ikke. Ingen migrering af brugerdata er nødvendig.
+Øvelsesformatet er fortsat version 1 med svar, checked og hints pr. id. Den eksisterende accountStorage, revisionskontrol, synkroniseringskø og markCorrect/lessonCompletion genbruges. Første korrekt kontrollerede løsning registreres med vectorFunctions, det korrekte modul og konkret trinrute. Alle tre moduler og repetitionen har uafhængig aktiv fremdrift. Den permanente historik beholdes, mens den **aktive** status beregnes fra aktuelt kontrollerede svar. Enhver svarredigering fjerner checked, så aktiv gennemførelse trækkes tilbage også efter genindlæsning. Korrekt tekst i et ubekræftet felt tæller ikke. Besøg, noter og manuelt vurderet CAS-dokumentation tæller ikke. Ingen migrering af brugerdata er nødvendig.
 
 ## Første levering · kontrol og udgivelse
 
@@ -307,4 +319,57 @@ Udgivelse følger AGENTS.md: hele Git-status gennemgås; det eksisterende ucommi
 
 ## Næste arbejdsgang
 
-Stop efter denne levering af B-repetition 12–13. Ved brugerens besked om Modul 3: genlæs ark 3 og verificér især arealnotation, orientering, kurvelængde og dobbeltpunktgrænser på ny. Modul 3 og opsamlingen er fortsat tydeligt planlagte og implementeres først ved den konkrete fortsættelse.
+Repetitionens stop blev efterfulgt af brugerens konkrete fortsættelse til Modul 3. Ark 3 er genlæst, og kontrollen er dokumenteret nedenfor. Stop efter Modul 3; opsamlingen er fortsat tydeligt planlagt.
+
+## Modul 3 · implementering 6. november 2026
+
+### Genlæsning og faglig kontrol
+
+Hele ark 3 er genudtrukket fra den uændrede original. Office Math i P18, P27, P47, P71 og P83–85 er kontrolleret direkte i XML med brøk, norm, eksponent, koordinatgrænser og tværvektor. De indlejrede figurer for modelbil, dobbeltpunktsløkke, radial lukning, skiløbere, fire-spidset kurve og landevejsbil er gennemset. Opgave 4's formelbillede (image6.tmp, faktisk PNG) viser samme halverede integral med afledt stedvektor og tværvektor. Læseplan side 3 og undervisningsbeskrivelse side 7 er genlæst for placering og mål.
+
+| Kildemodel | Kontrolleret resultat og betingelse |
+| --- | --- |
+| Modelbil: første koordinat sin(t)+2; anden 3sin(t/2)+1 | Hele intervallet 0 til 4π giver længde 15,4826515303 m. Øvre løkke 0 til 2π har areal 4 m²; de to løkker har samlet geometrisk areal 8 m² og orienteret sum nul. |
+| Fire-spidset kurve: 4cos³(t), 4sin³(t) | Farten er 12 gange absolutværdien af produktet sin(t)cos(t); fire kvadranter giver længde 24. Nulfart i spidserne kræver stykkevis argumentation, ikke negativ fart. |
+| Kanonkugle: 11,2t; −4,91t²+8,43t+1,7 | Første positive landing 1,8992077550 s; vandret rækkevidde 21,2711268561 m; banelængde 23,5732231569 m. Fortegnet og eksponenten er aflæst strukturelt i Word og kontrolleret mod arkets resultat. |
+| Dobbeltpunktsløkke: t²−2t; t³−12t | Parametre −2 og 4 giver (8;16). Areal 129,6; længde 68,5198796563; spids tangentlinjevinkel 80,5376777920 grader. |
+| Radial lukning: −t³+3t; t² | På −k til k, med 0<k<√3, er de to indre områder separate. Arealet k⁵/5+k³=6 giver k=1,5862586134. Radiale forbindelser gennem origo har nul bidrag. |
+| Skiløbere | Sluttider 30 og 13,1607401295 s ved andenkoordinat −300 m. Rutelængder 300,2399040767 og 307,9835531964 m. Kortest tid er ikke kortest rute. |
+| Landevejsbil: 12t; 0,001t³−0,1t²+2,4t | Fart ved ét sekund 12,2005413404 m/s; længde på 0 til 60 s er 721,9128877326 m; endepunktsafstand 720 m. |
+
+Numeriske kilderesultater er kontrolleret med højpræcisionsberegning og med uafhængig sammensat Gauss–Legendre-kvadratur i testene. Testene evaluerer også de faktisk viste MathML-koordinater separat. De interaktive figurer bruger en særskilt Simpson-rutine, som ikke bruges som facitorakel i testene.
+
+### Undervisning, bank og lagring
+
+13 direkte trin: mål/starttjek, fart, længde, interval/gennemløb, kildearealformel, orientering, løkker, modeller, værktøj, øvelser, eksamen, sluttjek og arbejdsmetode. 45 kort består af ni diagnostiske spørgsmål, ni guidede mikroøvelser, 20 bankopgaver og syv sluttjek. Kun de 36 korrekt kontrollerede ikke-diagnostiske kort gennemfører modulet. Besøg, figurer, noter og ubekræftede korrekte felter gennemfører ikke. Svarredigering trækker aktiv status tilbage; permanent første-korrekt-historik og optjente point bevares.
+
+Grundhjælpen følger den konkrete forudsætning: koordinatvis differentiation, vektornorm, absolutværdi, konstant integral, stamfunktion, grænser, orientering, lukning og radianer. Begge hjælpemiddeltyper indgår. Der er fuldt gennemregnede eksempler, trinvis hjælp, særskilte delpoint og specifik fejlfeedback. CAS-input og frie begrundelser gemmes som noter og selvvurderes; appen påstår ikke automatisk at kontrollere ekstern værktøjsbrug.
+
+To tastaturbetjente SVG-laboratorier har samme målestok på akserne, beregnede kurver, gennemløbspile og tabelalternativ. Længdelaboratoriet sammenligner korder, integral og endepunktsafstand samt halve intervaller og gentagne cirkelomløb. Areallaboratoriet viser orienterede bidrag og positive delarealer, omvendt gennemløb og enkeltløkker. Halveringen er allerede med i tabellernes orienterede bidrag. Flere løkker, åbne kurvers angivne lukning og gentagne gennemløbs multiplicitet forklares særskilt.
+
+Bankmodul vf.3 har 20 nye faste version 1-opgaver: constant, integrand, backtrack, circle, repeat, ellipse, orientation, small-loop, cancellation, loop-bounds, loop-measure, closure, radial, model-car, astroid, cannon, road, skiers, convergence og time-scale. Alle 457 tidligere opgaver og deres id'er/versioner er bevaret; samlet bank er 477. Opgaverne har neutrale tekster, tre hints, løsninger og feedback pr. delspørgsmål og virker i både træning og prøvetilstand. Prøvetilstanden skjuler hjælp indtil aflevering. Gentag-modul åbner Modul 3.
+
+Nye namespaces er christian-matematik.vector.measure.v1 og christian-matematik.vector.measure-notes.v1. Kontoens eksisterende kø, revisionskontrol og historik genbruges, med metadata Vektorfunktioner, Modul 3 og præcis trinrute. Modul 1, Modul 2 og B-repetitionens lagring er uændret. Ingen databasemigreringer eller ændringer i point-/købslogik er tilføjet.
+
+### Kontrol og udgivelse
+
+- tests/vector-measure.test.js: syv uafhængige matematiske, bank-, versions-, feedback- og rutetests. De viste koordinater differentieres numerisk og kontrolleres mod separat Gauss–Legendre-kvadratur og eksakte arealer. Løkker, radial/ret lukning, orientering, flere omløb, fysisk interval, enheder og alle kildemodeller indgår.
+- tests/vector-measure.browser.test.js: alle 45 kort og 20 bankopgaver, diagnostik/grundhjælp, hints, notesvar efter genindlæsning, gennemførelse/tilbagekaldelse, bevarede Modul 1/2/repetitionsdata, begge laboratorier, 13 ruter, historik, prøveprivatliv, MathML-struktur, labels, id'er, tastatur, samtlige trin og bankopgaver ved 390 pixels samt ingen JavaScript-/konsolfejl.
+- tests/vector-measure.accounts.browser.test.js: alle 45 svar, korrekte metadata, anden enhed, brugeradskillelse, tidligere Modul 1/2/repetitionssvar og noter, hints, historik, aktiv status og genoptagelse efter en afbrudt gemning. En lokal elev optjener 48 point fra 45 nye og tre tidligere kort, køber en pizza for 40, redigerer et korrekt svar og beholder både de otte point og købet. Kun en isoleret midlertidig database anvendes.
+- Manuel billedkontrol af desktop og mobil: kildearealformel og tværvektor, begge laboratorier, løkkeskygger, retning, lige akseenheder, tabeller og typografi. Mobiltabeller og aksemærker er tilpasset efter første kontrol.
+
+| Kontrol | Resultat |
+| --- | --- |
+| npm test | 153 af 153 tests består, heraf syv nye til Modul 3 |
+| Filerne i npm run test:browser | 30 af 30 browserforløb består |
+| npm run test:accounts | Én PostgreSQL/API-test består |
+| Filerne i npm run test:accounts:browser | 14 af 14 kontoforløb består |
+| test:shop, test:bank-rewards, test:tutor og test:guide | 16 supplerende tests og fire browserforløb består |
+| npm run build | Rent produktionsbuild består; 477 bankopgaver, 45 nye kort og 36 obligatoriske kontroller verificeret i artefaktet |
+| MathML, tastatur og 390 pixels | Alle nye trin og bankopgaver består; ingen JavaScript-/konsolfejl |
+
+De samme testfiler som pakkens fulde scripts køres; uafhængige browserfiler fordeles mellem processer. Kontoforløb bruger særskilte kildekopier og midlertidige databaser, så deres builds ikke kolliderer. De låste afhængigheder er kopieret fra den friske npm ci, der blev brugt ved repetitionen. Ingen tests eller migreringer peger mod produktion. De 15 berørte JavaScript-/CSS-filer er sammenlignet byte for byte med det rene build.
+
+Udgivelse følger AGENTS.md: hele Git-status, også nye filer, er gennemgået. De tre eksisterende standalone-filer er uafhængige af appen og bevares uden at medtages. Branch codex/vektorfunktioner-modul-3 udgives gennem Git til main og Vercel. Vercels Production-resultat og de berørte filer på produktionsadressen kontrolleres efter push. Railway-database, volumen og den bevidst frakoblede appservice ændres ikke.
+
+Opsamlingen er fortsat planlagt, og arbejdet stopper efter denne levering af Modul 3.
