@@ -67,6 +67,6 @@ test('versioned bank, partial credit, goal coverage, routes and old task version
  const s=get('square-distance'),p=s.parts[0];assert.match(targetedFeedback(s,p,'sum-coords'),/lagt koordinaterne sammen/);assert.match(targetedFeedback(s,p,'root'),/selve afstanden/);assert.match(targetedFeedback(get('flat'),get('flat').parts[1],'min'),/skifter ikke fortegn/);
  const set=composeSet({topics:['vectorFunctions'],onlyCompleted:true,completed:['vf.repetition'],minutes:500,distribution:{short:40,medium:40,complex:40}});assert.equal(set.tasks.length,16);
  for(const t of bank.filter(t=>t.module!=='vf.repetition')){const old=instantiate(t.id,'unchanged');assert.deepEqual(instantiate(t.id,'unchanged',old.version),old);}
- assert.deepEqual(vectorImplemented,['1','2','repetition','3']);assert.equal(repetitionPages.length,12);for(const path of repetitionPages)assert.equal(parseVectorRoute('#'+path).path,path);assert.equal(parseVectorRoute('#vectorFunctions/repetition/bad').path,'vectorFunctions/repetition/start');
+ assert.deepEqual(vectorImplemented,['1','2','repetition','3','opsamling']);assert.equal(repetitionPages.length,12);for(const path of repetitionPages)assert.equal(parseVectorRoute('#'+path).path,path);assert.equal(parseVectorRoute('#vectorFunctions/repetition/bad').path,'vectorFunctions/repetition/start');
  for(const goal of vectorGoals.filter(g=>/^B12|^B13|^A15 /.test(g[0])))assert.doesNotMatch(goal.join(' '),/planlagt/);
 });

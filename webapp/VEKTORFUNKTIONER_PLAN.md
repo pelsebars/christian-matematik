@@ -1,6 +1,6 @@
 # Vektorfunktioner · samlet plan, Modul 1–3 og B-repetition 12–13
 
-Status 6. november 2026: **Modul 1–3 og B-repetition 12–13 er implementeret**. Opsamlingen er fortsat planlagt. Repetitionen er unummereret og indeholder to uafhængige spor. Opsamlingen er ikke en ekstra undervisningsgang. Modul 3 er implementeret efter brugerens fortsættelse og udgivelsesinstruks. Opsamlingen afventer en ny konkret fortsættelse.
+Status 6. november 2026: **Hele vektorforløbet er implementeret: Modul 1–3, B-repetition 12–13 og opsamlingen**. Repetitionen er unummereret og indeholder to uafhængige spor. Opsamlingen er ikke en ekstra undervisningsgang. Opsamlingen er implementeret efter brugerens konkrete fortsættelse, inklusive statusoverblik i pointshoppen.
 
 ## Kilder og kildekontrol
 
@@ -49,13 +49,13 @@ Formlerne og deres betingelser er nu implementeret i Modul 3. Kilderne er genlæ
 | Modul 2 · Hastighed, acceleration og tangenter | 12. november 2026 | 88–91 | Implementeret |
 | B-repetition 12–13 · Monotoniforhold og optimering | 13. november 2026 | – | Implementeret |
 | Modul 3 · Areal og kurvelængde | 16. november 2026 | 88–91 | Implementeret |
-| Opsamling · Opsamling | Efter Modul 3 | – | Planlagt |
+| Opsamling · Opsamling | Efter Modul 3 | – | Implementeret |
 
 Repetitionens to spor har egne starttjek og egne kontroller. Bestået starttjek giver adgang til en hurtigere vej til selvstændige opgaver og sluttjek. Et forkert starttjek tilbyder rolig genopbygning; en sidevisning må aldrig give gennemførelse. Monotonisporet: afledtes fortegn, voksende/aftagende, stationære punkter, lokale/globale ekstrema og definitionsinterval. Optimeringssporet: oversæt tekst, opstil målfunktion og interval, find kandidater og randpunkter, sammenlign, kontrollér og fortolk. Broer: maksimal højde som andenkoordinat; største afstand via afstandens kvadrat, når det bevarer maksimum.
 
 ## Læringsmålmatrix
 
-Samme 32 rækker bruges i appens udfoldelige målskort via vector-plan.js. Alle introduktioner, øvelser og kontroller er implementeret; kun den afsluttende opsamling er planlagt.
+Samme 32 rækker bruges i appens udfoldelige målskort via vector-plan.js. Alle introduktioner, øvelser og kontroller er implementeret. Opsamlingen tilføjer blandet kontrol og seks faglige delstatusser, som er kortlagt nedenfor.
 
 | Mål | Introduceres | Øves | Kontrolleres | Hjælpemidler og kilde |
 | --- | --- | --- | --- | --- |
@@ -144,9 +144,16 @@ Samme 32 rækker bruges i appens udfoldelige målskort via vector-plan.js. Alle 
 - #vectorFunctions/3/eksamen
 - #vectorFunctions/3/sluttjek
 - #vectorFunctions/3/opsummering
-- #vectorFunctions/opsamling: planlagt opsamling uden undervisningsgangsnummer.
+- #vectorFunctions/opsamling/start
+- #vectorFunctions/opsamling/overblik
+- #vectorFunctions/opsamling/metode
+- #vectorFunctions/opsamling/uden
+- #vectorFunctions/opsamling/med
+- #vectorFunctions/opsamling/modelkontrol
+- #vectorFunctions/opsamling/sluttjek
+- #vectorFunctions/opsamling/opsummering
 
-Gamle emners ruter bevares. #vectorFunctions/1 og #vectorFunctions/2 samt ukendte trin i disse moduler normaliseres til deres start. Planlagte moduler har ingen svarfelter og ingen gennemførelsesmarkering. Hashnavigation følger browserens historik; trinlinks og direkte genindlæsning virker. Sideoverskriften får fokus ved navigation. Venstremenuens fælles accordion viser M1, M2, Rep., M3 og Opsamling.
+Gamle emners ruter bevares. #vectorFunctions/1 og #vectorFunctions/2 samt ukendte trin i disse moduler normaliseres til deres start. Alle fem afsnit er nu implementeret. Opsamlingen har sin egen status og tælles særskilt fra undervisningsgangene. Hashnavigation følger browserens historik; trinlinks og direkte genindlæsning virker. Sideoverskriften får fokus ved navigation. Venstremenuens fælles accordion viser M1, M2, Rep., M3 og Opsamling.
 
 ## Modul 1 · implementering
 
@@ -161,7 +168,7 @@ Gamle emners ruter bevares. #vectorFunctions/1 og #vectorFunctions/2 samt ukendt
 
 ## Bank, versioner og personlige data
 
-Hovedemne vectorFunctions har bankmoduler vf.1, vf.2, vf.repetition og vf.3. Pakkerne leverer henholdsvis 16, 20, 16 og 20 faste, verificerede version 1-opgaver, i alt 72. Hele fællesbanken har 477 opgaver. Gamle id'er, versioner og gemte sæt er bevaret. Den eksisterende udvælgelse, bedømmelse og sessionskontrakt genbruges. Neutrale opgavetekster; metoder ligger i hints og løsninger. Særskilte delspørgsmål giver delpoint. Prøvetilstand skjuler hjælp til aflevering, og Gentag-modul linker til den relevante direkte startrute.
+Hovedemne vectorFunctions har bankmoduler vf.1, vf.2, vf.repetition, vf.3 og vf.opsamling. Pakkerne leverer henholdsvis 16, 20, 16 og 20 faste, verificerede version 1-opgaver. Opsamlingens vf.opsamling tilføjer 16, i alt 88 vektoropgaver. Hele fællesbanken har 493 opgaver. Gamle id'er, versioner og gemte sæt er bevaret. Den eksisterende udvælgelse, bedømmelse og sessionskontrakt genbruges. Neutrale opgavetekster; metoder ligger i hints og løsninger. Særskilte delspørgsmål giver delpoint. Prøvetilstand skjuler hjælp til aflevering, og Gentag-modul linker til den relevante direkte startrute.
 
 Kontonamespaces:
 
@@ -169,6 +176,7 @@ Kontonamespaces:
 - christian-matematik.vector.dynamics.v1 og christian-matematik.vector.dynamics-notes.v1: Modul 2.
 - christian-matematik.vector.repetition.v1 og christian-matematik.vector.repetition-notes.v1: B-repetition 12–13.
 - christian-matematik.vector.measure.v1 og christian-matematik.vector.measure-notes.v1: Modul 3.
+- christian-matematik.vector.finish.v1 og christian-matematik.vector.finish-notes.v1: Opsamling.
 
 Øvelsesformatet er fortsat version 1 med svar, checked og hints pr. id. Den eksisterende accountStorage, revisionskontrol, synkroniseringskø og markCorrect/lessonCompletion genbruges. Første korrekt kontrollerede løsning registreres med vectorFunctions, det korrekte modul og konkret trinrute. Alle tre moduler og repetitionen har uafhængig aktiv fremdrift. Den permanente historik beholdes, mens den **aktive** status beregnes fra aktuelt kontrollerede svar. Enhver svarredigering fjerner checked, så aktiv gennemførelse trækkes tilbage også efter genindlæsning. Korrekt tekst i et ubekræftet felt tæller ikke. Besøg, noter og manuelt vurderet CAS-dokumentation tæller ikke. Ingen migrering af brugerdata er nødvendig.
 
@@ -372,4 +380,67 @@ De samme testfiler som pakkens fulde scripts køres; uafhængige browserfiler fo
 
 Udgivelse følger AGENTS.md: hele Git-status, også nye filer, er gennemgået. De tre eksisterende standalone-filer er uafhængige af appen og bevares uden at medtages. Branch codex/vektorfunktioner-modul-3 udgives gennem Git til main og Vercel. Vercels Production-resultat og de berørte filer på produktionsadressen kontrolleres efter push. Railway-database, volumen og den bevidst frakoblede appservice ændres ikke.
 
-Opsamlingen er fortsat planlagt, og arbejdet stopper efter denne levering af Modul 3.
+Efter Modul 3 bad brugeren om opsamlingen og om opdatering af statusoverblikket i pointshoppen. Den levering beskrives nedenfor.
+
+
+## Opsamling og pointshop · implementering 6. november 2026
+
+### Fagligt grundlag
+
+Der er ikke et særskilt opsamlingsark. Læseplanens side 3 og undervisningsbeskrivelsens side 7 er genlæst for rækkefølge, U1–U5 og K1–K4. De tre oprindelige Word-ark er genudtrukket strukturelt med Office Math. Ark 1 P17 (cirkel med centrum −2 og 3, radius fem og vinkel 3t) og ark 3 P126/P142 (u2 og u4) er kontrolleret direkte i XML med koordinatgrænser, fortegn og eksponenter bevaret. De øvrige opsamlingsspørgsmål er egne nye eksempler, som repeterer det eksisterende stof. De er ikke et officielt eksamenssæt eller en ekstra undervisningsgang.
+
+De nye numeriske resultater er verificeret med højpræcisionskvadratur samt uafhængig midpoint-kvadratur og bisektion i testene. Testene evaluerer faktisk vist MathML separat:
+
+| Model | Kontrolleret resultat |
+| --- | --- |
+| Kast: 5t; −2t²+8t+1 | Første positive landing 4,1213203436 s; rækkevidde 20,6066017178 m; banelængde 27,8437419216 m. |
+| Største afstand: t; 6t−t², fra nul til seks | Største højde ni ved tre; største afstand 9,5147458593 ved 3,1771243445. Alle indre kandidater og begge randpunkter sammenlignes. |
+| Ark 3 u2: t³−2t; t² | Punktet (4;4) har parameter to og hastighed (10;4). Den givne linje går gennem punktet og har parallel retning. Kurvelængde fra nul til to er 7,6674666347. |
+| Ark 3 u4: t²; t³−t+1 | Parametrene minus én og én giver (1;1), hastigheder (−2;2) og (2;2), tangentvinkel 90 grader. Svar kontrolleres i forskriften. |
+| Ark 1 cirkel | Centrum (−2;3), radius fem, fart 15 og ét omløb på intervallet nul til to tredjedele pi; areal 25 gange pi. |
+| Interaktiv egen model: 2t; 4t−t² | På nul til fire er banelængden 11,8315428604, endepunktsafstanden otte og højden størst fire ved to. Lukning langs førsteaksen giver orienteret bidrag minus 64 tredjedele og geometrisk areal 64 tredjedele. |
+
+### Undervisning og mål
+
+Otte trin indeholder seks diagnostiske spørgsmål, seks guidede mikroøvelser, 16 blandede bankopgaver og seks nye sluttjek: 34 kort, heraf 28 obligatoriske. Alle trin er direkte adresserbare og tastaturbetjente. Metodevalg trænes med samme model og seks forskellige spørgsmål i en beregnet SVG-figur med lige akseenheder og et fuldt tekstalternativ. Gennemregnede eksempler, modelkritik, flertrins-hints, specifik fejlfeedback, delpoint og egne CAS-noter følger appens fælles komponenter. Frie begrundelser og faktisk ekstern værktøjsbrug selvvurderes.
+
+| Opsamlingsmål | Introduceres | Øves | Kontrolleres | Mål i det samlede forløb |
+| --- | --- | --- | --- | --- |
+| Parameter, punkter og baner | Starttjek og værktøjskasse | position, axes, passages, source-circle | final.position og svar i begge koordinater | K1, A1–A5, A7–A9 |
+| Hastighed, acceleration og tangenter | Starttjek og værktøjskasse | tangent, zero, angles, passages, source-route | final.motion og særskilte delspørgsmål | K2, A11–A14 |
+| Baneskæring og samtidig kollision | Starttjek og gennemregnet møde | clocks og mini.meeting | final.meeting og fysisk tid i begge modeller | A6, U1, U4 |
+| Monotoni og optimering | Starttjek, værktøjskasse og figur | stationary, window, farthest | final.optimize, alle kandidater og randpunkter | A15, B12–B13a |
+| Længde, areal og afgrænsning | Starttjek, kildeformel og figur | journey, turns, regions, flight, source-route | final.measure, multiple omløb og geometriske delarealer | A16–A18, U1, U5 |
+| Modeller, enheder og CAS-kontrol | Værktøjskasse og dokumentation | flight, farthest, source-route og refleksionsrapporter | final.tools og konkrete modelresultater; faktisk CAS og fritekst selvvurderes | K3–K4, A10, A19, U2–U4 |
+
+Opsamlingen gennemføres kun ved alle 28 korrekt kontrollerede aktiviteter. Svarredigering trækker aktiv gennemførelse tilbage. Seks faglige delstatusser viser målrettede links til tidligere grundlag. De tre moduler og B-repetitionen bevarer egne svar, noter og status. Forløbets nævner er fortsat fire undervisningsgange; opsamlingen tælles særskilt.
+
+### Pointshop, bank og databevaring
+
+Pointoverblikket i butikken har et nyt statusafsnit for alle fem vektorafsnit, inklusive Modul 3 og opsamlingen. Status og antal kommer direkte fra de eksisterende undervisningscontrolleres aktuelle bedømmelse via vector-progress.js. Der etableres ingen separat kopi af brugerens besvarelser eller ny vurderingsregel. Svarredigering opdaterer overblikket straks; genindlæsning og en anden enhed genopbygger det fra de gemte kontosvar. Optjente point og den aktuelle læringsstatus vises som forskellige størrelser.
+
+Nye namespaces er christian-matematik.vector.finish.v1 og christian-matematik.vector.finish-notes.v1. Historikken angiver Vektorfunktioner, Opsamling og præcis trinrute. 16 nye faste version 1-opgaver har præfiks vfend. og modul vf.opsamling: position, axes, passages, clocks, tangent, zero, angles, stationary, window, journey, turns, regions, flight, farthest, source-route og source-circle. De virker i træning og prøvesæt med eksisterende kontrakt og korrekt genbesøgslink. Alle tidligere 477 opgaver og deres versioner/genoptagelse er bevaret; samlet bank 493.
+
+Pointshoppens summering, køb, priser, historiske point og database er uændret. De nye statusrækker er kun en præsentation af den aktuelle fremdrift; der slettes eller genberegnes ingen point og køb. Eksisterende data og separate standalone-filer bevares.
+
+### Verifikation og udgivelse
+
+- Syv nye matematiske/bank/rute/status-tests består; npm test består med 160 tests.
+- Ny kontobrowsertest består med alle 34 svar, hints/noter, anden enhed, brugeradskillelse, tidligere Modul 1/2/repetitions/Modul 3-svar og noter samt genoptagelse efter gemmefejl. Den midlertidige elev har 41 historiske point, køber for 40 og beholder restsaldo én, køb og pointoverblik efter svarredigering.
+- Ny browsertest kontrollerer alle 34 kort, 16 bankopgaver, otte ruter, seks delstatusser, interaktivt metodevalg, pointshopstatus og tilbagekaldelse, MathML, labels, tastatur og 390 pixels.
+- Billedkontrol af desktop og mobil er gennemført. Slutkontrollen af pointshoppen viser korrekt status for Modul 3 og opsamlingen, entydig opsamlingslabel, læsbare rækker ved 390 pixels og ingen sidefejl.
+
+| Kontrol | Resultat |
+| --- | --- |
+| npm test | 160 af 160 tests består, heraf syv nye til opsamlingen |
+| Filerne i test:browser | Alle 31 browserforløb består efter rettelse af ruteforventninger og separat genkørsel |
+| Filerne i test:accounts:browser | Alle 15 kontoforløb består |
+| test:accounts | Én PostgreSQL/API-test består |
+| test:shop, test:bank-rewards, test:tutor og test:guide | 16 supplerende tests og fire browserforløb består |
+| npm run build | Rent build består: 493 opgaver, 34 opsamlingskort og 28 obligatoriske kontroller verificeret i det byggede artefakt |
+| JavaScript/CSS i build | Alle 18 berørte appfiler er identiske med den testede kildeversion |
+| Tastatur, MathML, 390 pixels og konsol | Alle nye trin og bankopgaver består; ingen JavaScript-/konsolfejl |
+
+Filerne fra de fulde pakkescripts køres i midlertidige kildekopier med samme låste afhængigheder. Kontotests har separate builds og isolerede PGlite-databaser. To tidligere rutetests er opdateret fra den planlagte opsamlingsadresse til den nu implementerede kanoniske startrute. Den første parallelle browserkørsel ramte desuden tidsgrænser i fire uændrede forløb; alle seks berørte testfiler består efter genkørsel med højst to samtidige browsere. Der ændres ingen testtidsgrænser eller produktionsfunktioner for at omgå disse kontroller. Ingen testdata, køb eller migreringer peger mod produktion.
+
+Udgivelsen følger AGENTS.md via codex/vektorfunktioner-opsamling til main og Vercel. Hele Git-status gennemgås, og alle nødvendige appfiler medtages. Production-status og berørte filer på produktionsadressen kontrolleres efter push. Railway-database, volumen og den bevidst frakoblede appservice ændres ikke.

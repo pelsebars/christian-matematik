@@ -117,3 +117,5 @@ window.addEventListener('account-progress',render);
 window.addEventListener('mathviewchange',event=>{renderToolbar();if(event.detail.view==='shop'){render();load();}});
 window.addEventListener('focus',()=>{if(!root.hidden&&!busy)load();});
 renderToolbar();if(!root.hidden){render();load();}
+
+window.addEventListener('vector-progress',render);

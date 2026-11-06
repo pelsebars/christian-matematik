@@ -11,6 +11,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "vf.opsamling": {topic:"vectorFunctions",name:"Opsamling",section:"vector-module-opsamling"},
   "ode.repetition": {topic:"differentialEquations",name:"B-repetition 8–9: Logaritmer og binomialfordeling",section:"ode-module-repetition"},
   "ode.opsamling": {topic:"differentialEquations",name:"Opsamling: blandede opgaver og metodevalg",section:"ode-module-opsamling"},
   "ode.6": {topic:"differentialEquations",name:"Logistisk vækst",section:"ode-module-6"},
@@ -86,6 +87,12 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  "vfend.position": {module:"vf.opsamling",text:"Parameter, punkter, akser og banekurver"},
+  "vfend.motion": {module:"vf.opsamling",text:"Hastighed, fart, acceleration, tangenter og vinkler"},
+  "vfend.meeting": {module:"vf.opsamling",text:"Baneskæring og samtidig kollision"},
+  "vfend.optimize": {module:"vf.opsamling",text:"Monotoni, kandidater, randpunkter og optimering"},
+  "vfend.measure": {module:"vf.opsamling",text:"Kurvelængde, areal, lukning og gennemløb"},
+  "vfend.tools": {module:"vf.opsamling",text:"Modelinterval, enheder, dokumenteret CAS og kontrol"},
   "vf3.speed": {module:"vf.3",text:"Beregne ikke-negativ fart som hastighedsvektorens længde"},
   "vf3.length": {module:"vf.3",text:"Integrere fart til rutelængde"},
   "vf3.units": {module:"vf.3",text:"Bevare parameter- og koordinatenheder"},

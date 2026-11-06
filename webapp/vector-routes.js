@@ -3,14 +3,16 @@ export const vectorSteps=[['start','Mål og starttjek'],['parameter','Parameter 
 export const dynamicsSteps=[['start','Mål og starttjek'],['afledte','Koordinatvis differentiation'],['bevaegelse','Hastighed, fart og acceleration'],['tangenter','Tangentens ligning'],['akser','Vandret, lodret og nulvektor'],['vinkler','Vektorer og tangentvinkler'],['dobbeltpunkt','To hastigheder i ét punkt'],['hoejde','Maksimal højde og interval'],['vaerktoej','CAS og dokumentation'],['oevelser','Prøv selv'],['eksamen','Sammenhængende opgaver'],['sluttjek','Sluttjek'],['opsummering','Fast arbejdsmetode']];
 export const repetitionSteps=[['start','To spor og starttjek'],['monotoni','B12 · Funktion og afledt'],['stationaere','B12 · Stationære punkter'],['globale','B12 · Globale ekstrema'],['model','B13 · Fra tekst til funktion'],['hoejde','B13 · Største højde'],['afstand','B13 · Afstand til et sted'],['vaerktoej','CAS og dokumentation'],['oevelser','Prøv selv'],['eksamen','Sammenhængende opgaver'],['sluttjek','To selvstændige sluttjek'],['opsummering','Status og arbejdsmetode']];
 export const measureSteps=[['start','Mål og starttjek'],['fart','Fart som vektorlængde'],['laengde','Integral af farten'],['interval','Interval og gennemløb'],['areal','Tværvektor og arealformel'],['orientering','Orientering og fortegn'],['loekker','Løkker og afgrænsning'],['modeller','Modeller og enheder'],['vaerktoej','CAS og numerisk kontrol'],['oevelser','Prøv selv'],['eksamen','Sammenhængende opgaver'],['sluttjek','Sluttjek'],['opsummering','Fast arbejdsmetode']];
-export const vectorImplemented=['1','2','repetition','3'];
-export const stepsForVectorModule=module=>({'1':vectorSteps,'2':dynamicsSteps,'repetition':repetitionSteps,'3':measureSteps}[module]||[]);
+export const vectorFinishSteps=[['start','Mål og starttjek'],['overblik','Din værktøjskasse'],['metode','Vælg fremgangsmåde'],['uden','Blandet uden hjælpemidler'],['med','Blandet med hjælpemidler'],['modelkontrol','Vurder konklusioner'],['sluttjek','Forståelsestjek'],['opsummering','Din status og næste skridt']];
+export const vectorImplemented=['1','2','repetition','3','opsamling'];
+export const stepsForVectorModule=module=>({'1':vectorSteps,'2':dynamicsSteps,'repetition':repetitionSteps,'3':measureSteps,'opsamling':vectorFinishSteps}[module]||[]);
 export const vectorRoute=(module='',step='')=>['vectorFunctions',module,step].filter(Boolean).join('/');
 export const pagesForVectorModule=module=>stepsForVectorModule(module).map(([id])=>vectorRoute(module,id));
 export const vectorPages=pagesForVectorModule('1');
 export const dynamicsPages=pagesForVectorModule('2');
 export const repetitionPages=pagesForVectorModule('repetition');
 export const measurePages=pagesForVectorModule('3');
+export const vectorFinishPages=pagesForVectorModule('opsamling');
 export function parseVectorRoute(hash){
  const [topic,requested,step]=hash.replace(/^#/,'').split('/');if(topic!=='vectorFunctions')return null;
  const module=vectorModules.some(m=>m.id===requested)?requested:'',steps=stepsForVectorModule(module);

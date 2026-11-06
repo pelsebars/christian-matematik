@@ -61,8 +61,8 @@ test('all new contracts, partial points, rounded answers and specific feedback a
  assert.deepEqual(gradeTask(get('constant'),{speed:'5',length:'15'}).map(p=>p.points),[1,0]);assert.match(targetedFeedback(get('constant'),get('constant').parts[0],'7'),/lagt komponenterne sammen/);assert.match(targetedFeedback(get('backtrack'),get('backtrack').parts[0],'3'),/forskydningens længde/);assert.match(targetedFeedback(get('cancellation'),get('cancellation').parts[1],'zero'),/udligning/);
  for(const t of bank.filter(t=>t.module!=='vf.3')){const old=instantiate(t.id,'retained');assert.deepEqual(instantiate(t.id,'retained',old.version),old);}
 });
-test('module 3 routes, required controls and catalog filter leave only the recap planned',()=>{
- assert.deepEqual(vectorImplemented,['1','2','repetition','3']);assert.equal(measurePages.length,13);for(const p of measurePages)assert.equal(parseVectorRoute('#'+p).path,p);assert.equal(parseVectorRoute('#vectorFunctions/3/unknown').path,'vectorFunctions/3/start');assert.equal(parseVectorRoute('#vectorFunctions/opsamling').path,'vectorFunctions/opsamling');
+test('module 3 routes, required controls and catalog filter keep the recap separate from teaching sessions',()=>{
+ assert.deepEqual(vectorImplemented,['1','2','repetition','3','opsamling']);assert.equal(measurePages.length,13);for(const p of measurePages)assert.equal(parseVectorRoute('#'+p).path,p);assert.equal(parseVectorRoute('#vectorFunctions/3/unknown').path,'vectorFunctions/3/start');assert.equal(parseVectorRoute('#vectorFunctions/opsamling').path,'vectorFunctions/opsamling/start');
  for(const t of measureLessonTasks)assert.ok(measurePages.includes('vectorFunctions/3/'+measureTaskStep(t)),t.id);assert.ok(measureRequired.every(t=>!t.id.includes('.pre.')));
  const set=composeSet({topics:['vectorFunctions'],onlyCompleted:true,completed:['vf.3','vf.1','vf.2','int.3'],minutes:500,distribution:{short:50,medium:50,complex:50}});assert.equal(set.tasks.filter(t=>t.module==='vf.3').length,20);
  for(const g of vectorGoals.filter(g=>/^A1[6-9] /.test(g[0])))assert.doesNotMatch(g.join(' '),/planlagt/);
