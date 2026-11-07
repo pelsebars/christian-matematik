@@ -21,7 +21,7 @@ try {
       const page = await browser.newPage(), errors = [];
       page.on('pageerror', error => errors.push(error.message));
       await page.goto(`http://127.0.0.1:${server.address().port}/?preview=1#normalDistribution/1/start`);
-      await page.locator('html[data-sidebar-navigation=ready]').waitFor();
+      await page.locator('.personal-overview').waitFor({ state:'attached' });
       assert.ok(await page.locator('*').count() < 10000, 'Inactive lessons stay outside the live document');
       const go = path => page.evaluate(path => window.showMathView(path), path);
       const card = page.locator('[data-int-card="norm.pre.percent"]');
@@ -67,7 +67,7 @@ try {
       await card.locator('button[type=submit]').click();
       assert.equal(await card.evaluate(el => el.classList.contains('is-correct')), true);
       await page.reload();
-      await page.locator('html[data-sidebar-navigation=ready]').waitFor();
+      await page.locator('.personal-overview').waitFor({ state:'attached' });
       assert.equal(await card.locator('input').inputValue(), '0,25');
       assert.equal(await card.evaluate(el => el.classList.contains('is-correct')), true);
       assert.deepEqual(errors, []);
@@ -88,7 +88,7 @@ try {
   await page.locator('#accountPassword').fill('local-workspace-test-password');
   await page.locator('#repeatPassword').fill('local-workspace-test-password');
   await page.locator('#accountSubmit').click();
-  await page.locator('html[data-sidebar-navigation=ready]').waitFor();
+  await page.locator('.personal-overview').waitFor({ state:'attached' });
   const go = path => page.evaluate(path => window.showMathView(path), path);
   const flush = () => page.evaluate(async () => (await import('/account/store.js')).flush());
   const data = () => page.evaluate(async () => (await fetch('/api/learning')).json());
@@ -121,7 +121,7 @@ try {
   assert.equal(saved.rewardPoints, 2);
   assert.equal(saved.completions.length, 2);
   await page.reload();
-  await page.locator('html[data-sidebar-navigation=ready]').waitFor();
+  await page.locator('.personal-overview').waitFor({ state:'attached' });
   await go('normalDistribution/1/start');
   assert.equal(await first.locator('input').inputValue(), '0,25');
   assert.equal(await first.locator('.int-hints p').count(), 1);
