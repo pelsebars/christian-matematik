@@ -339,6 +339,7 @@ root.addEventListener("click", (event) => {
     s = state.session;
   if (action === "repeat-module") {
     const m = modules[b.dataset.module];
+    if (m.topic === "trigonometry" && window.openTrigSection) { window.openTrigSection(m.section); return; }
     if (m.topic === "vectorFunctions" && window.openVectorSection) {
       window.openVectorSection(m.section);
       return;

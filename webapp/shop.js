@@ -119,3 +119,5 @@ window.addEventListener('focus',()=>{if(!root.hidden&&!busy)load();});
 renderToolbar();if(!root.hidden){render();load();}
 
 window.addEventListener('vector-progress',render);
+
+window.addEventListener('trig-progress',render);

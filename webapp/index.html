@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="./shop.css" />
     <link rel="stylesheet" href="./guide.css" />
     <link rel="stylesheet" href="./skins.css" />
+    <link rel="stylesheet" href="./trig.css">
   </head>
   <body>
     <main id="accountLanding" class="account-landing">
@@ -175,6 +176,7 @@
           </div>
           <div class="nav-divider" aria-hidden="true"></div>
 
+<div class="nav-group" data-nav-group="trigonometry"><div class="nav-group-row"><button class="nav-item" type="button" data-view="trigonometry"><span class="nav-number" aria-hidden="true">10</span><span>Trigonometriske funktioner</span></button><button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-trigonometry"><span class="sr-only">Vis moduler i Trigonometriske funktioner</span><span class="nav-chevron" aria-hidden="true"></span></button></div><div class="nav-submenu" id="nav-modules-trigonometry" hidden><a href="#trigonometry/1/start"><span>M1</span>Sinus og harmoniske svingninger</a><a href="#trigonometry/2/start"><span>M2</span>Trigonometriske ligninger</a></div></div>
           <button class="nav-item" type="button" data-view="tasks">
             <span class="nav-symbol" aria-hidden="true">✓</span>
             <span>Opgaver</span>
@@ -314,6 +316,7 @@
             <button class="topic-card topic-card--green" type="button" data-view="differentialEquations"><span class="card-index">07 · Differentialligninger</span><span class="formula-preview"><math><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>=</mo><mn>2</mn><mi>x</mi></mrow></math></span><span class="card-title">Differentialligninger</span><span class="card-description">Fra ændringshastighed til løsningskurve. Modul 1–6, B-repetition 8–9 og den afsluttende opsamling er åbne.</span><span class="card-action">Åbn forløbet</span></button>
             <button class="topic-card topic-card--cyan" type="button" data-view="normalDistribution"><span class="card-index">08 · Normalfordeling</span><span class="formula-preview"><math><mrow><mi>X</mi><mo>∼</mo><mi>N</mi><mo>(</mo><mi>μ</mi><mo>;</mo><mi>σ</mi><mo>)</mo></mrow></math></span><span class="card-title">Normalfordeling</span><span class="card-description">Fra målinger til sandsynligheder og statistisk analyse. Modul 1–5 og B-repetition 10–11 er åbne. Den afsluttende opsamling er også åben.</span><span class="card-action">Åbn forløbet</span></button>
             <button class="topic-card topic-card--blue" type="button" data-view="vectorFunctions"><span class="card-index">09 · Vektorfunktioner</span><span class="formula-preview"><math><mrow><mover><mi>r</mi><mo>→</mo></mover><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mo>(</mo><mtable><mtr><mtd><mi>x</mi><mo>(</mo><mi>t</mi><mo>)</mo></mtd></mtr><mtr><mtd><mi>y</mi><mo>(</mo><mi>t</mi><mo>)</mo></mtd></mtr></mtable><mo>)</mo></mrow></math></span><span class="card-title">Vektorfunktioner</span><span class="card-description">Modul 1 og 2 er åbne. Undersøg baner, hastighed, fart, acceleration og tangenter.</span><span class="card-action">Åbn forløbet</span></button>
+            <button class="topic-card topic-card--cyan" type="button" data-view="trigonometry"><span class="card-index">10 · Trigonometriske funktioner</span><span class="formula-preview"><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></span><span class="card-title">Trigonometriske funktioner</span><span class="card-description">To moduler: sinus, cosinus, harmoniske svingninger og ligninger. Undersøg grafer og træn med modeller.</span><span class="card-action">Åbn forløbet</span></button>
           </div>
 
           <section class="path-panel" aria-labelledby="pathHeading">
@@ -374,6 +377,7 @@
           <div class="lesson-content" id="odeLesson" hidden></div>
           <div class="lesson-content" id="normalLesson" hidden></div>
           <div class="lesson-content" id="vectorLesson" hidden></div>
+          <div class="lesson-content" id="trigLesson" hidden></div>
 
           <div class="lesson-content" id="equationLesson" hidden>
             <nav class="lesson-nav" aria-label="Indhold i Ligninger">

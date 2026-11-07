@@ -1,3 +1,4 @@
+import {parseTrigRoute} from '../trig-plan.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -41,7 +42,7 @@ test('all published references resolve to real teaching destinations and legacy 
  for(const card of guideCurriculum){
   if(card.section)assert.ok(html.includes(`id="${card.section}"`),card.id);
   if(!card.route)continue;
-  const parse=card.route.startsWith('normalDistribution/')?parseNormalRoute:card.route.startsWith('differentialEquations/')?parseOdeRoute:card.route.startsWith('vectorFunctions/')?parseVectorRoute:card.route.startsWith('integration/')?parseIntegralRoute:null;
+  const parse=card.route.startsWith('trigonometry/')?parseTrigRoute:card.route.startsWith('normalDistribution/')?parseNormalRoute:card.route.startsWith('differentialEquations/')?parseOdeRoute:card.route.startsWith('vectorFunctions/')?parseVectorRoute:card.route.startsWith('integration/')?parseIntegralRoute:null;
   if(parse)assert.equal(parse('#'+card.route).path,card.route,card.id);
   else assert.ok(['equations','quadratic','composite','differentiation','planeGeometry','formulas'].includes(card.route));
  }

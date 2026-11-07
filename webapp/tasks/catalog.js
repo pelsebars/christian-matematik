@@ -1,5 +1,6 @@
 import { integralModules } from "../integral-plan.js";
 export const topics = {
+  trigonometry: "Trigonometriske funktioner",
   vectorFunctions: "Vektorfunktioner",
   normalDistribution: "Normalfordeling",
   differentialEquations: "Differentialligninger",
@@ -11,6 +12,8 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  "trig.1": {topic:"trigonometry",name:"Cosinus og sinus · harmoniske svingninger",section:"trig-module-1"},
+  "trig.2": {topic:"trigonometry",name:"Trigonometriske ligninger",section:"trig-module-2"},
   "vf.opsamling": {topic:"vectorFunctions",name:"Opsamling",section:"vector-module-opsamling"},
   "ode.repetition": {topic:"differentialEquations",name:"B-repetition 8–9: Logaritmer og binomialfordeling",section:"ode-module-repetition"},
   "ode.opsamling": {topic:"differentialEquations",name:"Opsamling: blandede opgaver og metodevalg",section:"ode-module-opsamling"},
@@ -87,6 +90,7 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  ...Object.fromEntries([1,2].flatMap(m => Object.entries({start:"Kontrollere grundlag og vinkelmål",oevelser:m===1?"Bestemme og fortolke harmoniske svingninger":"Finde alle trigonometriske løsninger i et interval",modeller:"Opstille, beregne og kontrollere modeller med enheder",slut:"Anvende metoderne selvstændigt"}).map(([step,text]) => [`trig${m}.${step}`,{module:`trig.${m}`,text}]))),
   "vfend.position": {module:"vf.opsamling",text:"Parameter, punkter, akser og banekurver"},
   "vfend.motion": {module:"vf.opsamling",text:"Hastighed, fart, acceleration, tangenter og vinkler"},
   "vfend.meeting": {module:"vf.opsamling",text:"Baneskæring og samtidig kollision"},

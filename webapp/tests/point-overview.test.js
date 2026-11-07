@@ -21,7 +21,7 @@ test('Overview sums exact net awards without changing data, preserving fractiona
  assert.deepEqual(result,[{topic,points:4.5,solved:3},{topic:'unallocated',points:4,solved:0}]);
  const html=renderPointOverview({earnedPoints:8.5,pointOverview:result});
  assert.match(html,/8,5/);assert.match(html,/Blandede sæt og ældre point/);
- assert.equal((html.match(/Endnu ikke implementeret/g)||[]).length,3);
+ assert.equal((html.match(/Endnu ikke implementeret/g)||[]).length,2);
 });
 
 test('SQL overview respects account boundaries and offsets historical awards',async()=>{
