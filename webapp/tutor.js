@@ -2,6 +2,9 @@ import { accountStorage } from './account/store.js';
 const bindings = new WeakMap();
 let panel, active, opener, busy = false;
 const history = new Map();
+globalThis.window?.addEventListener('mathviewchange', () => {
+  document.querySelectorAll('.tutor-open').forEach(button => { button.disabled = busy; });
+});
 export function bindTutor(card, identity, getContext) {
   if (!card || bindings.has(card)) return;
   bindings.set(card, { identity, getContext });

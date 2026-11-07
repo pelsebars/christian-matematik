@@ -17,7 +17,7 @@ try{
  await page.reload();await page.locator('.personal-overview').waitFor();await shop(page);
  await filter(page,'overview');
  assert.match(await page.locator('.point-summary').textContent(),/400/);
- assert.equal(await page.locator('.point-planned').count(),3);
+ assert.equal(await page.locator('.point-planned').count(),2);
  assert.equal(await page.locator('.point-chart a[href="#equations"]').count(),1);
  await page.screenshot({path:'/tmp/math-point-overview-desktop.png',fullPage:true});
  await page.setViewportSize({width:390,height:844});

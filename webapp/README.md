@@ -114,3 +114,9 @@ Verifikation:
 Kilder til API-kontrakten:
 [OpenAI billedinput](https://developers.openai.com/api/docs/guides/images-vision) og
 [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs).
+
+### Browserydelse
+
+Kun det aktuelle forløb og modul ligger i det aktive dokument. `lesson-workspace.js` flytter de øvrige originale elementer til `DocumentFragment` og gendanner dem før forløbets navigationshandler; svar, hints, figurer og eventlyttere bevares. Alle moduler initialiseres fortsat fra kontodata, så forløbsstatus i overblik og butik er komplet. Indtastning opdaterer kun det ændrede svarfelts forhåndsvisning.
+
+`npm run test:workspace` tester WebKit og Chrome samt rigtig kontolagring i en isoleret database. Installér ved behov WebKit med `npx playwright install webkit`; Chrome bruges fra den lokale installation. Testen kontrollerer også, at navigation under en ventende gemning bevarer svar og point uden dobbelttildeling.

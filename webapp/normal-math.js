@@ -10,7 +10,11 @@ export const leftEvent = bound => X + op('≤') + bound;
 export const rightEvent = bound => X + op('≥') + bound;
 export const betweenEvent = (a,b) => a + op('≤') + X + op('≤') + b;
 export const densityFormula = (mean=mu,sd=sigma) => frac(n(1),'<msqrt>'+n(2)+mi('π')+'</msqrt>'+op('·')+sd)+op('·')+exp(op('−')+frac(n(1),n(2))+op('·')+power(frac(x+op('−')+mean,sd),2));
-export const fmt = (value,digits=4) => Number(value).toLocaleString('da-DK',{maximumFractionDigits:digits,minimumFractionDigits:digits});
+const numberFormats = new Map();
+export const fmt = (value,digits=4) => {
+ if(!numberFormats.has(digits))numberFormats.set(digits,new Intl.NumberFormat('da-DK',{maximumFractionDigits:digits,minimumFractionDigits:digits}));
+ return numberFormats.get(digits).format(Number(value));
+};
 function parameters(mean,sd){if(!Number.isFinite(mean)||!Number.isFinite(sd)||sd<=0)throw RangeError('Middelværdi skal være endelig, og spredningen skal være positiv.');}
 const validBound=value=>{if(typeof value!=='number'||Number.isNaN(value))throw RangeError('Grænsen skal være et tal.');};
 export function pdf(value,mean=0,sd=1){parameters(mean,sd);validBound(value);return Math.exp(-.5*((value-mean)/sd)**2)/(sd*Math.sqrt(2*Math.PI));}

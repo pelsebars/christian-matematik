@@ -30,6 +30,15 @@ export function bindLessonExercises(root, tasks, key, onProgress, helpId) {
  for (const t of tasks) {
   const el = root.querySelector(`[data-int-card="${t.id}"]`), form = el.querySelector('form');
   const d = state[t.id] ??= { answers: {}, checked: false, hints: 0 };
+  const fields = new Map(t.parts.map(p => [p.id, {
+   input: form.elements.namedItem(p.id),
+   preview: el.querySelector(`[data-preview="${p.id}"]`),
+   feedback: el.querySelector(`[data-feedback="${p.id}"]`),
+  }]));
+  const updatePreview = p => {
+   const field = fields.get(p.id);
+   if (field.preview) field.preview.innerHTML = answerPreviewMath(d.answers[p.id] ?? '');
+  };
   bindTutor(el, `${key}:${t.id}:v${t.version || 1}`, () => taskContext(t, d.answers, d.hints));
   t.parts.filter(p => p.type === 'choice').forEach(p => {
    const sel = form.elements.namedItem(p.id); p.options.forEach((o, i) => { sel.options[i + 1].textContent = `Mulighed ${i + 1}`; });
@@ -37,9 +46,9 @@ export function bindLessonExercises(root, tasks, key, onProgress, helpId) {
   });
   function display() {
    for (const p of t.parts) {
-    const v = d.answers[p.id] ?? ''; form.elements.namedItem(p.id).value = v;
-    const preview = el.querySelector(`[data-preview="${p.id}"]`); if (preview) preview.innerHTML = answerPreviewMath(v);
-    const feedback = el.querySelector(`[data-feedback="${p.id}"]`); feedback.replaceChildren();
+    const v = d.answers[p.id] ?? ''; fields.get(p.id).input.value = v;
+    updatePreview(p);
+    const feedback = fields.get(p.id).feedback; feedback.replaceChildren();
     if (d.checked) {
      const r = gradePart(p, v); feedback.textContent = r.status === 'incorrect' ? targetedFeedback(t, p, v) : r.message;
      feedback.className = `int-feedback ${r.status}`;
@@ -50,7 +59,18 @@ export function bindLessonExercises(root, tasks, key, onProgress, helpId) {
    el.querySelector('.int-hints').innerHTML = t.hints.slice(0, d.hints).map((h, i) => `<p><strong>Hint ${i + 1}:</strong> ${h}</p>`).join('');
    const b = el.querySelector('[data-int-hint]'); b.disabled = d.hints >= t.hints.length; b.textContent = b.disabled ? 'Alle hints er vist' : 'Vis næste hint';
   }
-  form.addEventListener('input', () => { for (const p of t.parts) d.answers[p.id] = form.elements.namedItem(p.id).value; d.checked = false; display(); onProgress(complete); save(); });
+  form.addEventListener('input', event => {
+   const part = t.parts.find(p => fields.get(p.id).input === event.target);
+   if (!part) return;
+   d.answers[part.id] = event.target.value;
+   // Editing invalidates the checked result. Don't rewrite the focused input
+   // or rebuild the other previews, hints and feedback on every keystroke.
+   if (d.checked) for (const { feedback } of fields.values()) { feedback.replaceChildren(); feedback.className = ''; }
+   d.checked = false;
+   el.classList.remove('is-correct');
+   updatePreview(part);
+   onProgress(complete); save();
+  });
   form.addEventListener('submit', e => { e.preventDefault(); d.checked = true; display(); onProgress(complete); save(); if(complete(t))markCorrect(key,lessonCompletion(key,t)); });
   el.querySelector('[data-int-hint]').addEventListener('click', () => { d.hints = Math.min(t.hints.length, d.hints + 1); display(); save(); });
   el.querySelector('[data-int-retry]').addEventListener('click', () => { d.answers = {}; d.checked = false; d.hints = 0; el.querySelector('details').open = false; display(); onProgress(complete); save(); form.elements[0].focus(); });

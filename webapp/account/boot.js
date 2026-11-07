@@ -1,6 +1,7 @@
 import { formatRewardPoints } from '../reward-points.js';
 import { ready, user, startupError, preview, accountStorage, completions, rewardPoints, flush, hasConflict, reopenSavedVersion } from './store.js';
 import { escapeHTML as esc } from '../tasks/math.js';
+import { parkInactiveLesson } from '../lesson-workspace.js';
 const landing = document.querySelector('#accountLanding'), shell = document.querySelector('.app-shell');
 const form = document.querySelector('#accountForm'), message = document.querySelector('#accountMessage');
 let mode = 'login';
@@ -74,13 +75,28 @@ if (!user && !preview) {
   });
   // Initial state must be loaded before any lesson binds its forms.
   await new Promise((resolve, reject) => { const script = document.createElement('script'); script.src = './app.js'; script.onload = resolve; script.onerror = reject; document.head.append(script); });
-  await import('../tasks/ui.js'); await import('../integral.js'); await import('../ode.js'); await import('../normal.js'); await import('../vector.js'); await import('../trig.js');
+  await import('../tasks/ui.js');
+  for (const [file, view, selector, modules] of [
+    ['integral', 'integration', '#integralLesson'],
+    ['ode', 'differentialEquations', '#odeLesson', { 1:'ode-module-one', 2:'ode-module-two', 3:'ode-module-three', repetition:'ode-module-review', 4:'ode-module-four', 5:'ode-module-five', 6:'ode-module-six', opsamling:'ode-module-finish' }],
+    ['normal', 'normalDistribution', '#normalLesson', { 1:'normal-module-one', 2:'normal-module-two', 3:'normal-module-three', repetition:'normal-repetition', 4:'normal-module-four', 5:'normal-module-five', opsamling:'normal-course-finish' }],
+    ['vector', 'vectorFunctions', '#vectorLesson', { 1:'vector-module-one', 2:'vector-module-two', repetition:'vector-module-repetition', 3:'vector-module-three', opsamling:'vector-module-finish' }],
+    ['trig', 'trigonometry', '#trigLesson', { 1:'trig-module-1', 2:'trig-module-2' }],
+  ]) {
+    await import(`../${file}.js`);
+    parkInactiveLesson(view, selector, modules);
+  }
   await import('../sidebar.js');
   await import('../shop.js');
   await import('../guide.js');
   await import('./legacy.js');
   const { bindLegacyTutors } = await import('../tutor.js');
   bindLegacyTutors();
+  for (const [view, selector] of [
+    ['equations', '#equationLesson'], ['quadratic', '#quadraticLesson'],
+    ['composite', '#compositeLesson'], ['differentiation', '#differentiationLesson'],
+    ['planeGeometry', '#planeGeometryLesson'],
+  ]) parkInactiveLesson(view, selector);
   const dashboard = document.createElement('section'); dashboard.className = 'personal-overview';
   document.querySelector('[data-page="home"]').prepend(dashboard);
   const labels = { trigonometry: 'Trigonometriske funktioner', equations: 'Ligninger', quadratic: 'Andengradsligninger', composite: 'Sammensatte funktioner', differentiation: 'Differentialregning', planeGeometry: 'Plangeometri og vektorer', integration: 'Integralregning', differentialEquations: 'Differentialligninger', normalDistribution: 'Normalfordeling', vectorFunctions: 'Vektorfunktioner' };
