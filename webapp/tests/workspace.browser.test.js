@@ -45,6 +45,7 @@ try {
         ['differentialEquations/2/start', '#ode-module-two [data-int-card]'],
         ['vectorFunctions/3/start', '#vector-module-three [data-int-card]'],
         ['trigonometry/2/start', '#trig-module-2 [data-int-card]'],
+        ...[1,2,3,4].map(id=>[`twoVariables/${id}/start`, `#two-module-${id} [data-int-card]`]),
         ['integration/2/start', '#integralLesson'],
         ['equations', '#equationLesson .exercise-card'],
         ['planeGeometry', '#planeGeometryLesson'],

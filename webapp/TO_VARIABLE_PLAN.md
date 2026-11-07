@@ -24,3 +24,12 @@ Modul 1: commit a02f8ed, Vercel success, otte centrale produktionsfiler sammenli
 14 opgaver: andenordensafledte, blandede afledte, ligningssystemer, stationære punkters tre koordinater, D-testen, parametre, flader med flere stationære punkter og chipsens saddelpunkt. Interaktivt trådnet for ax²+by² med akser og snittabel. Testen håndterer D=0 uden at påstå en klassifikation. Numeriske første- og andenordensafledte verificerer opgavepunkterne uafhængigt.
 
 Modul 2: commit 3dc4788, Vercel success, fem centrale produktionsfiler sammenlignet med Git. Produktionsfrontendens browserkontrol indlæser de faktiske Vercel-filer, men sender samtlige API-kald til en isoleret lokal testdatabase, så produktionsdata bevares.
+
+## Modul 4 og samlet forløb
+14 opgaver: modelreduktion, åben kasse, positive dimensioner, randmaksimum, saddelkontrol, kasseskelet, fuglebur, hønsegård, snitligninger og globalt minimum med AM–GM. Interaktivt arealkort med fast rumfang og sammenligningstabel. Modellerne er kontrolleret mod de oprindelige materiale-/rumfangsbetingelser og uafhængige numeriske afledte.
+
+Alle fire moduler er åbne: 58 opgaver i både undervisning og opgavebank. Pointbutikken viser fire statusrækker. Inaktive moduler parkeres uden for dokumentet efter samme mønster som de andre forløb.
+
+Slutvalidering før modul 4: 172 tests i hovedpakken bestået; fem vejledertests og tre pointoverblikstests bestået; butikstest bestået. Browserkontrollen løser alle 58 opgaver og kontrollerer kontoadskillelse, genindlæsning, vedvarende point, bankbelønning, noter, status, labels, mobilbredde og interaktive figurer. Workspace-testen består i Chrome og WebKit, inklusive alle fire nye modulruter; WebKit-kontotesten bevarer svar og point ved navigation og genindlæsning.
+
+Modul 3: commit 72f30d9, Vercel success, seks centrale produktionsfiler sammenlignet med Git, produktionsfrontendens isolerede browserkontrol bestået for tre moduler.

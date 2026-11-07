@@ -42,3 +42,19 @@ test('Stationary classification covers minima, maxima, saddles and inconclusive 
  const cases=[['two3.minimum',(x,y)=>x*x+y*y-4*y],['two3.saddle',(x,y)=>x*x-y*y+2*x*y+4*y],['two3.two-points',(x,y)=>x**3+3*x*y-y*y],['two3.chip',(x,y)=>1-x*x/9+y*y/4],['two3.final',(x,y)=>x*x-y*y-4*x*y+10*y]];
  for(const [id,f] of cases){const task=twoTasks.find(t=>t.id===id);if(!task)continue;const [x,y,z]=task.parts.map(p=>+p.answer),h=1e-4;assert.ok(Math.abs(f(x,y)-z)<1e-8,id);assert.ok(Math.abs((f(x+h,y)-f(x-h,y))/(2*h))<1e-6,id);assert.ok(Math.abs((f(x,y+h)-f(x,y-h))/(2*h))<1e-6,id);const xx=(f(x+h,y)-2*f(x,y)+f(x-h,y))/h**2,yy=(f(x,y+h)-2*f(x,y)+f(x,y-h))/h**2,xy=(f(x+h,y+h)-f(x+h,y-h)-f(x-h,y+h)+f(x-h,y-h))/(4*h*h);assert.equal(c(xx,yy,xy).kind,task.parts.find(p=>p.id==='kind').answer,id);}
 });
+
+test('Optimization satisfies original material constraints and global bounds',async()=>{
+ const {openBox}=await import('../two-math.js');
+ assert.equal(openBox(0,4),null);assert.equal(openBox(4,-1),null);assert.equal(openBox(Infinity,2),null);
+ assert.deepEqual(openBox(4,4),{height:2,area:48,dx:0,dy:0});
+ for(let i=1;i<=32;i++)for(let j=1;j<=32;j++){const x=i/4,y=j/4,b=openBox(x,y);assert.ok(Math.abs(x*y*b.height-32)<1e-10);assert.ok(b.area>=48-1e-10);}
+ if(!twoTasks.some(t=>t.id==='two4.skeleton'))return;
+ const get=id=>twoTasks.find(t=>t.id===id).parts.map(p=>+p.answer),near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,`${a} vs ${b}`);
+ const [area,x,y,h,max]=get('two4.skeleton');near(area,2*(20*30+20*75+30*75));near(4*(x+y+h),500);near(max,2*(x*y+x*h+y*h));
+ for(const [id,A,bottoms] of [['two4.bird',80,1],['two4.poultry',48,2]]){
+  const answers=get(id),[x,y,h,v]=id==='two4.bird'?answers:[2,4,answers[0],answers[1]];near(bottoms*x*y+(2*x+y)*h,A);near(x*y*h,v);
+  const f=(x,y)=>x*y*(A-bottoms*x*y)/(2*x+y),e=1e-4;near((f(x+e,y)-f(x-e,y))/(2*e),0);near((f(x,y+e)-f(x,y-e))/(2*e),0);
+  for(let i=1;i<=50;i++)for(let j=1;j<=50;j++){const a=i/4,b=j/4;if(bottoms*a*b<A)assert.ok(f(a,b)<=v+1e-8);}
+ }
+ const [a,b,c,d]=get('two4.final');near(a*b*c,108);near(a*b+2*a*c+2*b*c,d);near(openBox(a,b,108).dx,0);near(openBox(a,b,108).dy,0);
+});

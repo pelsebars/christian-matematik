@@ -81,7 +81,7 @@ if (!user && !preview) {
     ['ode', 'differentialEquations', '#odeLesson', { 1:'ode-module-one', 2:'ode-module-two', 3:'ode-module-three', repetition:'ode-module-review', 4:'ode-module-four', 5:'ode-module-five', 6:'ode-module-six', opsamling:'ode-module-finish' }],
     ['normal', 'normalDistribution', '#normalLesson', { 1:'normal-module-one', 2:'normal-module-two', 3:'normal-module-three', repetition:'normal-repetition', 4:'normal-module-four', 5:'normal-module-five', opsamling:'normal-course-finish' }],
     ['vector', 'vectorFunctions', '#vectorLesson', { 1:'vector-module-one', 2:'vector-module-two', repetition:'vector-module-repetition', 3:'vector-module-three', opsamling:'vector-module-finish' }],
-    ['two', 'twoVariables', '#twoLesson'],
+    ['two', 'twoVariables', '#twoLesson', {1:'two-module-1',2:'two-module-2',3:'two-module-3',4:'two-module-4'}],
     ['trig', 'trigonometry', '#trigLesson', { 1:'trig-module-1', 2:'trig-module-2' }],
   ]) {
     await import(`../${file}.js`);
