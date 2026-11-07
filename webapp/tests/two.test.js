@@ -34,3 +34,11 @@ test('Module 2 gradients agree with independent central differences, including q
  const cases=[['two2.quotient',(x,y)=>2*x*y/(x*x+y*y),1,2],['two2.bmi-rate',(x,y)=>x/y**2,90,1.8],['two2.final',(x,y)=>x*x-4*y*y+3*x*y,1,2],['two2.gradient',(x,y)=>x*x*y-3*x*y*y-2*y*y+1,1,2]];
  for(const [id,f,x,y] of cases){const a=twoTasks.find(t=>t.id===id).parts.map(p=>+p.answer),h=1e-5;assert.ok(Math.abs((f(x+h,y)-f(x-h,y))/(2*h)-a[0])<1e-6,id);assert.ok(Math.abs((f(x,y+h)-f(x,y-h))/(2*h)-a[1])<1e-6,id);}
 });
+
+
+test('Stationary classification covers minima, maxima, saddles and inconclusive cases',async()=>{
+ const {classifyStationary:c}=await import('../two-math.js');
+ assert.deepEqual(c(4,8,-1),{determinant:31,kind:'min'});assert.deepEqual(c(-2,-8,1),{determinant:15,kind:'max'});assert.deepEqual(c(2,-2,2),{determinant:-8,kind:'saddle'});assert.deepEqual(c(0,0,0),{determinant:0,kind:'unknown'});assert.equal(c(2,2,2).kind,'unknown');
+ const cases=[['two3.minimum',(x,y)=>x*x+y*y-4*y],['two3.saddle',(x,y)=>x*x-y*y+2*x*y+4*y],['two3.two-points',(x,y)=>x**3+3*x*y-y*y],['two3.chip',(x,y)=>1-x*x/9+y*y/4],['two3.final',(x,y)=>x*x-y*y-4*x*y+10*y]];
+ for(const [id,f] of cases){const task=twoTasks.find(t=>t.id===id);if(!task)continue;const [x,y,z]=task.parts.map(p=>+p.answer),h=1e-4;assert.ok(Math.abs(f(x,y)-z)<1e-8,id);assert.ok(Math.abs((f(x+h,y)-f(x-h,y))/(2*h))<1e-6,id);assert.ok(Math.abs((f(x,y+h)-f(x,y-h))/(2*h))<1e-6,id);const xx=(f(x+h,y)-2*f(x,y)+f(x-h,y))/h**2,yy=(f(x,y+h)-2*f(x,y)+f(x,y-h))/h**2,xy=(f(x+h,y+h)-f(x+h,y-h)-f(x-h,y+h)+f(x-h,y-h))/(4*h*h);assert.equal(c(xx,yy,xy).kind,task.parts.find(p=>p.id==='kind').answer,id);}
+});

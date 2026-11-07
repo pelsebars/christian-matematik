@@ -19,3 +19,8 @@ Git-status er gennemgået: `standalone/` og `webapp/tests/normal-start-rewards.b
 15 opgaver: partielle afledte med potens-, produkt-, kæde- og kvotientregler, gradient, tangentretning, nulgradient, bakke, taxa, BMI og kropsoverflade. Interaktiv niveaukurve med gradientpil og tangent, også i punktet med nulgradient. Numerisk differenskontrol af fire uafhængige forskrifter samt samme fulde browserforløb som modul 1.
 
 Modul 1: commit a02f8ed, Vercel success, otte centrale produktionsfiler sammenlignet byte for byte med Git.
+
+## Modul 3
+14 opgaver: andenordensafledte, blandede afledte, ligningssystemer, stationære punkters tre koordinater, D-testen, parametre, flader med flere stationære punkter og chipsens saddelpunkt. Interaktivt trådnet for ax²+by² med akser og snittabel. Testen håndterer D=0 uden at påstå en klassifikation. Numeriske første- og andenordensafledte verificerer opgavepunkterne uafhængigt.
+
+Modul 2: commit 3dc4788, Vercel success, fem centrale produktionsfiler sammenlignet med Git. Produktionsfrontendens browserkontrol indlæser de faktiske Vercel-filer, men sender samtlige API-kald til en isoleret lokal testdatabase, så produktionsdata bevares.
