@@ -45,7 +45,7 @@ test('the method-selection figure uses the displayed model, equal physical quant
  near(quad(t=>Math.hypot(...finishVelocity(t)),0,4),11.83154286035678);near(quad(t=>{const [x,y]=finishPosition(t),[dx,dy]=finishVelocity(t);return(x*dy-y*dx)/2;},0,4),-64/3);near(quad(t=>2*(4*t-t*t),0,4),64/3);
 });
 test('all contracts, rounded answers, area coverage, feedback and old bank versions remain valid',()=>{
- assert.equal(bank.filter(t=>t.topic!=='trigonometry').length,493);assert.equal(vectorFinishTasks.length,16);assert.equal(vectorFinishLessonTasks.length,34);assert.equal(vectorFinishRequired.length,28);assert.equal(new Set(vectorFinishLessonTasks.map(t=>t.id)).size,34);
+ assert.equal(bank.filter(t=>t.topic!=='twoVariables' && t.topic!=='trigonometry').length,493);assert.equal(vectorFinishTasks.length,16);assert.equal(vectorFinishLessonTasks.length,34);assert.equal(vectorFinishRequired.length,28);assert.equal(new Set(vectorFinishLessonTasks.map(t=>t.id)).size,34);
  for(const t of vectorFinishLessonTasks)for(const p of t.parts){assert.equal(gradePart(p,p.answer).status,'correct',t.id+':'+p.id);if(p.tolerance)assert.equal(gradePart(p,Number(p.answer).toFixed(4)).status,'correct');}
  for(const t of vectorFinishTasks){assert.deepEqual(instantiate(t.id,'finish',1),t);assert.ok(t.hints.length>=3);assert.ok(t.parts.every(p=>t.errors.some(e=>e.part===p.id)));assert.doesNotMatch(t.prompt,/brug (Pythagoras|kædereglen|arealformlen)|integrér (farten|normen)/i);}
  assert.equal(vectorFinishAreaStatus(()=>true).length,6);for(const a of vectorFinishAreaStatus(()=>true))assert.ok(a.count===a.total&&a.total>=3);for(const [id]of finishAreas)assert.ok(goals['vfend.'+id]);assert.ok(vectorFinishAreaStatus(()=>false).every(a=>a.count===0));

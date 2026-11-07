@@ -1,5 +1,7 @@
+import { twoModules } from "../two-plan.js";
 import { integralModules } from "../integral-plan.js";
 export const topics = {
+  twoVariables: "Funktioner af to variable",
   trigonometry: "Trigonometriske funktioner",
   vectorFunctions: "Vektorfunktioner",
   normalDistribution: "Normalfordeling",
@@ -12,6 +14,7 @@ export const topics = {
   planeGeometry: "Plangeometri og vektorer",
 };
 export const modules = {
+  ...Object.fromEntries(twoModules.map(m=>[`two.${m.id}`,{topic:"twoVariables",name:m.title,section:`two-module-${m.id}`} ])),
   "trig.1": {topic:"trigonometry",name:"Cosinus og sinus · harmoniske svingninger",section:"trig-module-1"},
   "trig.2": {topic:"trigonometry",name:"Trigonometriske ligninger",section:"trig-module-2"},
   "vf.opsamling": {topic:"vectorFunctions",name:"Opsamling",section:"vector-module-opsamling"},
@@ -90,6 +93,7 @@ export const modules = {
   "geo.5": { topic: "planeGeometry", name: "Cirklen", section: "cirkel-teori" },
 };
 export const goals = {
+  ...Object.fromEntries(twoModules.flatMap(m => Object.entries({start:"Kontrollere grundlaget",oevelser:m.summary,modeller:"Anvende modeller med enheder og kontrollere med CAS",slut:"Anvende metoderne selvstændigt"}).map(([step,text])=>[`two${m.id}.${step}`,{module:`two.${m.id}`,text}]))),
   ...Object.fromEntries([1,2].flatMap(m => Object.entries({start:"Kontrollere grundlag og vinkelmål",oevelser:m===1?"Bestemme og fortolke harmoniske svingninger":"Finde alle trigonometriske løsninger i et interval",modeller:"Opstille, beregne og kontrollere modeller med enheder",slut:"Anvende metoderne selvstændigt"}).map(([step,text]) => [`trig${m}.${step}`,{module:`trig.${m}`,text}]))),
   "vfend.position": {module:"vf.opsamling",text:"Parameter, punkter, akser og banekurver"},
   "vfend.motion": {module:"vf.opsamling",text:"Hastighed, fart, acceleration, tangenter og vinkler"},

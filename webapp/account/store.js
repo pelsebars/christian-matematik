@@ -105,13 +105,14 @@ export async function flush() {
 globalThis.window?.addEventListener('online', flush);
 globalThis.window?.addEventListener('beforeunload', event => { if (pending.size) { event.preventDefault(); event.returnValue = ''; } });
 export function lessonCompletion(key, task) {
+  const two = key.startsWith('christian-matematik.twoVariables.');
   const trig = key.startsWith('christian-matematik.trigonometry.');
   const ode = key.includes('ode') || key.includes('differential');
   const vector = key.startsWith('christian-matematik.vector.');
   const normal = key.startsWith('christian-matematik.normal.');
   const names = { graphs: '2', definite: '3', areas: '4', repetition: 'repetition', solids: '5', substitution: '6', final: '7' };
-  const module = trig ? key.split('.')[2] : vector ? ({ introduction:'1', dynamics:'2', repetition:'repetition', measure:'3', finish:'opsamling' }[key.split('.')[2]] || '1') : normal ? ({ introduction:'1', standard:'2', parameters:'3', algebra:'repetition', plots:'4', regression:'5', finish:'opsamling' }[key.split('.')[2]] || '1') : ode ? ({ introduction:'1', proportional:'2', local:'3', review:'repetition', field:'4', shifted:'5', logistic:'6', finish:'opsamling' }[key.split('.')[2]] || '1') : names[key.split('.')[2]] || '1';
-  const topic = trig ? 'trigonometry' : vector ? 'vectorFunctions' : normal ? 'normalDistribution' : ode ? 'differentialEquations' : 'integration';
+  const module = (two || trig) ? key.split('.')[2] : vector ? ({ introduction:'1', dynamics:'2', repetition:'repetition', measure:'3', finish:'opsamling' }[key.split('.')[2]] || '1') : normal ? ({ introduction:'1', standard:'2', parameters:'3', algebra:'repetition', plots:'4', regression:'5', finish:'opsamling' }[key.split('.')[2]] || '1') : ode ? ({ introduction:'1', proportional:'2', local:'3', review:'repetition', field:'4', shifted:'5', logistic:'6', finish:'opsamling' }[key.split('.')[2]] || '1') : names[key.split('.')[2]] || '1';
+  const topic = two ? 'twoVariables' : trig ? 'trigonometry' : vector ? 'vectorFunctions' : normal ? 'normalDistribution' : ode ? 'differentialEquations' : 'integration';
   const labelNode = document.createElement('div'); labelNode.innerHTML = task.prompt;
   const label = labelNode.textContent.replace(/\s+/g, ' ').trim().slice(0, 170) || task.id;
   const route = location.hash.slice(1).startsWith(topic + '/' + module + '/') ? location.hash.slice(1) : `${topic}/${module}/oevelser`;

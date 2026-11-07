@@ -1,4 +1,5 @@
 const subjects = {
+  twoVariables: {kicker:"11 · A-niveau",title:"Funktioner af to variable",description:"Funktionsværdier, kurver, gradienter, stationære punkter og optimering.",understand:"Forbind en flade med dens snit, hældninger og ekstrema.",formula:"<math><mi>z</mi><mo>=</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo></math>"},
   trigonometry: { kicker: "10 · A-niveau", title: "Trigonometriske funktioner", description: "Sinus, cosinus, harmoniske svingninger og trigonometriske ligninger.", understand: "Forbind enhedscirklen med periodiske grafer og find alle løsninger i et interval.", formula: `<math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>A</mi><mi mathvariant="normal">sin</mi><mo>(</mo><mi>ω</mi><mi>x</mi><mo>+</mo><mi>φ</mi><mo>)</mo><mo>+</mo><mi>d</mi></mrow></math>` },
   vectorFunctions: { kicker: "09 · A-niveau", title: "Vektorfunktioner", description: "Fra en parameter til banekurver, skæringspunkter og bevægelse.", understand: "Forstå parameter, position og banekurve og kontrollér begge koordinater.", formula: `<math><mrow><mover><mi>r</mi><mo>→</mo></mover><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mo>(</mo><mtable><mtr><mtd><mi>x</mi><mo>(</mo><mi>t</mi><mo>)</mo></mtd></mtr><mtr><mtd><mi>y</mi><mo>(</mo><mi>t</mi><mo>)</mo></mtd></mtr></mtable><mo>)</mo></mrow></math>` },
   normalDistribution: { kicker: "08 · A-niveau", title: "Normalfordeling", description: "Fra målinger til sandsynligheder og statistisk analyse.", understand: "Forstå modeller, tæthed, areal og usikkerhed ét trin ad gangen.", formula: `<math><mrow><mi>X</mi><mo>∼</mo><mi>N</mi><mo>(</mo><mi>μ</mi><mo>;</mo><mi>σ</mi><mo>)</mo></mrow></math>` },
@@ -109,12 +110,13 @@ function closeMenu() {
 
 function showView(view, shouldFocus = true) {
   const requestedPath = view;
+  if (view.startsWith("twoVariables/")) view = "twoVariables";
   if (view.startsWith("trigonometry/")) view = "trigonometry";
   if (view.startsWith("integration/")) view = "integration";
   if (view.startsWith("vectorFunctions/")) view = "vectorFunctions";
   if (view.startsWith("normalDistribution/")) view = "normalDistribution";
   if (view.startsWith("differentialEquations/")) view = "differentialEquations";
-  document.querySelector("[data-page=subject] .learning-steps").hidden = view === "integration" || view === "differentialEquations" || view === "normalDistribution" || view === "vectorFunctions" || view === "trigonometry";
+  document.querySelector("[data-page=subject] .learning-steps").hidden = view === "integration" || view === "differentialEquations" || view === "normalDistribution" || view === "vectorFunctions" || (view === "trigonometry" || view === "twoVariables");
   document.querySelector("#subjectFormula").hidden = false;
   document.title = "Christians matematik";
   subjectView.classList.remove("is-integral-session", "is-integral-overview");
@@ -140,6 +142,7 @@ function showView(view, shouldFocus = true) {
   differentiationLesson.hidden = view !== "differentiation";
   planeGeometryLesson.hidden = view !== "planeGeometry";
   document.querySelector("#integralLesson").hidden = view !== "integration";
+  document.querySelector("#twoLesson").hidden = view !== "twoVariables";
   document.querySelector("#trigLesson").hidden = view !== "trigonometry";
   document.querySelector("#vectorLesson").hidden = view !== "vectorFunctions";
   document.querySelector("#normalLesson").hidden = view !== "normalDistribution";
@@ -149,7 +152,7 @@ function showView(view, shouldFocus = true) {
     view === "quadratic" ||
     view === "composite" ||
     view === "differentiation" ||
-    view === "planeGeometry" || view === "integration" || view === "differentialEquations" || view === "normalDistribution" || view === "vectorFunctions" || view === "trigonometry";
+    view === "planeGeometry" || view === "integration" || view === "differentialEquations" || view === "normalDistribution" || view === "vectorFunctions" || (view === "trigonometry" || view === "twoVariables");
 
   setActiveNavigation(view);
   const hash = view === "home" ? "" : requestedPath;
@@ -157,7 +160,7 @@ function showView(view, shouldFocus = true) {
   closeMenu();
   window.dispatchEvent(new CustomEvent("mathviewchange", { detail: { view, focus: shouldFocus } }));
 
-  if (shouldFocus && view !== "integration" && view !== "differentialEquations" && view !== "normalDistribution" && view !== "vectorFunctions" && view !== "trigonometry") {
+  if (shouldFocus && view !== "integration" && view !== "differentialEquations" && view !== "normalDistribution" && view !== "vectorFunctions" && view !== "trigonometry" && view !== "twoVariables") {
     window.scrollTo({ top: 0, behavior: "smooth" });
     mainContent.focus({ preventScroll: true });
   }
@@ -1600,12 +1603,12 @@ document.addEventListener("keydown", (event) => {
 
 window.addEventListener("hashchange", () => {
   const requestedView = window.location.hash.slice(1) || "home";
-  const validView = requestedView === "guide" || requestedView === "formulas" || requestedView === "tasks" || requestedView === "shop" || (subjects[requestedView] || requestedView.startsWith("integration/") || requestedView.startsWith("differentialEquations/") || requestedView.startsWith("normalDistribution/") || requestedView.startsWith("vectorFunctions/") || requestedView.startsWith("trigonometry/")) ? requestedView : "home";
-  showView(validView, validView === "integration" || validView.startsWith("integration/") || validView === "differentialEquations" || validView.startsWith("differentialEquations/") || validView === "normalDistribution" || validView.startsWith("normalDistribution/") || validView === "trigonometry" || validView === "vectorFunctions" || validView.startsWith("vectorFunctions/") || validView.startsWith("trigonometry/"));
+  const validView = requestedView === "guide" || requestedView === "formulas" || requestedView === "tasks" || requestedView === "shop" || (subjects[requestedView] || requestedView.startsWith("integration/") || requestedView.startsWith("differentialEquations/") || requestedView.startsWith("normalDistribution/") || requestedView.startsWith("vectorFunctions/") || requestedView.startsWith("trigonometry/") || requestedView.startsWith("twoVariables/")) ? requestedView : "home";
+  showView(validView, validView === "integration" || validView.startsWith("integration/") || validView === "differentialEquations" || validView.startsWith("differentialEquations/") || validView === "normalDistribution" || validView.startsWith("normalDistribution/") || validView === "trigonometry" || validView === "vectorFunctions" || validView.startsWith("vectorFunctions/") || validView.startsWith("trigonometry/") || validView.startsWith("twoVariables/"));
 });
 
 const initialView = window.location.hash.slice(1) || "home";
-showView(initialView === "guide" || initialView === "formulas" || initialView === "tasks" || initialView === "shop" || (subjects[initialView] || initialView.startsWith("integration/") || initialView.startsWith("differentialEquations/") || initialView.startsWith("normalDistribution/") || initialView.startsWith("vectorFunctions/") || initialView.startsWith("trigonometry/")) ? initialView : "home", false);
+showView(initialView === "guide" || initialView === "formulas" || initialView === "tasks" || initialView === "shop" || (subjects[initialView] || initialView.startsWith("integration/") || initialView.startsWith("differentialEquations/") || initialView.startsWith("normalDistribution/") || initialView.startsWith("vectorFunctions/") || initialView.startsWith("trigonometry/") || initialView.startsWith("twoVariables/")) ? initialView : "home", false);
 
 // Shared navigation hook for targeted repetition from the task bank.
 window.showMathView = showView;

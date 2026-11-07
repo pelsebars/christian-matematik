@@ -1,0 +1,3 @@
+export const num=(id,label,answer,tolerance=1e-8)=>({id,label,answer:String(answer),type:'number',points:2,tolerance});
+export const choice=(id,label,answer,options)=>({id,label,answer,type:'choice',points:2,options:options.map(([id,label])=>({id,label}))});
+export const q=(module,id,step,prompt,parts,hints,solution,aids=false)=>({id:`two${module}.${id}`,version:1,topic:'twoVariables',module:`two.${module}`,goals:[`two${module}.${step}`],prerequisites:module>1?[`two.${module-1}`]:[],difficulty:aids?3:step==='start'?1:2,size:parts.length>2?'complex':parts.length>1?'medium':'short',minutes:parts.length*3,aids,step,prompt:`<p>${prompt}</p>`,parts,hints,solution:`<p>${solution}</p>`,errors:parts.map(p=>({part:p.id,feedback:hints[0]}))});

@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {fixture} from './account-fixture.js';
+import {twoTasks} from '../tasks/bank/twoVariables.js';
+import {twoModules,twoSteps} from '../two-plan.js';
+const f=await fixture(),browser=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL||'chrome'}),errors=[];
+const go=(p,path)=>p.evaluate(path=>window.showMathView(path),path);
+async function login(p,name,signup=false){await p.goto(f.origin);await p.locator('#accountLanding').waitFor();if(signup)await p.locator('.auth-tabs [data-auth-mode=signup]').click();await p.locator('#accountUsername').fill(name);await p.locator('#accountPassword').fill('to-variable-lokal-testkode-123');if(signup)await p.locator('#repeatPassword').fill('to-variable-lokal-testkode-123');await p.locator('#accountSubmit').click();await p.locator('html[data-sidebar-navigation=ready]').waitFor();}
+const save=async p=>assert.equal(await p.evaluate(async()=>(await import('/account/store.js')).flush()),true);
+try{
+ const ctx=await browser.newContext({viewport:{width:1440,height:1000}}),p=await ctx.newPage();p.on('pageerror',e=>errors.push(e.message));
+ await login(p,'two_elev',true);
+ for(const m of twoModules)for(const [step] of twoSteps){await go(p,`twoVariables/${m.id}/${step}`);assert.ok(await p.locator(`#two-module-${m.id} [data-two-step=${step}]`).isVisible());assert.equal(await p.locator('#trigLesson').isVisible(),false);}
+ for(const t of twoTasks){await go(p,`twoVariables/${t.module.split('.')[1]}/${t.step}`);const card=p.locator(`[data-int-card="${t.id}"]`);for(const a of t.parts){const input=card.locator(`[name=${a.id}]`);if(a.type==='choice')await input.selectOption(a.answer);else await input.fill(a.answer.replace('.',','));}await card.locator('[type=submit]').click();assert.ok(await card.evaluate(e=>e.classList.contains('is-correct')),t.id);}
+ for(const m of twoModules)assert.equal(await p.locator(`[data-two-status="${m.id}"]`).textContent(),'Gennemført');
+ await go(p,'twoVariables/1/modeller');await p.locator('#two-notes-1').fill('Domæne, snit og enheder.');await save(p);
+ const rows=await p.evaluate(async()=>(await import('/account/store.js')).completions());assert.equal(rows.filter(r=>r.topic==='twoVariables').length,twoTasks.length);assert.ok(rows.every(r=>r.route.startsWith('twoVariables/')));
+ await go(p,'shop');await p.locator('[data-filter=overview]').click();for(const m of twoModules)assert.match(await p.locator(`[data-point-two-status="${m.id}"]`).innerText(),/Gennemført/);
+ const ctx2=await browser.newContext(),b=await ctx2.newPage();b.on('pageerror',e=>errors.push(e.message));await login(b,'two_elev');await go(b,'twoVariables/1/modeller');assert.equal(await b.locator('#two-notes-1').inputValue(),'Domæne, snit og enheder.');
+ await b.locator('[data-int-card="two1.bmi"] [name=b]').fill('999');assert.equal(await b.locator('[data-two-status="1"]').textContent(),'I gang');await save(b);await b.reload();await b.locator('html[data-sidebar-navigation=ready]').waitFor();assert.equal(await b.locator('[data-two-status="1"]').textContent(),'I gang');
+ const rewards=await b.evaluate(async()=>await(await fetch('/api/shop')).json());assert.equal(rewards.earnedPoints,twoTasks.length);assert.equal(rewards.pointOverview.find(r=>r.topic==='twoVariables').solved,twoTasks.length);
+ await go(b,'twoVariables/1/udforsk');const before=await b.locator('#two-module-1 [data-two-readout]').textContent();await b.locator('#two-lab-1-b').focus();await b.keyboard.press('ArrowRight');assert.notEqual(await b.locator('#two-module-1 [data-two-readout]').textContent(),before);await b.locator('#two-lab-1-level').fill('-1');assert.match(await b.locator('#two-module-1 [data-two-readout]').textContent(),/ingen niveaukurve/);
+ assert.deepEqual(await b.locator('#twoLesson input,#twoLesson select,#twoLesson textarea').evaluateAll(els=>els.filter(e=>!e.labels?.length).map(e=>e.id)),[]);
+ assert.deepEqual(await b.evaluate(()=>{const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);return ids.filter((id,i)=>ids.indexOf(id)!==i);}),[]);
+ for(const m of twoModules){await go(b,`twoVariables/${m.id}/udforsk`);await b.setViewportSize({width:390,height:844});assert.ok(await b.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await b.waitForTimeout(400);await b.screenshot({path:`/tmp/two-${m.id}-mobile.png`,fullPage:true});}
+ await go(b,'tasks');assert.ok(await b.locator('input[name=topics][value=twoVariables]').isVisible());
+ await b.evaluate(async()=>{const store=await import('/account/store.js');store.accountStorage.setItem('christian-matematik.tasks.v1',JSON.stringify({schema:1,completed:[],history:[],session:{mode:'training',status:'active',seed:'two-bank',items:[{id:'two1.substitute',version:1}],index:0,answers:{},checked:{},hints:{},marked:{},self:{},startedAt:Date.now(),rewardId:crypto.randomUUID(),minutes:10,timer:false}}));await store.flush();});
+ await b.reload();await b.locator('.task-question input').fill('3');await b.locator('[data-task-action=check]').click();await save(b);const bank=await b.evaluate(async()=>await(await fetch('/api/shop')).json());assert.equal(bank.earnedPoints,twoTasks.length+2);assert.equal(bank.pointOverview.find(r=>r.topic==='twoVariables').points,twoTasks.length+2);
+ const ctx3=await browser.newContext(),c=await ctx3.newPage();await login(c,'two_anden',true);await go(c,'twoVariables/1/modeller');assert.equal(await c.locator('#two-notes-1').inputValue(),'');assert.equal(await c.locator('[data-two-status="1"]').textContent(),'Ikke begyndt');assert.deepEqual(errors,[]);
+ console.log(`Two-variable browser checks passed: ${twoModules.length} modules, ${twoTasks.length} answers, persisted accounts, bank rewards, shop, editing, isolation, mobile and graph.`);
+}finally{await browser.close();await f.close();}

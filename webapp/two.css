@@ -1,0 +1,16 @@
+#twoLesson .two-controls {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:1.5rem 0}
+#twoLesson .two-controls label {display:grid;gap:.5rem}
+#twoLesson .two-controls input {width:100%}
+#twoLesson svg {display:block;width:100%;max-width:800px;color:var(--text-primary,#334155);background:var(--surface,#fff);border-radius:12px}
+#twoLesson textarea {display:block;width:100%;box-sizing:border-box;margin:.75rem 0 2rem;padding:1rem;font:inherit}
+#twoLesson table {width:100%}
+#twoLesson td,#twoLesson th {padding:.65rem;text-align:left}
+#twoLesson .example-card {margin:1.5rem 0;padding:1.5rem}
+#twoLesson .lesson-section>p,#twoLesson li {line-height:1.8}
+#twoLesson .vector-step-menu {flex-wrap:wrap}
+#twoLesson .int-table {overflow-x:auto}
+#twoLesson .int-table table {min-width:0}
+#twoLesson .int-table caption {white-space:normal;padding:.75rem}
+@media (max-width:600px) { #twoLesson svg text {font-size:24px} }
+
+#twoLesson .int-table th {min-width:0}

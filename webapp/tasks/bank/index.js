@@ -1,3 +1,4 @@
+import { twoTasks } from './twoVariables.js';
 import { trigTasks } from './trigonometry.js';
 import { vectorFinishTasks } from './vector-finish.js';
 import { vectorMeasureTasks } from './vector-measure.js';
@@ -30,7 +31,7 @@ import { calculusTasks } from "./calculus.js";
 import { differentiationTasks } from "./differentiation.js";
 import { geometryTasks } from "./geometry.js";
 import { validateTask } from "../schema.js";
-export const bank = [...trigTasks, ...vectorFinishTasks, ...vectorMeasureTasks, ...vectorRepetitionTasks, ...normalFinishTasks, ...finishTasks, ...logisticTasks, ...shiftedTasks, ...fieldTasks, ...reviewTasks, ...localTasks, ...proportionalTasks, ...vectorDynamicsTasks, ...vectorTasks, ...normalRegressionTasks, ...normalPlotTasks, ...normalAlgebraTasks, ...normalParameterTasks, ...normalStandardTasks, ...normalTasks, ...odeTasks, ...algebraTasks, ...equationTasks, ...quadraticTasks, ...compositeTasks, ...calculusTasks, ...differentiationTasks, ...geometryTasks, ...integrationBankTasks, ...integrationRepetitionTasks];
+export const bank = [...twoTasks, ...trigTasks, ...vectorFinishTasks, ...vectorMeasureTasks, ...vectorRepetitionTasks, ...normalFinishTasks, ...finishTasks, ...logisticTasks, ...shiftedTasks, ...fieldTasks, ...reviewTasks, ...localTasks, ...proportionalTasks, ...vectorDynamicsTasks, ...vectorTasks, ...normalRegressionTasks, ...normalPlotTasks, ...normalAlgebraTasks, ...normalParameterTasks, ...normalStandardTasks, ...normalTasks, ...odeTasks, ...algebraTasks, ...equationTasks, ...quadraticTasks, ...compositeTasks, ...calculusTasks, ...differentiationTasks, ...geometryTasks, ...integrationBankTasks, ...integrationRepetitionTasks];
 if (new Set(bank.map((t) => t.id)).size !== bank.length)
   throw Error("Opgave-id skal være entydige i banken.");
 export function seededRandom(seed) {

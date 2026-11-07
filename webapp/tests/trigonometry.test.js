@@ -40,7 +40,7 @@ test('Canonical routes and shop attribution include trigonometry',()=>{
  assert.equal(parseTrigRoute('#vectorFunctions'),null);
  assert.equal(setTopic(JSON.stringify({items:[{id:trigTasks[0].id}]})),'trigonometry');
  const html=renderPointOverview({earnedPoints:7,pointOverview:[{topic:'trigonometry',points:7,solved:2}]});
- assert.match(html,/href="#trigonometry"/);assert.match(html,/7 point/);assert.equal((html.match(/Endnu ikke implementeret/g)||[]).length,2);
+ assert.match(html,/href="#trigonometry"/);assert.match(html,/7 point/);assert.equal((html.match(/Endnu ikke implementeret/g)||[]).length,1);
 });
 
 test('Server bank rewards accept new task versions and require checked or submitted answers',()=>{
