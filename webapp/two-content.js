@@ -1,7 +1,8 @@
 import {renderExercises} from './integral-exercises.js';
 import {twoTasks} from './tasks/bank/twoVariables.js';
 import {theory as one} from './two-module1.js';
-const theories={'1':one};
+import {theory as two} from './two-module2.js';
+const theories={'1':one,'2':two};
 export function twoContent(module){
  const tasks=twoTasks.filter(t=>t.module===`two.${module}`),exercises=step=>renderExercises(tasks.filter(t=>t.step===step));
  return `<p data-lesson-warning class="int-warning" role="alert" hidden></p>

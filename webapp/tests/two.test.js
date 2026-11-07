@@ -28,3 +28,9 @@ test('Bank rewards require an actual check and withdraw active credit on editing
  const t=twoTasks[0],session={mode:'training',status:'active',seed:'two',items:[{id:t.id,version:1}],answers:{[t.id]:{a:t.parts[0].answer}},checked:{},hints:{},self:{},marked:{},index:0,startedAt:Date.now(),minutes:10,timer:false};
  assert.equal(bankSessionReward(session).points,0);session.checked[t.id]=true;assert.equal(bankSessionReward(session).points,2);session.answers[t.id].a='999';assert.equal(bankSessionReward(session).points,0);
 });
+
+test('Module 2 gradients agree with independent central differences, including quotient and model units',()=>{
+ const t=twoTasks.find(t=>t.id==='two2.quotient');if(!t)return;
+ const cases=[['two2.quotient',(x,y)=>2*x*y/(x*x+y*y),1,2],['two2.bmi-rate',(x,y)=>x/y**2,90,1.8],['two2.final',(x,y)=>x*x-4*y*y+3*x*y,1,2],['two2.gradient',(x,y)=>x*x*y-3*x*y*y-2*y*y+1,1,2]];
+ for(const [id,f,x,y] of cases){const a=twoTasks.find(t=>t.id===id).parts.map(p=>+p.answer),h=1e-5;assert.ok(Math.abs((f(x+h,y)-f(x-h,y))/(2*h)-a[0])<1e-6,id);assert.ok(Math.abs((f(x,y+h)-f(x,y-h))/(2*h)-a[1])<1e-6,id);}
+});

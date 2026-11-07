@@ -1,5 +1,6 @@
 const fmt=n=>Number(n.toFixed(3)).toLocaleString('da-DK');
 export function bindTwoLab(root,module){
+ if(module==='2')return bindGradientLab(root,module);
  const slider=(id,label,min,max,value,step=.1)=>`<label for="two-lab-${module}-${id}">${label}<input id="two-lab-${module}-${id}" data-control="${id}" type="range" min="${min}" max="${max}" value="${value}" step="${step}"></label>`;
  root.innerHTML=`<h3>Fladen z=x²+y²</h3><p>Venstre: niveaukurven x²+y²=k set ovenfra. Højre: snittet y=b, altså z=x²+b². Begge koordinatvinduer går fra −5 til 5 vandret.</p><div class="two-controls">${slider('level','Niveau k',-1,16,4)}${slider('b','Fast y-værdi b',-3,3,1)}</div><p data-two-readout role="status"></p><div data-two-plot></div><div class="int-table" data-two-table></div>`;
  const update=()=>{
@@ -10,4 +11,15 @@ export function bindTwoLab(root,module){
   root.querySelector('[data-two-table]').innerHTML=`<table><caption>Kontrolpunkter på snittet y=${fmt(b)}</caption><thead><tr><th>x</th><th>y</th><th>z=f(x,y)</th></tr></thead><tbody>${[-2,-1,0,1,2].map(x=>`<tr><td>${x}</td><td>${fmt(b)}</td><td>${fmt(x*x+b*b)}</td></tr>`).join('')}</tbody></table>`;
  };
  root.addEventListener('input',update);update();
+}
+
+function bindGradientLab(root,module){
+ const slider=(id,label)=>`<label for="two-lab-${module}-${id}">${label}<input id="two-lab-${module}-${id}" data-control="${id}" type="range" min="-3" max="3" step=".1" value="1"></label>`;
+ root.innerHTML=`<h3>Niveaukurver og gradient for f(x,y)=x²+y²</h3><p>Flyt punktet P. Den orange pil starter i P og viser ∇f(P)=(2x;2y). Den blå linje viser en tangentretning til niveaukurven. Alle akser har samme målestok.</p><div class="two-controls">${slider('x','Punktets x')}${slider('y','Punktets y')}</div><p data-two-readout role="status"></p><div data-two-plot></div><div class="int-table" data-two-table></div>`;
+ const update=()=>{
+  const x=+root.querySelector('[data-control=x]').value,y=+root.querySelector('[data-control=y]').value,r=Math.hypot(x,y),X=x=>300+x*28,Y=y=>300-y*28;
+  root.querySelector('[data-two-readout]').textContent=`P=(${fmt(x)};${fmt(y)}), f(P)=${fmt(r*r)}, gradient=(${fmt(2*x)};${fmt(2*y)}), længde=${fmt(2*r)}. ${r?'Gradienten peger udad; værdien vokser væk fra centrum.':'Nulgradient: ingen retning. Her er minimum.'}`;
+  root.querySelector('[data-two-plot]').innerHTML=`<svg viewBox="0 0 600 600" role="img" aria-label="Cirkelformet niveaukurve med gradientpil og tangent"><defs><marker id="two-arrow-${module}" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#b45309"/></marker></defs><path d="M20 300H580 M300 20V580" stroke="currentColor" opacity=".4"/><g fill="currentColor" font-size="18"><text x="555" y="325">x</text><text x="310" y="30">y</text><text x="440" y="325">5</text><text x="310" y="160">5</text><text x="20" y="575">Niveau k=${fmt(r*r)}</text></g><circle cx="300" cy="300" r="${r*28}" fill="none" stroke="#137c8b" stroke-width="2"/>${r?`<path d="M${X(x-y/r*2)} ${Y(y+x/r*2)}L${X(x+y/r*2)} ${Y(y-x/r*2)}" stroke="#137c8b" stroke-width="3"/><path d="M${X(x)} ${Y(y)}L${X(3*x)} ${Y(3*y)}" stroke="#b45309" stroke-width="3" marker-end="url(#two-arrow-${module})"/>`:''}<circle cx="${X(x)}" cy="${Y(y)}" r="5" fill="currentColor"/><text x="${X(x)+8}" y="${Y(y)-8}" fill="currentColor">P</text></svg>`;
+  root.querySelector('[data-two-table]').innerHTML=`<table><caption>Hældninger i P</caption><thead><tr><th>Retning</th><th>Ændring pr. enhed</th></tr></thead><tbody><tr><td>Positiv x-retning</td><td>${fmt(2*x)}</td></tr><tr><td>Positiv y-retning</td><td>${fmt(2*y)}</td></tr><tr><td>Stejleste stigning</td><td>${fmt(2*r)}</td></tr></tbody></table>`;
+ };root.addEventListener('input',update);update();
 }

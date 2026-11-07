@@ -136,7 +136,10 @@ test("Balanced sets are reproducible, diverse, bounded and filterable", () => {
   const options = { seed: "balanced", minutes: 60 };
   const result = composeSet(options);
   assert.ok(result.tasks.length >= 6 && result.tasks.length <= 12);
-  assert.equal(new Set(result.tasks.map((t) => t.topic)).size, new Set(bank.map(t => instantiate(t.id, "topics").topic)).size);
+  // A sixty-minute set cannot guarantee every topic as the curriculum grows.
+  assert.ok(new Set(result.tasks.map(t => t.topic)).size >= 6);
+  const broad = composeSet({...options, minutes: 240, distribution:{short:20,medium:20,complex:20}});
+  assert.equal(new Set(broad.tasks.map(t => t.topic)).size, new Set(bank.map(t => instantiate(t.id, "topics").topic)).size);
   assert.ok(result.minutes <= 60);
   assert.equal(new Set(result.tasks.map((t) => t.id)).size, result.tasks.length);
   assert.deepEqual(result, composeSet(options));

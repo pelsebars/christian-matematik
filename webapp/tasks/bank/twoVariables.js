@@ -1,2 +1,3 @@
 import {tasks as one} from '../../two-module1.js';
-export const twoTasks=[...one];
+import {tasks as two} from '../../two-module2.js';
+export const twoTasks=[...one,...two];
