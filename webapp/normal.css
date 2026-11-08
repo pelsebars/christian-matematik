@@ -1,4 +1,28 @@
 #normalLesson .lesson-section { margin-top:24px; }
+#normalLesson .normal-intro-entry { border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:14px; padding:24px; background:var(--surface); margin-bottom:32px; }
+#normalLesson .normal-intro-entry .primary-button { display:inline-block; margin-top:8px; }
+#normalLesson .normal-intro-kicker { color:var(--blue); font-weight:700; }
+#normalLesson .normal-intro-reading { max-width:760px; }
+#normalLesson .normal-intro-reading h3 { margin-top:28px; }
+#normalLesson .normal-intro-reading p { margin-bottom:18px; }
+#normalLesson .normal-intro-reading .normal-concepts svg text { font-size:18px; }
+#normalLesson .normal-intro-reading .normal-important h3 { margin-top:0; }
+#normalLesson .normal-intro-outline { max-width:760px; }
+#normalLesson .normal-intro-outline nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+#normalLesson .normal-intro-outline a { display:flex; align-items:baseline; gap:10px; padding:10px; border-radius:8px; }
+#normalLesson .normal-intro-outline a[aria-current] { background:var(--blue-soft); font-weight:700; }
+#normalLesson .normal-intro-outline a span { font-variant-numeric:tabular-nums; }
+#normalLesson .normal-intro-visual .normal-presets button { flex:1 1 140px; }
+#normalLesson .normal-intro-visual [aria-pressed=true] { background:var(--blue); color:#fff; }
+#normalLesson .normal-intro-caption { font-size:.85rem; color:var(--ink-soft); }
+#normalLesson .normal-intro-onward { border-top:1px solid var(--line); padding-top:18px; }
+#normalLesson .normal-intro-formula .int-formula { max-width:100%; overflow-x:auto; }
+#normalLesson .normal-intro-questions dt { font-weight:700; margin:24px 0 8px; }
+#normalLesson .normal-intro-questions dd { margin:0 0 20px; line-height:1.7; }
+@media(max-width:700px){
+ #normalLesson .normal-intro-entry { padding:18px; }
+ #normalLesson .normal-intro-outline nav { grid-template-columns:1fr; }
+}
 #normalLesson [data-lesson-warning]:not([hidden]) { padding:16px; border:1px solid #b77b28; background:var(--skin-surface-soft, #fff1e2); border-radius:12px; }
 #normalLesson .normal-figure { margin:24px 0; padding:20px; background:var(--surface); border:1px solid var(--line); border-radius:14px; }
 #normalLesson .normal-figure label,#normalLesson .normal-figure output { display:block; margin-bottom:12px; }
