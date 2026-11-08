@@ -64,7 +64,7 @@ ${panel('usikkerhed',section('Et nyt udvalg kan give en ny linje',`
  <p>Flere målinger ved samme vandrette spænd og mindre fejlvariation vil typisk gøre et hældningsinterval smallere. Også spredningen i de vandrette værdier betyder noget. En større stikprøve er ikke automatisk mere repræsentativ.</p>
  ${important('Usikkerhed handler om, at en beregning fra et udvalg kan ændre sig, hvis vi måler igen. Flere decimaler i værktøjet fjerner ikke denne stikprøveusikkerhed.')}
 `))}
-${panel('interval',section('Fra ét skøn til et interval',`
+${panel('interval',section('Beregn et konfidensinterval for hældningen',`
  <p>En hældning fortæller, hvor linjen ligger i denne stikprøve. Et konfidensinterval beskriver usikkerheden omkring skønnet med en metode, hvis dækningsniveau er valgt på forhånd. Her bruger vi et tosidet 95 %-interval.</p>${regressionIntervalMarkup()}
  <dl class="normal-symbols"><dt>${math(margin)}</dt><dd>Fejlmarginen: afstanden fra den beregnede hældning til hver grænse. Delta betyder her ændring eller margin.</dd><dt>${math(se)}</dt><dd>Standardfejlen på hældningen. Indekset a fortæller, hvilken koefficient usikkerheden handler om.</dd><dt>${math(mi('t'))}</dt><dd>En faktor fra Student-fordelingen. Ved 95 %-niveau vælges dens 97,5 %-fraktil, fordi der er 2,5 % i hver hale.</dd><dt>${math(count+op('−')+n(2))}</dt><dd>Antal frihedsgrader ved den estimerede rette linje. Det bestemmer t-faktoren.</dd></dl>
  <p>Materialets interval skrives ${math(op('[')+a+op('−')+margin+op(';')+a+op('+')+margin+op(']'))}. Fejlmarginen findes som ${math(margin+op('=')+mi('t')+op('·')+se)}. Faktoren er ikke altid 1,96; få talpar kræver en større t-faktor.</p>
