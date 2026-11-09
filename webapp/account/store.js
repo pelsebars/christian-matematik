@@ -8,7 +8,9 @@ export let startupError = '';
 // Spendable balance confirmed by the server, after purchases.
 export let rewardPoints = 0;
 export let activeSkin = 'default';
+let rewardRevision = 0, pointsRequest = null;
 export function applyShopState(data) {
+  rewardRevision++;
   if (Number.isFinite(data.rewardPoints)) rewardPoints = data.rewardPoints;
   if (skinIds.includes(data.activeSkin)) activeSkin = data.activeSkin;
   if (inBrowser) {
@@ -66,7 +68,9 @@ export function markCorrect(namespace, completion) {
   const entry = pending.get(namespace) || { value: values.get(namespace) || '{}', revision: revisions.get(namespace) || 0, completions: [] };
   entry.completions.push(completion); pending.set(namespace, entry);
   cachePending(); window.dispatchEvent(new Event('account-progress'));
-  clearTimeout(timer); timer = setTimeout(flush, 500);
+  // A checked correct answer is a finished action. Confirm its points now;
+  // subsequent typing or navigation must not keep postponing that save.
+  clearTimeout(timer); void flush();
 }
 export async function flush() {
   if (preview || !user) return true;
@@ -87,6 +91,7 @@ export async function flush() {
         const data = await response.json();
         const { revision } = data; revisions.set(namespace, revision);
         rewardPoints = data.rewardPoints ?? rewardPoints;
+        rewardRevision++;
         window.dispatchEvent(new Event('account-progress'));
         const latest = pending.get(namespace);
         if (latest === entry && latest.value === sent.value && latest.completions.length === sent.completions.length) pending.delete(namespace);
@@ -103,6 +108,30 @@ export async function flush() {
   return inFlight;
 }
 globalThis.window?.addEventListener('online', flush);
+// Other tabs/devices can earn or spend points while this workspace stays open.
+// Only refresh the balance; never replace answers, revisions or pending work.
+export function refreshPoints() {
+  if (preview || !user || inFlight || document.visibilityState === 'hidden') return Promise.resolve(false);
+  if (pointsRequest) return pointsRequest;
+  const revision = rewardRevision;
+  pointsRequest = (async () => {
+    try {
+      const response = await fetch('/api/points', { cache: 'no-store' });
+      if (!response.ok) return false;
+      const data = await response.json();
+      // A response begun before a save/purchase cannot overwrite its balance.
+      if (data.userId !== user.id || revision !== rewardRevision || inFlight || !Number.isFinite(data.rewardPoints)) return false;
+      if (data.rewardPoints !== rewardPoints) applyShopState(data);
+      return true;
+    } catch { return false; }
+    finally { pointsRequest = null; }
+  })();
+  return pointsRequest;
+}
+globalThis.window?.addEventListener('focus', refreshPoints);
+globalThis.window?.addEventListener('online', refreshPoints);
+if (inBrowser) document.addEventListener('visibilitychange', () => { if (!document.hidden) void refreshPoints(); });
+void ready.then(() => { if (inBrowser && user && !preview) setInterval(refreshPoints, 30000); });
 globalThis.window?.addEventListener('beforeunload', event => { if (pending.size) { event.preventDefault(); event.returnValue = ''; } });
 export function lessonCompletion(key, task) {
   const two = key.startsWith('christian-matematik.twoVariables.');

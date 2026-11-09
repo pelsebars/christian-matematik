@@ -35,6 +35,10 @@ export function createRouter({ auth, pool, origin }) {
       const userId = session.user.id; // Never accept a user ID from the client.
       if (url.pathname === '/api/tutor') return await handleTutor(request, pool, userId);
       if (url.pathname === '/api/shop') return await handleShop(request,pool,userId);
+      if (url.pathname === '/api/points' && request.method === 'GET') {
+        const { rewardPoints } = await pointBalance(pool, userId);
+        return json({ userId, rewardPoints });
+      }
       if (url.pathname === '/api/learning' && request.method === 'GET') {
         const [states, completions] = await Promise.all([
           pool.query('SELECT namespace, value, revision FROM learning_state WHERE user_id=$1', [userId]),

@@ -12,6 +12,7 @@ test('Real PostgreSQL protocol: accounts, sessions, isolation, CSRF, conflict an
   const cookieFrom = response => response.headers.getSetCookie().map(c => c.split(';')[0]).join('; ');
   try {
     assert.equal((await request('/api/learning')).status, 401);
+    assert.equal((await request('/api/points')).status, 401);
     const a = await request('/api/auth/sign-up/email', { method: 'POST', body: { username: 'alice', password } });
     assert.equal(a.status, 200, await a.clone().text());
     const cookieA = cookieFrom(a); assert.ok(cookieA); assert.match(a.headers.get('set-cookie'), /httponly/i);
@@ -24,6 +25,11 @@ test('Real PostgreSQL protocol: accounts, sessions, isolation, CSRF, conflict an
     const stateA = await (await request('/api/learning', { cookie:cookieA })).json();
     const stateB = await (await request('/api/learning', { cookie:cookieB })).json();
     assert.equal(stateA.completions.length,1); assert.equal(stateB.completions.length,0); assert.equal(stateB.states.length,0);
+    const pointsA = await request('/api/points', { cookie:cookieA });
+    assert.equal(pointsA.headers.get('cache-control'), 'no-store');
+    assert.deepEqual(await pointsA.json(), { userId:stateA.user.id, rewardPoints:1 });
+    assert.deepEqual(await (await request('/api/points?userId=alice', { cookie:cookieB })).json(), { userId:stateB.user.id, rewardPoints:0 });
+    assert.equal((await request('/api/points', { method:'POST', cookie:cookieA })).status, 404);
     assert.equal(stateA.rewardPoints,1); assert.equal(stateB.rewardPoints,0);
     assert.equal(stateA.completions[0].points_awarded,1);
     assert.equal((await request('/api/learning', { method:'PUT', cookie:cookieB, body:{ ...payload, userId:stateA.user.id, completions:[] } })).status,200);

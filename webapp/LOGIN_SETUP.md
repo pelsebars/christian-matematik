@@ -113,6 +113,8 @@ Ved opgradering: kør først `npm run db:migrate`, deploy derefter og kør `node
 
 `npm run test:bank-rewards` dækker bl.a. gentagelser, delpoint, skriftlige delopgaver, prøvesæt, konflikter, gamle point og scenariet 21/25 med 7 oprindelige butikspoint.
 
+Korrekte løsninger sendes straks til serveren; kun almindelig indtastning bruger gemmepausen. Den viste saldo opdateres fra serverens svar. `GET /api/points` returnerer den indloggede kontos disponible saldo og konto-id med `Cache-Control: no-store`. Åbne faner henter saldoen ved fokus, tilbagevendende netforbindelse og hvert 30. sekund, mens fanen er synlig. Det ændrer ikke besvarelser eller lokale kladder. Et ældre saldosvar kan ikke overskrive en nyere bekræftet gemning eller et køb. `npm run test:live-points` tester dette i WebKit og Chrome, inklusive vektorfunktioner M1, flere enheder, fejl og genforsøg.
+
 ## Udgivelsesoprydning 31. oktober 2026
 
 Vercel er den eneste app-host og bygger `webapp` fra `main`. Railway-appservicen
