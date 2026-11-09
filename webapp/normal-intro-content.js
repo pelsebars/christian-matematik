@@ -1,6 +1,7 @@
 import {math,n,mi,op,mu,sigma,X,x,P,fn,frac,power,distribution,densityFormula} from './normal-math.js';
 import {normalIntroSteps} from './normal-routes.js';
 import {introVisual,introRegressionFigure} from './normal-intro-figures.js';
+import {normalScaleOverviewMarkup} from './normal-scale-overview.js';
 
 export const normalIntroForModule={'1':'maalinger','2':'standard','3':'parametre','repetition':'algebra','4':'normalplot','5':'regression','opsamling':'overblik'};
 const a=mi('a'),b=mi('b'),z=mi('z'),s=mi('s'),count=mi('n'),i=mi('i');
@@ -11,7 +12,7 @@ const formula=(title,body)=>`<details class="normal-intro-formula"><summary>${ti
 const onward=(route,label)=>`<p class="normal-intro-onward">Når du er klar til at arbejde med stoffet: <a href="#normalDistribution/${route}">${label}</a>.</p>`;
 
 export function normalIntroContent(){return `
-<details class="normal-intro-outline"><summary>Vælg et af de 14 korte afsnit</summary><nav aria-label="Afsnit i den rolige introduktion">${normalIntroSteps.map(([id,label],index)=>`<a href="#normalDistribution/intro/${id}" data-intro-link><span>${index+1}</span> ${label}</a>`).join('')}</nav></details>
+<details class="normal-intro-outline"><summary>Vælg et af de ${normalIntroSteps.length} afsnit</summary><nav aria-label="Afsnit i den rolige introduktion">${normalIntroSteps.map(([id,label],index)=>`<a href="#normalDistribution/intro/${id}" data-intro-link><span>${index+1}</span> ${label}</a>`).join('')}</nav></details>
 ${page('start','Vi begynder med virkeligheden',`
  <p>En maskine skal fylde mælk i kartoner. Selv når maskinen fungerer, bliver indholdet ikke helt ens hver gang. En karton får lidt mere, en anden lidt mindre. Vi kan derfor ikke sige præcis, hvad den næste karton indeholder.</p>
  <p>Men vi vil stadig gerne vide noget nyttigt: Hvor meget varierer indholdet? Hvor tit bliver der fyldt for lidt i? Og hvordan kan nogle få målinger fortælle os noget om produktionen som helhed?</p>
@@ -22,6 +23,7 @@ ${page('start','Vi begynder med virkeligheden',`
  <p>Læs ét afsnit ad gangen med “Næste afsnit” nederst. Du må gerne stoppe midtvejs og komme tilbage. Menuen ovenfor kan også føre dig direkte til den idé, du vil genlæse.</p>
  <p>Du skal ikke regne eller aflevere noget her. Figurerne kan skiftes med knapper, så du kan se en idé ændre sig. Formlerne ligger i felter, du selv kan åbne. Først forklarer vi med ord, hvad de skal bruges til.</p>
  <p>Rækkefølgen er den samme som i undervisningen: normalmodel og sandsynlighed, standardisering, ukendte parametre, algebra, normalplot og til sidst regression med konfidensintervaller.</p>
+ <p>Til hurtigt opslag: <a href="#normalDistribution/intro/formelkort">Se grafikken med den oprindelige fordeling, standardisering og vejen tilbage</a>.</p>
  ${idea('Du behøver ikke kunne formlerne for at begynde. Start med at forstå, hvilket spørgsmål vi prøver at besvare.')}
 `)}
 ${page('maalinger','Mange forskellige målinger kan danne ét mønster',`
@@ -79,6 +81,10 @@ ${page('standard','Mål afstanden med en målestok, der passer',`
  <p><strong>Dette interval handler om mulige målinger.</strong> Senere møder vi et konfidensinterval, som handler om usikkerheden på en parameter. De to intervaller svarer på forskellige spørgsmål.</p>
  ${idea('En afstand bliver forståelig, når vi sammenholder den med, hvor meget målingerne normalt varierer.')}
  ${onward('2/standard','Modul 2 · standardnormalfordelingen')}
+`)}
+${page('formelkort','Grafisk formeloverblik · fra x til z og tilbage',`
+ ${normalScaleOverviewMarkup()}
+ ${onward('2/tilbage','Modul 2 · tilbage til den oprindelige skala')}
 `)}
 ${page('parametre','Hvad hvis vi ikke kender klokkens centrum eller bredde?',`
  <p>Indtil nu har vi forestillet os, at vi allerede kendte klokken. Men en opgave kan vende situationen om: Vi kender noget om andele eller grænser og skal finde den klokke, som passer til oplysningerne.</p>

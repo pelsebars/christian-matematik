@@ -1,4 +1,5 @@
 import {pdf} from './normal-math.js';
+import {bindNormalScaleOverview} from './normal-scale-overview.js';
 
 const color='#176489',accent='#a65a25';
 const frame=(label,body)=>`<svg viewBox="0 0 640 260" role="img" aria-label="${label}"><title>${label}</title>${body}</svg>`;
@@ -43,6 +44,7 @@ export function introVisual(kind){
  return `<figure class="normal-concepts normal-intro-visual" data-intro-visual="${kind}"><figcaption>${config.title}</figcaption><div class="normal-presets" role="group" aria-label="${config.title}">${config.options.map(([id,label])=>`<button class="secondary-button" type="button" data-intro-choice="${id}" aria-pressed="${id===config.initial}">${label}</button>`).join('')}</div><div data-intro-canvas>${config.render(config.initial)}</div><p data-intro-explanation aria-live="polite">${kind==='interval'?introIntervals[config.initial].text:descriptions[kind][config.initial]}</p><p class="normal-intro-caption">${kind==='interval'?'Illustration af tre tænkte resultater. Intervallerne er ikke beregnet fra et datasæt.':'Illustration af en normalmodel. Figuren viser idéen uden konkrete måledata.'}</p></figure>`;
 }
 export function bindNormalIntro(host){
+ bindNormalScaleOverview(host);
  for(const figure of host.querySelectorAll('[data-intro-visual]')){
   const kind=figure.dataset.introVisual,render={bell:introBellFigure,area:introAreaFigure,interval:introIntervalFigure}[kind];
   figure.addEventListener('click',event=>{

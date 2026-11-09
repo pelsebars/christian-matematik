@@ -10,7 +10,7 @@ import {normalModules} from '../normal-plan.js';
 import {introBellFigure,introAreaFigure,introIntervalFigure} from '../normal-intro-figures.js';
 
 const pages=pagesForNormalModule('intro');
-assert.equal(pages.length,14);
+assert.equal(pages.length,15);
 assert.deepEqual(normalImplemented,['1','2','3','repetition','4','5','opsamling']);
 assert.equal(parseNormalRoute('#normalDistribution/intro').path,pages[0]);
 assert.equal(parseNormalRoute('#normalDistribution/intro/unknown').path,pages[0]);
@@ -48,7 +48,7 @@ try{
   for(let index=0;index<pages.length;index++){
    await go(pages[index]);const panel=intro.locator(`[data-normal-step="${normalIntroSteps[index][0]}"]`);await panel.waitFor({state:'visible'});
    assert.equal(await page.locator('[data-normal-step]:visible').count(),1);
-   assert.match(await page.locator('[data-normal-location]').innerText(),new RegExp(`Afsnit ${index+1} af 14`));
+   assert.match(await page.locator('[data-normal-location]').innerText(),new RegExp(`Afsnit ${index+1} af ${pages.length}`));
    assert.equal(await intro.locator('[data-intro-link][aria-current=step]').getAttribute('href'),'#'+pages[index]);
    await fits(pages[index]);
    for(const detail of await panel.locator('.normal-intro-formula').all()){await detail.locator('summary').click();await fits(pages[index]+' formula');}
@@ -58,6 +58,15 @@ try{
   await page.locator('#normal-module-one [data-normal-step=start]').waitFor({state:'visible'});
   await page.locator('.normal-page-controls a').first().click();await intro.locator('[data-normal-step=overblik]').waitFor({state:'visible'});
   await page.reload();await intro.locator('[data-normal-step=overblik]').waitFor({state:'visible'});
+  await go('normalDistribution/intro/formelkort');const reference=intro.locator('.normal-scale-overview');await reference.waitFor({state:'visible'});
+  assert.equal(await reference.locator('.normal-scale-curve').count(),3);
+  for(const [label,summary] of [['Under centrum',/960 mL.*−2/],['Ved centrum',/1000 mL.*0/],['Over centrum',/1040 mL.*2/]]){
+   await reference.getByRole('button',{name:label,exact:true}).press('Enter');assert.match(await reference.locator('[data-scale-summary]').textContent(),summary);assert.equal(await reference.locator('[aria-pressed=true]').count(),1);await fits('scale overview '+label);
+  }
+  const downloadPromise=page.waitForEvent('download');await reference.locator('[data-scale-download]').click();const download=await downloadPromise;
+  assert.equal(download.suggestedFilename(),'normalfordeling-fra-x-til-z-og-tilbage.svg');const svg=await readFile(await download.path(),'utf8');assert.match(svg,/z = \(x − μ\) \/ σ/);assert.match(svg,/x = 1040 mL/);assert.match(svg,/Φ⁻¹\(p\)/);
+  assert.equal(await page.evaluate(svg=>new DOMParser().parseFromString(svg,'image/svg+xml').querySelector('parsererror')?.textContent||'',svg),'','download must be valid standalone SVG/XML');
+  await reference.screenshot({path:`/tmp/matematik-normal-formelkort-${name}.png`});
   await intro.locator('.normal-intro-outline summary').click();await intro.getByRole('link',{name:'2 Målinger og klokken',exact:true}).click();
   await intro.locator('[data-normal-step=maalinger]').waitFor({state:'visible'});assert.equal(await intro.locator('.normal-intro-outline').getAttribute('open'),null);
   const bell=intro.locator('[data-intro-visual=bell]'),oldBell=await bell.locator('[data-intro-canvas]').innerHTML();
@@ -82,7 +91,7 @@ try{
   if(name==='mobile')await page.locator('#menuButton').click();const submenu=page.locator('#nav-modules-normalDistribution');if(!await submenu.isVisible())await page.locator('[aria-controls=nav-modules-normalDistribution]').click();
   await submenu.getByRole('link',{name:'Start Forstå idéerne · helt fra bunden',exact:true}).click();await intro.locator('[data-normal-step=start]').waitFor({state:'visible'});
   await page.screenshot({path:`/tmp/matematik-normal-intro-start-${name}.png`,fullPage:true});await context.close();
-  console.log(`${name}: 14 sections, formulas, illustrations, direct links, reload, keyboard, mobile layout and unchanged learning data passed`);
+  console.log(`${name}: ${pages.length} sections, formulas, illustrations, direct links, reload, keyboard, mobile layout and unchanged learning data passed`);
  }
  assert.deepEqual(errors,[]);
 }finally{await browser.close();await new Promise(done=>server.close(done));}
