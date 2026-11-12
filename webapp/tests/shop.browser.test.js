@@ -6,7 +6,7 @@ const f=await fixture();
 const browser=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL||'chrome'});
 const password='shop-browser-password-123';const errors=[];
 async function login(page,username,signup=false){await page.goto(f.origin);await page.locator('#accountLanding').waitFor();if(signup)await page.locator('[data-auth-mode=signup]').first().click();await page.locator('#accountUsername').fill(username);await page.locator('#accountPassword').fill(password);if(signup)await page.locator('#repeatPassword').fill(password);await page.locator('#accountSubmit').click();await page.locator('.personal-overview').waitFor();}
-async function shop(page){await page.locator('.personal-overview').waitFor({state:'attached'});await page.locator('[data-view=shop]').click();await page.locator('[data-preview-skin=military]').waitFor();await page.waitForFunction(()=>!document.querySelector('.shop-message')?.textContent.includes('Henter'));}
+async function shop(page){await page.locator('.personal-overview').waitFor({state:'attached'});await page.locator('.shop-dialog').waitFor({state:'attached'});await page.locator('[data-view=shop]').click();await page.locator('[data-preview-skin=military]').waitFor();await page.waitForFunction(()=>!document.querySelector('.shop-message')?.textContent.includes('Henter'));}
 async function purchase(page,id){await page.locator(`[data-buy="${id}"]`).click();await page.locator('[data-confirm-buy]').click();await page.waitForFunction(()=>!document.querySelector('.shop-dialog').open);await page.locator('[data-filter=mine][aria-pressed=true]').waitFor();}
 async function filter(page,id){await page.locator(`[data-filter=${id}]`).click();}
 try{
