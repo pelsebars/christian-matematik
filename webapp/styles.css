@@ -1261,6 +1261,17 @@ math {
   font-size: clamp(1.4rem, 3vw, 2.1rem);
 }
 
+#formula-area .rule-math,
+#formula-arc-length .rule-math {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+#formula-area .rule-math math,
+#formula-arc-length .rule-math math {
+  font-size: clamp(0.85rem, 2vw, 1.4rem);
+}
+
 /* Løsning af andengradsligninger */
 
 .quadratic-lesson {

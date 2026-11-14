@@ -2946,6 +2946,59 @@
               </div>
             </article>
 
+            <article class="rule-card" id="formula-velocity">
+              <div class="rule-copy">
+                <p class="rule-category">Vektorfunktioner</p>
+                <h2>Fra position til hastighed</h2>
+                <p>Hastighedsvektoren findes ved at differentiere stedvektoren med hensyn til tiden. Differentier hver koordinat for sig.</p>
+                <p>Eksempel: Er stedvektoren <math><mrow><mover><mi>r</mi><mo>→</mo></mover><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mo>(</mo><msup><mi>t</mi><mn>2</mn></msup><mo>,</mo><mn>3</mn><mi>t</mi><mo>)</mo></mrow></math>, er hastighedsvektoren <math><mrow><mover><mi>v</mi><mo>→</mo></mover><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mo>(</mo><mn>2</mn><mi>t</mi><mo>,</mo><mn>3</mn><mo>)</mo></mrow></math>.</p>
+                <p class="pitfall"><strong>Pas på:</strong> Hastighed er en vektor med retning. Fart er længden af hastighedsvektoren.</p>
+              </div>
+              <div class="rule-math" aria-label="Hastighedsvektoren v af t er lig den afledte stedvektor r mærke af t">
+                <math display="block">
+                  <mrow><mover><mi>v</mi><mo>→</mo></mover><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msup><mover><mi>r</mi><mo>→</mo></mover><mo>′</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo></mrow>
+                </math>
+              </div>
+            </article>
+
+            <article class="rule-card" id="formula-arc-length">
+              <div class="rule-copy">
+                <p class="rule-category">Vektorfunktioner · Kurvelængde</p>
+                <h2>Fra fart til kurvelængde</h2>
+                <p>Differentier først koordinatfunktionerne x(t) og y(t). Kvadrér de to afledte, læg dem sammen, og tag kvadratroden. Det giver farten på tidspunktet t: længden af hastighedsvektoren.</p>
+                <p>For at finde hele kurvelængden fra tiden a til b integrerer du farten. Tænk på det som at lægge alle de små tilbagelagte afstande sammen. Formlen gælder for en stykkevist glat kurve.</p>
+                <p>Eksempel: Med <math><mrow><mi>x</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>3</mn><mi>t</mi></mrow></math> og <math><mrow><mi>y</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>4</mn><mi>t</mi></mrow></math> er farten <math><mrow><msqrt><mrow><msup><mn>3</mn><mn>2</mn></msup><mo>+</mo><msup><mn>4</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><mn>5</mn></mrow></math>. Fra t = 0 til t = 2 bliver kurvelængden derfor 10.</p>
+                <p class="pitfall"><strong>Pas på:</strong> Kvadratroden alene giver farten, ikke hele kurvelængden. Gennemløbes samme stykke flere gange, tæller hver gennemløbning med i den tilbagelagte længde.</p>
+              </div>
+              <div class="rule-math" aria-label="Farten er kvadratroden af x mærke af t i anden plus y mærke af t i anden. Kurvelængden L er integralet af farten fra a til b.">
+                <math display="block">
+                  <mtable columnalign="left">
+                    <mtr><mtd><mi>s</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msqrt><mrow><msup><mrow><msup><mi>x</mi><mo>′</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></msqrt></mtd></mtr>
+                    <mtr><mtd><mi>L</mi><mo>=</mo><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><msqrt><mrow><msup><mrow><msup><mi>x</mi><mo>′</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mrow><msup><mi>y</mi><mo>′</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></msqrt><mspace width="0.2em"/><mi mathvariant="normal">d</mi><mi>t</mi></mtd></mtr>
+                  </mtable>
+                </math>
+              </div>
+            </article>
+
+            <article class="rule-card" id="formula-area">
+              <div class="rule-copy">
+                <p class="rule-category">Vektorfunktioner · Areal</p>
+                <h2>Areal inden i en lukket kurve</h2>
+                <p>Følg kanten én hel omgang fra tiden a til b. Integralet lægger de små arealbidrag sammen, og formlen giver arealet inden i kurven.</p>
+                <p>Tværvektoren er stedvektoren drejet 90° mod uret: <math><mrow><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo><mo>→</mo><mo>(</mo><mo>−</mo><mi>y</mi><mo>,</mo><mi>x</mi><mo>)</mo></mrow></math>. Prikken betyder skalarprodukt: Gang koordinaterne parvis, og læg sammen. Derfor er integranden <math><mrow><mi>x</mi><msup><mi>y</mi><mo>′</mo></msup><mo>−</mo><mi>y</mi><msup><mi>x</mi><mo>′</mo></msup></mrow></math>. Her er x og y koordinatfunktionerne, og mærket betyder afledt med hensyn til tiden t.</p>
+                <p>Eksempel: En cirkel med radius 2, beskrevet ved <math><mrow><mi>x</mi><mo>=</mo><mn>2</mn><mi>cos</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow></math> og <math><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mi>sin</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow></math>, gennemløbes én gang fra 0 til <math><mrow><mn>2</mn><mi>π</mi></mrow></math>. Integranden bliver 4, så arealet er <math><mrow><mn>4</mn><mi>π</mi></mrow></math>.</p>
+                <p class="pitfall"><strong>Pas på:</strong> Kurven skal være lukket, uden selvkrydsninger og gennemløbes præcis én gang. Den skal være stykkevist glat. Tag absolutværdien efter integrationen, så arealet er positivt uanset omløbsretningen.</p>
+              </div>
+              <div class="rule-math" aria-label="Arealet er en halv gange absolutværdien af integralet fra a til b af r mærke prik tværvektoren til r. I koordinater er integranden x gange y mærke minus y gange x mærke.">
+                <math display="block">
+                  <mtable columnalign="left">
+                    <mtr><mtd><mi>A</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>|</mo><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><msup><mover><mi>r</mi><mo>→</mo></mover><mo>′</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo><mo>·</mo><mover><mover><mi>r</mi><mo>→</mo></mover><mo>^</mo></mover><mo>(</mo><mi>t</mi><mo>)</mo><mspace width="0.2em"/><mi mathvariant="normal">d</mi><mi>t</mi><mo>|</mo></mtd></mtr>
+                    <mtr><mtd><mi>A</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>|</mo><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mo>(</mo><mi>x</mi><msup><mi>y</mi><mo>′</mo></msup><mo>−</mo><mi>y</mi><msup><mi>x</mi><mo>′</mo></msup><mo>)</mo><mspace width="0.2em"/><mi mathvariant="normal">d</mi><mi>t</mi><mo>|</mo></mtd></mtr>
+                  </mtable>
+                </math>
+              </div>
+            </article>
+
             <article class="rule-card" id="formula-extrema">
               <div class="rule-copy">
                 <p class="rule-category">Differentialregning</p>
