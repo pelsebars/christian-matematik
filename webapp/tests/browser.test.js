@@ -59,7 +59,7 @@ try {
   await page.locator('html[data-sidebar-navigation="ready"]').waitFor();
   // Sidebar module groups work as an accordion and link to both legacy
   // scroll sections and routed teaching sessions.
-  assert.equal(await page.locator('.nav-group').count(), 7);
+  assert.ok(await page.locator('.nav-group').count() >= 8);
   assert.equal(await page.locator('.nav-submenu:visible').count(), 0);
   await page.locator('[data-nav-group="planeGeometry"] .nav-expand').click();
   assert.equal(await page.locator('#nav-modules-planeGeometry').isVisible(), true);
@@ -168,6 +168,8 @@ try {
     ),
   );
   assert.equal(await page.locator(".task-feedback").count(), examCount);
+  assert.match(await page.locator(".task-grade h3").innerText(), /Estimeret karakter:/);
+  assert.match(await page.locator(".task-grade").innerText(), /point = 100 %/);
   await page.locator("[data-task-action=retry]").click();
   assert.ok(
     (await page.locator("#taskHeading").innerText()).includes(
@@ -257,9 +259,22 @@ try {
       "Faglig tjekliste",
     ),
   );
-  await page.locator(`[data-self-part="${manualPart.id}"]`).selectOption("2");
+  assert.equal(await page.locator('.task-grade').count(), 0);
   await page.locator("[data-task-action=finish]").click();
   await page.locator("[data-task-action=submit]").click();
+  assert.match(await page.locator('.task-grade').innerText(), /når alle delspørgsmål er vurderet/);
+  const manualDetails = page.locator('details.task-panel').nth(manualIndex);
+  await manualDetails.evaluate(element => element.open = true);
+  await page.locator(`[data-self-part="${manualPart.id}"]`).selectOption("2");
+  assert.match(await page.locator('.task-grade h3').innerText(), /Estimeret karakter:/);
+  assert.match(await page.locator('.task-grade').innerText(), /din egen vurdering/);
+  await page.reload();
+  await page.locator('.task-grade').waitFor();
+  assert.match(await page.locator('.task-grade h3').innerText(), /Estimeret karakter:/);
+  await page.locator('details.task-panel').nth(manualIndex).evaluate(element => element.open = true);
+  await page.locator(`[data-self-part="${manualPart.id}"]`).selectOption('');
+  assert.equal(await page.locator('.task-grade strong').count(), 0);
+  await page.locator(`[data-self-part="${manualPart.id}"]`).selectOption('2');
   assert.match(await page.locator(".task-score").innerText(), /^2 af \d+ point$/);
   await page.locator("[data-task-action=repeat-module]").first().click();
   assert.equal(await page.locator("#differentiationLesson").isVisible(), true);
