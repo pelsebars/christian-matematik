@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./guide.css" />
     <link rel="stylesheet" href="./skins.css" />
     <link rel="stylesheet" href="./trig.css">
+    <link rel="stylesheet" href="./polar.css">
     <link rel="stylesheet" href="./two.css">
   </head>
   <body>
@@ -181,6 +182,7 @@
 
 <div class="nav-group" data-nav-group="trigonometry"><div class="nav-group-row"><button class="nav-item" type="button" data-view="trigonometry"><span class="nav-number" aria-hidden="true">10</span><span>Trigonometriske funktioner</span></button><button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-trigonometry"><span class="sr-only">Vis moduler i Trigonometriske funktioner</span><span class="nav-chevron" aria-hidden="true"></span></button></div><div class="nav-submenu" id="nav-modules-trigonometry" hidden><a href="#trigonometry/1/start"><span>M1</span>Sinus og harmoniske svingninger</a><a href="#trigonometry/2/start"><span>M2</span>Trigonometriske ligninger</a></div></div>
           <div class="nav-group" data-nav-group="twoVariables"><div class="nav-group-row"><button class="nav-item" type="button" data-view="twoVariables"><span class="nav-number" aria-hidden="true">11</span><span>Funktioner af to variable</span></button><button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-twoVariables"><span class="sr-only">Vis moduler i Funktioner af to variable</span><span class="nav-chevron" aria-hidden="true"></span></button></div><div class="nav-submenu" id="nav-modules-twoVariables" hidden><a href="#twoVariables/1/start"><span>M1</span>Funktionsværdier og kurver</a><a href="#twoVariables/2/start"><span>M2</span>Partielle afledte og gradienter</a><a href="#twoVariables/3/start"><span>M3</span>Stationære punkter</a><a href="#twoVariables/4/start"><span>M4</span>Optimering</a></div></div>
+          <div class="nav-group" data-nav-group="polarCoordinates"><div class="nav-group-row"><button class="nav-item" type="button" data-view="polarCoordinates"><span class="nav-number" aria-hidden="true">12</span><span>Polære koordinater</span></button><button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-polarCoordinates"><span class="sr-only">Vis modul i Polære koordinater</span><span class="nav-chevron" aria-hidden="true"></span></button></div><div class="nav-submenu" id="nav-modules-polarCoordinates" hidden><a href="#polarCoordinates/1/start"><span>M1</span>Afstand, vinkel og koordinater</a></div></div>
           <button class="nav-item" type="button" data-view="tasks">
             <span class="nav-symbol" aria-hidden="true">✓</span>
             <span>Opgaver</span>
@@ -322,6 +324,7 @@
             <button class="topic-card topic-card--blue" type="button" data-view="vectorFunctions"><span class="card-index">09 · Vektorfunktioner</span><span class="formula-preview"><math><mrow><mover><mi>r</mi><mo>→</mo></mover><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mo>(</mo><mtable><mtr><mtd><mi>x</mi><mo>(</mo><mi>t</mi><mo>)</mo></mtd></mtr><mtr><mtd><mi>y</mi><mo>(</mo><mi>t</mi><mo>)</mo></mtd></mtr></mtable><mo>)</mo></mrow></math></span><span class="card-title">Vektorfunktioner</span><span class="card-description">Modul 1 og 2 er åbne. Undersøg baner, hastighed, fart, acceleration og tangenter.</span><span class="card-action">Åbn forløbet</span></button>
             <button class="topic-card topic-card--cyan" type="button" data-view="trigonometry"><span class="card-index">10 · Trigonometriske funktioner</span><span class="formula-preview"><math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">sin</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></span><span class="card-title">Trigonometriske funktioner</span><span class="card-description">To moduler: sinus, cosinus, harmoniske svingninger og ligninger. Undersøg grafer og træn med modeller.</span><span class="card-action">Åbn forløbet</span></button>
           <button class="topic-card topic-card--cyan" type="button" data-view="twoVariables"><span class="card-index">11 · Funktioner af to variable</span><span class="formula-preview">z = f(x,y)</span><span class="card-title">Funktioner af to variable</span><span class="card-description">Fire moduler fra funktionsværdier og kurver til gradienter og optimering.</span><span class="card-action">Åbn forløbet</span></button>
+          <button class="topic-card topic-card--cyan" type="button" data-view="polarCoordinates"><span class="card-index">12 · Polære koordinater</span><span class="formula-preview">(r; θ) ↔ (x; y)</span><span class="card-title">Polære koordinater</span><span class="card-description">Et kort modul om afstand og vinkel, omregning, kvadranter og radarmålinger.</span><span class="card-action">Åbn modulet</span></button>
           </div>
 
           <section class="path-panel" aria-labelledby="pathHeading">
@@ -383,6 +386,7 @@
           <div class="lesson-content" id="normalLesson" hidden></div>
           <div class="lesson-content" id="vectorLesson" hidden></div>
           <div class="lesson-content" id="trigLesson" hidden></div>
+          <div class="lesson-content" id="polarLesson" hidden></div>
           <div class="lesson-content" id="twoLesson" hidden></div>
 
           <div class="lesson-content" id="equationLesson" hidden>
@@ -2999,6 +3003,7 @@
               </div>
             </article>
 
+            <article class="rule-card" id="formula-polar"><div class="rule-copy"><p class="rule-category">Polære koordinater</p><h2>Fra afstand og vinkel til et punkt</h2><p>Vinklen θ måles fra positiv x-akse mod uret. Her er r≥0.</p><p class="pitfall"><strong>Pas på:</strong> Kontrollér kvadrant og grader/radianer. arctan(y/x) alene vælger ikke altid den rette vinkel. I origo er vinklen vilkårlig.</p><a class="text-button" href="#polarCoordinates/1/teori">Åbn det korte modul →</a></div><div class="rule-math"><math display="block"><mtable columnalign="left"><mtr><mtd><mi>x</mi><mo>=</mo><mi>r</mi><mi>cos</mi><mo>(</mo><mi>θ</mi><mo>)</mo></mtd></mtr><mtr><mtd><mi>y</mi><mo>=</mo><mi>r</mi><mi>sin</mi><mo>(</mo><mi>θ</mi><mo>)</mo></mtd></mtr><mtr><mtd><mi>r</mi><mo>=</mo><msqrt><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></msqrt></mtd></mtr></mtable></math></div></article>
             <article class="rule-card" id="formula-extrema">
               <div class="rule-copy">
                 <p class="rule-category">Differentialregning</p>

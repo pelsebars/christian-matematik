@@ -82,6 +82,7 @@ if (!user && !preview) {
     ['normal', 'normalDistribution', '#normalLesson', { 1:'normal-module-one', 2:'normal-module-two', 3:'normal-module-three', repetition:'normal-repetition', 4:'normal-module-four', 5:'normal-module-five', opsamling:'normal-course-finish' }],
     ['vector', 'vectorFunctions', '#vectorLesson', { 1:'vector-module-one', 2:'vector-module-two', repetition:'vector-module-repetition', 3:'vector-module-three', opsamling:'vector-module-finish' }],
     ['two', 'twoVariables', '#twoLesson', {1:'two-module-1',2:'two-module-2',3:'two-module-3',4:'two-module-4'}],
+    ['polar', 'polarCoordinates', '#polarLesson', {1:'polar-module-1'}],
     ['trig', 'trigonometry', '#trigLesson', { 1:'trig-module-1', 2:'trig-module-2' }],
   ]) {
     await import(`../${file}.js`);
@@ -100,7 +101,7 @@ if (!user && !preview) {
   ]) parkInactiveLesson(view, selector);
   const dashboard = document.createElement('section'); dashboard.className = 'personal-overview';
   document.querySelector('[data-page="home"]').prepend(dashboard);
-  const labels = { twoVariables: "Funktioner af to variable", trigonometry: 'Trigonometriske funktioner', equations: 'Ligninger', quadratic: 'Andengradsligninger', composite: 'Sammensatte funktioner', differentiation: 'Differentialregning', planeGeometry: 'Plangeometri og vektorer', integration: 'Integralregning', differentialEquations: 'Differentialligninger', normalDistribution: 'Normalfordeling', vectorFunctions: 'Vektorfunktioner' };
+  const labels = { polarCoordinates: "Polære koordinater", twoVariables: "Funktioner af to variable", trigonometry: 'Trigonometriske funktioner', equations: 'Ligninger', quadratic: 'Andengradsligninger', composite: 'Sammensatte funktioner', differentiation: 'Differentialregning', planeGeometry: 'Plangeometri og vektorer', integration: 'Integralregning', differentialEquations: 'Differentialligninger', normalDistribution: 'Normalfordeling', vectorFunctions: 'Vektorfunktioner' };
   function renderOverview() {
     const rows = completions();
     let resume; try { resume = JSON.parse(accountStorage.getItem('christian-matematik.resume.v1') || '{}').route; } catch {}

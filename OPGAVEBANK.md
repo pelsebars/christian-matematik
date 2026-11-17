@@ -470,3 +470,11 @@ Modul 5 har 48 kort og 40 obligatoriske aktiviteter. Åbning, figurkontroller og
 Blandingen dækker tæthed kontra areal og optælling, standardisering og strenge udfaldsgrænser, areal til grænse, ukendte parametre, kvadratsætning, to ligninger, normalplot, residualer, t-baseret hældningsinterval, nul, 95 %-fortolkning, modelbegrænsning og kvadreret respons. De nye spørgsmål bruger blandt andet Gulerødder under 410 g, 200 klubhøjder, Phillipsdata og modeltid ved 1000 hl i Unibrew. Alle nødvendige observationer/par står i bilag, også i prøve. Kildeark og gamle opgave-id'er/versioner ændres ikke.
 
 Pakken følger samme kontrakt med størrelser/sværhedsgrader, med/uden hjælpemidler, hints i flere trin, gennemregnede løsninger, læringsmål og konkret fejlfeedback. Prøvesæt skjuler emnemetadata, hints, facit og løbende bedømmelse. Et resultat kan føre direkte tilbage til opsamlingen. Den har 34 øvelseskort og 28 obligatoriske aktiviteter med egen kontolagring og anbefalinger i seks områder; tidligere modulstatus og historik bevares.
+
+## Polære koordinater · kort modul
+
+`webapp/polar.js` åbner forløbet `polarCoordinates/1/start` med starttjek, teori, interaktiv radius/vinkel-tegning, øvelser, modeller/CAS og sluttjek. `webapp/tasks/bank/polar.js` indeholder 13 fælles modul- og bankopgaver under `polar.1`: to startopgaver, syv træningsopgaver, to modeller og to sluttjek. De dækker omregning begge veje, grader/radianer, alle kvadranter, akser, origo og ækvivalente vinkler. Modulet bruger ikke-negativ radius og angivne vinkelintervaller.
+
+Emnet indgår i bankens emnevalg, målrettet teorihenvisning, kontoens fremdrift og pointoversigten. Korrekte modulopgaver følger den eksisterende belønning på ét point pr. opgave; banken bruger delspørgsmålenes point. Ændrede svar trækker aktiv gennemførelse tilbage og bevarer optjente point. Ingen databaseændringer eller genberegning af eksisterende point er nødvendige.
+
+Validering: `cd webapp && npm run test:polar` omfatter facit/kvadranter, opgaveudvælgelse og belønning samt browsertest med kontolagring, anden enhed, brugeradskillelse, bankpoint, noter/hints, direkte links og mobilvisning.

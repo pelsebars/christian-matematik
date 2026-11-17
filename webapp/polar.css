@@ -1,0 +1,16 @@
+#polarLesson .polar-controls {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:1.5rem 0}
+#polarLesson .polar-controls label {display:grid;gap:.5rem}
+#polarLesson .polar-controls input {width:100%}
+#polarLesson svg {display:block;width:100%;max-width:800px;color:var(--text-primary,#334155);background:var(--surface,#fff);border-radius:12px}
+#polarLesson textarea {display:block;width:100%;box-sizing:border-box;margin:.75rem 0 2rem;padding:1rem;font:inherit}
+#polarLesson table {width:100%}
+#polarLesson td,#polarLesson th {padding:.65rem;text-align:left}
+#polarLesson .example-card {margin:1.5rem 0;padding:1.5rem}
+#polarLesson .lesson-section>p,#polarLesson li {line-height:1.8}
+#polarLesson .vector-step-menu {flex-wrap:wrap}
+#polarLesson .int-table {overflow-x:auto}
+#polarLesson .int-table table {min-width:0}
+#polarLesson .int-table caption {white-space:normal;padding:.75rem}
+@media (max-width:600px) { #polarLesson svg text {font-size:24px} }
+
+#polarLesson .polar-controls{display:grid;gap:1rem} #polarLesson input[type=range]{width:100%} #polarLesson svg{max-width:560px} #polarLesson .polar-readout{font-variant-numeric:tabular-nums}

@@ -2,6 +2,7 @@
 // Destinations are validated in tests; absent lessons deliberately have no link.
 const card = (id, title, signs, meaning, theory, route, section, source) => ({ id, title, signs, meaning, theory, route, section, source });
 export const guideCurriculum = [
+ card('polarCoordinates','Polære koordinater','radius; afstand og vinkel; polær; atan2','Et punkt beskrives ved afstanden fra origo og en vinkel fra positiv x-akse mod uret.','x=r cos(θ), y=r sin(θ), og r=√(x²+y²). Kontrollér kvadrant og vinkelmål. Origo har ingen entydig vinkel.','polarCoordinates/1/teori',null,'webapp/polar-plan.js'),
  card('equation','Ligninger','Find den ukendte; samme værdi; skæring','To størrelser skal være lige store. Find den værdi, der får ligheden til at passe.','Gør det samme på begge sider. Ved skæring løses f(x)=g(x); indsæt bagefter for at finde y.','equations',null,'webapp/index.html: equationLesson'),
  card('quadratic','Andengradsligninger','x²; nulpunkt; parabel skærer aksen','En ligning med højeste potens 2 kan have op til to reelle løsninger.','Skriv ax²+bx+c=0. Diskriminanten b²−4ac afgør antallet af reelle rødder. Skeln mellem rødder og toppunkt.','quadratic',null,'webapp/index.html: quadraticLesson'),
  card('composite','Sammensatte funktioner','funktion inde i funktion; parentes opløftet; f(g(x))','Et resultat bruges som input til næste funktion.','Find indre og ydre funktion. Ved differentiation bruges kædereglen: ydre afledte gange indre afledte.','composite',null,'webapp/index.html: compositeLesson'),

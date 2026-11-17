@@ -121,4 +121,5 @@ renderToolbar();if(!root.hidden){render();load();}
 window.addEventListener('vector-progress',render);
 
 window.addEventListener('trig-progress',render);
+window.addEventListener('polar-progress',render);
 window.addEventListener('two-progress',render);
