@@ -1,0 +1,37 @@
+#termExamView { max-width:1100px; margin:auto; }
+.term-toolbar { position:sticky; top:12px; z-index:5; padding:18px 22px; border:1px solid #bad1db; border-radius:18px; background:#f4fbff; box-shadow:0 5px 20px #163c5012; display:flex; flex-wrap:wrap; gap:16px 28px; align-items:center; }
+.term-buttons { display:flex; flex-wrap:wrap; gap:8px; }
+.term-buttons button { border:1px solid #17556c; border-radius:999px; padding:10px 20px; background:#17617c; color:white; font:inherit; font-weight:700; cursor:pointer; }
+.term-buttons button:disabled { opacity:.45; cursor:default; }
+.term-clocks { display:flex; gap:24px; flex-wrap:wrap; }
+.term-clocks div { display:grid; gap:3px; }
+.term-clocks span { font-size:.8rem; color:#476273; }
+.term-clocks strong { font-size:1.25rem; font-variant-numeric:tabular-nums; color:#133f54; }
+#termPhase { flex-basis:100%; margin:0; font-size:.9rem; }
+#termSave { font-size:.85rem; color:#526578; }
+.term-info,.term-result,.term-task { background:var(--surface,#fff); border:1px solid #dce4eb; border-radius:18px; padding:24px; margin:20px 0; }
+.term-info { font-size:.92rem; }
+.term-result { border-color:#5d9bb0; background:#f2fafb; }
+.term-score { font-size:1.45rem; font-weight:750; color:#15566d; }
+.term-task h2 { display:flex; gap:18px; align-items:baseline; }
+.term-task h2 small { font-size:.8rem; font-weight:400; color:#64748b; }
+.term-part { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.85fr); gap:24px; padding:20px 0; border-top:1px solid #e5ebf0; }
+.term-part fieldset { margin:0; padding:0; border:0; min-width:0; }
+.term-part legend { font-weight:700; margin-bottom:12px; }
+.term-part legend span { font-weight:400; color:#64748b; font-size:.8rem; margin-left:12px; }
+.term-fields { display:flex; gap:12px; flex-wrap:wrap; }
+.term-fields label { flex:1 1 120px; min-width:0; display:grid; gap:6px; }
+.term-part input[type=text],.term-part textarea,.term-part select { width:100%; box-sizing:border-box; border:1px solid #9aaebb; border-radius:8px; padding:10px; background:white; color:#172c3a; font:inherit; }
+.term-part textarea { resize:vertical; }
+.term-part fieldset:disabled input,.term-part fieldset:disabled textarea { background:#f1f4f7; color:#526170; opacity:1; }
+.term-review { font-size:.9rem; min-width:0; overflow-wrap:anywhere; }
+.term-review p:first-child { margin-top:0; }
+.term-override { display:flex; gap:8px; align-items:center; margin:12px 0; }
+.term-verdict { font-weight:700; color:#a33c35; }
+.term-verdict[data-status=correct] { color:#257348; }
+.term-verdict[data-status=review],.term-verdict[data-status=manual],.term-verdict[data-status=overridden] { color:#745310; }
+.term-note { background:#fff5db; padding:12px; border-radius:8px; }
+@media(max-width:700px) { .term-toolbar { top:0; padding:12px; gap:12px; } .term-clocks { gap:16px; } .term-clocks strong { font-size:1rem; } .term-buttons button { padding:8px 14px; } .term-part { grid-template-columns:1fr; gap:12px; } .term-task,.term-info,.term-result { padding:16px; } }
+/* Keep the document as the scroll container so the timer remains sticky. */
+html:has(#termExamView:not([hidden])), body:has(#termExamView:not([hidden])) { overflow-x:clip; }
+@media(max-width:760px) { .term-toolbar { top:84px; } }

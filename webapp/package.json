@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:term-exam": "node --test tests/term-exam.test.js tests/term-exam.accounts.test.js && npm run build && node tests/term-exam.browser.test.js",
     "test:estimated-grade": "node --test tests/estimated-grade.test.js && node tests/browser.test.js",
     "test:live-points": "npm run build && node tests/live-points.browser.test.js",
     "test:workspace": "npm run build && node tests/workspace.browser.test.js",

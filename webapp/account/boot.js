@@ -73,9 +73,12 @@ if (!user && !preview) {
       f.reset(); output.textContent = 'Adgangskoden er ændret. Andre enheder er logget ud.';
     } catch (error) { output.textContent = error.message; }
   });
+  const { renderOralExam } = await import("../oral-exam.js");
+  renderOralExam();
   // Initial state must be loaded before any lesson binds its forms.
   await new Promise((resolve, reject) => { const script = document.createElement('script'); script.src = './app.js'; script.onload = resolve; script.onerror = reject; document.head.append(script); });
   await import('../tasks/ui.js');
+  await import('../term-exam.js');
   for (const [file, view, selector, modules] of [
     ['integral', 'integration', '#integralLesson'],
     ['ode', 'differentialEquations', '#odeLesson', { 1:'ode-module-one', 2:'ode-module-two', 3:'ode-module-three', repetition:'ode-module-review', 4:'ode-module-four', 5:'ode-module-five', 6:'ode-module-six', opsamling:'ode-module-finish' }],
@@ -103,7 +106,8 @@ if (!user && !preview) {
   document.querySelector('[data-page="home"]').prepend(dashboard);
   const labels = { polarCoordinates: "Polære koordinater", twoVariables: "Funktioner af to variable", trigonometry: 'Trigonometriske funktioner', equations: 'Ligninger', quadratic: 'Andengradsligninger', composite: 'Sammensatte funktioner', differentiation: 'Differentialregning', planeGeometry: 'Plangeometri og vektorer', integration: 'Integralregning', differentialEquations: 'Differentialligninger', normalDistribution: 'Normalfordeling', vectorFunctions: 'Vektorfunktioner' };
   function renderOverview() {
-    const rows = completions();
+    // Exam rows also hold zero and partial awards; the exam has its own result overview.
+    const rows = completions().filter(row => !row.id.startsWith('term:'));
     let resume; try { resume = JSON.parse(accountStorage.getItem('christian-matematik.resume.v1') || '{}').route; } catch {}
     dashboard.innerHTML = `<p class="eyebrow">Mit overblik</p><h1>${preview ? 'Dit personlige arbejdsrum' : `Hej ${esc(user.username)}`}</h1><p>Ét trin ad gangen. Her kan du følge dine korrekt løste opgaver.</p><div class="personal-summary"><strong>${rows.length}</strong><span>opgaver løst korrekt</span>${resume && /^[a-zA-Z0-9/_-]+$/.test(resume) ? `<a class="primary-button" href="#${esc(resume)}">Fortsæt, hvor du slap →</a>` : '<a class="primary-button" href="#equations">Begynd med ligninger →</a>'}</div>${preview ? '' : `<div class="personal-rewards"><strong id="rewardPoints">${formatRewardPoints(rewardPoints)}</strong><span>butikspoint</span><p>I undervisningen: 1 point første gang. I opgavebanken: alle automatisk bedømte resultatpoint, hver gang du tager et nyt trænings- eller prøvesæt. Pointene vises efter gemning. <a href="#shop">Besøg butikken →</a></p></div>`}<div class="personal-topics">${Object.entries(labels).map(([topic, label]) => {
       const items = rows.filter(r => r.topic === topic);

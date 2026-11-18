@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="./tasks/tasks.css" />
     <link rel="stylesheet" href="./shop.css" />
     <link rel="stylesheet" href="./guide.css" />
+    <link rel="stylesheet" href="./oral-exam.css" />
+    <link rel="stylesheet" href="./term-exam.css" />
     <link rel="stylesheet" href="./skins.css" />
     <link rel="stylesheet" href="./trig.css">
     <link rel="stylesheet" href="./polar.css">
@@ -183,11 +185,13 @@
 <div class="nav-group" data-nav-group="trigonometry"><div class="nav-group-row"><button class="nav-item" type="button" data-view="trigonometry"><span class="nav-number" aria-hidden="true">10</span><span>Trigonometriske funktioner</span></button><button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-trigonometry"><span class="sr-only">Vis moduler i Trigonometriske funktioner</span><span class="nav-chevron" aria-hidden="true"></span></button></div><div class="nav-submenu" id="nav-modules-trigonometry" hidden><a href="#trigonometry/1/start"><span>M1</span>Sinus og harmoniske svingninger</a><a href="#trigonometry/2/start"><span>M2</span>Trigonometriske ligninger</a></div></div>
           <div class="nav-group" data-nav-group="twoVariables"><div class="nav-group-row"><button class="nav-item" type="button" data-view="twoVariables"><span class="nav-number" aria-hidden="true">11</span><span>Funktioner af to variable</span></button><button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-twoVariables"><span class="sr-only">Vis moduler i Funktioner af to variable</span><span class="nav-chevron" aria-hidden="true"></span></button></div><div class="nav-submenu" id="nav-modules-twoVariables" hidden><a href="#twoVariables/1/start"><span>M1</span>Funktionsværdier og kurver</a><a href="#twoVariables/2/start"><span>M2</span>Partielle afledte og gradienter</a><a href="#twoVariables/3/start"><span>M3</span>Stationære punkter</a><a href="#twoVariables/4/start"><span>M4</span>Optimering</a></div></div>
           <div class="nav-group" data-nav-group="polarCoordinates"><div class="nav-group-row"><button class="nav-item" type="button" data-view="polarCoordinates"><span class="nav-number" aria-hidden="true">12</span><span>Polære koordinater</span></button><button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-modules-polarCoordinates"><span class="sr-only">Vis modul i Polære koordinater</span><span class="nav-chevron" aria-hidden="true"></span></button></div><div class="nav-submenu" id="nav-modules-polarCoordinates" hidden><a href="#polarCoordinates/1/start"><span>M1</span>Afstand, vinkel og koordinater</a></div></div>
+<div class="nav-group" data-nav-group="oralExam"><div class="nav-group-row"><button class="nav-item" type="button" data-view="oralExam"><span class="nav-symbol" aria-hidden="true">◌</span><span>Mundtlig eksamen</span></button><button class="nav-expand" type="button" aria-expanded="false" aria-controls="nav-oral-exam"><span class="sr-only">Vis spørgsmål i Mundtlig eksamen</span><span class="nav-chevron" aria-hidden="true"></span></button></div><div class="nav-submenu" id="nav-oral-exam" hidden><a href="#oralExam/1"><span>1</span>Differentialregning</a><span class="oral-pending">2. Differentialregning og funktioner af to variable<small>Kommer senere</small></span><span class="oral-pending">3. Differentialregning og funktioner af to variable<small>Kommer senere</small></span><span class="oral-pending">4. Differentialregning<small>Kommer senere</small></span><span class="oral-pending">5. Vektorer og vektorfunktioner<small>Kommer senere</small></span><span class="oral-pending">6. Vektorer og vektorfunktioner<small>Kommer senere</small></span><span class="oral-pending">7. Integralregning<small>Kommer senere</small></span><span class="oral-pending">8. Integralregning og normalfordeling<small>Kommer senere</small></span><span class="oral-pending">9. Integralregning<small>Kommer senere</small></span><span class="oral-pending">10. Integralregning<small>Kommer senere</small></span><span class="oral-pending">11. Differentialregning og integralregning<small>Kommer senere</small></span><span class="oral-pending">12. Differentialligninger<small>Kommer senere</small></span><span class="oral-pending">13. Differentialligninger<small>Kommer senere</small></span><span class="oral-pending">14. Normalfordelingen og differentialligninger<small>Kommer senere</small></span><span class="oral-pending">15. Trigonometriske funktioner<small>Kommer senere</small></span></div></div>
           <button class="nav-item" type="button" data-view="tasks">
             <span class="nav-symbol" aria-hidden="true">✓</span>
             <span>Opgaver</span>
           </button>
 
+          <button class="nav-item" type="button" data-view="termExam"><span class="nav-symbol" aria-hidden="true">◷</span><span>Termins opgave</span></button>
           <button class="nav-item" type="button" data-view="shop"><span class="nav-symbol" aria-hidden="true">♧</span><span>Butik</span></button>
 
           <button class="nav-item" type="button" data-view="formulas">
@@ -344,7 +348,9 @@
         </section>
 
         <section id="shopView" data-page="shop" hidden aria-label="Butik"></section>
+        <section id="oralExamView" data-page="oralExam" hidden aria-label="Mundtlig eksamen"></section>
         <section id="guideView" data-page="guide" hidden aria-label="Forstå en opgave"></section>
+        <section id="termExamView" data-page="termExam" hidden aria-label="Termins opgave"></section>
         <section id="tasksView" data-page="tasks" hidden aria-label="Opgaver"></section>
 
         <section class="subject-view" data-page="subject" hidden>

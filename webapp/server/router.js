@@ -1,3 +1,6 @@
+import { isDeepStrictEqual } from 'node:util';
+import { TERM_NAMESPACE, validTerm } from '../term-exam-model.js';
+import { awardTermExam } from './term-exam.js';
 import { handleTutor } from './tutor.js';
 import { BANK_NAMESPACE, bankSessionReward } from '../tasks/rewards.js';
 import { awardBankSet } from './bank-rewards.js';
@@ -53,11 +56,22 @@ export function createRouter({ auth, pool, origin }) {
       const body = JSON.parse(raw);
       if (!body || typeof body !== 'object' || Array.isArray(body)) return json({ message: 'Ugyldige fremskridtsdata.' }, 400);
       if (!namespacePattern.test(body.namespace) || !Number.isSafeInteger(body.revision) || body.revision < 0 || !body.value || typeof body.value !== 'object' || Array.isArray(body.value)) return json({ message: 'Ugyldige fremskridtsdata.' }, 400);
+      if (body.namespace === TERM_NAMESPACE && !validTerm(body.value)) return json({ message:'Ugyldigt prøveforsøg.' },400);
       const completions = body.completions ?? [];
       if (!Array.isArray(completions) || completions.length > 500 || completions.some(c => !c || typeof c !== 'object' || !string(c.id, 200) || !string(c.topic, 80) || !string(c.module, 120) || !string(c.label, 200) || !string(c.route, 180) || !/^[a-zA-Z0-9/_-]+$/.test(c.route))) return json({ message: 'Ugyldige opgavedata.' }, 400);
+      if (completions.some(c=>c.id.startsWith('term:'))) return json({message:'Prøvepoint beregnes fra besvarelsen.'},400);
       const client = await pool.connect();
       try {
         await client.query('BEGIN');
+        if(body.namespace === TERM_NAMESPACE) {
+          // Use the same account lock as purchases to serialize award corrections.
+          await client.query('SELECT id FROM "user" WHERE id=$1 FOR UPDATE',[userId]);
+          const prior = await client.query('SELECT value FROM learning_state WHERE user_id=$1 AND namespace=$2',[userId,TERM_NAMESPACE]);
+          const previous=prior.rows[0]?.value;
+          if(previous?.status==='finished' && (body.value.status!=='finished' || !isDeepStrictEqual(previous.answers,body.value.answers) || previous.elapsed!==body.value.elapsed)) {
+            await client.query('ROLLBACK');return json({message:'Prøven er afleveret. Kun pointvurderingen kan ændres.'},400);
+          }
+        }
         const saved = body.revision === 0
           ? await client.query('INSERT INTO learning_state(user_id,namespace,value) VALUES($1,$2,$3) ON CONFLICT DO NOTHING RETURNING revision', [userId, body.namespace, body.value])
           : await client.query('UPDATE learning_state SET value=$3,revision=revision+1,updated_at=now() WHERE user_id=$1 AND namespace=$2 AND revision=$4 RETURNING revision', [userId, body.namespace, body.value, body.revision]);
@@ -66,6 +80,7 @@ export function createRouter({ auth, pool, origin }) {
         // awards across retries, namespaces, tabs and devices.
         for (const c of completions) await client.query('INSERT INTO learning_completion(user_id,exercise_id,topic,module,label,route,points_awarded) VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT DO NOTHING', [userId,c.id,c.topic,c.module,c.label,c.route,c.id.startsWith('bank:') ? 0 : 1]);
         if (body.namespace === BANK_NAMESPACE) await awardBankSet(client,userId,bankSessionReward(body.value.session));
+        if(body.namespace === TERM_NAMESPACE) await awardTermExam(client,userId,body.value);
         const rewards = await pointBalance(client,userId);
         await client.query('COMMIT');
         return json({ revision: saved.rows[0].revision, rewardPoints: rewards.rewardPoints });

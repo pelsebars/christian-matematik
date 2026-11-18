@@ -110,7 +110,9 @@ function closeMenu() {
 }
 
 function showView(view, shouldFocus = true) {
+  if (view === "oralExam") view = "oralExam/1";
   const requestedPath = view;
+  if (view === "oralExam/1") view = "oralExam";
   if (view.startsWith("polarCoordinates/")) view = "polarCoordinates";
   if (view.startsWith("twoVariables/")) view = "twoVariables";
   if (view.startsWith("trigonometry/")) view = "trigonometry";
@@ -122,9 +124,12 @@ function showView(view, shouldFocus = true) {
   document.querySelector("#subjectFormula").hidden = false;
   document.title = "Christians matematik";
   subjectView.classList.remove("is-integral-session", "is-integral-overview");
+  document.querySelector("#termExamView").hidden = view !== "termExam";
   document.querySelector("#tasksView").hidden = view !== "tasks";
   document.querySelector("#shopView").hidden = view !== "shop";
   document.querySelector("#guideView").hidden = view !== "guide";
+  document.querySelector("#oralExamView").hidden = view !== "oralExam";
+  if (view === "oralExam") document.title = "1. Differentialregning · Mundtlig eksamen";
   homeView.hidden = view !== "home";
   formulaView.hidden = view !== "formulas";
   subjectView.hidden = !subjects[view];
@@ -1606,12 +1611,12 @@ document.addEventListener("keydown", (event) => {
 
 window.addEventListener("hashchange", () => {
   const requestedView = window.location.hash.slice(1) || "home";
-  const validView = requestedView === "guide" || requestedView === "formulas" || requestedView === "tasks" || requestedView === "shop" || (subjects[requestedView] || requestedView.startsWith("integration/") || requestedView.startsWith("differentialEquations/") || requestedView.startsWith("normalDistribution/") || requestedView.startsWith("vectorFunctions/") || requestedView.startsWith("trigonometry/") || (requestedView.startsWith("twoVariables/") || requestedView.startsWith("polarCoordinates/"))) ? requestedView : "home";
-  showView(validView, validView === "integration" || validView.startsWith("integration/") || validView === "differentialEquations" || validView.startsWith("differentialEquations/") || validView === "normalDistribution" || validView.startsWith("normalDistribution/") || validView === "trigonometry" || validView === "vectorFunctions" || validView.startsWith("vectorFunctions/") || validView.startsWith("trigonometry/") || (validView.startsWith("twoVariables/") || validView.startsWith("polarCoordinates/")));
+  const validView = requestedView === "oralExam" || requestedView === "oralExam/1" || requestedView === "guide" || requestedView === "formulas" || requestedView === "tasks" || requestedView === "termExam" || requestedView === "shop" || (subjects[requestedView] || requestedView.startsWith("integration/") || requestedView.startsWith("differentialEquations/") || requestedView.startsWith("normalDistribution/") || requestedView.startsWith("vectorFunctions/") || requestedView.startsWith("trigonometry/") || (requestedView.startsWith("twoVariables/") || requestedView.startsWith("polarCoordinates/"))) ? requestedView : "home";
+  showView(validView, validView === "oralExam" || validView === "oralExam/1" || validView === "integration" || validView.startsWith("integration/") || validView === "differentialEquations" || validView.startsWith("differentialEquations/") || validView === "normalDistribution" || validView.startsWith("normalDistribution/") || validView === "trigonometry" || validView === "vectorFunctions" || validView.startsWith("vectorFunctions/") || validView.startsWith("trigonometry/") || (validView.startsWith("twoVariables/") || validView.startsWith("polarCoordinates/")));
 });
 
 const initialView = window.location.hash.slice(1) || "home";
-showView(initialView === "guide" || initialView === "formulas" || initialView === "tasks" || initialView === "shop" || (subjects[initialView] || initialView.startsWith("integration/") || initialView.startsWith("differentialEquations/") || initialView.startsWith("normalDistribution/") || initialView.startsWith("vectorFunctions/") || initialView.startsWith("trigonometry/") || (initialView.startsWith("twoVariables/") || initialView.startsWith("polarCoordinates/"))) ? initialView : "home", false);
+showView(initialView === "oralExam" || initialView === "oralExam/1" || initialView === "guide" || initialView === "formulas" || initialView === "tasks" || initialView === "termExam" || initialView === "shop" || (subjects[initialView] || initialView.startsWith("integration/") || initialView.startsWith("differentialEquations/") || initialView.startsWith("normalDistribution/") || initialView.startsWith("vectorFunctions/") || initialView.startsWith("trigonometry/") || (initialView.startsWith("twoVariables/") || initialView.startsWith("polarCoordinates/"))) ? initialView : "home", false);
 
 // Shared navigation hook for targeted repetition from the task bank.
 window.showMathView = showView;

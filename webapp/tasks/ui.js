@@ -36,7 +36,7 @@ function persist() {
   if (status) status.textContent = warning || "Se gemmestatus i sidemenuen.";
 }
 const header = () =>
-  `<header class="page-intro"><p class="eyebrow">Dit arbejdsrum</p><h1>Opgaver</h1><p class="page-lead">Prøv selv, vælg din vej, og brug løsningerne til at finde næste skridt.</p></header><p id="taskSave" class="task-save" role="status">${esc(warning || "Dit arbejde gemmes på din konto. Se gemmestatus i sidemenuen.")}</p>`;
+  `<header class="page-intro"><p class="eyebrow">Dit arbejdsrum</p><h1>Opgaver</h1><p><a class="task-button" href="#termExam">Termins opgave · August 2026</a></p><p class="page-lead">Prøv selv, vælg din vej, og brug løsningerne til at finde næste skridt.</p></header><p id="taskSave" class="task-save" role="status">${esc(warning || "Dit arbejde gemmes på din konto. Se gemmestatus i sidemenuen.")}</p>`;
 function render(focus = false) {
   closeTutor();
   const s = state.session;

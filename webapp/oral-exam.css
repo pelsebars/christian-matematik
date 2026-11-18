@@ -1,0 +1,32 @@
+#oralExamView { max-width: 1000px; margin: 0 auto; padding-bottom: 70px; line-height: 1.75; }
+.oral-header { padding: 20px 0 28px; }
+.oral-header h1 { font-size: clamp(2.1rem, 5vw, 3.5rem); margin: 4px 0; letter-spacing: -.04em; }
+.oral-eyebrow { color: var(--green); font-size: .8rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.oral-lead { font-size: 1.2rem; color: var(--ink-soft); }
+.oral-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(20px, 4vw, 40px); margin-bottom: 26px; box-shadow: var(--shadow); }
+.oral-card h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); line-height: 1.3; margin: 0 0 22px; }
+.oral-card h3 { margin: 28px 0 10px; line-height: 1.4; }
+.oral-card li { padding-left: 6px; margin: 10px 0; }
+.oral-card ol, .oral-card ul { padding-left: 24px; }
+.oral-outline { border-top: 5px solid var(--green); background: var(--green-soft); }
+.oral-say { border-left: 3px solid var(--blue); background: var(--blue-soft); padding: 18px 22px; }
+.oral-equation { font-family: 'Cambria Math', Cambria, Georgia, serif; font-size: clamp(1.05rem, 2.5vw, 1.4rem); padding: 18px 4px; overflow-x: auto; line-height: 2; }
+.oral-frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.5; margin: 0 5px; white-space: nowrap; }
+.oral-frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 5px; }
+.oral-limit { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2; }
+.oral-limit small { font-size: .65em; }
+.oral-step { border-top: 1px solid var(--line); margin-top: 22px; }
+.oral-note { padding: 18px; background: var(--paper); border-radius: 12px; }
+.oral-note h3 { margin-top: 0; }
+.oral-result { background: var(--green-soft); border-left: 4px solid var(--green); padding: 0 16px; }
+.oral-card figure { margin: 28px 0; padding: 16px; background: var(--paper); border-radius: 14px; }
+.oral-card svg { display: block; width: 100%; max-width: 650px; margin: auto; font: 16px system-ui; }
+.oral-note svg { max-width: 440px; }
+.oral-card figcaption { color: var(--ink-soft); font-size: .9rem; margin-top: 12px; }
+.oral-practice { margin-top: 60px; border-top: 7px solid var(--violet); }
+.oral-practice > .oral-eyebrow { color: var(--violet); }
+.oral-practice details { padding: 18px 0; border-top: 1px solid var(--line); }
+.oral-practice summary { cursor: pointer; font-weight: 700; }
+.oral-pending { display: block; padding: 10px 12px; color: #b5bfd1; font-size: .8rem; line-height: 1.5; }
+.oral-pending small { display: block; opacity: .8; }
+@media print { .sidebar, .topbar, #backdrop { display: none !important; } #oralExamView { max-width: none; } .oral-card { box-shadow: none; break-inside: auto; } .oral-equation, figure { break-inside: avoid; } }
